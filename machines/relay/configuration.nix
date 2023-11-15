@@ -13,6 +13,7 @@
 		../../modules/nas-client.nix
 		../../modules/vm-services.nix
 		../../modules/nice-to-have-packages.nix
+		../../modules/tor.nix
 	    ];
 
 	  # Bootloader.
@@ -21,7 +22,7 @@
 	  boot.loader.grub.useOSProber = true;
 
 	  networking = {
-	     hostName = "flow"; # Define your hostname.
+	     hostName = "relay"; # Define your hostname.
 	     networkmanager.enable = true;
 	  } 
 
@@ -31,7 +32,6 @@
 
 	  # Allow unfree packages
 	  nixpkgs.config.allowUnfree = true;
-
 	
 	# This value determines the NixOS release from which the default
 	# settings for stateful data, like file locations and database versions
