@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+    
+
+    environment.systemPackages = [cifs-utils];
     # Filesystem related settings
     fileSystems."/mnt/media" = {
         device = "//nas.reinthal.me/media";

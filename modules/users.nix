@@ -22,6 +22,7 @@
     packages = with pkgs; [
 		git
 		zsh
+                fzf
 		nmap
 		lf    
     ];
