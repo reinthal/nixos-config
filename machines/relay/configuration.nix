@@ -10,7 +10,6 @@
 		./hardware-configuration.nix
 		../../modules/users.nix
 		../../modules/locales.nix
-		../../modules/nas-client.nix
 		../../modules/vm-services.nix
 		../../modules/nice-to-have-packages.nix
 		../../modules/tor.nix
@@ -24,7 +23,7 @@
 	  networking = {
 	     hostName = "relay"; # Define your hostname.
 	     networkmanager.enable = true;
-	  } 
+	  };
 
 
 	  # Set your time zone.

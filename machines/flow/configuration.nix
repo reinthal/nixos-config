@@ -24,7 +24,7 @@
 	  networking = {
 	     hostName = "flow"; # Define your hostname.
 	     networkmanager.enable = true;
-	  } 
+	  };
 
 
 	  # Set your time zone.
