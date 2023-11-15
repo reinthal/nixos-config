@@ -11,6 +11,7 @@
               ../../modules/users.nix
 	      ../../modules/locales.nix
               ../../modules/nas-client.nix
+              ../../modules/vm-services.nix
 	    ];
 
 	  # Bootloader.
@@ -18,20 +19,16 @@
 	  boot.loader.grub.device = "/dev/sda";
 	  boot.loader.grub.useOSProber = true;
 
-	  networking.hostName = "flow"; # Define your hostname.
+	  networking = {
+	     hostName = "flow"; # Define your hostname.
+	     networkmanager.enable = true;
+	  } 
 
-	  # Enable networking
-	  networking.networkmanager.enable = true;
-	  # docker yes?
-	  virtualisation.docker.enable = true;
-	  virtualisation.docker.rootless = {
-	    enable = true;
-	    setSocketVariable = true;
-	  };
+
 	  # Set your time zone.
 	  time.timeZone = "Europe/Stockholm";
 
-	   # Allow unfree packages
+	  # Allow unfree packages
 	  nixpkgs.config.allowUnfree = true;
 
 	  # List packages installed in system profile. To search, run:
@@ -41,22 +38,11 @@
 	    wget
 	    curl
 	    vim
-	    fzf
 	    htop
-	    cifs-utils
 	    inetutils
 	  ];
 
-	# List services that you want to enable:
-	services.qemuGuest.enable = true;
-	services.openssh.enable = true;
-	 
-	# Configure keymap in X11
-	services.xserver = {
-	    layout = "us";
-	    xkbVariant = "";
-	};
-
+	
 	# This value determines the NixOS release from which the default
 	# settings for stateful data, like file locations and database versions
 	# on your system were taken. It‘s perfectly fine and recommended to leave
