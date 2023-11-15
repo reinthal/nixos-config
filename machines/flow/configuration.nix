@@ -9,7 +9,8 @@
 	    [ # Include the results of the hardware scan.
 	      ./hardware-configuration.nix
               ../../modules/users.nix
-
+	      ../../modules/locales.nix
+              ../../modules/nas-client.nix
 	    ];
 
 	  # Bootloader.
@@ -30,22 +31,7 @@
 	  # Set your time zone.
 	  time.timeZone = "Europe/Stockholm";
 
-	  # Select internationalisation properties.
-	  i18n.defaultLocale = "en_US.UTF-8";
-
-	  i18n.extraLocaleSettings = {
-	    LC_ADDRESS = "sv_SE.UTF-8";
-	    LC_IDENTIFICATION = "sv_SE.UTF-8";
-	    LC_MEASUREMENT = "sv_SE.UTF-8";
-	    LC_MONETARY = "sv_SE.UTF-8";
-	    LC_NAME = "sv_SE.UTF-8";
-	    LC_NUMERIC = "sv_SE.UTF-8";
-	    LC_PAPER = "sv_SE.UTF-8";
-	    LC_TELEPHONE = "sv_SE.UTF-8";
-	    LC_TIME = "sv_SE.UTF-8";
-	  };
-
-	  # Allow unfree packages
+	   # Allow unfree packages
 	  nixpkgs.config.allowUnfree = true;
 
 	  # List packages installed in system profile. To search, run:
@@ -61,19 +47,7 @@
 	    inetutils
 	  ];
 
-	  # Filesystem related settings
-
-	  fileSystems."/mnt/media" = {
-	      device = "//nas.reinthal.me/media";
-	      fsType = "cifs";
-	      options = let
-		# this line prevents hanging on network split
-		automount_opts = "_netdev,x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-		permissions = "nobrl,dir_mode=0755,file_mode=0664,uid=1000,gid=100,noperm";
-	      in ["${permissions},${automount_opts},credentials=/etc/smb-secrets"];
-	  };
 	# List services that you want to enable:
-
 	services.qemuGuest.enable = true;
 	services.openssh.enable = true;
 	 
