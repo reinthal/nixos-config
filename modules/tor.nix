@@ -1,14 +1,18 @@
 { config, pkgs, ... }:
 {
-    services.tor.enable = true; 
-    environment.etc."tor/torrc".text = pkgs.lib.mkForce ''
-Nickname      HotTacoRelay 
-ContactInfo   hot.taco.relay@protonmail.com
-ORPort        443
-ExitRelay     0
-SocksPort     0
-Log notice    syslog
-DataDirectory /var/lib/tor
-User          tor
-''; 
+  services.tor = {
+    enable = true;
+    openFirewall = true;
+    relay = {
+      enable = true;
+      role = "relay";
+  };
+  settings = {
+    ContactInfo = "hot.taco.relay@protonmail.com";
+    Nickname = "Hot Taco Relay Administrator";
+    ORPort = 9001;
+    ControlPort = 9051;
+    BandWidthRate = "1 MBytes";
+  };
+};
 }
