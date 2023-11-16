@@ -24,6 +24,7 @@
 	  networking = {
 	     hostName = "flow"; # Define your hostname.
 	     networkmanager.enable = true;
+	     firewall.enable = false;
 	  };
 
 
