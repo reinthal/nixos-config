@@ -9,10 +9,10 @@
   };
   settings = {
     ContactInfo = "hot.taco.relay@protonmail.com";
-    Nickname = "Hot Taco Relay Administrator";
+    Nickname = "HotTacoAdmin";
     ORPort = 9001;
     ControlPort = 9051;
-    BandWidthRate = "1 MBytes";
+    BandWidthRate = "5 MBytes";
   };
 };
 }
