@@ -12,7 +12,7 @@
     Nickname = "HotTacoAdmin";
     ORPort = 9001;
     ControlPort = 9051;
-    BandWidthRate = "5 MBytes";
+    BandWidthRate = "25 MBytes";
   };
 };
 }
