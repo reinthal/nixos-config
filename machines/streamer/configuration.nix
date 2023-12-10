@@ -5,7 +5,7 @@
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
                 ../../modules/users.nix
 		../../modules/locales.nix
-#		../../modules/nas-client.nix
+		../../modules/nas-client.nix
 		../../modules/vm-services.nix
 		../../modules/nice-to-have-packages.nix
 
