@@ -1,22 +1,23 @@
 { config, pkgs, ... }:
  {
-   config.virtualisation.oci-containers.containers = {
-     qbittorrent = {
-       image = "lscr.io/linuxserver/plex:latest";
-       ports = ["32400:32400"];
-       environment = {
-          PUID = "1000";
-          PGID = "1000";
-          UMASK = "002";
-          TZ="Etc/Stockholm";
-       };
-       volumes = [
-         "/home/kog/appdata/plex:/config"
-         "/mnt/media/media/transcodes:/transcodes"
-         "/mnt/media/media/transcodes/cache:/config/Library/Application Support/Plex Media Server/Cache/"
-         "/mnt/media/media/:/media"
-       ];
-     };
+   services.plex = {
+       enable = true;
+       openFirewall = true;
+       dataDir = "/mnt/media/media/";
+       extraPlugins = [
+    (builtins.path {
+       name = "Audnexus.bundle";
+       path = pkgs.fetchFromGitHub {
+       owner = "djdembeck";
+       repo = "Audnexus.bundle";
+       rev = "v0.2.8";
+        sha256 = "sha256-IWOSz3vYL7zhdHan468xNc6C/eQ2C2BukQlaJNLXh7E=";
+      };
+    })
+   ] 
+   };
+   services.tautulli = {
+       enable = true;
    };
  }
 
