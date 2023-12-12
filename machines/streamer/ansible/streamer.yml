@@ -8,6 +8,17 @@
       apt:
         update_cache: yes
       when: ansible_os_family == 'Debian'
+    - name: Remove Native docker
+      package:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - docker.io
+        - docker-doc  
+        - docker-compose
+        - podman-docker
+        - containerd
+        - runc
       - name: Create the directory with specific permissions
       command: install -m 0755 -d /etc/apt/keyrings
     - name: Download Docker GPG Key
@@ -57,11 +68,20 @@
         path: "/opt/data"
         state: directory
         mode: '0755'
+  - name: Ensure group "lxc_shares" exists
+    group:
+      gid: 10000
+      name: somegroup
+      state: present
+
+
     - name: Add user 'kog'
       user:
         name: kog
         state: present
         createhome: yes
+        groups: lxc_shares,docker
+        append: yes
         shell: /bin/bash  # Set the default shell to bash
 
     - name: Add 'kog' to sudoers
@@ -69,18 +89,6 @@
         dest: /etc/sudoers
         line: 'kog ALL=(ALL) NOPASSWD: ALL'
         validate: 'visudo -cf %s'
-
-    - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
-      become: yes
-
-    - name: Install Docker Compose
-      apt:
-        name: docker-compose
-        state: present
-      become: yes
 
     - name: Configure SSH key for 'kog'
       authorized_key:
