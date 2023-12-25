@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 {
+  services.nginx = {
+    enable = true;
+    virtualHosts."hottacorelay.org" = {
+     root = "/home/kog/nixos-config/machines/relay/var/www/hottacorelay.org
+    };
+  };
   services.tor = {
     enable = true;
     openFirewall = true;
@@ -12,8 +18,6 @@
     Nickname = "HotTacoAdmin";
     ControlPort = 9051;
     ORPort = 443;
-    DirPort = 80;
-    DirPortFrontPage = "/home/kog/nixos-config/tor.html";
     BandWidthRate = "25 MBytes";
     ExitPolicy = [
     "accept *:20-21     # FTP" 
