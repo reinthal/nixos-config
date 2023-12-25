@@ -3,7 +3,7 @@
   services.nginx = {
     enable = true;
     virtualHosts."hottacorelay.org" = {
-     root = "/home/kog/nixos-config/machines/relay/var/www/hottacorelay.org
+     root = "/home/kog/nixos-config/machines/relay/var/www/hottacorelay.org";
     };
   };
   services.tor = {
