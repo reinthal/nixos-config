@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 {
+  services.nginx.enable = true;
+  services.nginx.virtualHosts."hottacorelay.org" = {
+    root = "/var/www/hottacorelay.org";
+  };
+
   services.tor = {
     enable = true;
     openFirewall = true;
