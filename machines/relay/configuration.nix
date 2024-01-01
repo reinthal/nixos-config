@@ -13,7 +13,7 @@
 		../../modules/vm-services.nix
 		../../modules/nice-to-have-packages.nix
 		../../modules/tor.nix
-                ../../modules/munin.nix
+		../../modules/ddns.nix
 	    ];
 
 	  # Bootloader.

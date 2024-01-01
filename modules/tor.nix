@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   services.nginx.enable = true;
-  services.nginx.virtualHosts."hottacorelay.org" = {
+  services.nginx.virtualHosts."www.hottacorelay.org" = {
     root = "/var/www/hottacorelay.org";
   };
 
