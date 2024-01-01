@@ -10,7 +10,7 @@
 
 	systemd.services."ddns" = {
 	  script = ''
-	    ${pkgs.curl}/bin/curl "https://njal.la/update/?h=www.hottacorelay.org&k=9dp54s0lz8zisyky&auto"
+            ${pkgs.curl}/bin/curl "https://njal.la/update/?h=hottacorelay.org&k=yl2im8mkyj7iccqw&auto"
 	  '';
 	  serviceConfig = {
 	    Type = "oneshot";
