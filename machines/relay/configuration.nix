@@ -13,6 +13,7 @@
 		../../modules/vm-services.nix
 		../../modules/nice-to-have-packages.nix
 		../../modules/tor.nix
+		../../modules/ddns.nix
 	    ];
 
 	  # Bootloader.
@@ -23,8 +24,11 @@
 	  networking = {
 	     hostName = "relay"; # Define your hostname.
 	     networkmanager.enable = true;
+             firewall = {
+  		enable = true;
+                allowedTCPPorts = [ 22 80 443 4949];
+	     };
 	  };
-
 
 	  # Set your time zone.
 	  time.timeZone = "Europe/Stockholm";
