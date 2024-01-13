@@ -23,6 +23,10 @@
 
 	  networking = {
 	     hostName = "flow"; # Define your hostname.
+             extraHosts = 
+	    ''
+             10.22.22.10 nas.reinthal.me
+            '';
 	     networkmanager.enable = true;
 	     firewall.enable = false;
 	  };
