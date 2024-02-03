@@ -14,7 +14,6 @@
 		../../modules/vm-services.nix
                 ../../modules/qbittorrent.nix
 		../../modules/nice-to-have-packages.nix
-		../../modules/omz.nix
 		../../modules/zabbix.nix
 	    ];
 
