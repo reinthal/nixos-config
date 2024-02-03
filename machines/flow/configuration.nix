@@ -14,6 +14,8 @@
 		../../modules/vm-services.nix
                 ../../modules/qbittorrent.nix
 		../../modules/nice-to-have-packages.nix
+		../../modules/omz.nix
+		../../modules/zabbix.nix
 	    ];
 
 	  # Bootloader.
@@ -31,8 +33,8 @@
 	     firewall.enable = false;
 	  };
 
-
-	  # Set your time zone.
+	  
+          # Set your time zone.
 	  time.timeZone = "Europe/Stockholm";
 
 	  # Allow unfree packages
