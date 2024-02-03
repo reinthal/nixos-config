@@ -14,6 +14,7 @@
 		../../modules/nice-to-have-packages.nix
 		../../modules/tor.nix
 		../../modules/ddns.nix
+		../../modules/zabbix.nix
 	    ];
 
 	  # Bootloader.
