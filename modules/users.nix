@@ -30,8 +30,53 @@
 		xclip
 		zip
         ];
+      };
+    home-manager.users.ada = { pkgs, ... }: {
+      imports = [ ./home/vim.nix ./home/zsh.nix ];
+      home.stateVersion = "23.05";  
+      home.packages = with pkgs; [
+		git
+		zsh
+		fzf
+		nmap
+		lf    
+		exa
+		fd
+		file
+		fzf
+		htop
+		gotop
+		iftop
+		iotop
+		ldns
+		ltrace
+		loc
+		thefuck
+		tree
+		unzip
+		xclip
+		zip
+        ];
   };
+
   programs.zsh.enable = true;
+  users.users.ada = {
+    description = "ada";
+    isNormalUser = true;
+    hashedPassword = "$y$j9T$HWvOqEXKNAo71pncWn0oL.$SCSg00gwPa9UzNjfFQN2q3TTpIt.7LYj7R3li51Q8m8";
+    extraGroups = [ 
+		 "networkmanager" 
+		 "wheel"
+		 "docker"
+    ];
+    shell = pkgs.zsh;
+    uid = 1337;
+    openssh.authorizedKeys.keyFiles = [ 
+        ../keys/fireside.pub
+        ../keys/asperitas.pub 
+    ];
+  };
+
   users.users.kog = {
     description = "kog";
     isNormalUser = true;
