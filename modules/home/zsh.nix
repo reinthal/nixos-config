@@ -9,6 +9,7 @@
     enableCompletion = true;
     shellAliases = {
       sl = "exa";
+      gs = "git status";
       ls = "exa";
       l = "exa -l";
       la = "exa -la";
