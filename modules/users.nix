@@ -6,7 +6,7 @@
   security.sudo.wheelNeedsPassword = true; 
   home-manager.users.kog = { pkgs, ... }: {
       imports = [ ./home/vim.nix ./home/zsh.nix ];
-      home.stateVersion = "23.05";  
+      home.stateVersion = "23.11";  
       home.packages = with pkgs; [
 		git
 		zsh
@@ -33,7 +33,7 @@
       };
     home-manager.users.ada = { pkgs, ... }: {
       imports = [ ./home/vim.nix ./home/zsh.nix ];
-      home.stateVersion = "23.05";  
+      home.stateVersion = "23.11";  
       home.packages = with pkgs; [
 		git
 		zsh

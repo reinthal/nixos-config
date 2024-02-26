@@ -10,12 +10,13 @@
       ./hardware-configuration.nix
       ../../modules/nice-to-have-packages.nix
       ../../modules/vm-services.nix
+      ../../modules/users.nix
     ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "build"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -79,16 +80,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kog = {
-    isNormalUser = true;
-    description = "Alexander Reinthal";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-    #  thunderbird
-    ];
-  };
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
