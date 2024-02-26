@@ -13,7 +13,7 @@
 		fzf
 		nmap
 		lf    
-		exa
+		eza
 		fd
 		file
 		fzf
@@ -40,7 +40,7 @@
 		fzf
 		nmap
 		lf    
-		exa
+		eza
 		fd
 		file
 		fzf
