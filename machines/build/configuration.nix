@@ -12,6 +12,8 @@
       ../../modules/vm-services.nix
       ../../modules/users.nix
       ../../modules/nvidia.nix
+      ../../modules/development.nix
+      ../../modules/desktop-apps.nix
     ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
