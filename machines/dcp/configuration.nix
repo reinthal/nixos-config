@@ -7,18 +7,25 @@
 {
 	  imports =
 	    [ # Include the results of the hardware scan.
-		./hardware-configuration.nix
-		../../modules/users.nix
-		../../modules/locales.nix
-		../../modules/nas-client.nix
-                ../../modules/nice-to-have-packages.nix
-                ../../modules/vm-services.nix
+				./hardware-configuration.nix
+				../../modules/users.nix
+				../../modules/locales.nix
+				../../modules/nas-client.nix
+		    ../../modules/nice-to-have-packages.nix
+        ../../modules/vm-services.nix
+        ../../modules/distrobox.nix
+				../../modules/home/plasma.nix
+				../../modules/home/xrdp.nix
 	    ];
 
 	  # Bootloader.
-	  boot.loader.grub.enable = true;
-	  boot.loader.grub.device = "/dev/sda";
-	  boot.loader.grub.useOSProber = true;
+          boot = {
+            loader.grub = {
+              enable = true;
+	      device = "/dev/sda";
+	      useOSProber = true;
+            };
+          };
 
 	  networking = {
 	     hostName = "dcp"; # Define your hostname.

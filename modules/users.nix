@@ -31,10 +31,15 @@
 		zip
         ];
       };
-    home-manager.users.ada = { pkgs, ... }: {
+    home-manager.users.eyduh = { pkgs, ... }: {
       imports = [ ./home/vim.nix ./home/zsh.nix ];
       home.stateVersion = "23.05";  
       home.packages = with pkgs; [
+                tealdeer
+                helix
+                distrobox
+                btop
+
 		git
 		zsh
 		fzf
@@ -60,10 +65,10 @@
   };
 
   programs.zsh.enable = true;
-  users.users.ada = {
-    description = "ada";
+  users.users.eyduh = {
+    description = "eyduh";
     isNormalUser = true;
-    hashedPassword = "$y$j9T$HWvOqEXKNAo71pncWn0oL.$SCSg00gwPa9UzNjfFQN2q3TTpIt.7LYj7R3li51Q8m8";
+    hashedPassword = "$y$j9T$bSlUyvcO4E/r3.6/MTLiq0$.w3VnUYDWi119H0WVjDp46nc01LDsUFHlR4fRg8c8s8";
     extraGroups = [ 
 		 "networkmanager" 
 		 "wheel"
