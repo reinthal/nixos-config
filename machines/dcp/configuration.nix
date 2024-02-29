@@ -8,14 +8,15 @@
 	  imports =
 	    [ # Include the results of the hardware scan.
 				./hardware-configuration.nix
+				../../modules/appimages.nix
 				../../modules/users.nix
 				../../modules/locales.nix
 				../../modules/nas-client.nix
 		    ../../modules/nice-to-have-packages.nix
         ../../modules/vm-services.nix
         ../../modules/distrobox.nix
-				../../modules/home/plasma.nix
-				../../modules/home/xrdp.nix
+				../../modules/plasma.nix
+				../../modules/xrdp.nix
 	    ];
 
 	  # Bootloader.
