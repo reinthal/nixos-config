@@ -14,6 +14,7 @@
       ../../modules/nvidia.nix
       ../../modules/development.nix
       ../../modules/desktop-apps.nix
+      ../../modules/distrobox.nix
     ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
