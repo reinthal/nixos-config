@@ -88,6 +88,9 @@
     ];
     shell = pkgs.zsh;
     uid = 1000;
+    # To use this shell.nix on NixOS your user needs to be configured as such:
+    subUidRanges = [{ startUid = 100000; count = 65536; }];
+    subGidRanges = [{ startGid = 100000; count = 65536; }];
     openssh.authorizedKeys.keyFiles = [ 
         ../keys/battlestation.pub
         ../keys/mbpro.pub 

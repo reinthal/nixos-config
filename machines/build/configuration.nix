@@ -15,6 +15,7 @@
       ../../modules/development.nix
       ../../modules/desktop-apps.nix
       ../../modules/distrobox.nix
+      ../../modules/docker.nix
     ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
