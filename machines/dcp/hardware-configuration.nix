@@ -13,10 +13,17 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
+  fileSystems = { 
+  "/" =
     { device = "/dev/disk/by-uuid/c5482238-0674-4411-90d7-8552b161180e";
       fsType = "ext4";
     };
+
+  "/films" =
+    { device = "/dev/disk/by-uuid/3135f9d4-a821-4e03-bdd6-d1ba6ff54177";
+      fsType = "ext4";
+    };
+  };
 
   swapDevices = [ ];
 

@@ -7,8 +7,11 @@
 {
 	  imports =
 	    [ # Include the results of the hardware scan.
+				  <home-manager/nixos>
 				./hardware-configuration.nix
 				../../modules/appimages.nix
+				../../modules/nextcloud.nix
+				../../modules/pipewire.nix
 				../../modules/users.nix
 				../../modules/locales.nix
 				../../modules/nas-client.nix
@@ -20,13 +23,15 @@
 	    ];
 
 	  # Bootloader.
-          boot = {
-            loader.grub = {
-              enable = true;
-	      device = "/dev/sda";
-	      useOSProber = true;
-            };
+        boot = {
+          loader.grub = {
+            enable = true;
+			      devices = [
+							"/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"
+						];
+			      # useOSProber = true;
           };
+        };
 
 	  networking = {
 	     hostName = "dcp"; # Define your hostname.

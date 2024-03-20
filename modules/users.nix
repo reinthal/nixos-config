@@ -13,7 +13,7 @@
 		fzf
 		nmap
 		lf    
-		exa
+		eza
 		fd
 		file
 		fzf
@@ -35,33 +35,40 @@
       imports = [ ./home/vim.nix ./home/zsh.nix ];
       home.stateVersion = "23.05";  
       home.packages = with pkgs; [
-                tealdeer
-                helix
-                distrobox
-                btop
+        tealdeer
+        helix
+        distrobox
+        btop
 
-		git
-		zsh
-		fzf
-		nmap
-		lf    
-		exa
-		fd
-		file
-		fzf
-		htop
-		gotop
-		iftop
-		iotop
-		ldns
-		ltrace
-		loc
-		thefuck
-		tree
-		unzip
-		xclip
-		zip
-        ];
+        ffmpeg
+        xsv
+
+        firefox
+        
+
+    		git
+    		zsh
+    		fzf
+    		nmap
+    		lf    
+    		eza
+    		fd
+    		file
+    		fzf
+    		htop
+    		gotop
+    		iftop
+    		iotop
+    		ldns
+    		ltrace
+    		loc
+    		thefuck
+    		tree
+    		unzip
+    		xclip
+    		zip
+
+      ];
   };
 
   programs.zsh.enable = true;
@@ -73,12 +80,21 @@
 		 "networkmanager" 
 		 "wheel"
 		 "docker"
+     "nextcloud"
     ];
     shell = pkgs.zsh;
     uid = 1337;
     openssh.authorizedKeys.keyFiles = [ 
         ../keys/fireside.pub
         ../keys/asperitas.pub 
+    ];
+    packages = with pkgs; [
+      home-manager
+      ffmpeg
+      xsv
+      diceware
+      filezilla
+    
     ];
   };
 
@@ -96,6 +112,9 @@
     openssh.authorizedKeys.keyFiles = [ 
         ../keys/battlestation.pub
         ../keys/mbpro.pub 
+    ];
+    packages = with pkgs; [
+      home-manager
     ];
   };
 }

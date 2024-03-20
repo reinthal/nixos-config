@@ -17,12 +17,23 @@
   
   # programs
   programs = {
-#    partition-manager.enable = true;
+    partition-manager.enable = true;
     kdeconnect.enable = true;
   };
 
-  environment.systemPackages = with pkgs.libsForQt5; [
-    plasma-browser-integration
-    plasma-pa    
+    networking.firewall = {
+    allowedTCPPortRanges = [
+      { from = 1714; to = 1764; }
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; }
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+  firefox
+  
+  libsForQt5.plasma-pa    
+  libsForQt5.plasma-browser-integration
   ];
 }
