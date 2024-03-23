@@ -60,6 +60,7 @@
   };
 
   programs.zsh.enable = true;
+  programs.zsh.completionInit = "autoload -U compinit && compinit -u";
   users.users.ada = {
     description = "ada";
     isNormalUser = true;
