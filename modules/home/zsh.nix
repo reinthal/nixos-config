@@ -6,6 +6,7 @@
     autocd = true;
     dotDir = ".config/zsh";
     enableAutosuggestions = true;
+    completionInit = "autoload -U compinit && compinit -i";
     enableCompletion = true;
     shellAliases = {
       sl = "eza";
