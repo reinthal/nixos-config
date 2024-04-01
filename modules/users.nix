@@ -93,7 +93,8 @@
     subGidRanges = [{ startGid = 100000; count = 65536; }];
     openssh.authorizedKeys.keyFiles = [ 
         ../keys/battlestation.pub
-        ../keys/mbpro.pub 
+        ../keys/mbpro.pub
+        ../keys/build.pub
     ];
   };
 }
