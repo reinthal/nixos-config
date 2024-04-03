@@ -2,21 +2,32 @@
 {
   services.nginx.enable = true;
   services.nginx.virtualHosts."hottacorelay.org" = {
+    forceSSL = true;
+    enableACME = true;
     root = "/var/www/hottacorelay.org";
   };
-
+  security.acme = {
+      acceptTerms = true;
+      defaults.email = "hot.taco.relay@protonmail.com";
+  };
   services.tor = {
     enable = true;
     openFirewall = true;
     relay = {
       enable = true;
       role = "exit";
-  };
+    };
   settings = {
     ContactInfo = "hot.taco.relay@protonmail.com";
     Nickname = "HotTacoAdmin";
+    ClientUseIPv6 = false;
     ControlPort = 9051;
-    ORPort = 443;
+    ORPort = [
+      {
+        port = 8443;
+        IPv4Only = true;
+      }
+    ];
     BandWidthRate = "25 MBytes";
     ExitPolicy = [
     "accept *:20-21     # FTP" 
