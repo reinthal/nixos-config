@@ -14,7 +14,8 @@
 		../../modules/vm-services.nix
                 ../../modules/qbittorrent.nix
 		../../modules/nice-to-have-packages.nix
-		../../modules/zabbix.nix
+                #../../modules/zabbix.nix
+
 	    ];
 
 	  # Bootloader.

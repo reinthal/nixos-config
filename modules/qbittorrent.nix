@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
- {
+{
+   config.systemd.tmpfiles.rules = ["d /home/kog/.qbittorrent 770 kog users -"];
    config.virtualisation.oci-containers.containers = {
      qbittorrent = {
        image = "lscr.io/linuxserver/qbittorrent:latest";
@@ -11,7 +12,7 @@
           TZ="Etc/Stockholm";
        };
        volumes = [
-         "/home/kog/appdata/qbittorrent:/config"
+         "/home/kog/.qbittorrent:/config"
          "/mnt/media/torrent:/data/torrent"
        ];
      };
