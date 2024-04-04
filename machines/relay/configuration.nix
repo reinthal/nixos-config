@@ -21,13 +21,25 @@
 	  boot.loader.grub.enable = true;
 	  boot.loader.grub.device = "/dev/sda";
 	  boot.loader.grub.useOSProber = true;
+          
+          # High Workload Server configs
+          # https://github.com/Enkidu-6/tor-ddos?tab=readme-ov-file#first-step-preparing-your-system-for-high-number-of-connections
+
+          boot.kernel.sysctl."net.ipv4.tcp_fin_timeout" = 20;
+          boot.kernel.sysctl."net.ipv4.tcp_keepalive_time" = 1200;
+          boot.kernel.sysctl."net.ipv4.tcp_syncookies" = 1;
+          boot.kernel.sysctl."net.ipv4.tcp_tw_reuse" = 1;
+          boot.kernel.sysctl."net.ipv4.ip_local_port_range" = "10000 65000";
+          boot.kernel.sysctl."net.ipv4.tcp_max_syn_backlog" = 8192;
+          boot.kernel.sysctl."net.ipv4.tcp_max_tw_buckets" = 5000;
 
 	  networking = {
 	     hostName = "relay"; # Define your hostname.
-	     networkmanager.enable = true;
+             networkmanager.enable = true;
+             nftables.enable = true;
              firewall = {
   		enable = true;
-                allowedTCPPorts = [ 22 80 443 4949];
+                allowedTCPPorts = [ 22 80 443 10050];
 	     };
 	  };
 
