@@ -13,7 +13,14 @@
       appstoreEnable = true;
       extraAppsEnable = true;
       extraApps = {
-        inherit (config.services.nextcloud.package.packages.apps) notify_push;
+        inherit (config.services.nextcloud.package.packages.apps) notify_push memories calendar mail cospend contacts deck forms groupfolders;
+              # recognize = pkgs.fetchNextcloudApp {
+              #   sha256 = "sha256-ziUc4J2y1lW1BwygwOKedOWbeAnPpBDwT9wh35R0MYk=";
+              #   url = "https://github.com/nextcloud/recognize/releases/download/v6.1.1/recognize-6.1.1.tar.gz";
+              #   license = "agpl3";
+              #   appName = "recognize";
+              #   appVersion = "6.1.1";
+              # };
       };
 
       maxUploadSize = "5G";
