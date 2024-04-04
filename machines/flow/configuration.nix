@@ -15,7 +15,6 @@
                 ../../modules/qbittorrent.nix
 		../../modules/nice-to-have-packages.nix
                 ../../modules/zabbix.nix
-
 	    ];
 
 	  # Bootloader.
