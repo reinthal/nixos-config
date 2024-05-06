@@ -8,6 +8,9 @@
       imports = [ ./home/vim.nix ./home/zsh.nix ];
       home.stateVersion = "23.11";  
       home.packages = with pkgs; [
+                fluxcd
+                kubeseal
+                kubectl
 		git
 		zsh
 		fzf

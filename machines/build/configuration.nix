@@ -55,7 +55,11 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "gnome-remote-desktop";
 
+  services.xrdp.openFirewall = true;
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -103,6 +107,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     eza
+    gnome.gnome-remote-desktop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
