@@ -17,7 +17,11 @@
     { device = "/dev/disk/by-uuid/2ecd3465-e468-44ed-8e50-53b9e7412dd5";
       fsType = "ext4";
     };
-
+  fileSystems."/mnt/data" =
+    {
+      device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1-part1";
+      fsType = "ext4";
+  };
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/B30A-FD7C";
       fsType = "vfat";
