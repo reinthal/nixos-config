@@ -20,12 +20,28 @@ in
       };
     };
   };
-
-  # Terminal frontend 
-  environment.systemPackages = with pkgs; [
-    unstable.oterm
-  ];
-   # Ollama
+  # Ollama Frontend
+  system.activationScripts = {
+    script.text = ''
+      install -d -m 755 /home/kog/open-webui/data -o root -g root
+    '';
+   };
+   virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      #defaultNetwork.settings.dns_enabled = true;
+    };
+ 
+    oci-containers = {
+      backend = "podman";
+ 
+      containers = {
+        open-webui = import ./containers/open-webui.nix;
+      };
+    };
+  };
+   # Ollama Server
   services.ollama = {
     package = pkgs.unstable.ollama; 
     enable = true;
