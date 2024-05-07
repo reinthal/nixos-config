@@ -14,8 +14,7 @@
 		../../modules/vm-services.nix
                 ../../modules/qbittorrent.nix
 		../../modules/nice-to-have-packages.nix
-                #../../modules/zabbix.nix
-
+                ../../modules/zabbix.nix
 	    ];
 
 	  # Bootloader.
@@ -51,6 +50,6 @@
              autoUpgrade.enable = true;
              autoUpgrade.allowReboot = true;
 
-            stateVersion = "23.05"; # Did you read the comment?
+            stateVersion = "23.11"; # Did you read the comment?
         };
 }
