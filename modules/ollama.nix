@@ -20,6 +20,11 @@ in
       };
     };
   };
+
+  # Terminal frontend 
+  environment.systemPackages = with pkgs; [
+    unstable.oterm
+  ];
    # Ollama
   services.ollama = {
     package = pkgs.unstable.ollama; 
