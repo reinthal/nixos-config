@@ -1,36 +1,23 @@
 { config, lib, pkgs, ... }:
 
-let
-  cfg = config.services.ollama;
-in
 {
-  options.services.ollama = {
-    enable = lib.mkEnableOption "Ollama Service";
 
-    # Additional options can be added here as needed.
-    # For instance, customization for the ollama binary path or other settings.
+  disabledModules = [ "services/misc/ollama.nix" ];
+
+  # Ollama
+  services.ollama = {
+  package = pkgs.unstable.ollama; # Uncomment if you want to use the unstable channel, see https://fictionbecomesfact.com/nixos-unstable-channel
+  enable = true;
+  acceleration = "cuda"; # Or "rocm"
+  environmentVariables = { # I haven't been able to get this to work myself yet, but I'm sharing it for the sake of completeness
+    # HOME = "/home/ollama";
+    # OLLAMA_MODELS = "/home/ollama/models";
+    OLLAMA_HOST = "0.0.0.0:11434"; # Make Ollama accesible outside of localhost
+    # OLLAMA_ORIGINS = "http://localhost:8080,http://192.168.0.10:*"; # Allow access, otherwise Ollama returns 403 forbidden due to CORS
   };
 
-  config = lib.mkIf cfg.enable {
-    systemd.services.ollama = {
-      description = "Ollama Service";
-      after = [ "network-online.target" ]; # Ensures service starts after network is up
-      wantedBy = [ "multi-user.target" ]; # Ensures service is started at the appropriate runlevel
+};
 
-      serviceConfig = {
-        ExecStart = "${pkgs.ollama}/bin/ollama serve"; # Starts ollama service
-        User = "ollama"; # Runs under ollama user
-        Group = "ollama"; # Runs under ollama group
-        Restart = "always"; # Service is restarted on failure
-        RestartSec = 3; # Delay before service restart
-      };
-    };
 
-    # Ensures the ollama user and group exist
-    users.users.ollama = {
-      isSystemUser = true;
-      group = "ollama";
-    };
-    users.groups.ollama = {};
-  };
 }
+
