@@ -12,6 +12,7 @@
       ../../modules/vm-services.nix
       ../../modules/users.nix
       ../../modules/nvidia.nix
+      ../../modules/ollama.nix
       ../../modules/development.nix
       ../../modules/desktop-apps.nix
       ../../modules/distrobox.nix
