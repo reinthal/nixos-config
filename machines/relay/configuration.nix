@@ -13,10 +13,15 @@
 		../../modules/vm-services.nix
 		../../modules/nice-to-have-packages.nix
 		../../modules/tor.nix
-		../../modules/ddns.nix
 		../../modules/zabbix.nix
 	    ];
-
+          system.autoUpgrade = {
+            enable = true;
+            flake = inputs.self.outPath;
+            flags = ["--update-input" "nixpkgs" "-L"];
+             dates = "02:00";
+             randomizedDelaySec = "45min";
+          };
 	  # Bootloader.
 	  boot.loader.grub.enable = true;
 	  boot.loader.grub.device = "/dev/sda";
