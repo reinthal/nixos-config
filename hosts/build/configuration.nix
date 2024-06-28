@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{inputs, config, pkgs, ... }:
 
 {
   imports =
@@ -15,7 +15,14 @@
       ../../modules/development.nix
       ../../modules/desktop-apps.nix
       ../../modules/distrobox.nix
+      inputs.home-manager.nixosModules.default
     ];
+  home-manager = {
+    extraSpecialArgs = {inherit inputs; };
+    users = {
+      "kog" = import ./home.nix;
+    };
+  };
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

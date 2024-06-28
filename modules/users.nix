@@ -1,67 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = [<home-manager/nixos>]; 
+
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true; 
-  home-manager.users.kog = { pkgs, ... }: {
-      imports = [ ./home/vim.nix ./home/zsh.nix ];
-      home.stateVersion = "23.11";  
-      home.packages = with pkgs; [
-                fluxcd
-                kubeseal
-                kubectl
-		git
-		zsh
-		fzf
-		nmap
-		lf    
-		eza
-		fd
-		file
-		fzf
-		htop
-		gotop
-		iftop
-		iotop
-		ldns
-		ltrace
-		loc
-		thefuck
-		tree
-		unzip
-		xclip
-		zip
-        ];
-      };
-    home-manager.users.ada = { pkgs, ... }: {
-      imports = [ ./home/vim.nix ./home/zsh.nix ];
-      home.stateVersion = "23.11";  
-      home.packages = with pkgs; [
-		git
-		zsh
-		fzf
-		nmap
-		lf    
-		eza
-		fd
-		file
-		fzf
-		htop
-		gotop
-		iftop
-		iotop
-		ldns
-		ltrace
-		loc
-		thefuck
-		tree
-		unzip
-		xclip
-		zip
-        ];
-  };
-
   programs.zsh.enable = true;
   users.users.ada = {
     description = "ada";
