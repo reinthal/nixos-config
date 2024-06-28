@@ -15,6 +15,7 @@
       ../../modules/aylur/gnome.nix
       ../../modules/aylur/audio.nix
       ../../modules/aylur/gnome.nix
+      ../../modules/aylur/nautilus.nix
       inputs.home-manager.nixosModules.default
     ];
   home-manager = {
