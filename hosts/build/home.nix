@@ -1,18 +1,15 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  imports = [ ../../home/vim.nix ../../home/zsh.nix ];
+  imports = [ 
+    ../../modules/home/vim.nix
+    ../../modules/home/zsh.nix 
+  ];
 
   home.username = "kog";
   home.homeDirectory = "/home/kog";
-  home-manager = {
-    extraSpecialArgs = {inherit inputs; };
-    users = {
-      "kog" = import ./home.nix;
-    };
-  };
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
