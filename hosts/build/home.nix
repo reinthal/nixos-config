@@ -6,7 +6,10 @@
   imports = [ 
     ../../modules/home/zsh.nix 
   ];
-
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    warn-dirty = false;
+  };
   home.username = "kog";
   home.homeDirectory = "/home/kog";
   # This value determines the Home Manager release that your configuration is
