@@ -10,5 +10,6 @@
         vim
         htop
         inetutils
+        btop
     ];
 }
