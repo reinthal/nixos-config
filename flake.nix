@@ -15,7 +15,6 @@
 
     # Tricked out nvim :)
     pwnvim.url = "github:zmre/pwnvim";
-
   };
   outputs = inputs @ {
     nixpkgs,
@@ -24,7 +23,6 @@
     pwnvim,
     ...
   }: {
-
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
@@ -48,3 +46,4 @@
     };
   };
 }
+
