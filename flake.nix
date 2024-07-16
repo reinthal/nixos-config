@@ -30,7 +30,7 @@
         config.allowUnfree = true;
       };
       modules = [
-        ./modules/darwin
+        ./darwin
         home-manager.darwinModules.home-manager
         {
           home-manager = {
@@ -38,7 +38,7 @@
             useUserPackages = true;
             extraSpecialArgs = {inherit pwnvim;};
             users.kog.imports = [
-              ./modules/home-manager
+              ./home-manager
             ];
           };
         }
