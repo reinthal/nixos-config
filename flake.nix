@@ -19,12 +19,30 @@
     pwnvim.url = "github:zmre/pwnvim";
   };
   outputs = inputs @ {
+    self,
     nixpkgs,
     home-manager,
     darwin,
     pwnvim,
     ...
-  }: {
+  }:
+  let
+    inherit (self) outputs;
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+
+      mkNixos = modules: nixpkgs.lib.nixosSystem {
+        inherit modules;
+        specialArgs = { inherit inputs outputs self; };
+      };
+  in
+    rec
+   {
      nixosConfigurations = {
       nixbook = mkNixos [ ./nixos/hosts/nixbook ];
      };
