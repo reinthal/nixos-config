@@ -13,6 +13,8 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+
     # Tricked out nvim :)
     pwnvim.url = "github:zmre/pwnvim";
   };
@@ -23,6 +25,9 @@
     pwnvim,
     ...
   }: {
+     nixosConfigurations = {
+      nixbook = mkNixos [ ./nixos/hosts/nixbook ];
+     };
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
