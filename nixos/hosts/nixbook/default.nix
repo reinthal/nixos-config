@@ -33,7 +33,6 @@
   }; 
   # enable GPU support and audio
   hardware.asahi = {
-    peripheralFirmwareDirectory = "./firmware";
     useExperimentalGPUDriver = true;
     experimentalGPUInstallMode = "replace";
     setupAsahiSound = true;
