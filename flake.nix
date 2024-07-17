@@ -32,15 +32,33 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-  in {
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+    in rec  
+    {
+    
+    # Your custom packages
+    # Acessible through 'nix build', 'nix shell', etc
+    packages = forAllSystems (system:
+        let pkgs = nixpkgs.legacyPackages.${system};
+        in import ./pkgs { inherit pkgs; }
+      );
       
      nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit self inputs outputs;};
         # > Our main nixos configuration file <
         modules = [./nixos/hosts/nixbook];
       };
     };
+
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays { inherit inputs; };
     
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
