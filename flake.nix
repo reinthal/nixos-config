@@ -19,7 +19,7 @@
     pwnvim.url = "github:zmre/pwnvim";
     
     # TODO
-    #     nix-colors.url = "github:misterio77/nix-colors";
+    # nix-colors.url = "github:misterio77/nix-colors";
     # firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     # 
   };
@@ -30,43 +30,19 @@
     darwin,
     pwnvim,
     ...
-  }@inputs:
-  let
+  } @ inputs: let
     inherit (self) outputs;
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
-
-      mkNixos = modules: nixpkgs.lib.nixosSystem {
-        inherit modules;
-        specialArgs = { inherit inputs outputs self; };
-      };
-      mkDarwin = system: modules: inputs.darwin.lib.darwinSystem {
-        inherit modules system;
-        specialArgs = { inherit inputs outputs self; };
-      };
-  in
-    rec
-   {
-      # Your custom packages
-      # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit pkgs; }
-      );
-      # Devshell for bootstrapping
-      # Acessible through 'nix develop' or 'nix-shell' (legacy)
-      devShells = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./shell.nix { inherit pkgs; }
-      );
+  in {
+      
      nixosConfigurations = {
-      nixbook = mkNixos [ ./nixos/hosts/nixbook ];
-     };
+      # FIXME replace with your hostname
+      nixbook = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        # > Our main nixos configuration file <
+        modules = [./nixos/hosts/nixbook];
+      };
+    };
+     
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
