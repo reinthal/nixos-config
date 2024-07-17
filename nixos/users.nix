@@ -17,8 +17,8 @@
     shell = pkgs.zsh;
     uid = 1337;
     openssh.authorizedKeys.keyFiles = [ 
-        ../keys/fireside.pub
-        ../keys/asperitas.pub 
+        ./keys/fireside.pub
+        ./keys/asperitas.pub 
     ];
   };
 
@@ -37,9 +37,9 @@
     subUidRanges = [{ startUid = 100000; count = 65536; }];
     subGidRanges = [{ startGid = 100000; count = 65536; }];
     openssh.authorizedKeys.keyFiles = [ 
-        ../keys/battlestation.pub
-        ../keys/mbpro.pub
-        ../keys/build.pub
+        ./keys/battlestation.pub
+        ./keys/mbpro.pub
+        ./keys/build.pub
     ];
   };
 }
