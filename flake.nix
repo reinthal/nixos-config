@@ -1,5 +1,5 @@
 {
-  description = "Nixos config flake";
+  description = "Alex config flake";
 
   inputs = {
     # Where we get most of our software. Giant mono repo with recipes
@@ -17,15 +17,20 @@
 
     # Tricked out nvim :)
     pwnvim.url = "github:zmre/pwnvim";
+    
+    # TODO
+    #     nix-colors.url = "github:misterio77/nix-colors";
+    # firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    # 
   };
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
     home-manager,
     darwin,
     pwnvim,
     ...
-  }:
+  }@inputs:
   let
     inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -38,6 +43,10 @@
 
       mkNixos = modules: nixpkgs.lib.nixosSystem {
         inherit modules;
+        specialArgs = { inherit inputs outputs self; };
+      };
+      mkDarwin = system: modules: inputs.darwin.lib.darwinSystem {
+        inherit modules system;
         specialArgs = { inherit inputs outputs self; };
       };
   in
