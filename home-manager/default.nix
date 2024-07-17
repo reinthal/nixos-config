@@ -5,7 +5,6 @@
   lib,
   ...
 }: {
-
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -139,7 +138,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      font.normal.family = "MesloLGS Nerd Font Mono";
+      font.normal.family = "FireCode Nerd Font Mono";
       font.size = 16;
 
       keyboard.bindings = [
@@ -163,11 +162,13 @@
       ];
     };
   };
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+  };
   programs.kitty = {
     enable = true;
     font = {
-      name = "MesloLGS Nerd Font Mono";
+      name = "FireCode Nerd Font Mono";
       size = 15;
     };
   };
