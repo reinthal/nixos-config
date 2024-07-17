@@ -10,10 +10,7 @@
   ];
 
   time.timeZone = lib.mkDefault "Europe/Stockholm";
-
   home-manager.extraSpecialArgs = { inherit inputs outputs; };
-
-  programs.zsh.enable = true;
 
   services.openssh.enable = true;
 
