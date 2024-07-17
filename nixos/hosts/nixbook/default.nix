@@ -29,12 +29,20 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-  # Pick only one of the below networking options.
-  networking.hostName = "nixbook"; # Define your hostname.
-  networking.networkmanager = {
-    enable = true; # Easiest to use and most distros use this by default.
-    wifi.backend = "iwd";
+
+networking = {
+    hostName = "nixbook"; # Define your hostname.
+    firewall.checkReversePath = false;
+    networkmanager = {
+      enable = true; # Easiest to use and most distros use this by default.
+      wifi.backend = "iwd";
+    };
+    wireless.iwd = {
+      enable = true;
+      settings.General.EnableNetworkConfiguration = true;
+    };
   };
+
   # enable GPU support and audio
   hardware.asahi = {
     useExperimentalGPUDriver = true;
@@ -64,11 +72,6 @@
     ];
   };
 
-  networking.wireless.iwd = {
-    enable = true;
-
-    settings.General.EnableNetworkConfiguration = true;
-  };
   time.timeZone = "Europe/Stockholm";
 
   services.xserver = {
