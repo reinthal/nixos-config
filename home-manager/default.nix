@@ -49,6 +49,8 @@
       kubeconform
       kubectl
       k9s
+      # coms
+      signal-desktop
     ];
     sessionVariables = {
       PAGER = "less";
