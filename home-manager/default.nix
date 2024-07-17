@@ -30,6 +30,12 @@
       # data
       minio-client
       # crypto / identity
+      yubikey-manager
+      yubikey-manager-qt
+      yubikey-personalization
+      yubikey-personalization-gui
+      yubico-piv-tool
+      yubioath-flutter
       # dev
       poetry
       ruff

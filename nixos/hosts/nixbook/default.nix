@@ -44,6 +44,10 @@
 
   # backlight control
   programs.light.enable = true;
+  services = {
+    pcscd.enable = true;
+    udev.packages = [pkgs.yubikey-personalization];
+  };
   services.actkbd = {
     enable = true;
     bindings = [
