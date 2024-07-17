@@ -44,8 +44,6 @@
       kubeconform
       kubectl
       k9s
-      # meetings
-      slack
     ];
     sessionVariables = {
       PAGER = "less";
