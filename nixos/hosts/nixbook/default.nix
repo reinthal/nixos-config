@@ -18,6 +18,9 @@
 
       # font config
       ../../features/hidpi.nix
+
+      # Import home-manager's NixOS module
+      inputs.home-manager.nixosModules.home-manager
     ];
   
   # Use the systemd-boot EFI boot loader.
@@ -60,8 +63,14 @@
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
   };
-
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    users = {
+      kog = import ../../home-manager;
+    };
+  };
   users.users.kog = {
+     home = "/home/kog";  
      isNormalUser = true;
      hashedPassword = "$6$WMQGBij0sndI.ZxH$eBSuf/DxQvBnPqGb0qlxXQsUPFkFWc3QKufpTSpfvKMXYcI/NkIZ51vE9vE36388Yj7QnmjACHu3Kbms6dFNm.";
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.

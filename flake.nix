@@ -35,14 +35,13 @@
   in {
       
      nixosConfigurations = {
-      # FIXME replace with your hostname
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
         modules = [./nixos/hosts/nixbook];
       };
     };
-     
+    
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
