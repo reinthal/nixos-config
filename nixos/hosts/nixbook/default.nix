@@ -66,7 +66,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
     users = {
-      kog = import ../../home-manager;
+      kog = import ../../../home-manager;
     };
   };
   users.users.kog = {

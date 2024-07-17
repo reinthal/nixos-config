@@ -1,6 +1,5 @@
 {
   pkgs,
-  pwnvim,
   ...
 }: {
   # Don"t change this when you change package input. Leave it alone.
@@ -22,7 +21,6 @@
       minio-client
       # crypto / identity
       # dev
-      pwnvim.packages."aarch64-darwin".default
       poetry
       ruff
       # dev nix
