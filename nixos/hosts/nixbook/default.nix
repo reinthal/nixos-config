@@ -22,11 +22,9 @@
       # Import home-manager's NixOS module
       inputs.home-manager.nixosModules.home-manager
     ];
-  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-
   # Pick only one of the below networking options.
   networking.hostName = "nixbook"; # Define your hostname.
   networking.networkmanager = {
@@ -35,6 +33,7 @@
   }; 
   # enable GPU support and audio
   hardware.asahi = {
+    peripheralFirmwareDirectory = "/boot/asahi";
     useExperimentalGPUDriver = true;
     experimentalGPUInstallMode = "replace";
     setupAsahiSound = true;
