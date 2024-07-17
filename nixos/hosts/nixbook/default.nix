@@ -20,15 +20,13 @@
       ../../features/hidpi.nix
     ];
   
-  home-manager.users.kog = import ../../../home-manager;
-  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
   # Pick only one of the below networking options.
+  networking.hostName = "nixbook"; # Define your hostname.
   networking.networkmanager = {
-    hostName = "nixbook"; # Define your hostname.
     enable = true;  # Easiest to use and most distros use this by default.
     wifi.backend = "iwd";
   }; 
