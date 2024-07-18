@@ -36,6 +36,7 @@
       yubikey-personalization-gui
       yubico-piv-tool
       yubioath-flutter
+      pinentry-gnome3
       # dev
       poetry
       ruff
@@ -69,8 +70,15 @@
     };
   };
   programs.direnv.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
+  };
   programs.gpg = {
     enable = true;
+    mutableKeys = true;
+    mutableTrust = true;
     settings = {
       personal-cipher-preferences = "AES256 AES192 AES";
       personal-digest-preferences = "SHA512 SHA384 SHA256";

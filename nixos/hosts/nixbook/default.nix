@@ -30,7 +30,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
-networking = {
+  networking = {
     hostName = "nixbook"; # Define your hostname.
     firewall.checkReversePath = false;
     networkmanager = {
@@ -56,6 +56,7 @@ networking = {
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
   };
+
   services.actkbd = {
     enable = true;
     bindings = [
