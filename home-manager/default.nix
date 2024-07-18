@@ -36,7 +36,7 @@
       yubikey-personalization-gui
       yubico-piv-tool
       yubioath-flutter
-      pinentry-curses
+      pinentry-gnome3
       # dev
       poetry
       ruff
@@ -73,10 +73,10 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentryPackage = pkgs.pinentry.gnome3;
     enableZshIntegration = true;
     defaultCacheTtl = 60;
-    max-cache-ttl = 120;
+    maxCacheTtl = 120;
     extraConfig = ''ttyname $GPG_TTY'';
   };
   programs.gpg = {
