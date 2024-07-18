@@ -34,6 +34,7 @@
       yubikey-manager-qt
       yubikey-personalization
       yubikey-personalization-gui
+      yubikey-touch-detector
       yubico-piv-tool
       yubioath-flutter
       pinentry-gnome3
