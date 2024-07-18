@@ -56,7 +56,7 @@
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
   };
-
+  programs.ssh.startAgent = false;
   services.actkbd = {
     enable = true;
     bindings = [
