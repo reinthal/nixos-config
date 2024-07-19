@@ -8,6 +8,9 @@
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # 
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyperland.inputs.nixpkgs.follows = "nixpkgs";
 
     # Controls system level software and settings including fonts
     darwin.url = "github:lnl7/nix-darwin";

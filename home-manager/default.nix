@@ -34,10 +34,8 @@
       yubikey-manager-qt
       yubikey-personalization
       yubikey-personalization-gui
-      yubikey-touch-detector
       yubico-piv-tool
       yubioath-flutter
-      pinentry-gnome3
       # dev
       poetry
       ruff
@@ -70,16 +68,11 @@
       key = "1B24ADB218CFB40E";
     };
   };
-  programs.direnv.enable = true;
-  services.gpg-agent = {
+    programs.hyprland = {
     enable = true;
-    enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry.gnome3;
-    enableZshIntegration = true;
-    defaultCacheTtl = 60;
-    maxCacheTtl = 120;
-    extraConfig = ''ttyname $GPG_TTY'';
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
   };
+  programs.direnv.enable = true;
   programs.gpg = {
     enable = true;
     mutableKeys = true;
