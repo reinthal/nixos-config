@@ -8,7 +8,7 @@
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    # 
+    #
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -20,40 +20,40 @@
 
     # Tricked out nvim :)
     pwnvim.url = "github:zmre/pwnvim";
-    
+
     # TODO
     # nix-colors.url = "github:misterio77/nix-colors";
     # firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    # 
+    #
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
-    hyprland,
     darwin,
     pwnvim,
     ...
   } @ inputs: let
     inherit (self) outputs;
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
-    in rec  
-    {
-    
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+  in rec
+  {
     # Your custom packages
     # Acessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit pkgs; }
-      );
-      
-     nixosConfigurations = {
+    packages = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        import ./pkgs {inherit pkgs;}
+    );
+
+    nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit self inputs outputs;};
         # > Our main nixos configuration file <
@@ -62,8 +62,8 @@
     };
 
     # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays { inherit inputs; };
-    
+    overlays = import ./overlays {inherit inputs;};
+
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
@@ -87,4 +87,3 @@
     };
   };
 }
-
