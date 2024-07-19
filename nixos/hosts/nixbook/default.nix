@@ -15,7 +15,8 @@
     ../../common.nix
     # apple-silicon hardware support
     inputs.apple-silicon.nixosModules.apple-silicon-support
-
+    # Enable Nice Login-Screen
+    ../../features/greetd.nix
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix
@@ -88,7 +89,7 @@
   # add the following line somewhere in `config#uration.nix`
   # for example, in between locales and audio sections
   programs.sway.enable = true;
- # wayland-related
+  # wayland-related
   # programs.sway.enable = true; # commented out due to usage of home-manager's sway
   security.polkit.enable = true;
   home-manager = {
