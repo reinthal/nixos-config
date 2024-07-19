@@ -66,7 +66,7 @@
     ssh.startAgent = false;
     gnupg.agent.enable = true;
     gnupg.agent.enableSSHSupport = true;
-    gnupg.agent.pinentryPackage = pkgs.pinentry.gnome3;
+    gnupg.agent.pinentryPackage = pkgs.pinentry.curses;
   };
   services.actkbd = {
     enable = true;
@@ -102,7 +102,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    pinentry.gnome3
+    pinentry.curses
     (vscode-with-extensions.override {
       vscode = vscodium;
       vscodeExtensions = with vscode-extensions; [

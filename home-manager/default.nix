@@ -68,11 +68,7 @@
       key = "1B24ADB218CFB40E";
     };
   };
-    programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-  };
-  programs.direnv.enable = true;
+   programs.direnv.enable = true;
   programs.gpg = {
     enable = true;
     mutableKeys = true;
