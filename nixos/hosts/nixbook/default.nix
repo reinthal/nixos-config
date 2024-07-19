@@ -56,7 +56,18 @@
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
   };
-  programs.ssh.startAgent = false;
+  environment.shellInit = ''
+    export GPG_TTY="$(tty)"
+     ${pkgs.gnupg}/bin/gpg-connect-agent /bye
+     export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+  '';
+
+  programs = {
+    ssh.startAgent = false;
+    gnupg.agent.enable = true;
+    gnupg.agent.enableSSHSupport = true;
+    gnupg.agent.pinentryPackage = pkgs.pinentry.gnome3;
+  };
   services.actkbd = {
     enable = true;
     bindings = [
@@ -91,6 +102,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    pinentry.gnome3
     (vscode-with-extensions.override {
       vscode = vscodium;
       vscodeExtensions = with vscode-extensions; [
