@@ -12,7 +12,17 @@
       allowUnfreePredicate = _: true;
     };
   };
-  # Don"t change this when you change package input. Leave it alone.
+  wayland.windowManager.sway = {
+    enable = true;
+    config = rec {
+      modifier = "Mod4"; # Super key
+      output = {
+        "Virtual-1" = {
+          mode = "3456x2160@60Hz";
+        };
+      };
+    };
+  }; # Don"t change this when you change package input. Leave it alone.
   home = {
     stateVersion = "24.05";
     # specify my home-manager configs
@@ -68,7 +78,7 @@
       key = "1B24ADB218CFB40E";
     };
   };
-   programs.direnv.enable = true;
+  programs.direnv.enable = true;
   programs.gpg = {
     enable = true;
     mutableKeys = true;

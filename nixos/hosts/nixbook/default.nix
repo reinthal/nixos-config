@@ -85,12 +85,12 @@
   };
 
   time.timeZone = "Europe/Stockholm";
-
-  services.xserver = {
-    enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
-  };
+  # add the following line somewhere in `config#uration.nix`
+  # for example, in between locales and audio sections
+  programs.sway.enable = true;
+ # wayland-related
+  # programs.sway.enable = true; # commented out due to usage of home-manager's sway
+  security.polkit.enable = true;
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
     users = {
