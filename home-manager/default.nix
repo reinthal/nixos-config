@@ -22,6 +22,12 @@
         };
       };
     };
+      extraConfig = ''
+    bindsym Print               exec shotman -c output
+    bindsym Print+Shift         exec shotman -c region
+    bindsym Print+Shift+Control exec shotman -c window
+  '';
+
   }; # Don"t change this when you change package input. Leave it alone.
   home = {
     stateVersion = "24.05";
@@ -37,6 +43,10 @@
       curl
       less
       wget
+      # wayland
+      mako
+      wl-clipboard
+      shotman
       # data
       minio-client
       # crypto / identity
