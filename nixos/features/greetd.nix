@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   services.greetd = {
     enable = true;
     settings = {
@@ -7,7 +7,7 @@
           --time \
           --asterisks \
           --user-menu \
-          --cmd hyprland
+          --cmd ${lib.getExe config.programs.hyprland.package}
       '';
     };
   };
