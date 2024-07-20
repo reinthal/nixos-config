@@ -19,7 +19,7 @@
       modifier = "SUPER";
       modifier2 = "ALT";
     in
-      builtins.concatStrings [
+      lib.concatStrings [
         ''
           monitor=DP-1, 3456x2234, 0x0, 2
         ''
