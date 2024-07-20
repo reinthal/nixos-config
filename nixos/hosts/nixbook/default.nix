@@ -89,6 +89,7 @@
   # add the following line somewhere in `config#uration.nix`
   # for example, in between locales and audio sections
   programs.sway.enable = true;
+  programs.hyprland.enable = true;
   # wayland-related
   # programs.sway.enable = true; # commented out due to usage of home-manager's sway
   security.polkit.enable = true;

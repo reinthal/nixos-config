@@ -12,22 +12,42 @@
       allowUnfreePredicate = _: true;
     };
   };
-  wayland.windowManager.sway = {
+  wayland.windowManager.hyprland = {
     enable = true;
-    config = rec {
-      modifier = "Mod4"; # Super key
-      output = {
-        "Virtual-1" = {
-          mode = "3456x2160@60Hz";
-        };
-      };
+    xwayland.enable = true;
+    extraConfig = let
+      modifier = "SUPER";
+      modifier2 = "ALT";
+    in
+      builtins.concatStrings [
+        ''
+          monitor=DP-1, 3456x2234, 0x0, 2
+        ''
+      ];
+    settings = {
+      "$mod" = "SUPER";
+      bind =
+        [
+          "$mod, F, exec, firefox"
+          ", Print, exec, grimblast copy area"
+        ]
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+          builtins.concatLists (builtins.genList (
+              x: let
+                ws = let
+                  c = (x + 1) / 10;
+                in
+                  builtins.toString (x + 1 - (c * 10));
+              in [
+                "$mod, ${ws}, workspace, ${toString (x + 1)}"
+                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+              ]
+            )
+            10)
+        );
     };
-      extraConfig = ''
-    bindsym Print               exec shotman -c output
-    bindsym Print+Shift         exec shotman -c region
-    bindsym Print+Shift+Control exec shotman -c window
-  '';
-
   }; # Don"t change this when you change package input. Leave it alone.
   home = {
     stateVersion = "24.05";
