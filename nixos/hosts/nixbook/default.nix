@@ -17,6 +17,10 @@
     inputs.apple-silicon.nixosModules.apple-silicon-support
     # Enable Nice Login-Screen
     ../../features/greetd.nix
+    
+    ../../features/desktop
+    
+    (import ../../features/networking "nixbook")
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix
@@ -31,18 +35,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
-  networking = {
-    hostName = "nixbook"; # Define your hostname.
-    firewall.checkReversePath = false;
-    networkmanager = {
-      enable = true; # Easiest to use and most distros use this by default.
-      wifi.backend = "iwd";
-    };
-    wireless.iwd = {
-      enable = true;
-      settings.General.EnableNetworkConfiguration = true;
-    };
-  };
+  
 
   # enable GPU support and audio
   hardware.asahi = {
@@ -88,10 +81,7 @@
   time.timeZone = "Europe/Stockholm";
   # add the following line somewhere in `config#uration.nix`
   # for example, in between locales and audio sections
-  programs.hyprland.enable = true;
-  # wayland-related
-  # programs.sway.enable = true; # commented out due to usage of home-manager's sway
-  security.polkit.enable = true;
+
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
     users = {
