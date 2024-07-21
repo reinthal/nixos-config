@@ -1,5 +1,10 @@
 My nixconfig of mac os x
 
+# Work in progress
+- [] `feat/add-asahi-nixos`
+- [] get all servers into flake
+- [] modularize home-manager and build according to hostname
+
 # Uses
 
 - nixos-darwin https://github.com/LnL7/nix-darwin
