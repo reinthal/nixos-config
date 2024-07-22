@@ -28,7 +28,7 @@
       "$mod" = "SUPER";
       bind =
         [
-          "$mainMod, S, exec, rofi -show drun -show-icons"
+          "$mod, S, exec, rofi -show drun -show-icons"
           "$mod, F, exec, firefox"
           ", Print, exec, grimblast copy area"
         ]

@@ -5,6 +5,9 @@
   lib,
   ...
 }: {
+  imports = [
+    ./hyprland.nix
+  ];
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -12,7 +15,6 @@
       allowUnfreePredicate = _: true;
     };
   };
-
   # Don"t change this when you change package input. Leave it alone.
   home = {
     stateVersion = "24.05";
