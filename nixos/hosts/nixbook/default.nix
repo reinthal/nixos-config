@@ -16,7 +16,7 @@
     # apple-silicon hardware support
     inputs.apple-silicon.nixosModules.apple-silicon-support
     # Enable Nice Login-Screen
-    ../../features/greetd.nix
+    #../../features/greetd.nix
     
     ../../features/desktop
     

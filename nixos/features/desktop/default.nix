@@ -1,15 +1,20 @@
 {pkgs, ...}: {
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-  };
+  #xdg.portal = {
+  #  enable = true;
+  #  extraPortals = with pkgs; [
+  #    xdg-desktop-portal-gtk
+  #  ];
+  #};
   # wayland-related
   security.polkit.enable = true;
   environment.sessionVariables = {
@@ -49,4 +54,3 @@
     swww
   ];
 }
-
