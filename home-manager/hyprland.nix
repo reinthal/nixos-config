@@ -2,7 +2,16 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
+    ${pkgs.waybar}/bin/waybar &
+    ${pkgs.swww}/bin/swww init &
+
+    sleep 1
+
+    ${pkgs.swww}/bin/swww img ${../img/landscape.png} &
+  '';
+in {
   home.packages = with pkgs; [
     # wayland
   ];
@@ -22,13 +31,16 @@
       lib.concatStrings [
         ''
           monitor=DP-1, 3456x2234, 0x0, 2
+          monitor=HDMI-A-1, 3840x2160@60, 1728x0, 2
         ''
       ];
     settings = {
-      "$mod" = "SUPER";
+exec-once = ''${startupScript}/bin/start'';      "$mod" = "SUPER";
       bind =
         [
-          "$mod, S, exec, rofi -show drun -show-icons"
+          
+          "$mod, Return, exec, kitty"
+          "$mod, Space, exec, rofi -show drun -show-icons"
           "$mod, F, exec, firefox"
           ", Print, exec, grimblast copy area"
         ]
