@@ -28,6 +28,7 @@ in {
     xwayland.enable = true;
     plugins = [
       pkgs.hyprlandPlugins.borders-plus-plus
+      inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
     ];
     extraConfig = let
       modifier = "SUPER";
