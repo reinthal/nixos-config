@@ -83,6 +83,7 @@
   # for example, in between locales and audio sections
 
   home-manager = {
+    backupFileExtension = "hm-bkp";
     extraSpecialArgs = {inherit inputs outputs;};
     users = {
       kog = import ../../../home-manager;
