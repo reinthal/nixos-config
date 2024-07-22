@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -24,6 +25,9 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    plugins = [
+      inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
+    ];
     extraConfig = let
       modifier = "SUPER";
       modifier2 = "ALT";
@@ -31,15 +35,31 @@ in {
       lib.concatStrings [
         ''
           monitor=DP-1, 3456x2234, 0x0, 2
-          monitor=HDMI-A-1, 3840x2160@60, 1728x0, 2
+          monitor=HDMI-A-1, 3840x2160@60, 1728x0, 1
+
         ''
       ];
     settings = {
-exec-once = ''${startupScript}/bin/start'';      "$mod" = "SUPER";
+      "plugin:borders-plus-plus" = {
+        add_borders = 1; # 0 - 9
+
+        # you can add up to 9 borders
+        "col.border_1" = "rgb(ffffff)";
+        "col.border_2" = "rgb(2222ff)";
+
+        # -1 means "default" as in the one defined in general:border_size
+        border_size_1 = 10;
+        border_size_2 = -1;
+
+        # makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
+        natural_rounding = "yes";
+      };
+      exec-once = ''${startupScript}/bin/start'';
+      "$mod" = "SUPER";
       bind =
         [
-          
           "$mod, Return, exec, kitty"
+          "$mod, mouse:1, movewindow"
           "$mod, Space, exec, rofi -show drun -show-icons"
           "$mod, F, exec, firefox"
           ", Print, exec, grimblast copy area"

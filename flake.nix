@@ -10,7 +10,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     #
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
     # Controls system level software and settings including fonts
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
