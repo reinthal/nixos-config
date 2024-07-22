@@ -37,6 +37,7 @@
 
     # Wayland /  Hyprland
     mako
+    libnotify
     wl-gammactl
     wl-clipboard
     wayshot
