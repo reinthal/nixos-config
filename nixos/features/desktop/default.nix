@@ -28,8 +28,11 @@
     morewaita-icon-theme
     adwaita-icon-theme
     qogir-icon-theme
+    # Image Viewer
     loupe
+    # file system tool
     nautilus
+    # disk utility
     baobab
     gnome-calendar
     gnome-system-monitor
@@ -42,7 +45,7 @@
     wl-clipboard
     wayshot
     rofi-wayland
-    # ?
+    # sound control
     pavucontrol
     brightnessctl
 
