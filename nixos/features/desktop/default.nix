@@ -24,22 +24,16 @@
     NIXOS_OZONE_WL = "1";
   };
   environment.systemPackages = with pkgs;
-  with gnome; [
+   [
     morewaita-icon-theme
     adwaita-icon-theme
     qogir-icon-theme
     loupe
     nautilus
     baobab
-    gnome-text-editor
     gnome-calendar
-    gnome-boxes
     gnome-system-monitor
-    gnome-control-center
-    gnome-weather
     gnome-calculator
-    gnome-clocks
-    gnome-software # for flatpak
 
     # Wayland /  Hyprland
     mako
@@ -53,5 +47,14 @@
 
     # wallpaper
     swww
-  ];
+  ] ++ (with pkgs.gnome; [
+    gnome-boxes
+    gnome-text-editor # webcam tool
+    gnome-clocks
+    gnome-software # for flatpak
+    gnome-control-center
+    gnome-weather
+    
+])
+  ;
 }
