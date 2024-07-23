@@ -61,4 +61,23 @@
     
 ])
   ;
+
+  environment.gnome.excludePackages = (with pkgs; [
+  gnome-photos
+  gnome-tour
+  gedit # text editor
+  cheese # webcam tool
+  gnome-terminal
+  evince # document viewer
+  epiphany # web browser
+  totem # video player
+  geary # email reader
+]) ++ (with pkgs.gnome; [
+  gnome-music
+  gnome-characters
+  tali # poker game
+  iagno # go game
+  hitori # sudoku game
+  atomix # puzzle game
+]);
 }
