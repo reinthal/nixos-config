@@ -90,7 +90,8 @@
     };
   };
   programs.zsh.enable = true;
-
+  # dconf
+  programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     pinentry.curses
     (vscode-with-extensions.override {

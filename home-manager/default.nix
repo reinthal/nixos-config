@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hyprland.nix
+    ./dconf.nix
   ];
   nixpkgs = {
     config = {

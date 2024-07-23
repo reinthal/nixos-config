@@ -7,7 +7,8 @@
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
-
+      export XKB_DEFAULT_LAYOUT=us
+      export XCURSOR_THEME=Qogir
     sleep 1
 
     ${pkgs.swww}/bin/swww img ${../img/landscape.png} &
@@ -36,8 +37,14 @@ in {
       lib.concatStrings [
         ''
           monitor=DP-1, 3456x2234, 0x0, 2
-          monitor=HDMI-A-1, 3840x2160@60, 1728x0, 2
+          monitor=HDMI-A-1, highres,auto,2
+          xwayland {
+            force_zero_scaling = true
+          }
 
+          # toolkit-specific scale
+          env = GDK_SCALE,2
+          env = XCURSOR_SIZE,32
         ''
       ];
     settings = {
