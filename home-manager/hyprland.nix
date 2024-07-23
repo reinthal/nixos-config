@@ -36,7 +36,7 @@ in {
       lib.concatStrings [
         ''
           monitor=DP-1, 3456x2234, 0x0, 2
-          monitor=HDMI-A-1, 3840x2160@60, 1728x0, 1
+          monitor=HDMI-A-1, 3840x2160@60, 1728x0, 2
 
         ''
       ];

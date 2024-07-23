@@ -1,7 +1,14 @@
-My nixconfig of mac os x
+# Nix Configs
 
+## todos
+- [x] add teams
+- [] add languages
+- [] Fix hotkeys for sound
+- [] add wayland cursor
+- [] explore 1 plugin
 # Uses
 
+- flakes 
 - nixos-darwin https://github.com/LnL7/nix-darwin
 - home-manager https://github.com/nix-community/home-manager
 

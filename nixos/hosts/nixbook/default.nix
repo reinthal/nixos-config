@@ -17,7 +17,7 @@
     inputs.apple-silicon.nixosModules.apple-silicon-support
     # Enable Nice Login-Screen
     #../../features/greetd.nix
-    
+    ../../features/coms
     ../../features/desktop
     
     (import ../../features/networking "nixbook")
@@ -92,8 +92,6 @@
   programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
     pinentry.curses
     (vscode-with-extensions.override {
       vscode = vscodium;
