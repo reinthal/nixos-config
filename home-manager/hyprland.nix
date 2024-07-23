@@ -38,6 +38,8 @@ in {
         ''
           monitor=DP-1, 3456x2234, 0x0, 2
           monitor=HDMI-A-1, highres,auto,2
+
+          # Fix pixelated extra screen
           xwayland {
             force_zero_scaling = true
           }
@@ -45,6 +47,12 @@ in {
           # toolkit-specific scale
           env = GDK_SCALE,2
           env = XCURSOR_SIZE,32
+
+          # Switchable keyboard layout
+          input {
+            kb_layout = us,se
+            kb_options = grp:alt_space_toggle
+          }
         ''
       ];
     settings = {
