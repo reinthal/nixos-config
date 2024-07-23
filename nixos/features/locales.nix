@@ -3,17 +3,16 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "se_SE.UTF-8";
-    LC_IDENTIFICATION = "se_SE.UTF-8";
-    LC_MEASUREMENT = "se_SE.UTF-8";
-    LC_MONETARY = "se_SE.UTF-8";
-    LC_NAME = "se_SE.UTF-8";
-    LC_NUMERIC = "se_SE.UTF-8";
-    LC_PAPER = "se_SE.UTF-8";
-    LC_TELEPHONE = "se_SE.UTF-8";
-    LC_TIME = "se_SE.UTF-8";
+    LC_ADDRESS = "sv_SE.UTF-8";
+    LC_IDENTIFICATION = "sv_SE.UTF-8";
+    LC_MEASUREMENT = "sv_SE.UTF-8";
+    LC_MONETARY = "sv_SE.UTF-8";
+    LC_NAME = "sv_SE.UTF-8";
+    LC_NUMERIC = "sv_SE.UTF-8";
+    LC_PAPER = "sv_SE.UTF-8";
+    LC_TELEPHONE = "sv_SE.UTF-8";
+    LC_TIME = "sv_SE.UTF-8";
   };
 
-  console.useXkbConfig = true;
   services.xserver.xkb.layout = "us,se";
 }

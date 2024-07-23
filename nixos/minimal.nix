@@ -7,9 +7,9 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./users.nix
+    ./features/locales.nix
   ];
 
-  time.timeZone = lib.mkDefault "Europe/Stockholm";
   home-manager.extraSpecialArgs = { inherit inputs outputs; };
 
   services.openssh.enable = true;
