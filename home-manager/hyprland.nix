@@ -29,7 +29,6 @@ in {
     xwayland.enable = true;
     plugins = [
       pkgs.hyprlandPlugins.borders-plus-plus
-      pkgs.hyprlandPlugins.hyprtrails
       pkgs.hyprlandPlugins.hyprbars
     ];
     extraConfig = let
@@ -38,35 +37,34 @@ in {
     in
       lib.concatStrings [
         ''
-                    monitor=DP-1, 3456x2234, 0x0, 2
-                    monitor=HDMI-A-1, highres,auto,2
+          monitor=DP-1, 3456x2234, 0x0, 2
+          monitor=HDMI-A-1, highres,auto,2
 
-                    # Fix pixelated extra screen
-                    xwayland {
-                      force_zero_scaling = true
-                    }
+          # Fix pixelated extra screen
+          xwayland {
+            force_zero_scaling = true
+          }
 
-                    # toolkit-specific scale
-                    env = GDK_SCALE,2
-                    env = XCURSOR_SIZE,32
+          # toolkit-specific scale
+          env = GDK_SCALE,2
+          env = XCURSOR_SIZE,32
 
-                    # Switchable keyboard layout
-                    input {
-                      kb_layout = us,se
-                      kb_options = grp:alt_space_toggle
-                    }
+          # Switchable keyboard layout
+          input {
+            kb_layout = us,se
+            kb_options = grp:alt_space_toggle
+          }
 
-                    plugin {
-                      hyprbars {
-                        # example config
-                        bar_height = 20
-
-                        # example buttons (R -> L)
-                        # hyprbars-button = color, size, on-click
-                        hyprbars-button = rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive
-                        hyprbars-button = rgb(eeee11), 10, , hyprctl dispatch fullscreen 1
-                      }
-                    }
+          plugin {
+            hyprbars {
+              # example config
+              bar_height = 20
+             # example buttons (R -> L)
+              # hyprbars-button = color, size, on-click
+              hyprbars-button = rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive
+              hyprbars-button = rgb(eeee11), 10, , hyprctl dispatch fullscreen 1
+            }
+          }
         ''
       ];
     settings = {
