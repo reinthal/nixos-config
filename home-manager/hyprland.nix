@@ -28,7 +28,6 @@ in {
     enable = true;
     xwayland.enable = true;
     plugins = [
-      pkgs.hyprlandPlugins.borders-plus-plus
       pkgs.hyprlandPlugins.hyprbars
     ];
     extraConfig = let
@@ -48,53 +47,83 @@ in {
           # toolkit-specific scale
           env = GDK_SCALE,2
           env = XCURSOR_SIZE,32
-
-          # Switchable keyboard layout
-          input {
-            kb_layout = us,se
-            kb_options = grp:alt_space_toggle
-          }
-
-          plugin {
-            hyprbars {
-              # example config
-              bar_height = 20
-             # example buttons (R -> L)
-              # hyprbars-button = color, size, on-click
-              hyprbars-button = rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive
-              hyprbars-button = rgb(eeee11), 10, , hyprctl dispatch fullscreen 1
-            }
-          }
         ''
       ];
     settings = {
-      "plugin:borders-plus-plus" = {
-        add_borders = 1; # 0 - 9
-
-        # you can add up to 9 borders
-        "col.border_1" = "rgb(ffffff)";
-        "col.border_2" = "rgb(2222ff)";
-
-        # -1 means "default" as in the one defined in general:border_size
-        border_size_1 = 10;
-        border_size_2 = -1;
-
-        # makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
-        natural_rounding = "yes";
+      # Switchable keyboard layout
+      input = {
+        kb_layout = "us,se";
+        kb_options = "grp:alt_space_toggle";
       };
 
       gestures = {
         workspace_swipe = true;
         workspace_swipe_use_r = true;
       };
+      decoration = {
+        drop_shadow = "yes";
+        shadow_range = 8;
+        shadow_render_power = 2;
+        "col.shadow" = "rgba(00000044)";
 
+        dim_inactive = false;
+
+        blur = {
+          enabled = true;
+          size = 8;
+          passes = 3;
+          new_optimizations = "on";
+          noise = 0.01;
+          contrast = 0.9;
+          brightness = 0.8;
+          popups = true;
+        };
+      };
+
+      animations = {
+        enabled = "yes";
+        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+        animation = [
+          "windows, 1, 5, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "border, 1, 10, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
+        ];
+      };
+plugin = {
+        overview = {
+          centerAligned = true;
+          hideTopLayers = true;
+          hideOverlayLayers = true;
+          showNewWorkspace = true;
+          exitOnClick = true;
+          exitOnSwitch = true;
+          drawActiveWorkspace = true;
+          reverseSwipe = true;
+        };
+        hyprbars = {
+          bar_color = "rgb(2a2a2a)";
+          bar_height = 28;
+          col_text = "rgba(ffffffdd)";
+          bar_text_size = 11;
+          bar_text_font = "Ubuntu Nerd Font";
+
+          buttons = {
+            button_size = 0;
+            "col.maximize" = "rgba(ffffff11)";
+            "col.close" = "rgba(ff111133)";
+          };
+        };
+      };
       exec-once = ''${startupScript}/bin/start'';
-      "$mod" = "SUPER";
+
       bindle = [
         ",XF86AudioRaiseVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
-      bind = let 
+
+      bind = let
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
         mvfocus = binding "SUPER" "movefocus";
         ws = binding "SUPER" "workspace";
@@ -104,10 +133,10 @@ in {
         arr = [1 2 3 4 5 6 7];
       in
         [
-          "$mod, Return, exec, kitty"
-          "$mod, mouse:1, movewindow"
-          "$mod, Space, exec, rofi -show drun -show-icons"
-          "$mod, F, exec, firefox"
+          "SUPER, Return, exec, kitty"
+          "SUPER, mouse:273, movewindow"
+          "SUPER, Space, exec, rofi -show drun -show-icons"
+          "SUPER, W, exec, firefox"
           ", Print, exec, grimblast copy area"
 
           "ALT, Tab, focuscurrentorlast"
@@ -120,7 +149,7 @@ in {
         ]
         ++ (
           # workspaces
-          # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+          # binds SUPER + [shift +] {1..10} to [move to] workspace {1..10}
           builtins.concatLists (builtins.genList (
               x: let
                 ws = let
@@ -128,8 +157,8 @@ in {
                 in
                   builtins.toString (x + 1 - (c * 10));
               in [
-                "$mod, ${ws}, workspace, ${toString (x + 1)}"
-                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+                "SUPER, ${ws}, workspace, ${toString (x + 1)}"
+                "SUPER SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
               ]
             )
             10)
