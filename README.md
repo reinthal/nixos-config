@@ -3,8 +3,8 @@
 ## todos
 - [x] add teams
 - [x] add languages
-- [] Fix hotkeys for sound
-- [] add wayland cursor
+- [x] Fix hotkeys for sound
+- [x] add wayland cursor
 - [x] explore 1 plugin
 # Uses
 

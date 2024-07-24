@@ -82,15 +82,41 @@ in {
         # makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
         natural_rounding = "yes";
       };
+
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_use_r = true;
+      };
+
       exec-once = ''${startupScript}/bin/start'';
       "$mod" = "SUPER";
-      bind =
+      bindle = [
+        ",XF86AudioRaiseVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ];
+      bind = let 
+        binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
+        mvfocus = binding "SUPER" "movefocus";
+        ws = binding "SUPER" "workspace";
+        resizeactive = binding "SUPER CTRL" "resizeactive";
+        mvactive = binding "SUPER ALT" "moveactive";
+        mvtows = binding "SUPER SHIFT" "movetoworkspace";
+        arr = [1 2 3 4 5 6 7];
+      in
         [
           "$mod, Return, exec, kitty"
           "$mod, mouse:1, movewindow"
           "$mod, Space, exec, rofi -show drun -show-icons"
           "$mod, F, exec, firefox"
           ", Print, exec, grimblast copy area"
+
+          "ALT, Tab, focuscurrentorlast"
+          "CTRL ALT, D, exit"
+          "ALT, Q, killactive"
+          "SUPER, F, togglefloating"
+          "SUPER, G, fullscreen"
+          "SUPER, O, fakefullscreen"
+          "SUPER, P, togglesplit"
         ]
         ++ (
           # workspaces
