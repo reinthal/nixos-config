@@ -2,10 +2,10 @@
 
 ## todos
 - [x] add teams
-- [] add languages
+- [x] add languages
 - [] Fix hotkeys for sound
 - [] add wayland cursor
-- [] explore 1 plugin
+- [x] explore 1 plugin
 # Uses
 
 - flakes 
