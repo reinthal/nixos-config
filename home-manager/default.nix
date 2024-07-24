@@ -8,6 +8,7 @@
   imports = [
     ./hyprland.nix
     ./dconf.nix
+    ./theme.nix
   ];
   nixpkgs = {
     config = {
