@@ -142,6 +142,11 @@ in {
       };
       exec-once = ''${startupScript}/bin/start'';
 
+      general = {
+        layout = "dwindle";
+        resize_on_border = true;
+      };
+
       bindle = [
         ",XF86AudioRaiseVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
