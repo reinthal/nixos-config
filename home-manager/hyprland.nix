@@ -11,11 +11,12 @@
       export XCURSOR_THEME=Qogir
     sleep 1
 
-    ${pkgs.swww}/bin/swww img ${../img/landscape.png} &
+    ${pkgs.swww}/bin/swww img ${../img/cyber-punk.png} &
   '';
 in {
   home.packages = with pkgs; [
     # wayland
+    hyprlock
   ];
   programs = {
     waybar.enable = true;
