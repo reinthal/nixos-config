@@ -176,6 +176,7 @@ in {
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
+          "SUPER,L,exec,${lib.exe pkgs.hyprlock}"
 
           (mvfocus "k" "u")
           (mvfocus "j" "d")
