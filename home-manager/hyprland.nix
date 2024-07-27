@@ -14,10 +14,6 @@
     ${pkgs.swww}/bin/swww img ${../img/cyber-punk.png} &
   '';
 in {
-  home.packages = with pkgs; [
-    # wayland
-    hyprlock
-  ];
   programs = {
     waybar.enable = true;
   };
@@ -176,7 +172,7 @@ in {
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
-          "SUPER,L,exec,${lib.exe pkgs.hyprlock}"
+          "SUPER,L,exec,hyprlock"
 
           (mvfocus "k" "u")
           (mvfocus "j" "d")

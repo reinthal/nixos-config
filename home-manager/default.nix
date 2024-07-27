@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./hyprlock.nix
     ./hyprland.nix
     ./dconf.nix
     ./theme.nix
