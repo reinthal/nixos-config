@@ -29,7 +29,9 @@ in {
     xwayland.enable = true;
     plugins = [
       pkgs.hyprlandPlugins.hyprbars
+      #pkgs.hyprlandPlugins.hyprexpo
     ];
+
     extraConfig = let
       modifier = "SUPER";
       modifier2 = "ALT";
@@ -49,6 +51,7 @@ in {
           env = XCURSOR_SIZE,32
         ''
       ];
+
     settings = {
       # Switchable keyboard layout
       input = {
@@ -60,6 +63,7 @@ in {
         workspace_swipe = true;
         workspace_swipe_use_r = true;
       };
+
       decoration = {
         drop_shadow = "yes";
         shadow_range = 8;
@@ -80,6 +84,25 @@ in {
         };
       };
 
+      windowrule = let
+        f = regex: "float, ^(${regex})$";
+      in [
+        (f "org.gnome.Calculator")
+        (f "org.gnome.Nautilus")
+        (f "pavucontrol")
+        (f "nm-connection-editor")
+        (f "blueberry.py")
+        (f "org.gnome.Settings")
+        (f "org.gnome.design.Palette")
+        (f "Color Picker")
+        (f "xdg-desktop-portal")
+        (f "xdg-desktop-portal-gnome")
+        (f "de.haeckerfelix.Fragments")
+        (f "com.github.Aylur.ags")
+        "workspace 7, title:Spotify"
+      ];
+
+
       animations = {
         enabled = "yes";
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
@@ -91,7 +114,8 @@ in {
           "workspaces, 1, 6, default"
         ];
       };
-plugin = {
+
+      plugin = {
         overview = {
           centerAligned = true;
           hideTopLayers = true;
@@ -146,23 +170,18 @@ plugin = {
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
+
+          (mvfocus "k" "u")
+          (mvfocus "j" "d")
+          (mvfocus "l" "r")
+          (mvfocus "h" "l")
+          (ws "left" "e-1")
+          (ws "right" "e+1")
+          (mvtows "left" "e-1")
+          (mvtows "right" "e+1")
         ]
-        ++ (
-          # workspaces
-          # binds SUPER + [shift +] {1..10} to [move to] workspace {1..10}
-          builtins.concatLists (builtins.genList (
-              x: let
-                ws = let
-                  c = (x + 1) / 10;
-                in
-                  builtins.toString (x + 1 - (c * 10));
-              in [
-                "SUPER, ${ws}, workspace, ${toString (x + 1)}"
-                "SUPER SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-              ]
-            )
-            10)
-        );
+        ++ (map (i: ws (toString i) (toString i)) arr)
+        ++ (map (i: mvtows (toString i) (toString i)) arr);
     };
   };
 }
