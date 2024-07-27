@@ -14,9 +14,7 @@
     ${pkgs.swww}/bin/swww img ${../img/cyber-punk.png} &
   '';
 in {
-  programs = {
-    waybar.enable = true;
-  };
+
   services.mako = {
     enable = true;
   };

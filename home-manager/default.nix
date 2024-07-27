@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./waybar
     ./hyprlock.nix
     ./hyprland.nix
     ./dconf.nix
