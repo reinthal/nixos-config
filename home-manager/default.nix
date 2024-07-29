@@ -11,6 +11,7 @@
     ./hyprland.nix
     ./dconf.nix
     ./theme.nix
+     (import ./gui {inherit lib pkgs;})
   ];
   nixpkgs = {
     config = {
@@ -57,7 +58,7 @@
       kubectl
       k9s
       # coms
-      signal-desktop
+      signal-desktop-from-src
     ];
     sessionVariables = {
       PAGER = "less";

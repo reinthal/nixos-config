@@ -53,14 +53,17 @@
     );
     nixosConfigurations = {
       nixbook = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit self inputs outputs;};
+        specialArgs = {inherit nixpkgs self inputs outputs;};
         # > Our main nixos configuration file <
         modules = [./nixos/hosts/nixbook];
       };
     };
 
     # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
+    overlays = 
+      let 
+      pkgs = nixpkgs.legacyPackages."aarch64-linux"; 
+    in import ./overlays {inherit pkgs inputs;};
 
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
