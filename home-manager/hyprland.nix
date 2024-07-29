@@ -5,13 +5,12 @@
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
       export XKB_DEFAULT_LAYOUT=us
       export XCURSOR_THEME=Qogir
     sleep 1
 
-    ${pkgs.swww}/bin/swww img ${../img/cyber-punk.png} &
+    ${pkgs.swww}/bin/swww img ${../img/red.jpg} &
   '';
 in {
 
@@ -23,14 +22,9 @@ in {
     enable = true;
     xwayland.enable = true;
     plugins = [
-      pkgs.hyprlandPlugins.hyprbars
-      #pkgs.hyprlandPlugins.hyprexpo
     ];
 
-    extraConfig = let
-      modifier = "SUPER";
-      modifier2 = "ALT";
-    in
+    extraConfig =
       lib.concatStrings [
         ''
           monitor=DP-1, 3456x2234, 0x0, 2
@@ -52,6 +46,7 @@ in {
       input = {
         kb_layout = "us,se";
         kb_options = "grp:alt_space_toggle";
+        repeat_delay = 220;
       };
 
       gestures = {
@@ -60,6 +55,8 @@ in {
       };
 
       decoration = {
+        rounding = 10;
+        active_opacity = 0.8;
         drop_shadow = "yes";
         shadow_range = 8;
         shadow_render_power = 2;
@@ -121,19 +118,6 @@ in {
           drawActiveWorkspace = true;
           reverseSwipe = true;
         };
-        hyprbars = {
-          bar_color = "rgb(2a2a2a)";
-          bar_height = 28;
-          col_text = "rgba(ffffffdd)";
-          bar_text_size = 11;
-          bar_text_font = "Ubuntu Nerd Font";
-
-          buttons = {
-            button_size = 0;
-            "col.maximize" = "rgba(ffffff11)";
-            "col.close" = "rgba(ff111133)";
-          };
-        };
       };
       exec-once = ''${startupScript}/bin/start'';
 
@@ -170,7 +154,7 @@ in {
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
-          "SUPER,L,exec,hyprlock"
+          "CTRL, SUPER,Q,exec,hyprlock"
 
           (mvfocus "k" "u")
           (mvfocus "j" "d")

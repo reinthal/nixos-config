@@ -152,7 +152,7 @@
       "on-click": "reboot"
   },
   "custom/power": {
-      "format": "   ",
+      "format": "  ",
       "tooltip": false,
       "on-click": "poweroff"
   },
@@ -168,9 +168,8 @@
     "max-length": 50
   },
   "hyprland/language": {
-    "format": "󰌌 {}",
-    "keyboard-name": "dygma-defy-keyboard",
-    "on-click": "hyprctl switchxkblayout dygma-defy-keyboard next"
+    "format": "󰌌 {short}",
+    "on-click": "hyprctl switchxkblayout $(hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) .name') next"
   },
   "hyprland/window": {
     "format": "{}",
