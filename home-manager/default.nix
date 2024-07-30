@@ -35,6 +35,7 @@
       curl
       less
       wget
+      lazygit
       # data
       minio-client
       # crypto / identity
