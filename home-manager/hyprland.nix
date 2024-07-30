@@ -56,7 +56,7 @@ in {
 
       decoration = {
         rounding = 10;
-        active_opacity = 0.8;
+        inactive_opacity = 0.75;
         drop_shadow = "yes";
         shadow_range = 8;
         shadow_render_power = 2;
