@@ -145,7 +145,6 @@ in {
           "SUPER, mouse:273, movewindow"
           "SUPER, Space, exec, rofi -show drun -show-icons"
           "SUPER, W, exec, firefox"
-          ", Print, exec, grimblast copy area"
 
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
