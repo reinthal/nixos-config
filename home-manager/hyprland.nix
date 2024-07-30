@@ -9,7 +9,7 @@
       export XKB_DEFAULT_LAYOUT=us
       export XCURSOR_THEME=Qogir
     sleep 1
-
+    ${pkgs.networkmanagerapplet}/bin/nm-applet --no-agent &
     ${pkgs.swww}/bin/swww img ${../img/red.jpg} &
   '';
 in {
@@ -89,7 +89,6 @@ in {
         (f "Color Picker")
         (f "xdg-desktop-portal")
         (f "xdg-desktop-portal-gnome")
-        (f "de.haeckerfelix.Fragments")
         (f "com.github.Aylur.ags")
         "workspace 7, title:Spotify"
       ];

@@ -1,4 +1,7 @@
 { lib, pkgs, ... }: {
+    home.packages = with pkgs; [
+        networkmanagerapplet
+    ];
     xdg = {
         enable = true;
 
