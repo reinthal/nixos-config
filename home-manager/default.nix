@@ -6,9 +6,11 @@
   ...
 }:{
   imports = [
-    ./crypto
+    ./gpg
     ./cli
   ] ++ lib.optionals(!pkgs.stdenv.isDarwin) [
+    ./gui
+    ./yubikey
     ./waybar
     ./hyprlock.nix
     ./hyprland.nix
