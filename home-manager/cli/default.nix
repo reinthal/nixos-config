@@ -96,8 +96,8 @@
       shellAliases = {
         ls = "eza --color=auto -F";
         l = "eza -l --color=auto -F";
-        nswitch = "nix run nix-darwin -- switch --flake ~/dotfiles";
-        nup = "pushd ~/dotfiles; nix flake update; nswitch; popd";
+        nswitch = "nix run nix-darwin -- switch --flake ~/nixos-config";
+        nup = "pushd ~/nixos-config; nix flake update; nswitch; popd";
         aztest = "az account set --subscription 216a725a-bbca-4c05-8ce2-fbd86f6e2776";
         azprod = "az account set --subscription 17bc8fef-0659-4163-8114-7a08357a586e";
         azprodbla = "az account set --subscription c00506ae-6992-4d21-939b-f285d4c5f35e";
