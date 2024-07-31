@@ -1,0 +1,108 @@
+- name: Install user, Docker, configure SSH key, and pull GitHub repository
+  hosts: streamer2.reinthal.me
+  become: true
+  become_user: root
+
+  tasks:
+    - name: Update apt package cache (for Debian/Ubuntu)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+    - name: Install Packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - ca-certificates
+        - curl
+        - gnupg
+        - git
+        - curl
+        - vim
+        - tmux
+        - htop
+    - name: Remove Native docker
+      package:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - docker.io
+        - docker-doc  
+        - docker-compose
+        - podman-docker
+        - containerd
+        - runc
+    - name: Create the directory with specific permissions
+      command: install -m 0755 -d /etc/apt/keyrings
+    - name: Download Docker GPG Key
+      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor  --yes -o /etc/apt/keyrings/docker.gpg
+      args:
+        executable: /bin/bash
+    - name: Set Permissions for Docker GPG Key
+      file:
+        path: /etc/apt/keyrings/docker.gpg
+        mode: '0644'
+    - name: Get the system architecture
+      shell: dpkg --print-architecture
+      register: system_architecture
+    - name: Get Os version
+      shell: . /etc/os-release && echo "$VERSION_CODENAME"
+      register: os_version
+    - name: Create Docker APT Repository Entry
+      copy:
+        content: |
+          deb [arch="{{ system_architecture.stdout }}" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "{{ os_version.stdout }}" stable
+        dest: /etc/apt/sources.list.d/docker.list
+      when: not ansible_check_mode 
+    - name: Update apt package cache (for Debian/Ubuntu)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+    - name: Install Docker
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - docker-ce 
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+        - python3-pip
+    - name: Create data directory if it does not exist
+      ansible.builtin.file:
+        path: "/opt/data"
+        state: directory
+        mode: '0755'
+    - name: Ensure group "lxc_shares" exists
+      group:
+        gid: 10000
+        name: lxc_shares
+        state: present
+    - name: Add user 'kog'
+      user:
+        name: kog
+        state: present
+        createhome: yes
+        groups: lxc_shares,docker
+        append: yes
+        shell: /bin/bash  # Set the default shell to bash
+
+    - name: Add 'kog' to sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'kog ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Configure SSH key for 'kog'
+      authorized_key:
+        user: kog
+        key: "{{ lookup('file', '/Users/kog/.ssh/id_rsa.pub') }}"
+        state: present
+    - name: Clone GitHub repository
+      become_user: kog
+      git:
+        repo: https://github.com/reinthal/dockers.git
+        dest: /home/kog/dockers
+        version: no-gpu
+        update: yes

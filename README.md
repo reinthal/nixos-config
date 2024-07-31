@@ -1,4 +1,14 @@
-My nixconfig of mac os x
+# Nix Configs
+
+## todos
+- [x] add teams
+- [x] add languages
+- [x] Fix hotkeys for sound
+- [x] add wayland cursor
+- [x] explore 1 plugin
+- [x] do something visual
+- [-] add blueberry instead of current bluetooth app
+- [x] add gui for wifi/vpn
 
 # Work in progress
 - [] `feat/add-asahi-nixos`
@@ -7,6 +17,7 @@ My nixconfig of mac os x
 
 # Uses
 
+- flakes 
 - nixos-darwin https://github.com/LnL7/nix-darwin
 - home-manager https://github.com/nix-community/home-manager
 

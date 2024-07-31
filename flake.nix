@@ -1,5 +1,5 @@
 {
-  description = "Nixos config flake";
+  description = "Alex config flake";
 
   inputs = {
     # Where we get most of our software. Giant mono repo with recipes
@@ -8,21 +8,63 @@
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Controls system level software and settings including fonts
+    #
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+
     # Tricked out nvim :)
     pwnvim.url = "github:zmre/pwnvim";
+    # TODO
+    # nix-colors.url = "github:misterio77/nix-colors";
+    # firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    #
   };
-  outputs = inputs @ {
+  outputs = {
+    self,
     nixpkgs,
     home-manager,
     darwin,
     pwnvim,
     ...
-  }: {
+  } @ inputs: let
+    inherit (self) outputs;
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+  in rec
+  {
+    # Your custom packages
+    # Acessible through 'nix build', 'nix shell', etc
+    packages = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        import ./pkgs {inherit pkgs;}
+    );
+    nixosConfigurations = {
+      nixbook = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit nixpkgs self inputs outputs;};
+        # > Our main nixos configuration file <
+        modules = [./nixos/hosts/nixbook];
+      };
+    };
+
+    # Your custom packages and modifications, exported as overlays
+    overlays = 
+      let 
+      pkgs = nixpkgs.legacyPackages."aarch64-linux"; 
+    in import ./overlays {inherit pkgs inputs;};
+
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
@@ -30,15 +72,16 @@
         config.allowUnfree = true;
       };
       modules = [
-        ./modules/darwin
+        ./darwin
         home-manager.darwinModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            backupFileExtension = "hm-bkp";
             extraSpecialArgs = {inherit pwnvim;};
             users.kog.imports = [
-              ./modules/home-manager
+              ./home-manager
             ];
           };
         }
@@ -46,4 +89,3 @@
     };
   };
 }
-
