@@ -13,6 +13,7 @@ in {
     ]
     ++ lib.optionals (!isMacOS) [
       ./gui
+      ./terminal
       ./yubikey
       ./waybar
       ./hyprlock.nix
