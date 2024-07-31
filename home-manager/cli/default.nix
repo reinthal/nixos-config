@@ -26,6 +26,7 @@
 
       # dev nix
       nixpkgs-fmt
+      ags
 
       # devops
       terraform

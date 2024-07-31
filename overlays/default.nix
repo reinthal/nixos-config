@@ -322,6 +322,9 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+    ags = prev.ags.overrideAttrs (oldAttrs: rec {
+      buildInputs = oldAttrs.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
