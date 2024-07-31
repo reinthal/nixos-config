@@ -11,9 +11,9 @@
 - [x] add gui for wifi/vpn
 
 # Work in progress
-- [] get flow into flake
-- [] get relay into flake
-- [] get build host into flake
+- [ ] get flow into flake
+- [ ] get relay into flake
+- [ ] get build host into flake
 - [x] `feat/add-asahi-nixos`
 - [x] modularize home-manager and build according to hostname
 
