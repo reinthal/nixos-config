@@ -158,11 +158,11 @@
   },
   "network": {
     "format": "{ifname}",
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "{ifname} ",
+    "format-wifi": "{ipaddr} ",
+    "format-ethernet": "{ipaddr} ",
     "format-disconnected": "",
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    "tooltip-format-wifi": "{ipaddr}/{cidr} ",
+    "tooltip-format-wifi": "{essid} {ipaddr}/{cidr} ",
     "tooltip-format-ethernet": "{ipaddr}/{cidr} 󰊗",
     "tooltip-format-disconnected": "Disconnected 󰌙",
     "max-length": 50
