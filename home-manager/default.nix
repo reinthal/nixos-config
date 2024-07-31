@@ -9,7 +9,6 @@
     ./waybar
     ./hyprlock.nix
     ./hyprland.nix
-    ./dconf.nix
     ./theme.nix
      (import ./gui {inherit lib pkgs;})
   ];
