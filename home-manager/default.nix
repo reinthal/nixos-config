@@ -1,28 +1,25 @@
 {
   pkgs,
-  inputs,
-  outputs,
   lib,
   ...
-}:
-let
+}: let
   # builtins.currentSystem makes the flake impure, see https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-pure-eval
   isMacOS = builtins.currentSystem == "aarch64-darwin";
-in
-{
-  imports = [
-    ./gpg
-    ./cli
-    ./terminal
-  ] ++ lib.optionals(!isMacOS) [
-    ./gui
-    ./yubikey
-    ./waybar
-    ./hyprlock.nix
-    ./hyprland.nix
-    ./theme.nix
-     (import ./gui {inherit lib pkgs;})
-  ];
+in {
+  imports =
+    [
+      ./gpg
+      ./cli
+    ]
+    ++ lib.optionals (!isMacOS) [
+      ./gui
+      ./yubikey
+      ./waybar
+      ./hyprlock.nix
+      ./hyprland.nix
+      ./theme.nix
+      (import ./gui {inherit lib pkgs;})
+    ];
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -33,8 +30,5 @@ in
   # Don"t change this when you change package input. Leave it alone.
   home = {
     stateVersion = "24.05";
-    # specify my home-manager configs
-    packages = with pkgs; [];
   };
-    
 }

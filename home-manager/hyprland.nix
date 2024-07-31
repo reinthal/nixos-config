@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  inputs,
   ...
 }: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
@@ -13,7 +12,6 @@
     ${pkgs.swww}/bin/swww img ${../img/red.jpg} &
   '';
 in {
-
   services.mako = {
     enable = true;
   };
@@ -24,22 +22,21 @@ in {
     plugins = [
     ];
 
-    extraConfig =
-      lib.concatStrings [
-        ''
-          monitor=DP-1, 3456x2234, 0x0, 2
-          monitor=HDMI-A-1, highres,auto,2
+    extraConfig = lib.concatStrings [
+      ''
+        monitor=DP-1, 3456x2234, 0x0, 2
+        monitor=HDMI-A-1, highres,auto,2
 
-          # Fix pixelated extra screen
-          xwayland {
-            force_zero_scaling = true
-          }
+        # Fix pixelated extra screen
+        xwayland {
+          force_zero_scaling = true
+        }
 
-          # toolkit-specific scale
-          env = GDK_SCALE,2
-          env = XCURSOR_SIZE,32
-        ''
-      ];
+        # toolkit-specific scale
+        env = GDK_SCALE,2
+        env = XCURSOR_SIZE,32
+      ''
+    ];
 
     settings = {
       # Switchable keyboard layout
@@ -92,7 +89,6 @@ in {
         (f "com.github.Aylur.ags")
         "workspace 7, title:Spotify"
       ];
-
 
       animations = {
         enabled = "yes";

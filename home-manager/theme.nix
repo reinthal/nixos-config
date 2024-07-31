@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{pkgs, ...}: let
   nerdfonts = pkgs.nerdfonts.override {
     fonts = [
       "Ubuntu"
@@ -64,10 +60,8 @@ in {
     };
   };
 
-
   qt = {
     enable = true;
     platformTheme.name = "adwaita";
   };
-
 }

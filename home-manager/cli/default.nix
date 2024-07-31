@@ -1,19 +1,10 @@
-{
-  pkgs,
-  inputs,
-  outputs,
-  lib,
-  ...
-}: {
-
+{pkgs, ...}: {
   home = {
-    
     file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
 
     # specify my home-manager configs
     packages = with pkgs; [
-
       # cli
       ripgrep
       thefuck
@@ -28,14 +19,14 @@
 
       # data
       minio-client
-      
+
       # dev
       poetry
       ruff
 
       # dev nix
       nixpkgs-fmt
-      
+
       # devops
       terraform
       fluxcd
@@ -52,13 +43,10 @@
       EDITOR = "nvim";
       KEYID = "1B24ADB218CFB40E";
     };
-
   };
 
   programs = {
-    
     git = {
-
       enable = true;
       userEmail = "email@reinthal.me";
       userName = "Alexander Reinthal";
@@ -66,29 +54,23 @@
         signByDefault = true;
         key = "1B24ADB218CFB40E";
       };
-
     };
 
     bat = {
-
       enable = true;
       config.theme = "TwoDark";
-
     };
 
     direnv.enable = true;
 
     fzf = {
-
       enable = true;
       enableZshIntegration = true;
-
     };
 
     eza.enable = true;
 
     zsh = {
-      
       enable = true;
       autocd = true;
       history.share = true;
@@ -111,15 +93,12 @@
         gc = "git commit -m";
         gd = "git diff";
       };
-
     };
 
     starship = {
-
       enable = true;
       enableZshIntegration = true;
-
     };
   };
-
 }
+
