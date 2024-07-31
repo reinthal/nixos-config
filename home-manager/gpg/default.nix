@@ -1,25 +1,4 @@
 {
-  pkgs,
-  inputs,
-  outputs,
-  lib,
-  ...
-}:
-{
-    home = {
-      stateVersion = "24.05";
-      # specify my home-manager configs
-      packages = with pkgs; 
-      lib.optionals(!pkgs.stdenv.isDarwin) [
-          yubikey-manager
-          yubikey-manager-qt
-          yubikey-personalization
-          yubikey-personalization-gui
-          yubico-piv-tool
-          yubioath-flutter
-      ];
-  };
-  
   programs.gpg = {
     enable = true;
     mutableKeys = true;

@@ -5,8 +5,12 @@
   lib,
   ...
 }: {
-    home = {
+
+  home = {
+    
+    file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
+
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
@@ -38,17 +42,20 @@
       kubectl
       k9s
     ];
+
     sessionVariables = {
       PAGER = "less";
       CLICLOLOR = 1;
       EDITOR = "nvim";
       KEYID = "1B24ADB218CFB40E";
     };
+
   };
 
   programs = {
     
     git = {
+
       enable = true;
       userEmail = "email@reinthal.me";
       userName = "Alexander Reinthal";
@@ -56,18 +63,23 @@
         signByDefault = true;
         key = "1B24ADB218CFB40E";
       };
+
     };
 
     bat = {
+
       enable = true;
       config.theme = "TwoDark";
+
     };
 
     direnv.enable = true;
 
     fzf = {
+
       enable = true;
       enableZshIntegration = true;
+
     };
 
     eza.enable = true;
@@ -96,11 +108,14 @@
         gc = "git commit -m";
         gd = "git diff";
       };
+
     };
 
     starship = {
+
       enable = true;
       enableZshIntegration = true;
+
     };
   };
 

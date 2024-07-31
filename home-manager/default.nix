@@ -4,11 +4,11 @@
   outputs,
   lib,
   ...
-}: 
-{
+}:{
   imports = [
     ./crypto
     ./cli
+  ] ++ lib.optionals(!pkgs.stdenv.isDarwin) [
     ./waybar
     ./hyprlock.nix
     ./hyprland.nix
@@ -28,42 +28,5 @@
     # specify my home-manager configs
     packages = with pkgs; [];
   };
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      font.normal.family = "FireCode Nerd Font Mono";
-      font.size = 16;
-
-      keyboard.bindings = [
-        {
-          key = "i";
-          mods = "Control";
-          action = "ToggleViMode";
-        }
-        {
-          key = "h";
-          # Move left
-          mods = "Control";
-          action = "WordLeft";
-        }
-        {
-          key = "l";
-          mods = "Control";
-          # move right
-          action = "WordRightEnd";
-        }
-      ];
-    };
-  };
-  programs.firefox = {
-    enable = true;
-  };
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "FireCode Nerd Font Mono";
-      size = 15;
-    };
-  };
-  home.file.".inputrc".source = ./dotfiles/.inputrc;
+    
 }

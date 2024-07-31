@@ -1,4 +1,13 @@
 { lib, pkgs, ... }: {
+
+    programs = {
+        
+        firefox = {
+            enable = true;
+        };
+        
+    };
+
     home.packages = with pkgs; [
         networkmanagerapplet
         # coms
