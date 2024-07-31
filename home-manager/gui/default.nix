@@ -1,6 +1,8 @@
 { lib, pkgs, ... }: {
     home.packages = with pkgs; [
         networkmanagerapplet
+        # coms
+        signal-desktop-from-src
     ];
     xdg = {
         enable = true;

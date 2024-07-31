@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./cli
     ./waybar
     ./hyprlock.nix
     ./hyprland.nix
@@ -24,19 +25,7 @@
     stateVersion = "24.05";
     # specify my home-manager configs
     packages = with pkgs; [
-      # cli
-      ripgrep
-      thefuck
-      jq
-      just
-      azure-cli
-      fd
-      curl
-      less
-      wget
-      lazygit
-      # data
-      minio-client
+      
       # crypto / identity
       yubikey-manager
       yubikey-manager-qt
@@ -44,38 +33,10 @@
       yubikey-personalization-gui
       yubico-piv-tool
       yubioath-flutter
-      # dev
-      poetry
-      ruff
-      # dev nix
-      nixpkgs-fmt
-      # devops
-      terraform
-      fluxcd
-      kubeseal
-      kustomize
-      kubeconform
-      kubectl
-      k9s
-      # coms
-      signal-desktop-from-src
+      
     ];
-    sessionVariables = {
-      PAGER = "less";
-      CLICLOLOR = 1;
-      EDITOR = "nvim";
-      KEYID = "1B24ADB218CFB40E";
-    };
   };
-  programs.git = {
-    enable = true;
-    userEmail = "email@reinthal.me";
-    userName = "Alexander Reinthal";
-    signing = {
-      signByDefault = true;
-      key = "1B24ADB218CFB40E";
-    };
-  };
+  
   programs.direnv.enable = true;
   programs.gpg = {
     enable = true;
