@@ -13,6 +13,7 @@
 
     # specify my home-manager configs
     packages = with pkgs; [
+
       # cli
       ripgrep
       thefuck
@@ -24,12 +25,14 @@
       less
       wget
       lazygit
+
       # data
       minio-client
       
       # dev
       poetry
       ruff
+
       # dev nix
       nixpkgs-fmt
       
@@ -96,7 +99,7 @@
       shellAliases = {
         ls = "eza --color=auto -F";
         l = "eza -l --color=auto -F";
-        nswitch = "nix run nix-darwin -- switch --flake ~/nixos-config";
+        nswitch = "nix run nix-darwin -- switch --flake ~/nixos-config --impure";
         nup = "pushd ~/nixos-config; nix flake update; nswitch; popd";
         aztest = "az account set --subscription 216a725a-bbca-4c05-8ce2-fbd86f6e2776";
         azprod = "az account set --subscription 17bc8fef-0659-4163-8114-7a08357a586e";

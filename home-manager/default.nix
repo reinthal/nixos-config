@@ -4,11 +4,16 @@
   outputs,
   lib,
   ...
-}:{
+}:
+let
+  # builtins.currentSystem makes the flake impure, see https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-pure-eval
+  isMacOS = builtins.currentSystem == "aarch64-darwin";
+in
+{
   imports = [
     ./gpg
     ./cli
-  ] ++ lib.optionals(!pkgs.stdenv.isDarwin) [
+  ] ++ lib.optionals(!isMacOS) [
     ./gui
     ./yubikey
     ./waybar
