@@ -45,23 +45,23 @@
 
   # Homebrew
   homebrew = {
-    
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
 
     casks = [
-      "signal" 
-      "vlc" 
-      "postman" 
-      "macfuse" 
-      "docker" 
-      "raycast" 
-      "amethyst" 
+      "signal"
+      "vlc"
+      "postman"
+      "macfuse"
+      "docker"
+      "raycast"
+      "amethyst"
       "visual-studio-code"
     ];
 
-    brews = ["helm"
+    brews = [
+      "helm"
       "yq"
       "trippy"
       "yubikey-personalization"

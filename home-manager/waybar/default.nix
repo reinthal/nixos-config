@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   # status bar for hyprland/wayland
   programs.waybar = {
@@ -7,7 +5,7 @@
     settings = [
       {
         position = "top";
-        include = [ "${./shared.json}" ];
+        include = ["${./shared.json}"];
         modules-left = [
           "hyprland/workspaces"
         ];
@@ -49,3 +47,4 @@
     systemd.enable = true;
   };
 }
+
