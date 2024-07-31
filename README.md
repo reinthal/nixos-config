@@ -6,9 +6,9 @@
 - [x] Fix hotkeys for sound
 - [x] add wayland cursor
 - [x] explore 1 plugin
-- [] do something visual
-- [] add blueberry instead of current bluetooth app
-- [] add gui for wifi/vpn
+- [x] do something visual
+- [-] add blueberry instead of current bluetooth app
+- [x] add gui for wifi/vpn
 
 # Uses
 
