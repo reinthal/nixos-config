@@ -30,11 +30,11 @@
 
     kitty = {
       enable = true;
+      theme = "Nord";
       font = {
         name = "FireCode Nerd Font Mono";
-        size = 15;
+        size = 12;
       };
     };
   };
 }
-

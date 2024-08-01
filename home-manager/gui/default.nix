@@ -10,9 +10,8 @@
 
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhs;
+      mutableExtensionsDir = true;
     };
-
   };
 
   home.packages = with pkgs; [
@@ -32,4 +31,3 @@
     };
   };
 }
-
