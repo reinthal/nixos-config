@@ -7,6 +7,12 @@
     firefox = {
       enable = true;
     };
+
+    vscode = {
+      enable = true;
+      package = pkgs.vscode.fhs;
+    };
+
   };
 
   home.packages = with pkgs; [

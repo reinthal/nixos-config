@@ -94,12 +94,6 @@
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     pinentry.curses
-    (vscode-with-extensions.override {
-      vscode = vscodium;
-      vscodeExtensions = with vscode-extensions; [
-        bbenoist.nix
-      ];
-    })
   ];
   # Most users should NEVER change this value after the initial install, for any reason,
   # even if you've upgraded your system to a new NixOS release.
