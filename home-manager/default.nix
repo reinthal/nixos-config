@@ -16,6 +16,7 @@ in {
       ./terminal
       ./yubikey
       ./waybar
+      ./scripts
       ./hyprlock.nix
       ./hyprland.nix
       ./theme.nix

@@ -30,7 +30,7 @@
 
     kitty = {
       enable = true;
-      theme = "Nord";
+      theme = "Afterglow";
       font = {
         name = "FireCode Nerd Font Mono";
         size = 12;

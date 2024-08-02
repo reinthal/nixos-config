@@ -27,9 +27,11 @@
 
     # font config
     ../../features/hidpi.nix
-
-    # key mappings
+    # modules
     outputs.nixosModules.dual-function-keys
+    outputs.nixosModules.v4l2-loopback
+    
+    # key mappings
     ../../features/key-mappings/caps-to-ctrl-esc.nix
 
     # Import home-manager's NixOS module
@@ -39,7 +41,17 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
-  
+
+  v4l2-loopback = {
+    enable = true;
+    devices = [
+      {
+        number = 0;
+        label = "Droidcam";
+      }
+    ];
+  };
+  boot.kernelModules = [ "snd-aloop" ];
 
   # enable GPU support and audio
   hardware.asahi = {
@@ -98,6 +110,7 @@
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     pinentry.curses
+    droidcam
   ];
   # Most users should NEVER change this value after the initial install, for any reason,
   # even if you've upgraded your system to a new NixOS release.

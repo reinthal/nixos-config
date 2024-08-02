@@ -2,16 +2,7 @@
   pkgs,
   lib,
   ...
-}: let
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.swww}/bin/swww init &
-      export XKB_DEFAULT_LAYOUT=us
-      export XCURSOR_THEME=Qogir
-    sleep 1
-    ${pkgs.networkmanagerapplet}/bin/nm-applet --no-agent &
-    ${pkgs.swww}/bin/swww img ${../img/red.jpg} &
-  '';
-in {
+}: {
   services.mako = {
     enable = true;
   };
@@ -53,13 +44,14 @@ in {
 
       decoration = {
         rounding = 10;
-        inactive_opacity = 0.75;
+        inactive_opacity = 0.70;
+        active_opacity = 0.80;
         drop_shadow = "yes";
         shadow_range = 8;
         shadow_render_power = 2;
         "col.shadow" = "rgba(00000044)";
 
-        dim_inactive = false;
+        dim_inactive = true;
 
         blur = {
           enabled = true;
@@ -114,7 +106,7 @@ in {
           reverseSwipe = true;
         };
       };
-      exec-once = ''${startupScript}/bin/start'';
+      exec-once = ''start'';
 
       general = {
         layout = "dwindle";
@@ -141,14 +133,16 @@ in {
           "SUPER, Space, exec, rofi -show drun -show-icons"
           "SUPER, W, exec, firefox"
 
-          "ALT, Tab, focuscurrentorlast"
+          "SUPER, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
-          "ALT, Q, killactive"
+          "SUPER, Q, killactive"
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
           "CTRL SUPER,Q,exec,hyprlock"
+          "CTRL SUPER, G, exec, gamemode"
+          
 
           (mvfocus "k" "u")
           (mvfocus "j" "d")
