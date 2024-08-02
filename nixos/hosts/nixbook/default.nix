@@ -28,6 +28,10 @@
     # font config
     ../../features/hidpi.nix
 
+    # key mappings
+    outputs.nixosModules.dual-function-keys
+    ../../features/key-mappings/caps-to-ctrl-esc.nix
+
     # Import home-manager's NixOS module
     inputs.home-manager.nixosModules.home-manager
   ];
