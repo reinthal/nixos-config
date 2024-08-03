@@ -34,14 +34,11 @@
     # key mappings
     ../../features/key-mappings/caps-to-ctrl-esc.nix
 
-    # Import home-manager's NixOS module
-    inputs.home-manager.nixosModules.home-manager
   ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-
-
+ 
   v4l2-loopback = {
     enable = true;
     devices = [
@@ -51,6 +48,9 @@
       }
     ];
   };
+
+
+
   boot.kernelModules = [ "snd-aloop" ];
 
   # enable GPU support and audio
