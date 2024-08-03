@@ -11,6 +11,7 @@
     enable = true;
     xwayland.enable = true;
     plugins = [
+      pkgs.hyprlandPlugins.hyprbars
     ];
 
     extraConfig = lib.concatStrings [
