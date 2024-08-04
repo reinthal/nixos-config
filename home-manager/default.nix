@@ -13,6 +13,7 @@ in
   imports = [
     ./gpg
     ./cli
+    ./terminal
   ] ++ lib.optionals(!isMacOS) [
     ./gui
     ./yubikey
