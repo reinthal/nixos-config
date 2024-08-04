@@ -50,8 +50,8 @@
   };
 
 
-
-  boot.kernelModules = [ "snd-aloop" ];
+  # for droidcam
+  # boot.kernelModules = [ "snd-aloop" ];
 
   # enable GPU support and audio
   hardware.asahi = {

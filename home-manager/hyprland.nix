@@ -81,6 +81,9 @@
         (f "xdg-desktop-portal-gnome")
         (f "com.github.Aylur.ags")
         "workspace 7, title:Spotify"
+        "workspace 6, title:Signal"
+        "workspace 5, title:^(.*)(Microsoft Teams)$"
+        "fullscreen, title:^(.*)(Microsoft Teams)$"
       ];
 
       animations = {
