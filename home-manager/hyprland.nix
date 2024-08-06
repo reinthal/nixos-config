@@ -122,6 +122,11 @@
         ",XF86AudioLowerVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
 
+      bindm = [
+        "SUPER, mouse:273, resizewindow"
+        "SUPER, mouse:272, movewindow"
+      ];
+      
       bind = let
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
         mvfocus = binding "SUPER" "movefocus";
@@ -129,15 +134,16 @@
         resizeactive = binding "SUPER CTRL" "resizeactive";
         mvactive = binding "SUPER ALT" "moveactive";
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
+        e = "exec, ags -b hypr";
         arr = [1 2 3 4 5 6 7];
       in
         [
+          "SUPER, Tab, ${e} -t overview"
           "SUPER, Return, exec, kitty"
-          "SUPER, mouse:273, movewindow"
-          "SUPER, Space, exec, rofi -show drun -show-icons"
+          "SUPER, Space, ${e} -t launcher"
           "SUPER, W, exec, firefox"
 
-          "SUPER, Tab, focuscurrentorlast"
+          "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
           "SUPER, Q, killactive"
           "SUPER, F, togglefloating"
