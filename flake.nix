@@ -21,7 +21,6 @@
     # Tricked out nvim :)
     pwnvim.url = "github:zmre/pwnvim";
     # TODO
-    # nix-colors.url = "github:misterio77/nix-colors";
     # firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     #
   };
