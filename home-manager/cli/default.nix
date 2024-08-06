@@ -23,7 +23,7 @@
       # dev
       poetry
       ruff
-
+      bun
       # dev nix
       nixpkgs-fmt
       ags
@@ -102,4 +102,3 @@
     };
   };
 }
-
