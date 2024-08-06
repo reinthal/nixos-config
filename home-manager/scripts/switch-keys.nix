@@ -24,7 +24,7 @@
     read -p "Insert the Yubikey you want to use ....  "   ignore
     echo "Switching GPG to backup Yubikey ..."
 
-    ${pkgs.gpg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye
+    ${pkgs.gnupg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye
 
   '';
 
