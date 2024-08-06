@@ -11,7 +11,6 @@
       jq
       just
       azure-cli
-      fd
       curl
       less
       wget
@@ -23,7 +22,6 @@
       # dev
       poetry
       ruff
-      bun
       # dev nix
       nixpkgs-fmt
       ags

@@ -3,6 +3,9 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./ags.nix
+  ];
   programs = {
     firefox = {
       enable = true;

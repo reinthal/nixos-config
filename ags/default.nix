@@ -1,5 +1,6 @@
 {
   inputs,
+  matugen,
   writeShellScript,
   system,
   stdenv,
@@ -35,7 +36,7 @@
     fzf
     brightnessctl
     swww
-    inputs.matugen.packages.${system}.default
+    matugen
     slurp
     wf-recorder
     wl-clipboard
