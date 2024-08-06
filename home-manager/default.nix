@@ -21,6 +21,7 @@ in {
       ./theme.nix
       (import ./gui {inherit lib pkgs;})
     ];
+
   nixpkgs = {
     config = {
       allowUnfree = true;

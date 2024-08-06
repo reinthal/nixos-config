@@ -58,6 +58,7 @@
       "raycast"
       "amethyst"
       "visual-studio-code"
+      "zed"
     ];
 
     brews = [
