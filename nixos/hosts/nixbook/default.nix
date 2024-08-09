@@ -15,11 +15,13 @@
     ../../common.nix
     # apple-silicon hardware support
     inputs.apple-silicon.nixosModules.apple-silicon-support
+    
     # Enable Nice Login-Screen
     #../../features/greetd.nix
     ../../features/coms
     ../../features/desktop
-    
+    ../../features/nas.nix
+
     (import ../../features/networking "nixbook")
     # enable various features
     ../../features/sound.nix
