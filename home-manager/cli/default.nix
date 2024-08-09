@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-{pkgs, ...}: {
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
