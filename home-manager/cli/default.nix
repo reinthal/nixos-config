@@ -15,6 +15,7 @@
       less
       wget
       lazygit
+      btop
 
       # data
       minio-client
