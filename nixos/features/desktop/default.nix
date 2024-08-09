@@ -37,7 +37,7 @@
     gnome-calendar
     gnome-system-monitor
     gnome-calculator
-
+    gnome-tweaks
     # Wayland /  Hyprland
     mako
     libnotify
