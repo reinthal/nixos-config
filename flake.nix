@@ -15,13 +15,12 @@
     };
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-
+    ags.url = "github:Aylur/ags";
     apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
 
     # Tricked out nvim :)
     pwnvim.url = "github:zmre/pwnvim";
     # TODO
-    # nix-colors.url = "github:misterio77/nix-colors";
     # firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     #
   };
@@ -64,6 +63,13 @@
       let 
       pkgs = nixpkgs.legacyPackages."aarch64-linux"; 
     in import ./overlays {inherit pkgs inputs;};
+
+    # Reusable nixos modules you might want to export
+    # These are usually stuff you would upstream into nixpkgs
+    nixosModules = import ./modules/nixos;
+    # Reusable home-manager modules you might want to export
+    # These are usually stuff you would upstream into home-manager
+    homeManagerModules = import ./modules/home-manager;
 
     darwinConfigurations.mbp = darwin.lib.darwinSystem {
       system = "aarch64-darwin";

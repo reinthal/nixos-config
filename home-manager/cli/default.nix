@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+{pkgs, ...}: {
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
@@ -11,7 +12,6 @@
       jq
       just
       azure-cli
-      fd
       curl
       less
       wget
@@ -20,12 +20,13 @@
       # data
       minio-client
 
+
       # dev
       poetry
       ruff
-
       # dev nix
       nixpkgs-fmt
+
 
       # devops
       terraform

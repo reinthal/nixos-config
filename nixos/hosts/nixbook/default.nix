@@ -27,15 +27,31 @@
 
     # font config
     ../../features/hidpi.nix
+    # modules
+    outputs.nixosModules.dual-function-keys
+    outputs.nixosModules.v4l2-loopback
+    
+    # key mappings
+    ../../features/key-mappings/caps-to-ctrl-esc.nix
 
-    # Import home-manager's NixOS module
-    inputs.home-manager.nixosModules.home-manager
   ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
+ 
+  v4l2-loopback = {
+    enable = true;
+    devices = [
+      {
+        number = 0;
+        label = "Droidcam";
+      }
+    ];
+  };
 
-  
+
+  # for droidcam
+  # boot.kernelModules = [ "snd-aloop" ];
 
   # enable GPU support and audio
   hardware.asahi = {
@@ -94,12 +110,7 @@
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     pinentry.curses
-    (vscode-with-extensions.override {
-      vscode = vscodium;
-      vscodeExtensions = with vscode-extensions; [
-        bbenoist.nix
-      ];
-    })
+    droidcam
   ];
   # Most users should NEVER change this value after the initial install, for any reason,
   # even if you've upgraded your system to a new NixOS release.

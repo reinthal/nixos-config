@@ -2,16 +2,7 @@
   pkgs,
   lib,
   ...
-}: let
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.swww}/bin/swww init &
-      export XKB_DEFAULT_LAYOUT=us
-      export XCURSOR_THEME=Qogir
-    sleep 1
-    ${pkgs.networkmanagerapplet}/bin/nm-applet --no-agent &
-    ${pkgs.swww}/bin/swww img ${../img/red.jpg} &
-  '';
-in {
+}: {
   services.mako = {
     enable = true;
   };
@@ -20,8 +11,13 @@ in {
     enable = true;
     xwayland.enable = true;
     plugins = [
+      pkgs.hyprlandPlugins.hyprbars
     ];
 
+    extraConfig = lib.concatStrings [
+      ''
+        monitor=DP-1, 3456x2234, 0x0, 2
+        monitor=HDMI-A-1, highres,auto,2
     extraConfig = lib.concatStrings [
       ''
         monitor=DP-1, 3456x2234, 0x0, 2
@@ -31,7 +27,16 @@ in {
         xwayland {
           force_zero_scaling = true
         }
+        # Fix pixelated extra screen
+        xwayland {
+          force_zero_scaling = true
+        }
 
+        # toolkit-specific scale
+        env = GDK_SCALE,2
+        env = XCURSOR_SIZE,32
+      ''
+    ];
         # toolkit-specific scale
         env = GDK_SCALE,2
         env = XCURSOR_SIZE,32
@@ -53,7 +58,8 @@ in {
 
       decoration = {
         rounding = 10;
-        inactive_opacity = 0.75;
+        inactive_opacity = 0.70;
+        active_opacity = 0.80;
         drop_shadow = "yes";
         shadow_range = 8;
         shadow_render_power = 2;
@@ -88,6 +94,9 @@ in {
         (f "xdg-desktop-portal-gnome")
         (f "com.github.Aylur.ags")
         "workspace 7, title:Spotify"
+        "workspace 6, title:Signal"
+        "workspace 5, title:^(.*)(Microsoft Teams)$"
+        "fullscreen, title:^(.*)(Microsoft Teams)$"
       ];
 
       animations = {
@@ -114,7 +123,7 @@ in {
           reverseSwipe = true;
         };
       };
-      exec-once = ''${startupScript}/bin/start'';
+      exec-once = ''start'';
 
       general = {
         layout = "dwindle";
@@ -126,6 +135,11 @@ in {
         ",XF86AudioLowerVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
 
+      bindm = [
+        "SUPER, mouse:273, resizewindow"
+        "SUPER, mouse:272, movewindow"
+      ];
+      
       bind = let
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
         mvfocus = binding "SUPER" "movefocus";
@@ -133,22 +147,25 @@ in {
         resizeactive = binding "SUPER CTRL" "resizeactive";
         mvactive = binding "SUPER ALT" "moveactive";
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
+        e = "exec, ags -b hypr";
         arr = [1 2 3 4 5 6 7];
       in
         [
+          "SUPER, Tab, ${e} -t overview"
           "SUPER, Return, exec, kitty"
-          "SUPER, mouse:273, movewindow"
-          "SUPER, Space, exec, rofi -show drun -show-icons"
+          "SUPER, Space, ${e} -t launcher"
           "SUPER, W, exec, firefox"
 
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
-          "ALT, Q, killactive"
+          "SUPER, Q, killactive"
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
           "CTRL SUPER,Q,exec,hyprlock"
+          "CTRL SUPER, G, exec, gamemode"
+          
 
           (mvfocus "k" "u")
           (mvfocus "j" "d")

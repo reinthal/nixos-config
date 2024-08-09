@@ -42,15 +42,7 @@
     mako
     libnotify
     wl-gammactl
-    wl-clipboard
-    wayshot
     rofi-wayland
-    # sound control
-    pavucontrol
-    brightnessctl
-
-    # wallpaper
-    swww
   ] ++ (with pkgs.gnome; [
     gnome-boxes
     gnome-text-editor # webcam tool

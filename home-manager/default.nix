@@ -13,13 +13,15 @@ in {
     ]
     ++ lib.optionals (!isMacOS) [
       ./gui
+      ./terminal
       ./yubikey
-      ./waybar
+      ./scripts
       ./hyprlock.nix
       ./hyprland.nix
       ./theme.nix
       (import ./gui {inherit lib pkgs;})
     ];
+
   nixpkgs = {
     config = {
       allowUnfree = true;
