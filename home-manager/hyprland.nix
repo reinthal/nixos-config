@@ -23,16 +23,7 @@
         xwayland {
           force_zero_scaling = true
         }
-        # Fix pixelated extra screen
-        xwayland {
-          force_zero_scaling = true
-        }
 
-        # toolkit-specific scale
-        env = GDK_SCALE,2
-        env = XCURSOR_SIZE,32
-      ''
-    ];
         # toolkit-specific scale
         env = GDK_SCALE,2
         env = XCURSOR_SIZE,32
