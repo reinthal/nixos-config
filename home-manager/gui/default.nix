@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./ags.nix
+    ./kdeconnect.nix
   ];
   programs = {
     firefox = {
