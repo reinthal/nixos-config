@@ -100,6 +100,14 @@
   # add the following line somewhere in `config#uration.nix`
   # for example, in between locales and audio sections
 
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [
+      "e4da7455b22e6a55"
+    ];
+   # package = pkgs.zerotierone;
+  };
+
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {inherit pkgs inputs outputs;};
