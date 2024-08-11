@@ -17,7 +17,8 @@
     extraConfig = lib.concatStrings [
       ''
         monitor=DP-1, 3456x2234, 0x0, 2
-        monitor=HDMI-A-1, 3440x1440@75.05Hz,3456x0,2
+        monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
+        #monitor=HDMI-A-1, preferred,auto-right,1.6
 
         # Fix pixelated extra screen
         xwayland {
