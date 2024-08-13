@@ -3,10 +3,6 @@
   lib,
   ...
 }: {
-  services.mako = {
-    enable = true;
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -17,8 +13,8 @@
     extraConfig = lib.concatStrings [
       ''
         monitor=DP-1, 3456x2234, 0x0, 2
-        monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
-        #monitor=HDMI-A-1, preferred,auto-right,1.6
+        #monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
+        monitor=HDMI-A-1, preferred,auto-up,1
 
         # Fix pixelated extra screen
         xwayland {
@@ -127,7 +123,7 @@
         "SUPER, mouse:273, resizewindow"
         "SUPER, mouse:272, movewindow"
       ];
-      
+
       bind = let
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
         mvfocus = binding "SUPER" "movefocus";
@@ -153,7 +149,6 @@
           "SUPER, P, togglesplit"
           "CTRL SUPER,Q,exec,hyprlock"
           "CTRL SUPER, G, exec, gamemode"
-          
 
           (mvfocus "k" "u")
           (mvfocus "j" "d")

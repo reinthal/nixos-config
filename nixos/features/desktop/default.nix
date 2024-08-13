@@ -39,7 +39,6 @@
     gnome-calculator
     gnome-tweaks
     # Wayland /  Hyprland
-    mako
     libnotify
     wl-gammactl
     rofi-wayland

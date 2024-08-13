@@ -20,13 +20,11 @@
       # data
       minio-client
 
-
       # dev
       poetry
       ruff
       # dev nix
       nixpkgs-fmt
-
 
       # devops
       terraform
@@ -62,7 +60,16 @@
       config.theme = "TwoDark";
     };
 
-    direnv.enable = true;
+    direnv = {
+      enable = true;
+      config = {
+        global.load_dotenv = true;
+        whitelist.prefix = [
+          "~/repos/portgot/"
+        ];
+      };
+      enableZshIntegration = true;
+    };
 
     fzf = {
       enable = true;
@@ -102,4 +109,3 @@
     };
   };
 }
-
