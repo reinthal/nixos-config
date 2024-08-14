@@ -15,7 +15,7 @@
     ../../common.nix
     # apple-silicon hardware support
     inputs.apple-silicon.nixosModules.apple-silicon-support
-    
+
     # Enable Nice Login-Screen
     #../../features/greetd.nix
     ../../features/coms
@@ -32,15 +32,19 @@
     # modules
     outputs.nixosModules.dual-function-keys
     outputs.nixosModules.v4l2-loopback
-    
+
     # key mappings
     ../../features/key-mappings/caps-to-ctrl-esc.nix
-
   ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
- 
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [1716];
+  };
+
   v4l2-loopback = {
     enable = true;
     devices = [
@@ -50,7 +54,6 @@
       }
     ];
   };
-
 
   # for droidcam
   # boot.kernelModules = [ "snd-aloop" ];
@@ -105,7 +108,6 @@
     joinNetworks = [
       "e4da7455b22e6a55"
     ];
-   # package = pkgs.zerotierone;
   };
 
   home-manager = {
