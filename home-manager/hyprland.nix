@@ -139,7 +139,8 @@
           "SUPER, Return, exec, kitty"
           "SUPER, Space, ${e} -t launcher"
           "SUPER, W, exec, firefox"
-
+          
+          "SUPER, S, exec, hyprshot -m region --clipboard-only"
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
           "SUPER, Q, killactive"

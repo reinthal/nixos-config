@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     networkmanagerapplet
+    hyprshot
     # coms
     signal-desktop-from-src
   ];
