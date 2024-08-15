@@ -30,6 +30,7 @@
     qogir-icon-theme
     # Image Viewer
     loupe
+    brave
     # file system tool
     nautilus
     # disk utility
