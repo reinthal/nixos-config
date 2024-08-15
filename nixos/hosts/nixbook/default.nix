@@ -18,7 +18,8 @@
 
     # Enable Nice Login-Screen
     #../../features/greetd.nix
-    ../../features/coms
+     ../../features/apps/podman.nix
+     ../../features/coms
     ../../features/desktop
     ../../features/nas.nix
 
