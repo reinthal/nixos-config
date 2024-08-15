@@ -52,6 +52,12 @@
         import ./pkgs {inherit pkgs;}
     );
     nixosConfigurations = {
+
+      build = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit nixpkgs self inputs outputs;};
+        modules = [./nixos/hosts/build];
+      };
+      
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         # > Our main nixos configuration file <

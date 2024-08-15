@@ -1,29 +1,28 @@
-{inputs, config, pkgs, ... }:
+{inputs,outputs,  pkgs, ... }:
 
 {
   imports =
     [ 
       ./hardware-configuration.nix
-      ../../modules/nice-to-have-packages.nix
-      ../../modules/vm-services.nix
-      ../../modules/users.nix
-      ../../modules/nvidia.nix
-      ../../modules/development.nix
-      ../../modules/desktop-apps.nix
-      ../../modules/distrobox.nix
-      ../../modules/aylur/hyprland.nix
-      ../../modules/aylur/gnome.nix
-      ../../modules/aylur/audio.nix
-      ../../modules/aylur/gnome.nix
-      ../../modules/aylur/nautilus.nix
+      ../../common.nix
+      ../../features/coms
+      ../../features/desktop
+
+      # enable various features
+      ../../features/sound.nix
+      ../../features/bluetooth.nix
       inputs.home-manager.nixosModules.default
     ];
+
   home-manager = {
-    extraSpecialArgs = {inherit inputs; };
+    backupFileExtension = "hm-bkp";
+    extraSpecialArgs = {inherit pkgs inputs outputs;};
     users = {
-      "kog" = import ./home.nix;
+      kog = import ../../../home-manager;
     };
   };
+
+  
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -33,40 +32,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
-  };
-
-  #services.xrdp.openFirewall = true;
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "kog";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -80,8 +45,32 @@
     gnome.gnome-remote-desktop
   ];
 
+  services = {
+    pcscd.enable = true;
+    udev.packages = [pkgs.yubikey-personalization];
+  };
+  environment.shellInit = ''
+    export GPG_TTY="$(tty)"
+     ${pkgs.gnupg}/bin/gpg-connect-agent /bye
+     export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+  '';
 
+  programs = {
+    ssh.startAgent = false;
+    gnupg.agent.enable = true;
+    gnupg.agent.enableSSHSupport = true;
+    gnupg.agent.pinentryPackage = pkgs.pinentry.curses;
+  };
 
+  programs.zsh.enable = true;
+
+  time.timeZone = "Europe/Stockholm";
+
+  programs.dconf.enable = true;
+  environment.systemPackages = with pkgs; [
+    pinentry.curses
+    droidcam
+  ];
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 3389 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
