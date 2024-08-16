@@ -19,9 +19,10 @@
 
       # data
       minio-client
-
+      
+      # python
+      
       # dev
-      poetry
       ruff
       # dev nix
       nixpkgs-fmt
@@ -46,7 +47,7 @@
   };
 
   programs = {
-    git = {
+     git = {
       enable = true;
       userEmail = "email@reinthal.me";
       userName = "Alexander Reinthal";
