@@ -12,7 +12,7 @@
       ../../common.nix
       ../../features/coms
       ../../features/desktop
-
+      ../../features/nvidia.nix
       # enable various features
       ../../features/sound.nix
       ../../features/bluetooth.nix
@@ -29,6 +29,7 @@
 
   
   # Bootloader.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.hostName = "build"; # Define your hostname.
