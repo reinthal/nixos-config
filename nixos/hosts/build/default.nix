@@ -1,6 +1,11 @@
-{inputs,outputs,  pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}: {
   imports =
     [ 
       ./hardware-configuration.nix
@@ -26,7 +31,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.hostName = "build"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -39,10 +43,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    eza
     gnome.gnome-remote-desktop
+    pinentry.curses
+    droidcam
   ];
 
   services = {
@@ -67,10 +70,6 @@
   time.timeZone = "Europe/Stockholm";
 
   programs.dconf.enable = true;
-  environment.systemPackages = with pkgs; [
-    pinentry.curses
-    droidcam
-  ];
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 3389 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
