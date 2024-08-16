@@ -2,7 +2,13 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+let
+   signal =  if  builtins.currentSystem == "x86_64-linux" then
+    pkgs.signal-desktop
+  else
+    pkgs.signal-desktop-from-src;
+in {
   imports = [
     ./data-eng.nix
     ./ags.nix
@@ -23,13 +29,13 @@
     networkmanagerapplet
     hyprshot
     # coms
-    signal-desktop-from-src
+    signal
   ];
   xdg = {
     enable = true;
     desktopEntries = {
       signal-desktop = {
-        exec = "${lib.getExe' pkgs.signal-desktop-from-src "signal-desktop"}";
+        exec = "${lib.getExe' signal "signal-desktop"}";
         name = "Signal";
         type = "Application";
         terminal = false;
