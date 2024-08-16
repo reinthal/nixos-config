@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./data-eng.nix
     ./ags.nix
     ./kdeconnect.nix
   ];
