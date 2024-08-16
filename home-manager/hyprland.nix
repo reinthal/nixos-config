@@ -12,7 +12,7 @@
 
     extraConfig = lib.concatStrings [
       ''
-        monitor=DP-1, 3456x2234, 0x0, 2
+        monitor=eDP-1, 3456x2160, 0x0, 1.8
         #monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
         monitor=HDMI-A-1, preferred,auto-right,1
 
@@ -139,7 +139,7 @@
           "SUPER, Return, exec, kitty"
           "SUPER, Space, ${e} -t launcher"
           "SUPER, W, exec, firefox"
-          
+
           "SUPER, S, exec, hyprshot -m region --clipboard-only"
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
