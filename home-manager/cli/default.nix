@@ -42,7 +42,6 @@
       CLICLOLOR = 1;
       EDITOR = "nvim";
       KEYID = "1B24ADB218CFB40E";
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
     };
   };
 
