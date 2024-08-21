@@ -34,7 +34,6 @@
         kb_options = "grp:alt_space_toggle";
         repeat_delay = 220;
       };
-
       gestures = {
         workspace_swipe = true;
         workspace_swipe_use_r = true;
