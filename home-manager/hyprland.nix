@@ -79,7 +79,6 @@
         "workspace 7, title:Spotify"
         "workspace 6, title:Signal"
         "workspace 5, title:^(.*)(Microsoft Teams)$"
-        "fullscreen, title:^(.*)(Microsoft Teams)$"
       ];
 
       animations = {
@@ -127,8 +126,6 @@
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
         mvfocus = binding "SUPER" "movefocus";
         ws = binding "SUPER" "workspace";
-        resizeactive = binding "SUPER CTRL" "resizeactive";
-        mvactive = binding "SUPER ALT" "moveactive";
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
         e = "exec, ags -b hypr";
         arr = [1 2 3 4 5 6 7];
