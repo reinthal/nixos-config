@@ -11,6 +11,7 @@
       ./hardware-configuration.nix
       ../../common.nix
       ../../features/coms
+      ../../features/nas.nix
       ../../features/desktop
       ../../features/nvidia.nix
       # enable various features

@@ -12,7 +12,6 @@
     hashedPassword = "$y$j9T$HWvOqEXKNAo71pncWn0oL.$SCSg00gwPa9UzNjfFQN2q3TTpIt.7LYj7R3li51Q8m8";
     extraGroups = [
       "networkmanager"
-      "wheel"
     ];
     shell = pkgs.zsh;
     uid = 1337;

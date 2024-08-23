@@ -2,12 +2,15 @@
   lib,
   pkgs,
   ...
-}:
-let
-   signal =  if  builtins.currentSystem == "x86_64-linux" then
-    pkgs.signal-desktop
-  else
-    pkgs.signal-desktop-from-src;
+}: let
+  signal =
+    if builtins.currentSystem == "x86_64-linux"
+    then pkgs.signal-desktop
+    else pkgs.signal-desktop-from-src;
+  maybeSlack =
+    if builtins.currentSystem == "x86_64-linux"
+    then pkgs.slack
+    else null;
 in {
   imports = [
     ./data-eng.nix
@@ -30,6 +33,7 @@ in {
     hyprshot
     # coms
     signal
+    maybeSlack
   ];
   xdg = {
     enable = true;
@@ -40,6 +44,14 @@ in {
         type = "Application";
         terminal = false;
       };
+
+      slack-desktop = {
+        exec = "${lib.getExe' maybeSlack "slack-desktop"}";
+        name = "Slack";
+        type = "Application";
+        terminal = false;
+      };
+
 
       "org.gnome.Settings" = {
         name = "Settings";
