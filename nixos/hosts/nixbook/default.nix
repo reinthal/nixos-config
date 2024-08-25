@@ -18,11 +18,11 @@
 
     # Enable Nice Login-Screen
     #../../features/greetd.nix
-     ../../features/apps/podman.nix
-     ../../features/coms
+    ../../features/apps/podman.nix
+    ../../features/coms
     ../../features/desktop
     ../../features/nas.nix
-
+    ../../features/daw.nix
     (import ../../features/networking "nixbook")
     # enable various features
     ../../features/sound.nix
