@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  EnvironmentPackages.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     reaper
   ];
 }
