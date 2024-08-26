@@ -9,6 +9,7 @@
       ripgrep
       thefuck
       jq
+      yq
       just
       azure-cli
       curl
