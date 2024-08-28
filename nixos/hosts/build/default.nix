@@ -11,7 +11,8 @@
       ./hardware-configuration.nix
       ../../common.nix
       ../../features/coms
-      ../../features/nas.nix
+       ../../features/nas.nix
+       ../../features/apps/podman.nix
       ../../features/desktop
       ../../features/nvidia.nix
       # enable various features
@@ -73,7 +74,7 @@
 
   programs.dconf.enable = true;
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 3389 ];
+  networking.firewall.allowedTCPPorts = [ 8080 3389 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
