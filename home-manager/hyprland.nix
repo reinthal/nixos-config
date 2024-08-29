@@ -61,7 +61,17 @@
           popups = true;
         };
       };
-
+      windowrulev2 = let
+        move_to_monitor = monitor_id: regex: "monitor ${monitor_id} title:^(.*)(${regex})$";
+      in [
+        (move_to_monitor
+          "eDP-1"
+          "Microsoft Teams")
+        (
+          move_to_monitor "eDP-1" "Signal"
+        )
+        (move_to_monitor "eDP-1" "Brave")
+      ];
       windowrule = let
         f = regex: "float, ^(${regex})$";
       in [
@@ -76,9 +86,6 @@
         (f "xdg-desktop-portal")
         (f "xdg-desktop-portal-gnome")
         (f "com.github.Aylur.ags")
-        "workspace 7, title:Spotify"
-        "workspace 6, title:Signal"
-        "workspace 5, title:^(.*)(Microsoft Teams)$"
       ];
 
       animations = {
