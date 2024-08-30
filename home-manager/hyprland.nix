@@ -61,16 +61,27 @@
           popups = true;
         };
       };
+      workspace = let
+        ws_monitor0 = [0 1 2 3];
+        ws_monitor1 = [4 5 6 7];
+        f = ws: monitor: "${ws}, monitor:${monitor}";
+      in
+     
+ (map (i: f (toString i) ("0")) ws_monitor0) # half of the ws to monitor 0
+
+      ++ (map (i: f (toString i) ("1")) ws_monitor1); # half of the ws to monitor 1
+
+
       windowrulev2 = let
-        move_to_monitor = monitor_id: regex: "monitor ${monitor_id} title:^(.*)(${regex})$";
+        move_to_monitor = monitor_id: regex: "monitor ${monitor_id}, title:^(.*)(${regex})$";
       in [
         (move_to_monitor
-          "eDP-1"
-          "Microsoft Teams")
+          "0"
+          "Microsoft Teams|Teams for Linux")
         (
-          move_to_monitor "eDP-1" "Signal"
+          move_to_monitor "0" "Signal"
         )
-        (move_to_monitor "eDP-1" "Brave")
+        (move_to_monitor "0" "Brave")
       ];
       windowrule = let
         f = regex: "float, ^(${regex})$";
