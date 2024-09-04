@@ -159,7 +159,6 @@
           "SUPER, Q, killactive"
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
-          "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
           "CTRL SUPER,Q,exec,hyprlock"
           "CTRL SUPER, G, exec, gamemode"
