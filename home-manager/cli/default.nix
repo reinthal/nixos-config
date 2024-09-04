@@ -17,7 +17,7 @@
       wget
       lazygit
       btop
-
+      neovim
       # data
       minio-client
       

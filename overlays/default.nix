@@ -318,10 +318,27 @@
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = final: prev: {
+  modifications = final: prev: 
+  
+  {
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+    neovim =
+let
+  configModule = {
+      # Add any custom options (and feel free to upstream them!)
+      # options = ...
+
+      config.vim.theme.enable = true;
+    };
+
+    customNeovim = inputs.neovim-flake.lib.neovimConfiguration {
+      modules = [configModule];
+      inherit pkgs;
+    };
+  in 
+    customNeovim;
     ags = prev.ags.overrideAttrs (oldAttrs: rec {
       buildInputs = oldAttrs.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ];
     });
