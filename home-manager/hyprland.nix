@@ -1,15 +1,14 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    plugins = [
-      pkgs.hyprlandPlugins.hyprbars
-    ];
-
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    
     extraConfig = lib.concatStrings [
       ''
         monitor=eDP-1, 3456x2160, 0x0, 1.8

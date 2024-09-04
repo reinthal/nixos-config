@@ -5,7 +5,7 @@
     # Where we get most of our software. Giant mono repo with recipes
     sops-nix.url = "github:Mic92/sops-nix";
     # called derivations that say how to build software.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-22.11
+    nixpkgs.url = "github:nixos/nixpkgs/1284004bf6c6e50d8592b6efe83708931e75aec7"; # nixpkgs-unstable nixos-22.11
     Neve.url = "github:reinthal/Neve";
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
@@ -19,19 +19,12 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
     apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
-
-    # Tricked out nvim :)
-    pwnvim.url = "github:zmre/pwnvim";
-    # TODO
-    # firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    #
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
     darwin,
-    pwnvim,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -92,7 +85,6 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "hm-bkp";
-            extraSpecialArgs = {inherit pwnvim;};
             users.kog.imports = [
               ./home-manager
             ];
