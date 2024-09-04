@@ -10,7 +10,6 @@
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-flake.url = "github:jordanisaacs/neovim-flake";
     #
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
@@ -68,7 +67,7 @@
 
     # Your custom packages and modifications, exported as overlays
     overlays = let
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
     in
       import ./overlays {inherit pkgs inputs;};
 
