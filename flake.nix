@@ -9,6 +9,7 @@
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-flake.url = "github:jordanisaacs/neovim-flake";
     #
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
@@ -52,12 +53,11 @@
         import ./pkgs {inherit pkgs;}
     );
     nixosConfigurations = {
-
       build = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         modules = [./nixos/hosts/build];
       };
-      
+
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         # > Our main nixos configuration file <
@@ -66,10 +66,10 @@
     };
 
     # Your custom packages and modifications, exported as overlays
-    overlays = 
-      let 
-      pkgs = nixpkgs.legacyPackages."aarch64-linux"; 
-    in import ./overlays {inherit pkgs inputs;};
+    overlays = let
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    in
+      import ./overlays {inherit pkgs inputs;};
 
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
