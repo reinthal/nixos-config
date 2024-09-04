@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}
+: let
+  NeveNeovim = inputs.Neve.packages.${pkgs.system}.default;
+in {
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
@@ -17,12 +24,12 @@
       wget
       lazygit
       btop
-      neovim
+      NeveNeovim
       # data
       minio-client
-      
+
       # python
-      
+
       # dev
       ruff
       # dev nix
@@ -47,7 +54,7 @@
   };
 
   programs = {
-     git = {
+    git = {
       enable = true;
       userEmail = "email@reinthal.me";
       userName = "Alexander Reinthal";
