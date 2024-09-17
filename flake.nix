@@ -6,10 +6,10 @@
     sops-nix.url = "github:Mic92/sops-nix";
     # called derivations that say how to build software.
     nixpkgs.url = "github:nixos/nixpkgs/1284004bf6c6e50d8592b6efe83708931e75aec7"; # nixpkgs-unstable nixos-22.11
-    Neve.url = "github:reinthal/Neve";
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    jordanVim.url = "github:jordanisaacs/neovim-flake";
     #
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";

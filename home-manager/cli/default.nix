@@ -4,7 +4,7 @@
   ...
 }
 : let
-  NeveNeovim = inputs.Neve.packages.${pkgs.system}.default;
+  jordanVim = inputs.jordanVim.packages.${pkgs.system}.default;
 in {
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
@@ -24,7 +24,7 @@ in {
       wget
       lazygit
       btop
-      NeveNeovim
+      jordanVim
       # data
       minio-client
 

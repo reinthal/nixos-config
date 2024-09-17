@@ -1,4 +1,8 @@
-{pkgs, inputs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
@@ -23,8 +27,7 @@
     # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
   };
-  environment.systemPackages = with pkgs;
-   [
+  environment.systemPackages = with pkgs; [
     morewaita-icon-theme
     adwaita-icon-theme
     qogir-icon-theme
@@ -43,33 +46,29 @@
     libnotify
     wl-gammactl
     rofi-wayland
-  ] ++ (with pkgs.gnome; [
     gnome-boxes
     gnome-text-editor # webcam tool
     gnome-clocks
     gnome-software # for flatpak
     gnome-control-center
     gnome-weather
-    
-])
-  ;
+  ];
 
-  environment.gnome.excludePackages = (with pkgs; [
-  gnome-photos
-  gnome-tour
-  gedit # text editor
-  cheese # webcam tool
-  gnome-terminal
-  evince # document viewer
-  epiphany # web browser
-  totem # video player
-  geary # email reader
-]) ++ (with pkgs.gnome; [
-  gnome-music
-  gnome-characters
-  tali # poker game
-  iagno # go game
-  hitori # sudoku game
-  atomix # puzzle game
-]);
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-photos
+    gnome-tour
+    gedit # text editor
+    cheese # webcam tool
+    gnome-terminal
+    evince # document viewer
+    epiphany # web browser
+    totem # video player
+    geary # email reader
+    gnome-music
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+    gnome-characters
+  ];
 }

@@ -56,7 +56,7 @@
             repo = "Signal-Desktop";
             leaveDotGit = true; # signal calculates the release date via `git`
             rev = "v${version}";
-            hash = "sha256-95toboMXpXwKW5AmRlmHv8crRh9yNSeeF7zU+M7LP2Q=";
+            hash = "sha256-6SIpiWKEY8sEMXf3BpuoJSKbsvSiR47H92wI2l2kKD4=";
           };
           yarnOfflineCache = super.fetchYarnDeps {
             yarnLock = "${src}/yarn.lock";
