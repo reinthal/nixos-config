@@ -12,8 +12,8 @@
     extraConfig = lib.concatStrings [
       ''
         monitor=eDP-1, 3456x2160, 0x0, 1.8
-        #monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
-        monitor=HDMI-A-1, preferred,auto-right,1
+        monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
+        #monitor=HDMI-A-1, preferred,auto-right,1
 
         # Fix pixelated extra screen
         xwayland {
@@ -65,11 +65,8 @@
         ws_monitor1 = [4 5 6 7];
         f = ws: monitor: "${ws}, monitor:${monitor}";
       in
-     
- (map (i: f (toString i) ("0")) ws_monitor0) # half of the ws to monitor 0
-
-      ++ (map (i: f (toString i) ("1")) ws_monitor1); # half of the ws to monitor 1
-
+        (map (i: f (toString i) "0") ws_monitor0) # half of the ws to monitor 0
+        ++ (map (i: f (toString i) "1") ws_monitor1); # half of the ws to monitor 1
 
       windowrulev2 = let
         move_to_monitor = monitor_id: regex: "monitor ${monitor_id}, title:^(.*)(${regex})$";
