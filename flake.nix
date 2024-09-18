@@ -5,7 +5,7 @@
     # Where we get most of our software. Giant mono repo with recipes
     sops-nix.url = "github:Mic92/sops-nix";
     # called derivations that say how to build software.
-    nixpkgs.url = "github:nixos/nixpkgs/1284004bf6c6e50d8592b6efe83708931e75aec7"; # nixpkgs-unstable nixos-22.11
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; #1284004bf6c6e50d8592b6efe83708931e75aec7 nixos-22.11
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
