@@ -1,38 +1,14 @@
 # Nix Configs
 
-## todos
-- [x] add teams
-- [x] add languages
-- [x] Fix hotkeys for sound
-- [x] add wayland cursor
-- [x] explore 1 plugin
-- [x] do something visual
-- [-] add blueberry instead of current bluetooth app
-- [x] add gui for wifi/vpn
+## Pinned 
+- [] input nixpkgs from hyprland hotfix PR 1284004bf6c6e50d8592b6efe83708931e75aec7
 
-# Work in progress
-- [ ] get flow into flake
-- [ ] get relay into flake
-- [ ] get build host into flake
-- [x] `feat/add-asahi-nixos`
-- [x] modularize home-manager and build according to hostname
 
-# Uses
+## Hosts
 
-- flakes 
-- nixos-darwin https://github.com/LnL7/nix-darwin
-- home-manager https://github.com/nix-community/home-manager
-
-# Prerequisites
-
-From https://nixos.org/download/
-
-```bash
-sh <(curl -L https://nixos.org/nix/install)
-
-```
-
-and the default editor `vim` which comes with mac os.
+- Build, x86 proxmox vm with nixos
+- Macosx Darwin, vanilla Macosx
+- nixbook, apple silicon + nixos
 
 # First time using the flake
 
@@ -54,8 +30,3 @@ To apply new configurations or
 nixup
 ```
 
-to update and switch to new configurations.
-
-# commit signing
-
-Git commit signing enabled by default in home-manager
