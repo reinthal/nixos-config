@@ -50,6 +50,11 @@
         specialArgs = {inherit nixpkgs self inputs outputs;};
         modules = [./nixos/hosts/build];
       };
+      relay = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit nixpkgs self inputs outputs;};
+        # > Our main nixos configuration file <
+        modules = [./nixos/hosts/relay];
+      };
 
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
