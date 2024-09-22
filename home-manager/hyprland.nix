@@ -3,12 +3,19 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  is_nvidia = builtins.currentSystem == "x86_64-linux";
+in {
+  home.packages = with pkgs;
+    lib.optionals is_nvidia [
+      egl-wayland
+    ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    
+
     extraConfig = lib.concatStrings [
       ''
         monitor=eDP-1, 3456x2160, 0x0, 1.8
@@ -27,6 +34,29 @@
     ];
 
     settings = {
+      env =
+        [
+          # Hyprland/WAYLAND
+          "GTK_THEME,Nord"
+          "GDK_BACKEND,wayland,x11,*"
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "CLUTTER_BACKEND,wayland"
+          "XDG_SESSION_DESKTOP,Hyprland"
+          "XDG_CURRENT_DESKTOP,Hyprland"
+          "XDG_SESSION_TYPE,wayland"
+
+          # Hint electron apps to use wayland
+          "NIXOS_OZONE_WL,1"
+        ]
+        ++ lib.optionals is_nvidia [
+          "LIBVA_DRIVER_NAME,nvidia"
+          "GBM_BACKEND,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        ];
+
+      cursor = {
+        no_hardware_cursors = true;
+      };
       # Switchable keyboard layout
       input = {
         kb_layout = "us,se";
