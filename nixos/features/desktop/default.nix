@@ -22,7 +22,7 @@
   #};
   # wayland-related
   security.polkit.enable = true;
-    environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     morewaita-icon-theme
     adwaita-icon-theme
     qogir-icon-theme
