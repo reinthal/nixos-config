@@ -42,6 +42,7 @@
     gnome-system-monitor
     gnome-calculator
     gnome-tweaks
+    wireshark
     # Wayland /  Hyprland
     libnotify
     wl-gammactl

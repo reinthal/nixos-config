@@ -14,6 +14,7 @@ in {
     packages = with pkgs; [
       # cli
       ripgrep
+      tldr
       thefuck
       jq
       yq
