@@ -22,11 +22,6 @@
   #};
   # wayland-related
   security.polkit.enable = true;
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-  };
   environment.systemPackages = with pkgs; [
     morewaita-icon-theme
     adwaita-icon-theme
