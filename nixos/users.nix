@@ -27,6 +27,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "wireshark"
     ];
     shell = pkgs.zsh;
     uid = 1000;
