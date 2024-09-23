@@ -6,12 +6,12 @@
 : let
   jordanVim = inputs.jordanVim.packages.${pkgs.system}.default;
 in {
+  imports = [
+    ./neomutt
+  ];
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
-    imports = [
-      ./neomut
-    ];
     # specify my home-manager configs
     packages = with pkgs; [
       # cli

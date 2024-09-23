@@ -1,10 +1,12 @@
-{pkgs}: let
+{pkgs, ...}: let
   colorscheme = (import ./neomutt_colorscheme.nix).colorscheme;
 in {
+  accounts.email = {
+    maildirBasePath = "mail";
+
+  };
+
   programs = {
-    accounts.email = {
-      maldirBasePath = "mail";
-    };
     neomutt = {
       enable = true;
       sidebar = {
