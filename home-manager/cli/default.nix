@@ -9,13 +9,15 @@ in {
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
-
+    imports = [
+      ./neomut
+    ];
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
+      nmap
       ripgrep
       tldr
-      thefuck
       jq
       yq
       just
