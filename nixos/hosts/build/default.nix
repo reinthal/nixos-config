@@ -14,6 +14,7 @@
     ../../features/apps/podman.nix
     ../../features/desktop
     ../../features/sops.nix
+    ../../features/nvidia.nix
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix

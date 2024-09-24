@@ -9,6 +9,12 @@
   accounts.email.accounts = {
     "bergaborgen" = {
       primary = true;
+
+      neomutt = {
+        enable = true;
+        mailboxName = "Ekonomigruppen";
+        mailboxType = "imap";
+      };
       mbsync = {
         enable = true;
         create = "maildir";
