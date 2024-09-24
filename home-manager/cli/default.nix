@@ -17,6 +17,7 @@ in {
       ripgrep
       tldr
       jq
+      tree
       yq
       just
       azure-cli
