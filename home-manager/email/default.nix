@@ -1,4 +1,5 @@
 {config, ...}: {
+  imports = [./neomutt];
   programs = {
     alot.enable = true;
     notmuch.enable = true;
@@ -34,7 +35,5 @@
         };
       };
     };
-
-
   };
 }
