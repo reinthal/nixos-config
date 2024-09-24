@@ -5,7 +5,7 @@
 keys:
   - &kog age1rktgpvuzkq47s89sncwf94d8gpqe9y59gm6gjsla2m48eqrt7y2sg4w0cx
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/shhh.yaml$
     key_groups:
     - age:
       - *kog

@@ -13,7 +13,6 @@
     ../../features/nas.nix
     ../../features/apps/podman.nix
     ../../features/desktop
-:q
     ../../features/sops.nix
     # enable various features
     ../../features/sound.nix

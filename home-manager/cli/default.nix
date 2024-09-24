@@ -13,6 +13,8 @@ in {
     packages = with pkgs; [
       # cli
       zellij
+      sops
+      tree
       nmap
       ripgrep
       tldr
