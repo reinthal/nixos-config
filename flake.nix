@@ -24,7 +24,6 @@
     self,
     nixpkgs,
     home-manager,
-    sops-nix,
     darwin,
     ...
   } @ inputs: let
