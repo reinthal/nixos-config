@@ -24,7 +24,7 @@ in {
           isDefault = true;
         };
       };
-          };
+    };
     firefox = {
       enable = true;
     };
