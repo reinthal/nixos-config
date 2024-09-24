@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  colorscheme = (import ./neomutt_colorscheme.nix).colorscheme;
+  colorscheme = (import ./colorscheme.nix).colorscheme;
 in {
   programs = {
     neomutt = {
