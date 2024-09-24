@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   ...
 }: {
@@ -7,11 +6,9 @@
     inputs.sops-nix.homeManagerModules.sops
   ];
   sops = {
-    secrets.nas = {
- #     owner = config.users.users.kog.name;
-    };
     secrets."mail/ekonomigruppen" = {
 #      owner = config.users.users.kog.name;
+      path = "%r/mail/ekonomigruppen";
     };
     defaultSopsFile = ../secrets/shhh.yaml;
     age = {
