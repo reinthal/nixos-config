@@ -8,10 +8,10 @@
   ];
   sops = {
     secrets.nas = {
-      owner = config.users.users.kog.name;
+ #     owner = config.users.users.kog.name;
     };
     secrets."mail/ekonomigruppen" = {
-      owner = config.users.users.kog.name;
+#      owner = config.users.users.kog.name;
     };
     defaultSopsFile = ../secrets/shhh.yaml;
     age = {
