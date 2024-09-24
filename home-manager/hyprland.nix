@@ -62,7 +62,6 @@ in {
         kb_layout = "us,se";
         kb_options = [
           "grp:alt_space_toggle"
-          "caps:swapescape"
         ];
         repeat_delay = 220;
       };

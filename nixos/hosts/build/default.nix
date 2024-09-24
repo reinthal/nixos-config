@@ -6,20 +6,23 @@
   outputs,
   ...
 }: {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ../../common.nix
-      ../../features/coms
-       ../../features/nas.nix
-       ../../features/apps/podman.nix
-      ../../features/desktop
-      ../../features/nvidia.nix
-      # enable various features
-      ../../features/sound.nix
-      ../../features/bluetooth.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../common.nix
+    ../../features/coms
+    ../../features/nas.nix
+    ../../features/apps/podman.nix
+    ../../features/desktop
+    ../../features/nvidia.nix
+    # enable various features
+    ../../features/sound.nix
+    ../../features/bluetooth.nix
+    # key mappings
+ # modules
+    outputs.nixosModules.dual-function-keys
+   ../../features/key-mappings/caps-to-ctrl-esc.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   home-manager = {
     backupFileExtension = "hm-bkp";
@@ -29,7 +32,6 @@
     };
   };
 
-  
   # Bootloader.
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
@@ -74,7 +76,7 @@
 
   programs.dconf.enable = true;
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 8888 8080 3389 ];
+  networking.firewall.allowedTCPPorts = [8888 8080 3389];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -86,5 +88,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
