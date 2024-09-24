@@ -24,6 +24,7 @@
     self,
     nixpkgs,
     home-manager,
+    sops-nix,
     darwin,
     ...
   } @ inputs: let
@@ -48,7 +49,7 @@
     nixosConfigurations = {
       build = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
-        modules = [./nixos/hosts/build];
+        modules = [./nixos/hosts/build sops-nix.nixosModules.sops];
       };
       relay = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
@@ -59,7 +60,7 @@
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         # > Our main nixos configuration file <
-        modules = [./nixos/hosts/nixbook];
+        modules = [./nixos/hosts/nixbook sops-nix.nixosModules.sops];
       };
     };
 
