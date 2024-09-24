@@ -13,7 +13,7 @@
     ../../features/nas.nix
     ../../features/apps/podman.nix
     ../../features/desktop
-    ../../features/sops.nix
+    #../../features/sops.nix
     ../../features/nvidia.nix
     # enable various features
     ../../features/sound.nix

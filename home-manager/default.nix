@@ -13,12 +13,14 @@ in {
     ]
     ++ lib.optionals (!isMacOS) [
       ./gui
+      ./email
       ./terminal
       ./yubikey
       ./scripts
       ./hyprlock.nix
       ./hyprland.nix
       ./theme.nix
+      ./sops.nix
       (import ./gui {inherit lib pkgs;})
     ];
 
