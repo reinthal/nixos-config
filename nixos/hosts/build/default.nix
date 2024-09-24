@@ -18,9 +18,9 @@
     ../../features/sound.nix
     ../../features/bluetooth.nix
     # key mappings
- # modules
+    # modules
     outputs.nixosModules.dual-function-keys
-   ../../features/key-mappings/caps-to-ctrl-esc.nix
+    ../../features/key-mappings/caps-to-ctrl-esc.nix
     inputs.home-manager.nixosModules.default
   ];
 
