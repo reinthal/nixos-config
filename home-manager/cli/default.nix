@@ -15,6 +15,7 @@ in {
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
+      zellij
       nmap
       ripgrep
       tldr
@@ -27,6 +28,7 @@ in {
       wget
       lazygit
       btop
+      pass
       jordanVim
       # data
       minio-client
