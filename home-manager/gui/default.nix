@@ -14,6 +14,17 @@ in {
     ./kdeconnect.nix
   ];
   programs = {
+    thunderbird = {
+      enable = true;
+      settings = {
+        "privacy.donottrackheader.enabled" = true;
+      };
+      profiles = {
+        default = {
+          isDefault = true;
+        };
+      };
+          };
     firefox = {
       enable = true;
     };
