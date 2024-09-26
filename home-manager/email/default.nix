@@ -1,20 +1,19 @@
-{config, ...}: let
-  homeDirectory = config.home.homeDirectory;
-in {
-  imports = [./neomutt];
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs = {
-    alot.enable = true;
-    notmuch.enable = true;
-    astroid = {
-      enable = true;
-      extraConfig = {
-        
-      };
-    };
-    msmtp.enable = true;
-    mbsync.enable = true;
   };
-
+  home = {
+    file.".inputrc".source = ./dotfiles/.inputrc;
+    stateVersion = "24.05";
+    # specify my home-manager configs
+    packages = with pkgs; [
+      # cli
+      mailspring
+    ];
+  };
   accounts.email.accounts = {
     "bergaborgen" = {
       primary = true;
@@ -22,28 +21,8 @@ in {
       userName = "ekonomigruppen@bergaborgen.se";
       realName = "Ekonomigruppen";
       passwordCommand = [
-        ''cat ${homeDirectory}/.shhh/mail/ekonomigruppen''
+        ''cat ${config.home.homeDirectory}/.shhh/mail/ekonomigruppen''
       ];
-
-      astroid = {
-        enable = true;
-        sendMailCommand = "msmtp --read-envelope-from --read-recipients --account";
-      };
-
-      neomutt = {
-        enable = true;
-        mailboxName = "Ekonomigruppen";
-        mailboxType = "imap";
-      };
-
-      mbsync = {
-        enable = true;
-        create = "maildir";
-      };
-
-      notmuch.enable = true;
-      offlineimap.enable = true;
-      msmtp.enable = true;
 
       imap = {
         host = "mailcluster.loopia.se";
