@@ -22,6 +22,7 @@
     ../../features/coms
     ../../features/desktop
     ../../features/sops.nix
+../../features/cli/devenvs/datalake-stack.nix
     ../../features/nas.nix
     ../../features/daw.nix
     (import ../../features/networking "nixbook")
