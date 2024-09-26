@@ -6,4 +6,3 @@
     ./toggle-scratchpad.nix
   ];
 }
-
