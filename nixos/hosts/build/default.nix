@@ -15,6 +15,9 @@
     ../../features/desktop
     ../../features/sops.nix
     ../../features/nvidia.nix
+
+    ../../features/cli/devenvs/datalake-stack.nix
+    
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix

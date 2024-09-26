@@ -6,19 +6,6 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true;
   programs.zsh.enable = true;
-  users.users.ada = {
-    description = "ada";
-    isNormalUser = true;
-    hashedPassword = "$y$j9T$HWvOqEXKNAo71pncWn0oL.$SCSg00gwPa9UzNjfFQN2q3TTpIt.7LYj7R3li51Q8m8";
-    extraGroups = [
-      "networkmanager"
-    ];
-    shell = pkgs.zsh;
-    uid = 1337;
-    openssh.authorizedKeys.keyFiles = [
-    ];
-  };
-
   users.users.kog = {
     description = "kog";
     home = "/home/kog";
