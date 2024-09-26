@@ -3,15 +3,27 @@
   inputs,
   ...
 }: {
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+  services = {
+    flatpak.enable = true;
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
   };
+
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
     xwayland.enable = true;
+  };
+
+  systemd.services.flatpak-repo = {
+    wantedBy = ["multi-user.target"];
+    path = [pkgs.flatpak];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
   };
 
   #xdg.portal = {
@@ -29,6 +41,7 @@
     # Image Viewer
     loupe
     brave
+
     # file system tool
     nautilus
     # disk utility
@@ -59,7 +72,6 @@
     evince # document viewer
     epiphany # web browser
     totem # video player
-    geary # email reader
     gnome-music
     tali # poker game
     iagno # go game

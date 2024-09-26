@@ -1,16 +1,21 @@
 # Baseline "minimal" config, suitable for headless boxes (router, raspberry pi, etc)
 # Most hosts extend from ./common.nix instead, which includes quality of life stuff
 # like fonts, podman, etc.
-
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # You can import other NixOS modules here
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./users.nix
     ./features/locales.nix
   ];
-
-  home-manager.extraSpecialArgs = { inherit inputs outputs; };
+  home-manager.extraSpecialArgs = {inherit inputs outputs;};
 
   services.openssh.enable = true;
 
@@ -28,7 +33,7 @@
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!

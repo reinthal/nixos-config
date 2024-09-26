@@ -1,19 +1,8 @@
 {
   config,
-  pkgs,
   ...
 }: {
-  programs = {
-  };
-  home = {
-    file.".inputrc".source = ./dotfiles/.inputrc;
-    stateVersion = "24.05";
-    # specify my home-manager configs
-    packages = with pkgs; [
-      # cli
-      mailspring
-    ];
-  };
+  
   accounts.email.accounts = {
     "bergaborgen" = {
       primary = true;
