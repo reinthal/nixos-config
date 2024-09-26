@@ -188,9 +188,8 @@ in {
           "SUPER, W, exec, firefox"
 
           "SUPER, S, exec, scratchpad"
-
-          "SUPER, r, exec, scratchpad -g"
-
+          "SUPER, r, exec, scratchpad -g -l"
+          "CTRL SHIFT, s, exec, scratchpad -t"
           "SUPER, x, exec, hdrop kitty --class kitty_1"
           "SUPER CTRL, x, exec, hdrop kitty --class kitty_2"
 
