@@ -187,7 +187,14 @@ in {
           "SUPER, Space, ${e} -t launcher"
           "SUPER, W, exec, firefox"
 
-          "SUPER, S, exec, hyprshot -m region --clipboard-only"
+          "SUPER, S, exec, scratchpad"
+
+          "SUPER, r, exec, scratchpad -g"
+
+          "SUPER, x, exec, hdrop kitty --class kitty_1"
+          "SUPER CTRL, x, exec, hdrop kitty --class kitty_2"
+
+          "SUPERSHIFT, S, exec, hyprshot -m region --clipboard-only"
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
           "SUPER, Q, killactive"
