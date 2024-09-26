@@ -8,8 +8,14 @@
   ];
 
   sops = {
-    secrets.nas = {
-      owner = config.users.users.kog.name;
+    secrets = {
+      "github/datalakehouse/GITHUB_TOKEN" = {
+        owner = config.users.users.kog.name;
+      };
+
+      nas = {
+        owner = config.users.users.kog.name;
+      };
     };
     defaultSopsFile = ../../secrets/shhh.yaml;
     age = {
