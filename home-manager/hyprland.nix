@@ -5,10 +5,15 @@
   ...
 }: let
   is_nvidia = builtins.currentSystem == "x86_64-linux";
+  hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
 in {
-  home.packages = with pkgs;
+  home.packages =
     lib.optionals is_nvidia [
-      egl-wayland
+      pkgs.egl-wayland
+    ]
+    ++ [
+      hyprland-contrib.scratchpad
+      hyprland-contrib.hdrop
     ];
 
   wayland.windowManager.hyprland = {

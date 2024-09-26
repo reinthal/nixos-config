@@ -4,6 +4,10 @@
   inputs = {
     # Where we get most of our software. Giant mono repo with recipes
     sops-nix.url = "github:Mic92/sops-nix";
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # called derivations that say how to build software.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; #1284004bf6c6e50d8592b6efe83708931e75aec7 nixos-22.11
     # Manages configs links things into your home directory
@@ -48,7 +52,7 @@
     nixosConfigurations = {
       build = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
-        modules = [./nixos/hosts/build ];
+        modules = [./nixos/hosts/build];
       };
       relay = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
@@ -59,7 +63,7 @@
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         # > Our main nixos configuration file <
-        modules = [./nixos/hosts/nixbook ];
+        modules = [./nixos/hosts/nixbook];
       };
     };
 
