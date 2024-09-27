@@ -17,8 +17,7 @@ in {
       ./terminal
       ./yubikey
       ./scripts
-      ./hyprlock.nix
-      ./hyprland.nix
+      ./hyprland
       ./theme.nix
       ./sops.nix
       (import ./gui {inherit lib pkgs;})

@@ -21,7 +21,7 @@
 
     image {
         monitor =
-        path = ${../img/red.jpg}
+        path = ${../../img/red.jpg}
         size = 700 # lesser side if not 1:1 ratio
         rounding = -1 # negative values mean circle
         border_size = 4
