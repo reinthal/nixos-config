@@ -4,6 +4,8 @@
   inputs = {
     # Where we get most of our software. Giant mono repo with recipes
     sops-nix.url = "github:Mic92/sops-nix";
+    pyprland.url = "github:hyprland-community/pyprland";
+    pyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";

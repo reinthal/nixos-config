@@ -6,6 +6,7 @@
 }: let
   is_nvidia = builtins.currentSystem == "x86_64-linux";
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
+  pyprland = inputs.pyprland.packages.${pkgs.system}.pyprland;
 in {
   home.packages =
     lib.optionals is_nvidia [
@@ -14,6 +15,7 @@ in {
     ++ [
       hyprland-contrib.scratchpad
       hyprland-contrib.hdrop
+      pyprland
     ];
 
   wayland.windowManager.hyprland = {
