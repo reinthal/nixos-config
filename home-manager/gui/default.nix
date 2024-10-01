@@ -27,6 +27,7 @@ in {
   home.packages = with pkgs;
     [
       networkmanagerapplet
+      zed-editor
       hyprshot
       # coms
       signal
@@ -34,6 +35,7 @@ in {
     ++ lib.optional (builtins.currentSystem == "x86_64-linux") pkgs.slack;
   xdg = {
     enable = true;
+    configFile."zed/settings.json".source = ./zed/settings.json; 
     desktopEntries = {
       signal-desktop = {
         exec = "${lib.getExe' signal "signal-desktop"}";
