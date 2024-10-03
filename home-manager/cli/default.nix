@@ -4,7 +4,7 @@
   ...
 }
 : let
-  jordanVim = inputs.jordanVim.packages.${pkgs.system}.default;
+  jordanVim = inputs.jordanVim.packages.${pkgs.system}.maximal;
 in {
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
