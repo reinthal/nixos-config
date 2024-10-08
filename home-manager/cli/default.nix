@@ -29,6 +29,7 @@ in {
       lazygit
       btop
       pass
+      tree
       jordanVim
       # data
       minio-client
