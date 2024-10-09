@@ -15,7 +15,6 @@ in {
     ++ [
       hyprland-contrib.scratchpad
       hyprland-contrib.hdrop
-      pyprland
     ];
 
   wayland.windowManager.hyprland = {
@@ -26,8 +25,8 @@ in {
     extraConfig = lib.concatStrings [
       ''
         monitor=eDP-1, 3456x2160, 0x0, 1.8
-        #monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
-        monitor=HDMI-A-1, preferred,auto-right,1
+        monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
+        #monitor=HDMI-A-1, preferred,auto-right,1
 
         # Fix pixelated extra screen
         xwayland {
