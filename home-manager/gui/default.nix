@@ -35,7 +35,11 @@ in {
     ++ lib.optional (builtins.currentSystem == "x86_64-linux") pkgs.slack;
   xdg = {
     enable = true;
+<<<<<<< Updated upstream
     #configFile."zed/settings.json".source = ./zed/settings.json;
+=======
+#    configFile."zed/settings.json".source = ./zed/settings.json;
+>>>>>>> Stashed changes
     desktopEntries = {
       signal-desktop = {
         exec = "${lib.getExe' signal "signal-desktop"}";
