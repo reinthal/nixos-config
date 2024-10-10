@@ -16,6 +16,7 @@ animation = "fromTop"
 class = "brave-web.teams.com__-Default"
 margin = 10
 size = "90% 90%"
+lazy = true
 
 
 [scratchpads.slack]
@@ -24,6 +25,7 @@ animation = "fromTop"
 class = "brave-web.slack.com__-Default"
 margin = 10
 size = "90% 90%"
+lazy = true
 
 [scratchpads.term]
 animation = "fromTop"

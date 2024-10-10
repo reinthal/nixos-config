@@ -30,6 +30,5 @@
     acceleration = "cuda";
     host = "0.0.0.0";
     port = 11434;
-    loadModels = ["llama3.2:3b" "codellama:34b"];
   };
 }
