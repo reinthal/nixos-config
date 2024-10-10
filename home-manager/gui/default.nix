@@ -2,12 +2,7 @@
   lib,
   pkgs,
   ...
-}: let
-  signal =
-    if builtins.currentSystem == "x86_64-linux"
-    then pkgs.signal-desktop
-    else pkgs.signal-desktop-from-src;
-in {
+}: {
   imports = [
     ./data-eng.nix
     ./ags.nix
@@ -29,21 +24,12 @@ in {
       networkmanagerapplet
       zed-editor
       hyprshot
-      # coms
-      signal
     ]
-    ++ lib.optional (builtins.currentSystem == "x86_64-linux") pkgs.slack;
+    ++ lib.optional (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.signal];
   xdg = {
     enable = true;
     #configFile."zed/settings.json".source = ./zed/settings.json;
     desktopEntries = {
-      signal-desktop = {
-        exec = "${lib.getExe' signal "signal-desktop"}";
-        name = "Signal";
-        type = "Application";
-        terminal = false;
-      };
-
       "org.gnome.Settings" = {
         name = "Settings";
         comment = "Gnome Control Center";
