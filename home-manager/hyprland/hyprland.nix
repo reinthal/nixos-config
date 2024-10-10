@@ -187,14 +187,13 @@ in {
           "SUPER, W, exec, firefox"
           # Pypr
           "SUPER, D, exec, pypr toggle term"
-          "SUPER, M, exec, pypr toggle ident"
+          "SUPER, M, exec, pypr toggle slack"
+          "SUPER, N, exec, pypr toggle teams"
           "SUPER, P, exec, pypr toggle volume"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"
           "CTRL SHIFT, s, exec, toggle-scratchpad"
-          "SUPER, x, exec, hdrop kitty --class kitty_1"
-          "SUPER CTRL, x, exec, hdrop kitty --class kitty_2"
 
           "SUPERSHIFT, S, exec, hyprshot -m region --clipboard-only"
           "ALT, Tab, focuscurrentorlast"
