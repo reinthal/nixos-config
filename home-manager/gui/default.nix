@@ -25,7 +25,7 @@
       zed-editor
       hyprshot
     ]
-    ++ lib.optional (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.signal];
+    ++ lib.optional (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.signal-desktop];
   xdg = {
     enable = true;
     #configFile."zed/settings.json".source = ./zed/settings.json;
