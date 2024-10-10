@@ -30,6 +30,7 @@ in {
       btop
       pass
       tree
+      harlequin
       jordanVim
       # data
       minio-client

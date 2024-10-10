@@ -3,6 +3,7 @@
 
   inputs = {
     # Where we get most of our software. Giant mono repo with recipes
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
     sops-nix.url = "github:Mic92/sops-nix";
     pyprland.url = "github:hyprland-community/pyprland";
     pyprland.inputs.nixpkgs.follows = "nixpkgs";

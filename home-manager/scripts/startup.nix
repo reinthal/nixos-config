@@ -9,7 +9,6 @@
     export XCURSOR_THEME=Qogir
     ags -b hypr
     hyprctl setcursor Qogir 24
-    ${pyprland}/bin/pypr
   '';
 in {
   home.packages = [startupScript];

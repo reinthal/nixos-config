@@ -14,7 +14,6 @@ in {
     ]
     ++ [
       hyprland-contrib.scratchpad
-      hyprland-contrib.hdrop
     ];
 
   wayland.windowManager.hyprland = {
@@ -25,8 +24,8 @@ in {
     extraConfig = lib.concatStrings [
       ''
         monitor=eDP-1, 3456x2160, 0x0, 1.8
-        monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
-        #monitor=HDMI-A-1, preferred,auto-right,1
+        #monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-right,1.6
+        monitor=HDMI-A-1, preferred,auto-right,1
 
         # Fix pixelated extra screen
         xwayland {
@@ -157,8 +156,7 @@ in {
           reverseSwipe = true;
         };
       };
-      exec-once = ''start'';
-
+      exec-once = ["start" "${pyprland}/bin/pypr --debug /tmp/pypr.log"];
       general = {
         layout = "dwindle";
         resize_on_border = true;
@@ -187,6 +185,10 @@ in {
           "SUPER, Return, exec, kitty"
           "SUPER, Space, ${e} -t launcher"
           "SUPER, W, exec, firefox"
+          # Pypr
+          "SUPER, D, exec, pypr toggle term"
+          "SUPER, M, exec, pypr toggle ident"
+          "SUPER, P, exec, pypr toggle volume"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"
