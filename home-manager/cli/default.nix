@@ -22,7 +22,6 @@ in {
       tree
       yq
       just
-      azure-cli
       curl
       less
       wget
