@@ -80,13 +80,7 @@ in {
         rounding = 10;
         inactive_opacity = 0.70;
         active_opacity = 1.00;
-        drop_shadow = "yes";
-        shadow_range = 8;
-        shadow_render_power = 2;
-        "col.shadow" = "rgba(00000044)";
-
         dim_inactive = false;
-
         blur = {
           enabled = true;
           size = 8;
