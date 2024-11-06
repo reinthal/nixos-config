@@ -54,6 +54,7 @@ in {
           "NIXOS_OZONE_WL,1"
         ]
         ++ lib.optionals is_nvidia [
+          "AQ_DRM_DEVICES,/dev/dri/card1"
           "LIBVA_DRIVER_NAME,nvidia"
           "GBM_BACKEND,nvidia-drm"
           "__GLX_VENDOR_LIBRARY_NAME,nvidia"
