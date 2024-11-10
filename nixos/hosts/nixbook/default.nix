@@ -16,16 +16,16 @@
     # apple-silicon hardware support
     inputs.apple-silicon.nixosModules.apple-silicon-support
 
-    # Enable Nice Login-Screen
-    #../../features/greetd.nix
     ../../features/apps/podman.nix
     ../../features/coms
     ../../features/desktop
     ../../features/sops.nix
-../../features/cli/devenvs/datalake-stack.nix
+    ../../features/cli/devenvs/datalake-stack.nix
     ../../features/nas.nix
     ../../features/daw.nix
+    ../../features/cli
     (import ../../features/networking "nixbook")
+
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix
