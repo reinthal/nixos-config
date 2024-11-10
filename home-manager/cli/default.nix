@@ -6,6 +6,10 @@
 : let
   jordanVim = inputs.jordanVim.packages.${pkgs.system}.maximal;
 in {
+  xdg = {
+    configFile."distrobox/distrobox.conf".source = ./dotfiles/distrobox.conf;
+  };
+
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
     stateVersion = "24.05";
@@ -29,18 +33,13 @@ in {
       btop
       pass
       tree
-      harlequin
       jordanVim
       # data
       minio-client
-
-      # python
-
       # dev
       ruff
       # dev nix
       nixpkgs-fmt
-
       # devops
       terraform
       fluxcd
