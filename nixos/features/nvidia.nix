@@ -12,7 +12,7 @@
   #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_10; # TODO: Pinned to 6.10 due to compatability issues
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
-
+  hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;

@@ -6,6 +6,10 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = true;
   programs.zsh.enable = true;
+  # Make sure to set the appropriate user and group
+  systemd.tmpfiles.rules = [
+    "d /mnt/data/kog 0775 kog users - -"
+  ];
   users.users.kog = {
     description = "kog";
     home = "/home/kog";

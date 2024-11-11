@@ -10,6 +10,9 @@
       install -d -m 755 /home/kog/open-webui/data -o root -g root
     '';
   };
+  environment.systemPackages = [
+    pkgs.nvidia-container-toolkit
+  ];
   virtualisation = {
     podman = {
       enable = true;
