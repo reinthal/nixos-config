@@ -20,6 +20,7 @@ in {
       sops
       tree
       nmap
+      tcpdump
       ripgrep
       tldr
       jq
