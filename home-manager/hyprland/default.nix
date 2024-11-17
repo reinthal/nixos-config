@@ -2,6 +2,6 @@
   imports = [
     ./pyprland
     ./hyprland.nix
-    ./hyprlock.nix
+    ./swaylock.nix
   ];
 }

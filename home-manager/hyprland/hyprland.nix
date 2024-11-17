@@ -197,7 +197,7 @@ in {
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
           "SUPER, P, togglesplit"
-          "CTRL SUPER,Q,exec,hyprlock"
+          "CTRL SUPER,Q,exec,swaylock"
           "CTRL SUPER, G, exec, gamemode"
 
           (mvfocus "k" "u")
