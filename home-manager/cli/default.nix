@@ -34,7 +34,10 @@ in {
       btop
       pass
       tree
+      # programming
+      pyright
       jordanVim
+      nixd
       # data
       minio-client
       # dev

@@ -23,7 +23,6 @@
     [
       networkmanagerapplet
       zed-editor
-      pyright
       hyprshot
       keepassxc
       spotify
