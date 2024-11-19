@@ -8,7 +8,7 @@
   };
 
   volumes = [
-    "/home/kog/open-webui/data:/app/backend/data"
+    "/mnt/data/kog/open-webui/data:/app/backend/data"
   ];
 
   ports = [
