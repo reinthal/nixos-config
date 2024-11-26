@@ -35,6 +35,7 @@ in {
       pass
       tree
       # programming
+      azure-cli
       pyright
       jordanVim
       nixd
