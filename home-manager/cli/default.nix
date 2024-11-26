@@ -34,6 +34,7 @@ in {
       btop
       pass
       tree
+      azure-cli
       # programming
       azure-cli
       pyright
