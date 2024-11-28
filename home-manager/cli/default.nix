@@ -38,6 +38,7 @@ in {
       # programming
       azure-cli
       pyright
+      devenv
       jordanVim
       nixd
       # data
