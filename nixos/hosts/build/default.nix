@@ -18,7 +18,8 @@
     ../../features/nvidia.nix
 
     ../../features/cli/devenvs/datalake-stack.nix
-    
+    ../../features/cli/default.nix
+
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix
