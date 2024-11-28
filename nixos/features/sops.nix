@@ -6,10 +6,10 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
-
+ 
   sops = {
     secrets = {
-      "github/datalakehouse/GITHUB_TOKEN" = {
+      "github/knowyourdata/GITHUB_TOKEN" = {
         owner = config.users.users.kog.name;
       };
 
