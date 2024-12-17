@@ -25,7 +25,7 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
-    apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+    apple-silicon.url = "github:oliverbestmann/nixos-apple-silicon";
   };
   outputs = {
     self,
