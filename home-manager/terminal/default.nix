@@ -1,38 +1,11 @@
 {
   programs = {
-    alacritty = {
-      enable = true;
-      settings = {
-        font.normal.family = "FireCode Nerd Font Mono";
-        font.size = 16;
-
-        keyboard.bindings = [
-          {
-            key = "i";
-            mods = "Control";
-            action = "ToggleViMode";
-          }
-          {
-            key = "h";
-            # Move left
-            mods = "Control";
-            action = "WordLeft";
-          }
-          {
-            key = "l";
-            mods = "Control";
-            # move right
-            action = "WordRightEnd";
-          }
-        ];
-      };
-    };
 
     kitty = {
       enable = true;
-      theme = "Afterglow";
+      theme = "Catppuccin-Frappe";
       font = {
-        name = "FireCode Nerd Font Mono";
+        name = "MonaspiceKr Nerd Font Propo";
         size = 12;
       };
     };

@@ -16,6 +16,7 @@ in {
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
+      cool-retro-term
       zellij
       sops
       tree

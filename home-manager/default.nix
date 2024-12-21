@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  outputs,
   ...
 }: let
   # builtins.currentSystem makes the flake impure, see https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-pure-eval
@@ -24,6 +25,11 @@ in {
     ];
 
   nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
     config = {
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
