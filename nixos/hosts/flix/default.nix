@@ -13,7 +13,7 @@
     ../../features/sops.nix
     ../../features/nvidia.nix
     ../../features/cli/default.nix
-
+    ../../features/apps/jellyfin.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -31,14 +31,17 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-aa17dffc-bb20-4e3e-95c1-259a5b6b4d43".device = "/dev/disk/by-uuid/aa17dffc-bb20-4e3e-95c1-259a5b6b4d43";
-  networking.hostName = "flix"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "flix";
+    extraHosts = ''
+      10.22.22.10 nas.reinthal.me
+    '';
+    networkmanager.enable = true;
+    firewall.enable = true;
+  };
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    gnome-remote-desktop
     pinentry.curses
   ];
 
@@ -46,9 +49,7 @@
 
   time.timeZone = "Europe/Stockholm";
 
-  # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [];
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -25,6 +25,7 @@
       zed-editor
       hyprshot
       keepassxc
+      remmina
     ]
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.signal-desktop pkgs.spotify];
   xdg = {
