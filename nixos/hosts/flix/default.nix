@@ -14,6 +14,7 @@
     ../../features/nvidia.nix
     ../../features/cli/default.nix
     ../../features/apps/jellyfin.nix
+    ../../features/apps/plex.nix
     ../../features/apps/qbittorrent.nix
     inputs.home-manager.nixosModules.default
   ];
@@ -45,7 +46,6 @@
   environment.systemPackages = with pkgs; [
     pinentry.curses
   ];
-
   programs.zsh.enable = true;
 
   time.timeZone = "Europe/Stockholm";

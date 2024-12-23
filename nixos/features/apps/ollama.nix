@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{...}: {
   # Ollama Frontend
   system.activationScripts = {
     script.text = ''
@@ -11,10 +6,7 @@
       install -d -m 775 /mnt/data/kog/ollama/models/ -o root -g render
     '';
   };
-  environment.systemPackages = [
-    pkgs.nvidia-container-toolkit
-    pkgs.nvtopPackages.panthor
-  ];
+
   virtualisation = {
     podman = {
       enable = true;
