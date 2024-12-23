@@ -34,7 +34,7 @@
   networking = {
     hostName = "flix";
     extraHosts = ''
-      10.22.22.10 nas.reinthal.me
+      10.22.21.10 nas.reinthal.me
     '';
     networkmanager.enable = true;
     firewall.enable = true;
