@@ -4,11 +4,11 @@
   outputs,
   ...
 }: {
-  imports =
-    [
-      ./cli
-      ./scripts
-    ];
+  imports = [
+    ./cli
+    ./scripts
+    ./sops.nix
+  ];
 
   nixpkgs = {
     overlays = [
