@@ -53,6 +53,11 @@
         import ./pkgs {inherit pkgs;}
     );
     nixosConfigurations = {
+      seed = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit nixpkgs self inputs outputs;};
+        modules = [./nixos/hosts/seed];
+      };
+
       build = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         modules = [./nixos/hosts/build];
