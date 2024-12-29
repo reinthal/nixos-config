@@ -2,12 +2,27 @@
   config,
   lib,
   pkgs,
+  inputs,
+  outputs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../common.nix
+    ../../features/cli/default.nix
+    ../../features/apps/qbittorrent.nix
+    ../../features/s3fs
+    ../../features/sops.nix
+    inputs.home-manager.nixosModules.default
   ];
-
+  home-manager = {
+    backupFileExtension = "hm-bkp";
+    extraSpecialArgs = {inherit pkgs inputs outputs;};
+    users = {
+      kog = import ../../../home-manager/seed.nix;
+    };
+  };
+  nixpkgs.config.allowUnfree = true;
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda";
@@ -19,17 +34,5 @@
     firewall.enable = false;
   };
 
-  time.timeZone = "Europe/Amsterdam";
-  users.users.kog = {
-    isNormalUser = true;
-    initialPassword = "the world is a beautiful cat";
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-      neovim
-    ];
-  };
-
-  services.openssh.enable = true;
   system.stateVersion = "24.05";
 }
