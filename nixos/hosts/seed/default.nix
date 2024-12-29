@@ -11,7 +11,15 @@
     ../../common.nix
     ../../features/cli/default.nix
     ../../features/apps/qbittorrent.nix
-    ../../features/s3fs
+
+    # Import the S3FS configuration for "music" bucket
+    (import ../../features/s3fs/default.nix {
+      inherit pkgs lib;
+      bucket = "music";
+      keyfile = config.sops.secrets."hetzner/music".path;
+      mount = "/mnt/media/torrent";
+    })
+
     ../../features/sops.nix
     inputs.home-manager.nixosModules.default
   ];
