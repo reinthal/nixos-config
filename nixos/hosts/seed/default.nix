@@ -17,7 +17,7 @@
       inherit pkgs lib;
       bucket = "music";
       keyfile = config.sops.secrets."hetzner/music".path;
-      mount = "/mnt/media/torrent";
+      mount = "/mnt/media/";
     })
 
     ../../features/sops.nix
