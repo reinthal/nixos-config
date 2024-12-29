@@ -23,6 +23,7 @@
     ../../features/sops.nix
     inputs.home-manager.nixosModules.default
   ];
+  services.tailscale.enable = true;
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {inherit pkgs inputs outputs;};
