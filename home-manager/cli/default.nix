@@ -12,10 +12,11 @@ in {
 
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
-    stateVersion = "24.11";
+    stateVersion = "24.05";
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
+      lftp
       cool-retro-term
       zellij
       sops
