@@ -13,7 +13,6 @@
     ./yubikey
     ./plasma
     ./scripts
-    ./theme.nix
     ./sops.nix
     (import ./gui {inherit lib pkgs;})
   ];
