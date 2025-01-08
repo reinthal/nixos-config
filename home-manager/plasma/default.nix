@@ -29,8 +29,12 @@ in {
       cmake
       extra-cmake-modules
       ninja
+      plymouth
       kdePackages.plasma5support
       kdePackages.qt5compat
+      kdePackages.qtmultimedia
+      kdePackages.qtvirtualkeyboard
+      kdePackages.plasma-wayland-protocols
       kdePackages.qtstyleplugin-kvantum
       cantarell-fonts
       font-awesome
