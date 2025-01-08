@@ -11,6 +11,7 @@
     ./email
     ./terminal
     ./yubikey
+    ./plasma
     ./scripts
     ./theme.nix
     ./sops.nix
