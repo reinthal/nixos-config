@@ -105,7 +105,7 @@
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
-      stateVersion = config.system.stateVersion;
+      stateVersion = "24.11";
     };
     users = {
       kog = import ../../../home-manager;
@@ -209,11 +209,12 @@
             "e4da7455b22e6a55"
           ];
         };
+        system.stateVersion = "24.11";
         home-manager = {
           backupFileExtension = "hm-bkp";
           extraSpecialArgs = {
             inherit pkgs inputs outputs;
-            stateVersion = config.system.stateVersion;
+            stateVersion = "24.11";
           };
           users = {
             kog = import ../../../home-manager/only-plasma.nix;

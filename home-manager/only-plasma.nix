@@ -31,6 +31,6 @@
   };
   # Don"t change this when you change package input. Leave it alone.
   home = {
-    inherit stateVersion;
+    stateVersion = stateVersion;
   };
 }
