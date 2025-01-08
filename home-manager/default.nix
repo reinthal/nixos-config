@@ -2,6 +2,7 @@
   pkgs,
   lib,
   outputs,
+  stateVersion,
   ...
 }: let
   # builtins.currentSystem makes the flake impure, see https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-pure-eval
@@ -38,6 +39,6 @@ in {
   };
   # Don"t change this when you change package input. Leave it alone.
   home = {
-    stateVersion = "24.05";
+    stateVersion = stateVersion;
   };
 }

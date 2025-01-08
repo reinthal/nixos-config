@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  stateVersion,
   ...
 }
 : let
@@ -12,7 +13,7 @@ in {
 
   home = {
     file.".inputrc".source = ./dotfiles/.inputrc;
-    stateVersion = "24.05";
+    stateVersion = stateVersion;
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
