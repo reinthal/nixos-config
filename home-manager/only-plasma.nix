@@ -2,26 +2,20 @@
   pkgs,
   lib,
   outputs,
+  stateVersion,
   ...
-}: let
-  # builtins.currentSystem makes the flake impure, see https://nix.dev/manual/nix/2.23/command-ref/conf-file#conf-pure-eval
-  isMacOS = builtins.currentSystem == "aarch64-darwin";
-in {
-  imports =
-    [
-      ./gpg
-      ./cli
-    ]
-    ++ lib.optionals (!isMacOS) [
-      ./gui
-      ./email
-      ./terminal
-      ./yubikey
-      ./scripts
-      ./theme.nix
-      ./sops.nix
-      (import ./gui {inherit lib pkgs;})
-    ];
+}: {
+  imports = [
+    ./gpg
+    ./cli
+    ./email
+    ./terminal
+    ./yubikey
+    ./scripts
+    ./theme.nix
+    ./sops.nix
+    (import ./gui {inherit lib pkgs;})
+  ];
 
   nixpkgs = {
     overlays = [
@@ -37,6 +31,6 @@ in {
   };
   # Don"t change this when you change package input. Leave it alone.
   home = {
-    stateVersion = "24.05";
+    inherit stateVersion;
   };
 }
