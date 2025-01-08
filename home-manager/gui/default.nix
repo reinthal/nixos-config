@@ -27,8 +27,9 @@
       keepassxc
       remmina
       evolution
+      signal-desktop
     ]
-    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.signal-desktop pkgs.spotify];
+    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify];
   xdg = {
     enable = true;
     #configFile."zed/settings.json".source = ./zed/settings.json;
