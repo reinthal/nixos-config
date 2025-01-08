@@ -1,15 +1,9 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   services = {
     flatpak.enable = true;
-    xserver = {
-      enable = true;
-      displayManager.sddm.enable = true;
-      desktopManager.plasma6.enable = true;
-    };
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+    xserver.enable = true;
   };
 
   systemd.services.flatpak-repo = {
@@ -26,15 +20,7 @@
     morewaita-icon-theme
     adwaita-icon-theme
     qogir-icon-theme
-    # Image Viewer
-    loupe
     brave
-    # file system tool
-    nautilus
-    # disk utility
     baobab
-    # Wayland /  Hyprland
-    libnotify
-    wl-gammactl
   ];
 }
