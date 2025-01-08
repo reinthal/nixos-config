@@ -30,6 +30,7 @@ in {
       extra-cmake-modules
       ninja
       kdePackages.plasma5support
+      kdePackages.qt5compat
       kdePackages.qtstyleplugin-kvantum
       cantarell-fonts
       font-awesome
