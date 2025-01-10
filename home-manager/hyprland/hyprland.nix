@@ -153,7 +153,12 @@ in {
           reverseSwipe = true;
         };
       };
-      exec-once = ["start" "${pyprland}/bin/pypr --debug /tmp/pypr.log"];
+      exec-once = [
+        "start"
+        "${pyprland}/bin/pypr --debug /tmp/pypr.log"
+        # Dont know why but the small border settings do not get loaded on first load of hyprctl 20250110
+        "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/hyprctl reload"
+      ];
 
       bindle = [
         ",XF86AudioRaiseVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
