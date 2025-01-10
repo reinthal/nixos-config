@@ -19,6 +19,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    systemd.variables = ["--all"];
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
     extraConfig = lib.concatStrings [
@@ -75,7 +76,11 @@ in {
         workspace_swipe = true;
         workspace_swipe_use_r = true;
       };
-
+      general = {
+        gaps_out = 5;
+        layout = "dwindle";
+        resize_on_border = true;
+      };
       decoration = {
         rounding = 10;
         inactive_opacity = 0.70;
@@ -98,19 +103,16 @@ in {
         f = ws: monitor: "${ws}, monitor:${monitor}";
       in
         (map (i: f (toString i) "0") ws_monitor0) # half of the ws to monitor 0
-        ++ (map (i: f (toString i) "1") ws_monitor1); # half of the ws to monitor 1
+        ++ (map (i: f (toString i) "1") ws_monitor1) # half of the ws to monitor 1
+        ++ [
+          "special:slack, on-created-empty:brave --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS"
+          "special:teams1, on-created-empty:teams-for-linux"
+          "special:teams2, on-created-empty:flatpak run com.github.IsmaelMartinez.teams_for_linux"
+          "special:email, on-created-empty:brave --app=https://outlook.office.com"
+          "special:code, on-created-empty:code"
+          "special:signal-desktop, on-created-empty:signal-desktop"
+        ];
 
-      windowrulev2 = let
-        move_to_monitor = monitor_id: regex: "monitor ${monitor_id}, title:^(.*)(${regex})$";
-      in [
-        (move_to_monitor
-          "0"
-          "Microsoft Teams|Teams for Linux")
-        (
-          move_to_monitor "0" "Signal"
-        )
-        (move_to_monitor "0" "Brave")
-      ];
       windowrule = let
         f = regex: "float, ^(${regex})$";
       in [
@@ -152,10 +154,6 @@ in {
         };
       };
       exec-once = ["start" "${pyprland}/bin/pypr --debug /tmp/pypr.log"];
-      general = {
-        layout = "dwindle";
-        resize_on_border = true;
-      };
 
       bindle = [
         ",XF86AudioRaiseVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
@@ -182,9 +180,6 @@ in {
           "SUPER, W, exec, firefox"
           # Pypr
           "SUPER, D, exec, pypr toggle term"
-          "SUPER, M, exec, pypr toggle slack"
-          "SUPER, N, exec, pypr toggle teams"
-          "SUPER, P, exec, pypr toggle volume"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"
@@ -200,6 +195,12 @@ in {
           "CTRL SUPER,Q,exec,swaylock"
           "CTRL SUPER, G, exec, gamemode"
 
+          "SUPER, M, togglespecialworkspace, slack"
+          "SUPER, N, togglespecialworkspace, teams1"
+          "SUPER, B, togglespecialworkspace, teams2"
+          "SUPER, V, togglespecialworkspace, email"
+          "SUPER, C, togglespecialworkspace, code"
+          "SUPER, K, togglespecialworkspace, signal-desktop"
           (mvfocus "k" "u")
           (mvfocus "j" "d")
           (mvfocus "l" "r")
