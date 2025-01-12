@@ -19,7 +19,7 @@ in {
       # cli
       lftp
       cool-retro-term
-      zellij
+      tmux
       sops
       tree
       nmap
@@ -29,15 +29,13 @@ in {
       jq
       tree
       yq
-      just
       curl
       less
       wget
       lazygit
       btop
-      pass
       tree
-      azure-cli
+      yt-dlp
       # programming
       azure-cli
       pyright
