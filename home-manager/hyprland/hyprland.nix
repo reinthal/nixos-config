@@ -15,7 +15,20 @@ in {
     ++ [
       hyprland-contrib.scratchpad
     ];
-
+  #systemd.user.services."hyprctl-reload" = {
+  #  Unit = {
+  #    Description = "Reload Hyprland to fix sizing of borders after login.";
+  #    After = ["xdg-desktop-portal-hyprland.service" "graphical-session.target"];
+  #    Requires = ["xdg-desktop-portal-hyprland.service"];
+  #  };
+  #  Service = {
+  #    Type = "oneshot";
+  #    ExecStart = "${pkgs.bash}/bin/bash 'hyprctl-reload'";
+  # };
+  # Install = {
+  #   WantedBy = ["graphical-session.target"];
+  # };
+  #};
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -70,7 +83,7 @@ in {
         kb_options = [
           "grp:alt_space_toggle"
         ];
-        repeat_delay = 220;
+        repeat_delay = 200;
       };
       gestures = {
         workspace_swipe = true;
@@ -156,8 +169,7 @@ in {
       exec-once = [
         "start"
         "${pyprland}/bin/pypr --debug /tmp/pypr.log"
-        # Dont know why but the small border settings do not get loaded on first load of hyprctl 20250110
-        "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/hyprctl reload"
+        "hyprctl-reload"
       ];
 
       bindle = [

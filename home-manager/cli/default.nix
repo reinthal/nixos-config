@@ -19,7 +19,6 @@ in {
       # cli
       lftp
       cool-retro-term
-      tmux
       sops
       tree
       nmap
@@ -68,6 +67,10 @@ in {
   };
 
   programs = {
+    tmux = {
+      enable = true;
+      mouse = true;
+    };
     git = {
       enable = true;
       lfs.enable = true;
