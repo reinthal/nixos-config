@@ -4,6 +4,6 @@
     ./startup.nix
     ./switch-keys.nix
     ./toggle-scratchpad.nix
-    ./hyrpctl-reload.nix
+    ./hyprctl-reload.nix
   ];
 }
