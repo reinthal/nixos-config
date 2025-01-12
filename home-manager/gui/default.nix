@@ -28,6 +28,8 @@
       remmina
       evolution
       signal-desktop
+      mpv
+      mpvpaper
     ]
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify];
   xdg = {
