@@ -33,6 +33,7 @@ in {
       less
       wget
       lazygit
+      git-lfs
       btop
       tree
       yt-dlp
@@ -69,6 +70,7 @@ in {
   programs = {
     git = {
       enable = true;
+      lfs.enable = true;
       userEmail = "email@reinthal.me";
       userName = "Alexander Reinthal";
       signing = {
