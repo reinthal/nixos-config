@@ -15,20 +15,20 @@ in {
     ++ [
       hyprland-contrib.scratchpad
     ];
-  #systemd.user.services."hyprctl-reload" = {
-  #  Unit = {
-  #    Description = "Reload Hyprland to fix sizing of borders after login.";
-  #    After = ["xdg-desktop-portal-hyprland.service" "graphical-session.target"];
-  #    Requires = ["xdg-desktop-portal-hyprland.service"];
-  #  };
-  #  Service = {
-  #    Type = "oneshot";
-  #    ExecStart = "${pkgs.bash}/bin/bash 'hyprctl-reload'";
-  # };
-  # Install = {
-  #   WantedBy = ["graphical-session.target"];
-  # };
-  #};
+  systemd.user.services."hyprctl-reload" = {
+    Unit = {
+      Description = "Reload Hyprland to fix sizing of borders after login.";
+      After = ["xdg-desktop-portal-hyprland.service" "graphical-session.target"];
+      Requires = ["xdg-desktop-portal-hyprland.service"];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bash}/bin/bash 'hyprctl-reload'";
+   };
+   Install = {
+     WantedBy = ["graphical-session.target"];
+   };
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -169,7 +169,6 @@ in {
       exec-once = [
         "start"
         "${pyprland}/bin/pypr --debug /tmp/pypr.log"
-        "hyprctl-reload"
       ];
 
       bindle = [

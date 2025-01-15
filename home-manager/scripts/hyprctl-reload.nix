@@ -12,7 +12,10 @@
         AGS_RUNNING_INSTANCE=$(ps aux | grep agr-wrapped)
       done
       echo \"Ags is ready! Running hyprctl reload...\"
-      ${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/hyprctl reload
+      for i in {1..60}; do
+        ${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/hyprctl reload
+        sleep 1
+        done
     '';
 in {
   home.packages = [hyprctl-reload];
