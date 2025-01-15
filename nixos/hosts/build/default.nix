@@ -32,7 +32,7 @@
 
   home-manager = {
     backupFileExtension = "hm-bkp";
-    extraSpecialArgs = {inherit pkgs inputs outputs;};
+    extraSpecialArgs = {inherit pkgs inputs outputs; stateVersion = "24.11";};
     users = {
       kog = import ../../../home-manager;
     };
