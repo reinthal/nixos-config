@@ -10,6 +10,9 @@ in {
   ];
   sops = {
     secrets = {
+      "github/knowyourdata/.databrickscfg" = {
+        path = "${homeDirectory}/.databrickscfg";
+      };
       "mail/ekonomigruppen" = {
         path = "${homeDirectory}/.shhh/mail/ekonomigruppen";
       };
