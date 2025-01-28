@@ -18,6 +18,7 @@ in {
     packages = with pkgs; [
       # cli
       lftp
+      harlequin
       cool-retro-term
       sops
       tree
