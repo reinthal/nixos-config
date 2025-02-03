@@ -46,6 +46,7 @@ in {
       # data
       databricks-cli
       minio-client
+      databricks-cli
       # dev
       ruff
       # dev nix
