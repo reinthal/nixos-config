@@ -44,6 +44,7 @@ in {
       jordanVim
       nixd
       # data
+      databricks-cli
       minio-client
       # dev
       ruff
