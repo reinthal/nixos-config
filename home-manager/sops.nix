@@ -13,9 +13,6 @@ in {
       "github/knowyourdata/GITHUB_TOKEN" = {
         path = "${homeDirectory}/.shhh/github/knowyourdata/GITHUB_TOKEN";
       };
-      "github/knowyourdata/.databrickscfg" = {
-        path = "${homeDirectory}/.databrickscfg";
-      };
       "mail/ekonomigruppen" = {
         path = "${homeDirectory}/.shhh/mail/ekonomigruppen";
       };
