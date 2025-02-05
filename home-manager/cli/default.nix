@@ -17,6 +17,7 @@ in {
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
+      just
       lftp
       harlequin
       cool-retro-term
