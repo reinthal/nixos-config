@@ -16,7 +16,7 @@
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    jordanVim.url = "github:jordanisaacs/neovim-flake";
+    reinthalVim.url = "github:reinthal/neovim";
     #
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";

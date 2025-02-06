@@ -5,7 +5,7 @@
   ...
 }
 : let
-  jordanVim = inputs.jordanVim.packages.${pkgs.system}.maximal;
+  reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
 in {
   xdg = {
     configFile."distrobox/distrobox.conf".source = ./dotfiles/distrobox.conf;
@@ -42,7 +42,7 @@ in {
       azure-cli
       pyright
       devenv
-      jordanVim
+      reinthalVim
       nixd
       # data
       databricks-cli
