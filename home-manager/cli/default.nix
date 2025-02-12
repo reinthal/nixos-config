@@ -18,6 +18,7 @@ in {
     packages = with pkgs; [
       # cli
       just
+      dig
       lftp
       harlequin
       cool-retro-term
