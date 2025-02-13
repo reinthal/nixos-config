@@ -3637,11 +3637,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1738871466,
-        "narHash": "sha256-4ST2PQrWDK1mPllIWLQ8eKi20PQGb7cO1dwtChPLgWw=",
+        "lastModified": 1739433839,
+        "narHash": "sha256-1p4pK9NKAPIN495SHPfsZ/JoTQ6jq3l4PSgE+oB2DDg=",
         "owner": "reinthal",
         "repo": "neovim",
-        "rev": "2ccbab8a23271f3a2b5492f03ba213bcca5dfff4",
+        "rev": "2d864becd2141ed5d7ddc293bb9540fe1f2cc050",
         "type": "github"
       },
       "original": {
