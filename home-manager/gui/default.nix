@@ -22,6 +22,8 @@
   home.packages = with pkgs;
     [
       networkmanagerapplet
+      godot_4
+      aseprite
       zed-editor
       hyprshot
       keepassxc
