@@ -22,6 +22,7 @@
   home.packages = with pkgs;
     [
       networkmanagerapplet
+      qmmp
       godot_4
       aseprite
       zed-editor
