@@ -17,6 +17,7 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     reinthalVim.url = "github:reinthal/neovim";
+    reinthalVim.inputs.nixpkgs.follows = "nixpkgs";
     #
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
