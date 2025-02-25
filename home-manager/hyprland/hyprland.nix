@@ -7,6 +7,8 @@
   is_nvidia = builtins.currentSystem == "x86_64-linux";
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
   pyprland = inputs.pyprland.packages.${pkgs.system}.pyprland;
+  marble = inputs.marble.packages.${pkgs.system}.default;
+
 in {
   home.packages =
     lib.optionals is_nvidia [
@@ -14,6 +16,7 @@ in {
     ]
     ++ [
       hyprland-contrib.scratchpad
+      marble
     ];
   systemd.user.services."hyprctl-reload" = {
     Unit = {

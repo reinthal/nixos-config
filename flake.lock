@@ -19,6 +19,28 @@
         "type": "github"
       }
     },
+    "ags_2": {
+      "inputs": {
+        "astal": "astal_2",
+        "nixpkgs": [
+          "marble",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735485506,
+        "narHash": "sha256-7CWr3Q83KnGiLUn0oaboafLMOXQ0X9/fjFRVY1xopbM=",
+        "owner": "aylur",
+        "repo": "ags",
+        "rev": "251d39413543264361898b02035775aa3e46fe52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aylur",
+        "repo": "ags",
+        "type": "github"
+      }
+    },
     "apple-silicon": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -54,6 +76,28 @@
         "owner": "aylur",
         "repo": "astal",
         "rev": "127e9cdcbf173846a3c40ddc0abfbb038df48042",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aylur",
+        "repo": "astal",
+        "type": "github"
+      }
+    },
+    "astal_2": {
+      "inputs": {
+        "nixpkgs": [
+          "marble",
+          "ags",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735576092,
+        "narHash": "sha256-fxj82J3BHVaxUG1/umATdyeLq4xiw2DowJo3g3EeYl4=",
+        "owner": "aylur",
+        "repo": "astal",
+        "rev": "ce9ba0d07b44c52700fef44ea6c9cbad33c3fe44",
         "type": "github"
       },
       "original": {
@@ -241,6 +285,27 @@
       "original": {
         "owner": "hyprwm",
         "repo": "contrib",
+        "type": "github"
+      }
+    },
+    "marble": {
+      "inputs": {
+        "ags": "ags_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1740521917,
+        "narHash": "sha256-RUZJXkIQJ5IxoFo/YlprCX6ExXM8auyDi8HRfn6mhOs=",
+        "owner": "reinthal",
+        "repo": "shell",
+        "rev": "3b51e79095f964f234d821570d03ccf8413d337b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "reinthal",
+        "repo": "shell",
         "type": "github"
       }
     },
@@ -535,6 +600,7 @@
         "darwin": "darwin",
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
+        "marble": "marble",
         "nixpkgs": "nixpkgs_2",
         "pyprland": "pyprland",
         "reinthalVim": "reinthalVim",

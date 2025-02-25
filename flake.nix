@@ -11,10 +11,10 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #marble = {
-    #  url = "git+ssh://git@github.com/reinthal/shell.git?ref=main";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    marble = {
+      url = "github:reinthal/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     reinthalVim = {
       url = "github:reinthal/neovim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,9 +53,8 @@
     packages = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
-      #  marble = marble.packages.${system}.default;
       in
-        import ./pkgs {inherit pkgs; } #inherit marble;
+        import ./pkgs {inherit pkgs;}
     );
     nixosConfigurations = {
       seed = nixpkgs.lib.nixosSystem {
