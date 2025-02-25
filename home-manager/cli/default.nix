@@ -3,8 +3,9 @@
   inputs,
   stateVersion,
   ...
-}
-: {
+} : let
+reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
+in {
   xdg = {
     configFile."distrobox/distrobox.conf".source = ./dotfiles/distrobox.conf;
   };
@@ -22,6 +23,7 @@
       tree
       nmap
       tcpdump
+      reinthalVim
       ripgrep
       tldr
       jq
@@ -69,6 +71,10 @@
     tmux = {
       enable = true;
       mouse = true;
+    };
+    git-credential-oauth = {
+      enable = true;
+      
     };
     git = {
       enable = true;

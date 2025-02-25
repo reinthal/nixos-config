@@ -11,6 +11,14 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    #marble = {
+    #  url = "git+ssh://git@github.com/reinthal/shell.git?ref=main";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
+    reinthalVim = {
+      url = "github:reinthal/neovim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # called derivations that say how to build software.
     nixpkgs.url = "github:nixos/nixpkgs/3a228057f5b619feb3186e986dbe76278d707b6e";
     # Manages configs links things into your home directory
@@ -27,6 +35,7 @@
     nixpkgs,
     home-manager,
     darwin,
+   # marble,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -44,8 +53,9 @@
     packages = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
+      #  marble = marble.packages.${system}.default;
       in
-        import ./pkgs {inherit pkgs;}
+        import ./pkgs {inherit pkgs; } #inherit marble;
     );
     nixosConfigurations = {
       seed = nixpkgs.lib.nixosSystem {
