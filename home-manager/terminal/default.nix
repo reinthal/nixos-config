@@ -1,10 +1,10 @@
-{
+{pkgs, ...}: {
   programs = {
     kitty = {
       enable = true;
       themeFile = "Catppuccin-Frappe";
       font = {
-        name = "MonaspiceKr Nerd Font Propo";
+        name = "EnvyCodeR Nerd Font Propo";
         size = 12;
       };
     };
