@@ -2,11 +2,7 @@
   pkgs,
   lib,
   ...
-}: let
-  nerdFonts = [
-    pkgs.nerd-fonts
-  ];
-in {
+}: {
   # Set the console font
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -41,9 +37,7 @@ in {
     };
   };
   fonts.packages =
-    [
-      pkgs.nerd-fonts
-    ]
+    builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
     ++ builtins.attrValues {
       # Custom fonts from this repository (see pkgs/fonts)
       inherit (pkgs.local-pkgs.custom-fonts) material-icons feather-icons sf-pro monaspace;

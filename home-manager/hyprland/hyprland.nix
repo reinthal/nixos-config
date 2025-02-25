@@ -33,7 +33,6 @@ in {
     enable = true;
     xwayland.enable = true;
     systemd.variables = ["--all"];
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
     extraConfig = lib.concatStrings [
       ''

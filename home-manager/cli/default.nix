@@ -4,9 +4,7 @@
   stateVersion,
   ...
 }
-: let
-  reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
-in {
+: {
   xdg = {
     configFile."distrobox/distrobox.conf".source = ./dotfiles/distrobox.conf;
   };
@@ -20,8 +18,6 @@ in {
       just
       dig
       lftp
-      harlequin
-      cool-retro-term
       sops
       tree
       nmap
@@ -43,7 +39,6 @@ in {
       azure-cli
       pyright
       devenv
-      reinthalVim
       nixd
       # data
       databricks-cli
