@@ -44,8 +44,7 @@ in {
       iconTheme.package
       adwaita-icon-theme
       papirus-icon-theme
-      nerdfonts
-    ];
+    ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
     sessionVariables = {
       XCURSOR_THEME = cursorTheme.name;
       XCURSOR_SIZE = "${toString cursorTheme.size}";

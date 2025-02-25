@@ -23,13 +23,12 @@ in {
       cantarell-fonts
       font-awesome
       theme.package
-      font.package
+      nerd-fonts.ubuntu
       cursorTheme.package
       iconTheme.package
       adwaita-icon-theme
       papirus-icon-theme
-      nerdfonts
-    ];
+    ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
     sessionVariables = {
       XCURSOR_THEME = cursorTheme.name;
       XCURSOR_SIZE = "${toString cursorTheme.size}";

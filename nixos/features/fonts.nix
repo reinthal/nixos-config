@@ -40,13 +40,9 @@ in {
       lcdfilter = "default";
     };
   };
-
   fonts.packages =
     [
-      pkgs.nerd-fonts.fira-code
-      pkgs.nerd-fonts.noto-fonts
-      pkgs.nerd-fonts.powerline-fonts
-      pkgs.nerd-fonts.liberation_ttf
+      pkgs.nerd-fonts
     ]
     ++ builtins.attrValues {
       # Custom fonts from this repository (see pkgs/fonts)
