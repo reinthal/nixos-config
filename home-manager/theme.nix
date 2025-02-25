@@ -5,7 +5,7 @@
   };
   font = {
     name = "Ubuntu Nerd Font";
-    package = pkgs.nerdfonts;
+    package = pkgs.nerd-fonts.ubuntu;
     size = 11;
   };
   cursorTheme = {

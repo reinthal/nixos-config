@@ -4,7 +4,7 @@
   ...
 }: let
   nerdFonts = [
-    pkgs.nerdfonts
+    pkgs.nerd-fonts
   ];
 in {
   # Set the console font
@@ -43,19 +43,12 @@ in {
 
   fonts.packages =
     [
-      pkgs.nerdfonts
+      pkgs.nerd-fonts.fira-code
+      pkgs.nerd-fonts.noto-fonts
+      pkgs.nerd-fonts.powerline-fonts
+      pkgs.nerd-fonts.liberation_ttf
     ]
     ++ builtins.attrValues {
-      inherit
-        (pkgs)
-        fira-code
-        noto-fonts
-        open-fonts
-        powerline-fonts
-        liberation_ttf
-        iosevka
-        joypixels
-        ;
       # Custom fonts from this repository (see pkgs/fonts)
       inherit (pkgs.local-pkgs.custom-fonts) material-icons feather-icons sf-pro monaspace;
     };
