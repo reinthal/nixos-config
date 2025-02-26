@@ -8,7 +8,6 @@
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
   pyprland = inputs.pyprland.packages.${pkgs.system}.pyprland;
   marble = inputs.marble.packages.${pkgs.system}.default;
-
 in {
   home.packages =
     lib.optionals is_nvidia [
@@ -141,7 +140,6 @@ in {
         (f "Color Picker")
         (f "xdg-desktop-portal")
         (f "xdg-desktop-portal-gnome")
-        (f "com.github.Aylur.ags")
       ];
 
       animations = {
@@ -188,13 +186,12 @@ in {
         mvfocus = binding "SUPER" "movefocus";
         ws = binding "SUPER" "workspace";
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
-        e = "exec, ags -b hypr";
+        e = "exec, marble";
         arr = [1 2 3 4 5 6 7];
       in
         [
-          "SUPER, Tab, ${e} -t overview"
           "SUPER, Return, exec, kitty"
-          "SUPER, Space, ${e} -t launcher"
+          "SUPER, Space, exec, rofi -show drun"
           "SUPER, W, exec, firefox"
           # Pypr
           "SUPER, D, exec, pypr toggle term"
