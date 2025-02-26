@@ -3,8 +3,8 @@
   inputs,
   stateVersion,
   ...
-} : let
-reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
+}: let
+  reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
 in {
   xdg = {
     configFile."distrobox/distrobox.conf".source = ./dotfiles/distrobox.conf;
@@ -72,10 +72,7 @@ in {
       enable = true;
       mouse = true;
     };
-    git-credential-oauth = {
-      enable = true;
-      
-    };
+
     git = {
       enable = true;
       lfs.enable = true;
