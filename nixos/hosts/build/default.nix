@@ -11,7 +11,6 @@
     ../../common.nix
     ../../features/coms
     ../../features/nas.nix
-    ../../features/apps/ollama.nix
     ../../features/apps/podman.nix
     ../../features/desktop
     ../../features/sops.nix

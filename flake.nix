@@ -20,7 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # called derivations that say how to build software.
-    nixpkgs.url = "github:nixos/nixpkgs/3a228057f5b619feb3186e986dbe76278d707b6e";
+    nixpkgs.url = "github:nixos/nixpkgs/master"; #3a228057f5b619feb3186e986dbe76278d707b6e";
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +35,7 @@
     nixpkgs,
     home-manager,
     darwin,
-   # marble,
+    # marble,
     ...
   } @ inputs: let
     inherit (self) outputs;
