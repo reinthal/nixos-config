@@ -9,19 +9,29 @@
     ./kdeconnect.nix
   ];
   programs = {
-    firefox = {
+    chromium = {
       enable = true;
+      package = pkgs.ungoogled-chromium;
+      extensions = [
+        {id = "fihnjjcciajhdojfnbdddfaoknhalnja";} # i dont care about cookies
+        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
+        {id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";} # dark reader
+        {id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # sponsor block youtube
+        {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
+      ];
     };
 
     vscode = {
       enable = true;
       mutableExtensionsDir = true;
+      package = pkgs.vscodium;
     };
   };
 
   home.packages = with pkgs;
     [
       networkmanagerapplet
+      ladybird
       qmmp
       godot_4
       aseprite

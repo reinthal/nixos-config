@@ -18,10 +18,7 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    brave = prev.brave.override {
-      commandLineArgs = "--js-flags=--no-decommit-pooled-pages";
-    };
-    
+
     ags = prev.ags.overrideAttrs (oldAttrs: rec {
       buildInputs = oldAttrs.buildInputs ++ [pkgs.libdbusmenu-gtk3];
     });

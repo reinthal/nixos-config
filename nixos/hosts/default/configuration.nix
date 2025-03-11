@@ -1,20 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./../../modules/main-user.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./../../modules/main-user.nix
+    inputs.home-manager.nixosModules.default
+  ];
   main-user.enable = true;
   main-user.userName = "kog";
   home-manager = {
-    extraSpecialArgs = {inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "kog" = import ./home.nix;
     };
@@ -88,9 +90,8 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  
+
   # Install firefox.
-  programs.firefox.enable = true;
   programs.zsh.enable = true;
 
   # Allow unfree packages
@@ -99,8 +100,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

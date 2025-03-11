@@ -59,6 +59,9 @@ in {
         [
           # Hyprland/WAYLAND
           "GDK_SCALE,2"
+          # TODO 2025-03-01: https://discuss.cachyos.org/t/nautilus-stopped-working-overnight/3126/4
+          # something is broken on wayland+hyrpland
+          "GSK_RENDERER,ngl"
           "XCURSOR_SIZE,32"
           "GTK_THEME,Nord"
           "GDK_BACKEND,wayland,x11,*"
@@ -122,10 +125,10 @@ in {
         (map (i: f (toString i) "0") ws_monitor0) # half of the ws to monitor 0
         ++ (map (i: f (toString i) "1") ws_monitor1) # half of the ws to monitor 1
         ++ [
-          "special:slack, on-created-empty:brave --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS"
+          "special:slack, on-created-empty:chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS"
           "special:teams1, on-created-empty:teams-for-linux"
           "special:teams2, on-created-empty:flatpak run com.github.IsmaelMartinez.teams_for_linux"
-          "special:email, on-created-empty:brave --app=https://outlook.office.com"
+          "special:email, on-created-empty:chromium --app=https://outlook.office.com"
           "special:code, on-created-empty:code"
           "special:signal-desktop, on-created-empty:signal-desktop"
         ];
@@ -170,6 +173,7 @@ in {
         };
       };
       exec-once = [
+        "${pkgs.swww}/bin/swww-daemon"
         "start"
         "${pyprland}/bin/pypr --debug /tmp/pypr.log"
       ];
@@ -195,7 +199,7 @@ in {
         [
           "SUPER, Return, exec, kitty"
           "SUPER, Space, exec, rofi -show drun"
-          "SUPER, W, exec, firefox"
+          "SUPER, W, exec, chromium"
           # Pypr
           "SUPER, D, exec, pypr toggle term"
 
