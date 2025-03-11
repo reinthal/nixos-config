@@ -7,11 +7,11 @@
   reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
 in {
   xdg = {
-    configFile."distrobox/distrobox.conf".source = ./dotfiles/distrobox.conf;
+    configFile."distrobox/distrobox.conf".source = ../dotfiles/distrobox.conf;
   };
 
   home = {
-    file.".inputrc".source = ./dotfiles/.inputrc;
+    file.".inputrc".source = ../dotfiles/.inputrc;
     stateVersion = stateVersion;
     # specify my home-manager configs
     packages = with pkgs; [
