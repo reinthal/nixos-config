@@ -199,7 +199,7 @@ in {
         [
           "SUPER, Return, exec, kitty"
           "SUPER, Space, exec, rofi -show drun"
-          "SUPER, W, exec, chromium"
+          "SUPER, W, exec, zen"
           # Pypr
           "SUPER, D, exec, pypr toggle term"
 
