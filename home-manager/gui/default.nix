@@ -1,13 +1,13 @@
 {
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
     ./data-eng.nix
     ./ags.nix
     ./kdeconnect.nix
+    ./zen.nix
   ];
   programs = {
     chromium = {
@@ -31,7 +31,6 @@
 
   home.packages = with pkgs;
     [
-      inputs.cursor.packages.${pkgs.system}.default
       networkmanagerapplet
       ladybird
       qmmp

@@ -3,7 +3,7 @@
 
   inputs = {
     # Where we get most of our software. Giant mono repo with recipes
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    zen-browser.url = "github:reinthal/zen-browser-flake";
     cursor.url = "github:reinthal/cursor-flake";
     cursor.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
