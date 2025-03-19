@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -30,6 +31,7 @@
 
   home.packages = with pkgs;
     [
+      inputs.cursor.packages.${pkgs.system}.default
       networkmanagerapplet
       ladybird
       qmmp
