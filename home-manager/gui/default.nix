@@ -36,6 +36,7 @@
       qmmp
       godot_4
       aseprite
+      code-cursor
       zed-editor
       hyprshot
       keepassxc
