@@ -44,7 +44,7 @@
       telegram-desktop
       mpv
     ]
-    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify];
+    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
   xdg = {
     enable = true;
     #configFile."zed/settings.json".source = ./zed/settings.json;
