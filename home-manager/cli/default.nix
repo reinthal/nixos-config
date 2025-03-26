@@ -38,6 +38,7 @@ in {
       tree
       yt-dlp
       # programming
+      inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
       azure-cli
       pyright
       devenv

@@ -129,6 +129,7 @@ in {
           "special:teams1, on-created-empty:teams-for-linux"
           "special:teams2, on-created-empty:flatpak run com.github.IsmaelMartinez.teams_for_linux"
           "special:email, on-created-empty:chromium --app=https://outlook.office.com"
+          "special:llm, on-created-empty:claude-desktop"
           "special:code, on-created-empty:code"
           "special:signal-desktop, on-created-empty:signal-desktop"
         ];
@@ -223,6 +224,8 @@ in {
           "SUPER, V, togglespecialworkspace, email"
           "SUPER, C, togglespecialworkspace, code"
           "SUPER, K, togglespecialworkspace, signal-desktop"
+          "SUPER, J, togglespecialworkspace, llm"
+
           (mvfocus "k" "u")
           (mvfocus "j" "d")
           (mvfocus "l" "r")
