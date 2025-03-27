@@ -39,6 +39,8 @@ in {
       yt-dlp
       # programming
       inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
+      uv
+      nodejs
       azure-cli
       pyright
       devenv
