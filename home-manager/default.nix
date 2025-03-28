@@ -16,6 +16,7 @@
     ./hyprland
     ./theme.nix
     ./sops.nix
+    ./steam
     (import ./gui {inherit lib pkgs;})
   ];
 
