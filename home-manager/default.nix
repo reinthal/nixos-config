@@ -16,7 +16,8 @@
     ./hyprland
     ./theme.nix
     ./sops.nix
-    ./steam
+    # Conditionally import Steam based on architecture
+    ./conditional-steam.nix
     (import ./gui {inherit lib pkgs;})
   ];
 
