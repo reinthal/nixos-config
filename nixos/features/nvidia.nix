@@ -7,8 +7,17 @@
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      vaapiVdpau
+    ];
   };
-
+  # Add needed packages for graphics/gaming
+  environment.systemPackages = with pkgs; [
+    vulkan-tools
+    vulkan-loader
+    vulkan-validation-layers
+  ];
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11; # TODO: Pinned to 6.10 due to compatability issues
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
