@@ -59,6 +59,11 @@
         import ./pkgs {inherit pkgs;}
     );
     nixosConfigurations = {
+
+      workstation = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit nixpkgs self inputs outputs;};
+        modules = [./nixos/hosts/workstation];
+      };
       seed = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         modules = [./nixos/hosts/seed];
