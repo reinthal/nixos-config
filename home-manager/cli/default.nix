@@ -13,10 +13,7 @@ in {
 
   home = {
     file.".inputrc".source = ../dotfiles/.inputrc;
-    file.".gitconfig".text = ''
-      [credential]
-      helper = /home/kog/.nix-profile/bin/githubauth
-    '';
+
     stateVersion = stateVersion;
     # specify my home-manager configs
     packages = with pkgs; [
@@ -43,6 +40,7 @@ in {
       tree
       yt-dlp
       # programming
+      gh
       inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
       uv
       nodejs
