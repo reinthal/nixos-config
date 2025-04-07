@@ -1,17 +1,20 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, outputs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  outputs,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
     ../../features/coms
     ../../features/apps/podman.nix
     ../../features/desktop
-    ../../features/sops.nix 
+    ../../features/sops.nix
 
     ../../features/cli/devenvs/datalake-stack.nix
     ../../features/cli/default.nix
@@ -31,8 +34,12 @@
 
   boot.initrd.luks.devices."luks-0d811005-a4aa-4297-b870-89eb1fd778f7".device = "/dev/disk/by-uuid/0d811005-a4aa-4297-b870-89eb1fd778f7";
   networking.hostName = "workstation"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
+  # Add rtl8812au driver
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    rtl8812au
+  ];
+  # Load the module at boot
+  boot.kernelModules = ["8812au"];
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -49,6 +56,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    usbutils
     gnome-remote-desktop
     pinentry.curses
     droidcam
@@ -87,7 +95,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -95,9 +102,9 @@
   users.users.kog = {
     isNormalUser = true;
     description = "kog";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -114,5 +121,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
