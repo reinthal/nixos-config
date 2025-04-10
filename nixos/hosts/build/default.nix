@@ -16,7 +16,6 @@
     ../../features/sops.nix
     ../../features/nvidia.nix
 
-    ../../features/cli/devenvs/datalake-stack.nix
     ../../features/cli/default.nix
 
     # enable various features
