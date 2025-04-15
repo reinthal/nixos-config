@@ -79,6 +79,10 @@ in {
       mouse = true;
     };
 
+    gh = {
+      enable = true;
+      gitCredentialHelper.enable = true;
+    };
     git = {
       enable = true;
       lfs.enable = true;
