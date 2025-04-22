@@ -10,9 +10,6 @@ in {
   ];
   sops = {
     secrets = {
-      "github/knowyourdata/GITHUB_TOKEN" = {
-        path = "${homeDirectory}/.shhh/github/knowyourdata/GITHUB_TOKEN";
-      };
       "mail/ekonomigruppen" = {
         path = "${homeDirectory}/.shhh/mail/ekonomigruppen";
       };

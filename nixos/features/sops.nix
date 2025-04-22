@@ -9,10 +9,6 @@
 
   sops = {
     secrets = {
-      "github/knowyourdata/GITHUB_TOKEN" = {
-        owner = config.users.users.kog.name;
-      };
-
       nas = {
         owner = config.users.users.kog.name;
       };

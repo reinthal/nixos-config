@@ -1,9 +1,4 @@
-{config, ...}: let
-  token_path = "${config.sops.secrets."github/knowyourdata/GITHUB_TOKEN".path}";
-in {
+{config, ...}: {
   environment.sessionVariables = {
-    GITHUB_TOKEN = builtins.readFile token_path;
-    GITHUB_USER = "reinthal";
-    GITHUB_REPO = "knowyourdata";
   };
 }

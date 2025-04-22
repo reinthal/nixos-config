@@ -16,7 +16,6 @@
     ../../features/desktop
     ../../features/sops.nix
 
-    ../../features/cli/devenvs/datalake-stack.nix
     ../../features/cli/default.nix
 
     # enable various features
