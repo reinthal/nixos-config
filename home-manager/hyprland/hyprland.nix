@@ -125,11 +125,11 @@ in {
         (map (i: f (toString i) "0") ws_monitor0) # half of the ws to monitor 0
         ++ (map (i: f (toString i) "1") ws_monitor1) # half of the ws to monitor 1
         ++ [
+          "special:llm, on-created-empty:chromium --app=https://chat.platform.datadrivet.ai"
           "special:slack, on-created-empty:chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS"
           "special:teams1, on-created-empty:teams-for-linux"
           "special:teams2, on-created-empty:flatpak run com.github.IsmaelMartinez.teams_for_linux"
           "special:email, on-created-empty:chromium --app=https://outlook.office.com"
-          "special:llm, on-created-empty:claude-desktop"
           "special:code, on-created-empty:code"
           "special:signal-desktop, on-created-empty:signal-desktop"
         ];
