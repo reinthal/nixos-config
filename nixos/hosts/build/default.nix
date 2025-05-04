@@ -15,7 +15,7 @@
     ../../features/desktop
     ../../features/sops.nix
     ../../features/nvidia.nix
-
+    ../../features/steam
     ../../features/cli/default.nix
 
     # enable various features
