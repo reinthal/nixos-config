@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -32,6 +33,7 @@
   home.packages = with pkgs;
     [
       networkmanagerapplet
+      inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
       ladybird
       qmmp
       code-cursor

@@ -41,7 +41,7 @@ in {
       yt-dlp
       # programming
       gh
-      inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
+      
       uv
       nodejs
       azure-cli

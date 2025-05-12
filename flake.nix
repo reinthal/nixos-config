@@ -113,11 +113,14 @@
         home-manager.darwinModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "hm-bkp";
+            extraSpecialArgs = {
+              inherit nixpkgs inputs outputs;
+              stateVersion = "24.11";
+            };
             users.kog.imports = [
-              ./home-manager
+              ./home-manager/darwin.nix
             ];
           };
         }

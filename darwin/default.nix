@@ -3,21 +3,18 @@
     experimental-features = nix-command flakes
   '';
 
-  services.nix-daemon.enable = true;
   networking.hostName = "mbp";
   programs.zsh.enable = true;
 
   users.users.kog.home = "/Users/kog";
   environment = {
     shells = [pkgs.bash pkgs.zsh];
-    loginShell = pkgs.zsh;
     systemPath = ["/opt/homebrew/bin"];
     pathsToLink = ["/Applications"];
     systemPackages = [pkgs.coreutils];
   };
-  security.pam.enableSudoTouchIdAuth = true;
 
-  fonts.packages = [pkgs.nerd-fonts.meslo];
+  fonts.packages = [pkgs.nerd-fonts.meslo-lg];
 
   system = {
     keyboard = {
@@ -54,11 +51,11 @@
       "vlc"
       "postman"
       "macfuse"
-      "docker"
       "raycast"
       "amethyst"
       "visual-studio-code"
       "zed"
+      "yubico-authenticator"
     ];
 
     brews = [
@@ -73,6 +70,7 @@
     masApps = {
       "Wireguard" = 1451685025;
       "Remote Desktop" = 1295203466;
+      "Yubico Authenticator" = 1476679808;
     };
   };
 }
