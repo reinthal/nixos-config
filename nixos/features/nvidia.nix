@@ -18,7 +18,7 @@
     vulkan-loader
     vulkan-validation-layers
   ];
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11; # TODO: Pinned to 6.10 due to compatability issues
+  #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11; # TODO: Pinned to 6.10 due to compatability issues
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
   hardware.nvidia-container-toolkit.enable = true;
