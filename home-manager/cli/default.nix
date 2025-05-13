@@ -41,8 +41,6 @@ in {
       yt-dlp
       # programming
       gh
-      
-      uv
       nodejs
       azure-cli
       pyright
