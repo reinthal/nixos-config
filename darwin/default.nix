@@ -56,6 +56,7 @@
       "visual-studio-code"
       "zed"
       "chromium"
+      "cursor"
     ];
 
     brews = [
