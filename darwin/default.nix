@@ -56,6 +56,7 @@
       "visual-studio-code"
       "zed"
       "yubico-authenticator"
+      "chromium"
     ];
 
     brews = [
