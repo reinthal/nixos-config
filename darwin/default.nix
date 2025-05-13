@@ -55,7 +55,6 @@
       "amethyst"
       "visual-studio-code"
       "zed"
-      "yubico-authenticator"
       "chromium"
     ];
 
@@ -71,7 +70,6 @@
     masApps = {
       "Wireguard" = 1451685025;
       "Remote Desktop" = 1295203466;
-      "Yubico Authenticator" = 1476679808;
     };
   };
 }
