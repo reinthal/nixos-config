@@ -134,8 +134,8 @@ in {
           "special:signal-desktop, on-created-empty:signal-desktop"
         ];
 
-      windowrule = let
-        f = regex: "float, ^(${regex})$";
+      windowrulev2 = let
+        f = regex: "float,title:^(${regex})$";
       in [
         (f "org.gnome.Calculator")
         (f "org.gnome.Nautilus")

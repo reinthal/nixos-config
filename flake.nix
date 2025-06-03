@@ -22,13 +22,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # called derivations that say how to build software.
-    nixpkgs.url = "github:nixos/nixpkgs/master"; #3a228057f5b619feb3186e986dbe76278d707b6e";
+    nixpkgs.url = "github:NixOS/nixpkgs/25.05";
     # Manages configs links things into your home directory
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    ags.url = "github:Aylur/ags";
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -59,7 +62,6 @@
         import ./pkgs {inherit pkgs;}
     );
     nixosConfigurations = {
-
       workstation = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         modules = [./nixos/hosts/workstation];
