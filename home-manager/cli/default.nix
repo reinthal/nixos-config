@@ -18,7 +18,6 @@ in {
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
-      tailscale
       just
       dig
       lftp

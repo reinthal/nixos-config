@@ -32,6 +32,7 @@
   home.packages = with pkgs;
     [
       networkmanagerapplet
+      obs-studio
       ladybird
       qmmp
       code-cursor
