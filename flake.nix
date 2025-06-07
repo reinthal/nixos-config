@@ -1,8 +1,18 @@
 {
   description = "Alex config flake";
-
+nixConfig = {
+    substituters = [
+      "https://minio.nas.reinthal.me/nix-cache"
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "minio.nas.reinthal.me-1:snkldWl4cS1qcKxjNyHX+wTtOAv/hpT5SITsYlzKFUA="
+    ];
+  };
   inputs = {
-    # Where we get most of our software. Giant mono repo with recipes
     zen-browser.url = "github:reinthal/zen-browser-flake";
     sops-nix.url = "github:Mic92/sops-nix";
     pyprland.url = "github:hyprland-community/pyprland";
@@ -21,9 +31,7 @@
       url = "github:reinthal/neovim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # called derivations that say how to build software.
     nixpkgs.url = "github:NixOS/nixpkgs/25.05";
-    # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
@@ -40,7 +48,6 @@
     nixpkgs,
     home-manager,
     darwin,
-    # marble,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -53,8 +60,6 @@
     ];
   in rec
   {
-    # Your custom packages
-    # Acessible through 'nix build', 'nix shell', etc
     packages = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};

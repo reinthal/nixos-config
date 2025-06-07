@@ -10,8 +10,13 @@ in {
   ];
   sops = {
     secrets = {
+      "nix_cache/secret_key" = {
+        path = "${homeDirectory}/.config/nix/secret.key";
+        mode = "0400";
+      };
       "mail/ekonomigruppen" = {
         path = "${homeDirectory}/.shhh/mail/ekonomigruppen";
+        mode = "0400";
       };
     };
     defaultSopsFile = ../secrets/shhh.yaml;
