@@ -18,7 +18,6 @@ in {
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
-      just
       dig
       lftp
       sops
@@ -42,24 +41,16 @@ in {
       # programming
       gh
       nodejs
-      azure-cli
       pyright
       devenv
       nixd
       # data
-      databricks-cli
       minio-client
       # dev
       ruff
       # dev nix
       nixpkgs-fmt
       # devops
-      terraform
-      fluxcd
-      kubeseal
-      kustomize
-      kubeconform
-      kubectl
       k9s
     ];
 
