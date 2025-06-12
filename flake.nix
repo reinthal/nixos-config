@@ -1,6 +1,6 @@
 {
   description = "Alex config flake";
-nixConfig = {
+  nixConfig = {
     substituters = [
       "https://minio.nas.reinthal.me/nix-cache"
       "https://cache.nixos.org"
@@ -19,7 +19,10 @@ nixConfig = {
     pyprland.inputs.nixpkgs.follows = "nixpkgs";
     claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-master = {
+      url = "github:NixOS/nixpkgs/master";
+    };
+
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";

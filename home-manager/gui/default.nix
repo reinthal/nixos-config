@@ -35,7 +35,6 @@
       obs-studio
       ladybird
       qmmp
-      code-cursor
       zed-editor
       hyprshot
       keepassxc
@@ -45,7 +44,8 @@
       telegram-desktop
       mpv
     ]
-    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
+    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord]
+    ++ [pkgs.master.code-cursor];
   xdg = {
     enable = true;
     #configFile."zed/settings.json".source = ./zed/settings.json;

@@ -22,11 +22,13 @@
     ags = prev.ags.overrideAttrs (oldAttrs: rec {
       buildInputs = oldAttrs.buildInputs ++ [pkgs.libdbusmenu-gtk3];
     });
-
-    # Overlay code-cursor from nixpkgs master
-    code-cursor = inputs.nixpkgs-master.legacyPackages.${final.system}.code-cursor;
   };
-
+  master-packages = final: _prev: {
+    master = import inputs.nixpkgs-master {
+      system = final.system;
+      config.allowunfree = true;
+    };
+  };
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
   unstable-packages = final: _prev: {
