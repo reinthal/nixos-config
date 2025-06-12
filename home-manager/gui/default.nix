@@ -45,7 +45,7 @@
       mpv
     ]
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord]
-    ++ [pkgs.master.code-cursor];
+    ++ [pkgs.unstable.code-cursor];
   xdg = {
     enable = true;
     #configFile."zed/settings.json".source = ./zed/settings.json;

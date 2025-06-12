@@ -22,6 +22,7 @@
     nixpkgs-master = {
       url = "github:NixOS/nixpkgs/master";
     };
+    nixpkgs-unstable.url = "github:NixOs/nixpkgs/nixos-unstable";
 
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
