@@ -57,7 +57,7 @@ in {
         k9s
         kubectl
       ]
-      ++ [pkgs.unstable.opencode];
+      ++ [pkgs.unstable.opencode pkgs.unstable.claude-code];
 
     sessionVariables = {
       PAGER = "less";
