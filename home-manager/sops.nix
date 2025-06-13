@@ -10,6 +10,10 @@ in {
   ];
   sops = {
     secrets = {
+      "anthropic/api_key" = {
+        path = "${homeDirectory}/.config/Claude/api.key";
+        mode = "0400";
+      };
       "nix_cache/secret_key" = {
         path = "${homeDirectory}/.config/nix/secret.key";
         mode = "0400";

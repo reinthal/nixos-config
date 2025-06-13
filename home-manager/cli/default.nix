@@ -6,6 +6,8 @@
   ...
 }: let
   reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
+  configDirectory = config.xdg.configHome;
+  anthropicKey = "${configDirectory}/Claude/api.key";
 in {
   xdg = {
     configFile."distrobox/distrobox.conf".source = ../dotfiles/distrobox.conf;
@@ -16,49 +18,53 @@ in {
 
     stateVersion = stateVersion;
     # specify my home-manager configs
-    packages = with pkgs; [
-      # cli
-      dig
-      lftp
-      sops
-      tree
-      nmap
-      tcpdump
-      reinthalVim
-      ripgrep
-      tldr
-      jq
-      tree
-      yq
-      curl
-      less
-      wget
-      lazygit
-      git-lfs
-      btop
-      tree
-      yt-dlp
-      # programming
-      gh
-      nodejs
-      pyright
-      devenv
-      nixd
-      # data
-      minio-client
-      # dev
-      ruff
-      # dev nix
-      nixpkgs-fmt
-      # devops
-      k9s
-    ];
+    packages = with pkgs;
+      [
+        # cli
+        dig
+        lftp
+        sops
+        tree
+        nmap
+        tcpdump
+        reinthalVim
+        ripgrep
+        tldr
+        jq
+        tree
+        yq
+        curl
+        less
+        wget
+        lazygit
+        git-lfs
+        btop
+        tree
+        yt-dlp
+        # programming
+        gh
+        nodejs
+        pyright
+        devenv
+        nixd
+        # data
+        minio-client
+        # dev
+        ruff
+        # dev nix
+        nixpkgs-fmt
+        # devops
+        k9s
+        kubectl
+      ]
+      ++ [pkgs.unstable.opencode];
 
     sessionVariables = {
       PAGER = "less";
-      CLICLOLOR = 1;
+      CLICOLOR = 1;
       EDITOR = "nvim";
       KEYID = "1B24ADB218CFB40E";
+      ANTHROPIC_API_KEY = builtins.readFile anthropicKey;
     };
   };
 
