@@ -14,7 +14,6 @@
     ../../features/nvidia.nix
     ../../features/cli/default.nix
     ../../features/apps/jellyfin.nix
-    ../../features/apps/plex.nix
     ../../features/apps/qbittorrent.nix
     ../../features/apps/navidrome.nix
     inputs.home-manager.nixosModules.default

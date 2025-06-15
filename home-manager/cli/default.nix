@@ -11,6 +11,7 @@
 in {
   xdg = {
     configFile."distrobox/distrobox.conf".source = ../dotfiles/distrobox.conf;
+    configFile."opencode/.opencode.json".source = ../dotfiles/.opencode.json;
   };
 
   home = {
@@ -64,7 +65,7 @@ in {
       CLICOLOR = 1;
       EDITOR = "nvim";
       KEYID = "1B24ADB218CFB40E";
-      ANTHROPIC_API_KEY = builtins.readFile anthropicKey;
+      #      ANTHROPIC_API_KEY = builtins.readFile anthropicKey;
     };
   };
 
