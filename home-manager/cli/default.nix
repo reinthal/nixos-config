@@ -42,6 +42,7 @@ in {
         btop
         tree
         yt-dlp
+        svtplay-dl
         # programming
         gh
         nodejs
