@@ -16,6 +16,7 @@
     ../../features/apps/jellyfin.nix
     ../../features/apps/qbittorrent.nix
     ../../features/apps/navidrome.nix
+    ../../features/apps/pinchflat.nix
     inputs.home-manager.nixosModules.default
   ];
 
