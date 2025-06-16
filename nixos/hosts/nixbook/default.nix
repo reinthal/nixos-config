@@ -52,6 +52,7 @@
   };
 
   # backlight control
+  programs.nix-ld.enable = true;
   programs.light.enable = true;
   services = {
     pcscd.enable = true;
