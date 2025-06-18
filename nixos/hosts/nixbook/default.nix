@@ -21,7 +21,8 @@
     ../../features/daw.nix
     ../../features/cli
     (import ../../features/networking "nixbook")
-
+    # Services
+    ../../features/apps/ollama.nix
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix
