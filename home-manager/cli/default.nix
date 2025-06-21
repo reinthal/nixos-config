@@ -43,6 +43,7 @@ in {
         tree
         yt-dlp
         svtplay-dl
+        inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
         # programming
         gh
         nodejs
