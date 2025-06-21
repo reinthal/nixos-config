@@ -85,7 +85,7 @@
 
   programs.dconf.enable = true;
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [9090 8188 8080 1716 9047];
+  networking.firewall.allowedTCPPorts = [9090 8188 8080 1716 9047 10300];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
