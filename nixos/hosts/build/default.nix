@@ -72,6 +72,7 @@
   '';
 
   programs = {
+    nix-ld.enable = true;
     ssh.startAgent = false;
     gnupg.agent.enable = true;
     gnupg.agent.enableSSHSupport = true;
