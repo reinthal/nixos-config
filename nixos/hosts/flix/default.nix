@@ -17,12 +17,16 @@
     ../../features/apps/qbittorrent.nix
     ../../features/apps/navidrome.nix
     ../../features/apps/pinchflat.nix
+    ../../features/apps/whisper.nix
     inputs.home-manager.nixosModules.default
   ];
 
   home-manager = {
     backupFileExtension = "hm-bkp";
-    extraSpecialArgs = {inherit pkgs inputs outputs; stateVersion = "24.11";};
+    extraSpecialArgs = {
+      inherit pkgs inputs outputs;
+      stateVersion = "24.11";
+    };
     users = {
       kog = import ../../../home-manager/flix.nix;
     };

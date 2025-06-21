@@ -25,7 +25,7 @@ in {
       ];
       cmd = [
         "--model"
-        "tiny-int8"
+        "large-v3"
         "--language"
         "en"
         "--uri"
