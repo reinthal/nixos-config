@@ -26,9 +26,8 @@
 
       environment = {
         BASE_URL = "https://planka.reinthal.me";
-        DATABASE_URL = "postgresql://planka@postgres.reinthal.me:5432/planka";
-        DATABASE_PASSWORD__FILE = "/run/secrets/database_password";
-        SECRET_KEY__FILE = "/run/secrets/secret_key";
+        DATABASE_URL = "postgresql://planka:${builtins.readFile config.sops.secrets."planka/database_password".path}@postgres.reinthal.me:5432/planka";
+        SECRET_KEY = builtins.readFile config.sops.secrets."planka/secret_key".path;
         TRUST_PROXY = "true";
         DEFAULT_LANGUAGE = "en-US";
       };
@@ -38,8 +37,6 @@
         "/var/lib/planka/user-avatars:/app/public/user-avatars"
         "/var/lib/planka/background-images:/app/public/background-images"
         "/var/lib/planka/attachments:/app/private/attachments"
-        "${config.sops.secrets."planka/database_password".path}:/run/secrets/database_password:ro"
-        "${config.sops.secrets."planka/secret_key".path}:/run/secrets/secret_key:ro"
       ];
     };
   };
