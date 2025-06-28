@@ -44,7 +44,7 @@
     };
   };
 
-  sops = {
+  config.sops = {
     secrets = {
       "planka/secret_key" = {
         owner = config.users.users.kog.name;
