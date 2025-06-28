@@ -48,9 +48,11 @@
     secrets = {
       "planka/secret_key" = {
         owner = config.users.users.kog.name;
+        mode = "0440";
       };
       "planka/database_password" = {
         owner = config.users.users.kog.name;
+        mode = "0440";
       };
     };
   };
