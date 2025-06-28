@@ -26,7 +26,7 @@
 
       environment = {
         BASE_URL = "https://planka.reinthal.me";
-        DATABASE_URL = "postgresql://planka:$${DATABASE_PASSWORD}@postgres.reinthal.me:5432/planka";
+        DATABASE_URL = "postgresql://planka@postgres.reinthal.me:5432/planka";
         DATABASE_PASSWORD__FILE = "/run/secrets/database_password";
         SECRET_KEY__FILE = "/run/secrets/secret_key";
         TRUST_PROXY = "true";
