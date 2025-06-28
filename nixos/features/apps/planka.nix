@@ -25,7 +25,11 @@
       ];
 
       environment = {
-        BASE_URL = "https://planka.dmz.reinthal.me";
+        DEFAULT_ADMIN_EMAIL = "email@reinthal.me";
+        DEFAULT_ADMIN_PASSWORD = "${builtins.readFile config.sops.secrets."planka/database_password".path";
+        DEFAULT_ADMIN_NAME = "Alexander Reinthal";
+        DEFAULT_ADMIN_USERNAME = "reinthal";
+        BASE_URL = "https://todo.dmz.reinthal.me";
         DATABASE_URL = "postgresql://planka:${builtins.readFile config.sops.secrets."planka/database_password".path}@postgres.reinthal.me:5432/planka";
         SECRET_KEY = builtins.readFile config.sops.secrets."planka/secret_key".path;
         TRUST_PROXY = "true";
