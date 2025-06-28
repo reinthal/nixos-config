@@ -44,13 +44,14 @@
     };
   };
 
-  config.sops.secrets."planka/database_password" = {
-    sopsFile = ../../secrets/shhh.yaml;
-    format = "yaml";
-  };
-
-  config.sops.secrets."planka/secret_key" = {
-    sopsFile = ../../secrets/shhh.yaml;
-    format = "yaml";
+  sops = {
+    secrets = {
+      "planka/secret_key" = {
+        owner = config.users.users.kog.name;
+      };
+      "planka/database_password" = {
+        owner = config.users.users.kog.name;
+      };
+    };
   };
 }
