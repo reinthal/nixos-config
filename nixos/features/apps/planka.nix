@@ -25,7 +25,7 @@
       ];
 
       environment = {
-        BASE_URL = "https://planka.reinthal.me";
+        BASE_URL = "https://planka.dmz.reinthal.me";
         DATABASE_URL = "postgresql://planka:${builtins.readFile config.sops.secrets."planka/database_password".path}@postgres.reinthal.me:5432/planka";
         SECRET_KEY = builtins.readFile config.sops.secrets."planka/secret_key".path;
         TRUST_PROXY = "true";
