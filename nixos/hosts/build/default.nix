@@ -20,7 +20,6 @@
 
     # enable various features
     ../../features/sound.nix
-    ../../features/bluetooth.nix
     # key mappings
     # modules
     outputs.nixosModules.dual-function-keys

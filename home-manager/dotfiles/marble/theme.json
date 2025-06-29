@@ -22,7 +22,7 @@
   "padding": 9,
   "spacing": 9,
   "radius": 9,
-  "font": "0xProto Nerd Font 14",
+  "font": "Spleen 14",
   "hyprland.enable": true,
   "hyprland.inactiveBorder.dark": "#282828",
   "hyprland.inactiveBorder.light": "#181818",
