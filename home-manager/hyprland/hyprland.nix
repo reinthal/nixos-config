@@ -125,6 +125,7 @@ in {
         (map (i: f (toString i) "0") ws_monitor0) # half of the ws to monitor 0
         ++ (map (i: f (toString i) "1") ws_monitor1) # half of the ws to monitor 1
         ++ [
+          "special:tasks, on-created-empty:chromium --app=https://linear.app/reinthal/team/REI/active"
           "special:llm, on-created-empty:chromium --app=https://chat.platform.datadrivet.ai"
           "special:slack, on-created-empty:chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS"
           "special:teams1, on-created-empty:teams-for-linux"
@@ -225,6 +226,7 @@ in {
           "SUPER, C, togglespecialworkspace, code"
           "SUPER, K, togglespecialworkspace, signal-desktop"
           "SUPER, J, togglespecialworkspace, llm"
+          "SUPER, H, togglespecialworkspace, tasks"
 
           (mvfocus "k" "u")
           (mvfocus "j" "d")
