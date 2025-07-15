@@ -31,15 +31,12 @@
 
   home.packages = with pkgs;
     [
+      obsidian
       networkmanagerapplet
-      obs-studio
-      ladybird
-      qmmp
       zed-editor
       hyprshot
       keepassxc
       remmina
-      evolution
       signal-desktop
       telegram-desktop
       mpv
