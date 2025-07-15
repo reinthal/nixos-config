@@ -10,6 +10,10 @@ in {
   ];
   sops = {
     secrets = {
+      "github/knowyourdata/GITHUB_TOKEN" = {
+        path = "${homeDirectory}/.config/Claude/kyd_githubpat.token";
+        mode = "0400";
+      };
       "anthropic/api_key" = {
         path = "${homeDirectory}/.config/Claude/api.key";
         mode = "0400";
