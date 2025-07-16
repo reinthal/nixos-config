@@ -6,7 +6,6 @@
 }: let
   is_nvidia = builtins.currentSystem == "x86_64-linux";
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
-  pyprland = inputs.pyprland.packages.${pkgs.system}.pyprland;
   marble = inputs.marble.packages.${pkgs.system}.default;
 in {
   xdg = {
@@ -42,7 +41,6 @@ in {
     extraConfig = lib.concatStrings [
       ''
         monitor=eDP-1, 3456x2160, 0x0, 1.8
-        #monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-up,1.6
         monitor=HDMI-A-1, preferred,auto-right,1
 
         # Fix pixelated extra screen
@@ -101,6 +99,9 @@ in {
         layout = "dwindle";
         resize_on_border = true;
       };
+      dwindle = {
+        preserve_split = true;
+      };
       decoration = {
         rounding = 10;
         inactive_opacity = 0.70;
@@ -121,18 +122,20 @@ in {
         ws_monitor0 = [0 1 2 3];
         ws_monitor1 = [4 5 6 7];
         f = ws: monitor: "${ws}, monitor:${monitor}";
+        g = handle: cmd: "special:${handle}, on-created-empty:${cmd}";
       in
         (map (i: f (toString i) "0") ws_monitor0) # half of the ws to monitor 0
         ++ (map (i: f (toString i) "1") ws_monitor1) # half of the ws to monitor 1
         ++ [
-          "special:tasks, on-created-empty:chromium --app=https://linear.app/reinthal/team/REI/active"
-          "special:llm, on-created-empty:chromium --app=https://chat.platform.datadrivet.ai"
-          "special:slack, on-created-empty:chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS"
-          "special:teams1, on-created-empty:teams-for-linux"
-          "special:teams2, on-created-empty:flatpak run com.github.IsmaelMartinez.teams_for_linux"
-          "special:email, on-created-empty:chromium --app=https://outlook.office.com"
-          "special:code, on-created-empty:code"
-          "special:signal-desktop, on-created-empty:signal-desktop"
+          (g "tasks" "chromium --app=https://linear.app/reinthal/team/REI/active")
+          (g "llm" "claude-desktop")
+          (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
+          (g "teams1" "teams-for-linux")
+          (g "teams2" "flatpak run com.github.IsmaelMartinez.teams_for_linux")
+          (g "email" "chromium --app=https://outlook.office.com")
+          (g "codium" "codium")
+          (g "signal-desktop" "signal-desktop")
+          (g "obsidian" "obsidian")
         ];
 
       windowrulev2 = let
@@ -177,7 +180,6 @@ in {
       exec-once = [
         "${pkgs.swww}/bin/swww-daemon"
         "start"
-        "${pyprland}/bin/pypr --debug /tmp/pypr.log"
       ];
 
       bindle = [
@@ -192,18 +194,15 @@ in {
 
       bind = let
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
-        mvfocus = binding "SUPER" "movefocus";
+        mvfocus = binding "SUPER ALT" "movefocus";
         ws = binding "SUPER" "workspace";
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
-        e = "exec, marble";
         arr = [1 2 3 4 5 6 7];
       in
         [
           "SUPER, Return, exec, kitty"
           "SUPER, Space, exec, rofi -show drun"
           "SUPER, W, exec, zen"
-          # Pypr
-          "SUPER, D, exec, pypr toggle term"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"
@@ -218,12 +217,12 @@ in {
           "SUPER, P, togglesplit"
           "CTRL SUPER,Q,exec,swaylock"
           "CTRL SUPER, G, exec, gamemode"
-
+          "SUPER, O, togglespecialworkspace, obsidian"
           "SUPER, M, togglespecialworkspace, slack"
           "SUPER, N, togglespecialworkspace, teams1"
           "SUPER, B, togglespecialworkspace, teams2"
           "SUPER, V, togglespecialworkspace, email"
-          "SUPER, C, togglespecialworkspace, code"
+          "SUPER, C, togglespecialworkspace, codium"
           "SUPER, K, togglespecialworkspace, signal-desktop"
           "SUPER, J, togglespecialworkspace, llm"
           "SUPER, H, togglespecialworkspace, tasks"
