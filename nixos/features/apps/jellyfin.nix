@@ -12,7 +12,7 @@
     enable = true;
     environment = "production";
     package = pkgs.unstable.meilisearch;
-    masterKeyEnvironmentFile = config.sops.secrets."meilisearch/master_key".path;
+    masterKeyEnvironmentFile = /var/lib/meilisearch/auth;
   };
   services.jellyfin = {
     enable = true;
