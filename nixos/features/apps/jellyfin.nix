@@ -2,6 +2,7 @@
   services.meilisearch = {
     enable = true;
     environment = "production";
+    package = pkgs.unstable.meilisearch;
   };
   services.jellyfin = {
     enable = true;
