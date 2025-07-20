@@ -5,4 +5,5 @@
   # List your module files here
   dual-function-keys = import ./dual-function-keys.nix;
   v4l2-loopback = import ./v4l2-loopback.nix;
+  meilisearch = import ./meilisearch.nix;
 }
