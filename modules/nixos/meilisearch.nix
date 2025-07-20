@@ -1,5 +1,9 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   cfg = config.services.meilisearch;
   inherit (lib) mkEnableOption mkOption mkIf types;
 in {
@@ -15,7 +19,7 @@ in {
 
     listenAddress = mkOption {
       type = types.str;
-      default = "127.0.0.1";
+      default = "0.0.0.0";
       description = "The IP address to bind to.";
     };
 
@@ -26,7 +30,7 @@ in {
     };
 
     environment = mkOption {
-      type = types.enum [ "development" "production" ];
+      type = types.enum ["development" "production"];
       default = "development";
       description = "The environment in which to run Meilisearch.";
     };
@@ -44,7 +48,7 @@ in {
     };
 
     logLevel = mkOption {
-      type = types.enum [ "ERROR" "WARN" "INFO" "DEBUG" "TRACE" ];
+      type = types.enum ["ERROR" "WARN" "INFO" "DEBUG" "TRACE"];
       default = "INFO";
       description = "The log level for Meilisearch.";
     };
@@ -91,20 +95,24 @@ in {
 
     systemd.services.meilisearch = {
       description = "Meilisearch search engine";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
 
-      environment = {
-        MEILI_DB_PATH = cfg.dbPath;
-        MEILI_HTTP_ADDR = "${cfg.listenAddress}:${toString cfg.listenPort}";
-        MEILI_ENV = cfg.environment;
-        MEILI_LOG_LEVEL = cfg.logLevel;
-        MEILI_NO_ANALYTICS = lib.boolToString cfg.noAnalytics;
-      } // lib.optionalAttrs (cfg.maxIndexSize != null) {
-        MEILI_MAX_INDEX_SIZE = cfg.maxIndexSize;
-      } // lib.optionalAttrs (cfg.payloadSizeLimit != null) {
-        MEILI_HTTP_PAYLOAD_SIZE_LIMIT = cfg.payloadSizeLimit;
-      } // cfg.extraEnvironment;
+      environment =
+        {
+          MEILI_DB_PATH = cfg.dbPath;
+          MEILI_HTTP_ADDR = "${cfg.listenAddress}:${toString cfg.listenPort}";
+          MEILI_ENV = cfg.environment;
+          MEILI_LOG_LEVEL = cfg.logLevel;
+          MEILI_NO_ANALYTICS = lib.boolToString cfg.noAnalytics;
+        }
+        // lib.optionalAttrs (cfg.maxIndexSize != null) {
+          MEILI_MAX_INDEX_SIZE = cfg.maxIndexSize;
+        }
+        // lib.optionalAttrs (cfg.payloadSizeLimit != null) {
+          MEILI_HTTP_PAYLOAD_SIZE_LIMIT = cfg.payloadSizeLimit;
+        }
+        // cfg.extraEnvironment;
 
       serviceConfig = {
         Type = "simple";
@@ -113,7 +121,7 @@ in {
         ExecStart = "${cfg.package}/bin/meilisearch";
         Restart = "on-failure";
         RestartSec = 5;
-        
+
         # Security settings
         NoNewPrivileges = true;
         ProtectSystem = "strict";
@@ -126,7 +134,7 @@ in {
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
         ProtectControlGroups = true;
-        RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" ];
+        RestrictAddressFamilies = ["AF_UNIX" "AF_INET" "AF_INET6"];
         RestrictNamespaces = true;
         LockPersonality = true;
         MemoryDenyWriteExecute = true;
@@ -136,7 +144,7 @@ in {
         PrivateMounts = true;
 
         # Allow access to database directory
-        ReadWritePaths = [ cfg.dbPath ];
+        ReadWritePaths = [cfg.dbPath];
       };
 
       preStart = lib.optionalString (cfg.masterKeyFile != null) ''
@@ -144,6 +152,7 @@ in {
       '';
     };
 
-    networking.firewall.allowedTCPPorts = lib.mkIf (cfg.listenAddress != "127.0.0.1") [ cfg.listenPort ];
+    networking.firewall.allowedTCPPorts = lib.mkIf (cfg.listenAddress != "127.0.0.1") [cfg.listenPort];
   };
 }
+
