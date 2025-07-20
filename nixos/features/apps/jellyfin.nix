@@ -5,8 +5,6 @@
 }: {
   services.meilisearch = {
     enable = true;
-    environment = "production";
-    masterKeyEnvironmentFile = /var/lib/meilisearch/auth/master.key;
     package = pkgs.unstable.meilisearch;
   };
   services.jellyfin = {
