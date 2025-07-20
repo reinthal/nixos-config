@@ -9,6 +9,7 @@
 
   sops = {
     secrets = {
+      "meilisearch/master_key".neededForUsers = true;
       nas = {
         owner = config.users.users.kog.name;
       };
