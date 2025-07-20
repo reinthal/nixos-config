@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  services.meilisearch = {
+    enable = true;
+    environment = "production";
+  };
   services.jellyfin = {
     enable = true;
     openFirewall = true;
