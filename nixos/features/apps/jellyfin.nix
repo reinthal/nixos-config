@@ -12,7 +12,7 @@
     enable = true;
     environment = "production";
     package = pkgs.unstable.meilisearch;
-    masterKeyEnvironmentFile = /var/lib/meilisearch/auth;
+    masterKeyEnvironmentFile = /var/lib/meilisearch/auth/master.key;
   };
   services.jellyfin = {
     enable = true;
