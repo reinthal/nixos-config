@@ -17,7 +17,6 @@
     ../../features/apps/qbittorrent.nix
     ../../features/apps/navidrome.nix
     ../../features/apps/pinchflat.nix
-    ../../features/apps/planka.nix
     inputs.home-manager.nixosModules.default
   ];
 
