@@ -4,8 +4,8 @@
   ...
 }: {
   sops.secrets."meilisearch/master_key" = {
-    owner = "meilisearch";
-    group = "meilisearch";
+    owner = "65367";
+    group = "65367";
   };
 
   services.meilisearch = {
