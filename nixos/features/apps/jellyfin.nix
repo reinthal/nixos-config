@@ -7,7 +7,6 @@
     enable = true;
     openFirewall = true;
     user = "kog";
-    environment = "production";
   };
   environment.systemPackages = [
     pkgs.jellyfin
