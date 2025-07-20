@@ -3,16 +3,11 @@
   config,
   ...
 }: {
-  sops.secrets."meilisearch/master_key" = {
-    owner = "65367";
-    group = "65367";
-  };
-
   services.meilisearch = {
     enable = true;
     environment = "production";
     package = pkgs.unstable.meilisearch;
-    masterKeyEnvironmentFile = /var/lib/meilisearch/auth/master.key;
+    masterKeyEnvironmentFile = config.sops.secret."meilisearch/master_key".path;
   };
   services.jellyfin = {
     enable = true;
