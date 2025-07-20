@@ -18,7 +18,6 @@
     ../../features/apps/navidrome.nix
     ../../features/apps/pinchflat.nix
     inputs.home-manager.nixosModules.default
-    outputs.nixosModules.meilisearch
   ];
 
   home-manager = {

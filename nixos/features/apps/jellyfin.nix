@@ -10,9 +10,9 @@
 
   services.meilisearch = {
     enable = true;
-    environment = "production";
+    #environment = "production";
     package = pkgs.unstable.meilisearch;
-    masterKeyFile = config.sops.secrets."meilisearch/master_key".path;
+    #masterKeyEnvironmentFile = config.sops.secrets."meilisearch/master_key".path;
   };
   services.jellyfin = {
     enable = true;
