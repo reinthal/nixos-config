@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   sops.secrets."meilisearch/master_key" = {
     owner = "meilisearch";
     group = "meilisearch";
@@ -6,7 +10,7 @@
 
   services.meilisearch = {
     enable = true;
-    #    environment = "production";
+    environment = "production";
     package = pkgs.unstable.meilisearch;
     masterKeyFile = config.sops.secrets."meilisearch/master_key".path;
   };
