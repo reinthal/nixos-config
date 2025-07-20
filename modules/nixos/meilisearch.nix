@@ -8,7 +8,7 @@
   inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.services.meilisearch = {
-    enable = mkEnableOption "Meilisearch search engine";
+    enable = mkEnableOption "Powerful, fast, and an easy to use search engine";
 
     package = mkOption {
       type = types.package;
@@ -19,7 +19,7 @@ in {
 
     listenAddress = mkOption {
       type = types.str;
-      default = "0.0.0.0";
+      default = "127.0.0.1";
       description = "The IP address to bind to.";
     };
 
@@ -155,4 +155,3 @@ in {
     networking.firewall.allowedTCPPorts = lib.mkIf (cfg.listenAddress != "127.0.0.1") [cfg.listenPort];
   };
 }
-
