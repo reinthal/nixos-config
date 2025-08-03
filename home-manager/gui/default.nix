@@ -2,10 +2,16 @@
   lib,
   pkgs,
   ...
-}: {
+}: let 
+# Packages used for interacting with OS
+shell-packages = [ 
+
+]; in 
+
+{
   imports = [
     ./data-eng.nix
-    ./ags.nix
+    ./marble.nix
     ./kdeconnect.nix
     ./zen.nix
   ];

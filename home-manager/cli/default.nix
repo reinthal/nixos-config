@@ -23,6 +23,7 @@ in {
       [
         # cli
         ngrok
+        fd
         dig
         lftp
         sops

@@ -30,7 +30,7 @@
     };
     marble = {
       url = "github:reinthal/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     reinthalVim = {
       url = "github:reinthal/neovim";
@@ -38,13 +38,9 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
