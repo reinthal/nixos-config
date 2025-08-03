@@ -201,7 +201,7 @@ in {
       in
         [
           "SUPER, Return, exec, kitty"
-          "SUPER, Space, exec, rofi -show drun"
+          "SUPER, Space, exec, marble launcher"
           "SUPER, W, exec, zen"
 
           "SUPER, S, exec, scratchpad"
