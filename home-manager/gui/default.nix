@@ -4,9 +4,22 @@
   ...
 }: let 
 # Packages used for interacting with OS
-shell-packages = [ 
-
-]; in 
+shell-packages = with pkgs; [ 
+      hyprshot
+];
+desktop-apps = with pkgs;
+    [
+      obsidian
+      networkmanagerapplet
+      zed-editor
+      keepassxc
+      remmina
+      signal-desktop
+      telegram-desktop
+      mpv
+    ]
+    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
+ in 
 
 {
   imports = [
@@ -35,19 +48,7 @@ shell-packages = [
     };
   };
 
-  home.packages = with pkgs;
-    [
-      obsidian
-      networkmanagerapplet
-      zed-editor
-      hyprshot
-      keepassxc
-      remmina
-      signal-desktop
-      telegram-desktop
-      mpv
-    ]
-    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
+  home.packages = desktop-apps;
   xdg = {
     enable = true;
     #configFile."zed/settings.json".source = ./zed/settings.json;

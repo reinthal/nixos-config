@@ -22,8 +22,5 @@ shell-dependencies = with pkgs; [
     gtk3
   ];
 in {
-  xdg = {
-    configFile."marble/theme.json".source = ../dotfiles/marble/theme.json;
-  };
   home.packages = [marble] ++ shell-dependencies;
 }
