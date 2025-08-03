@@ -29,7 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     marble = {
-      url = "github:reinthal/shell";
+      url = "github:marble-shell/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     reinthalVim = {

@@ -63,6 +63,7 @@
     tailscale.enable = true;
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
+    meilisearch.enable = false;
   };
   environment.shellInit = ''
     export GPG_TTY="$(tty)"
