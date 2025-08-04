@@ -41,7 +41,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+    apple-silicon.url = "github:nix-community/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = {
