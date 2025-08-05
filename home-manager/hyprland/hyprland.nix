@@ -8,9 +8,6 @@
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
   marble = inputs.marble.packages.${pkgs.system}.default;
 in {
-  xdg = {
-    configFile."marble/theme.json".source = ../dotfiles/marble/theme.json;
-  };
   home.packages =
     lib.optionals is_nvidia [
       pkgs.egl-wayland
