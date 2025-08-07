@@ -131,13 +131,14 @@ in {
           (g "teams2" "flatpak run com.github.IsmaelMartinez.teams_for_linux")
           (g "email" "chromium --app=https://outlook.office.com")
           (g "codium" "codium")
-          (g "signal-desktop" "signal-desktop")
+          (g "signal-desktop" "signal-desktop --password-store=gnome-libsecret")
           (g "obsidian" "obsidian")
         ];
 
-      windowrulev2 = let
+      windowrule = let
         f = regex: "float,title:^(${regex})$";
       in [
+        "float,title:.*Bitwarden.*"
         (f "org.gnome.Calculator")
         (f "org.gnome.Nautilus")
         (f "pavucontrol")
