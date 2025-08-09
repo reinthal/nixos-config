@@ -7,7 +7,7 @@
   config.virtualisation.oci-containers.containers = {
     navidrome = {
       image = "deluan/navidrome:latest";
-
+      user = "1000:1000";
       extraOptions = [
         "--hostname"
         "flix"
