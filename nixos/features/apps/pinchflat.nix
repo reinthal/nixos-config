@@ -7,7 +7,7 @@
   config.virtualisation.oci-containers.containers = {
     pinchflat = {
       image = "ghcr.io/kieraneglin/pinchflat:latest";
-
+      user = "1000:1000";
       extraOptions = [
         "--hostname"
         "flix"
@@ -19,8 +19,6 @@
 
       environment = {
         TZ = "Europe/Stockholm";
-        PUID = "1000";
-        PGID = "1000";
       };
 
       volumes = [
@@ -30,4 +28,3 @@
     };
   };
 }
-
