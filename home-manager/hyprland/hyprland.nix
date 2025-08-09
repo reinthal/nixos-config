@@ -15,7 +15,8 @@ in {
     ++ [
       hyprland-contrib.scratchpad
       marble
-    ];
+    ]
+    ++ (with pkgs; [hyprshot]);
   systemd.user.services."hyprctl-reload" = {
     Unit = {
       Description = "Reload Hyprland to fix sizing of borders after login.";
