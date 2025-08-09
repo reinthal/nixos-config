@@ -20,7 +20,7 @@
       environment = {
         TZ = "Europe/Stockholm";
         PUID = "1000";
-        PGID = "100";
+        PGID = "1000";
       };
 
       volumes = [
@@ -30,3 +30,4 @@
     };
   };
 }
+

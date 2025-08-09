@@ -19,7 +19,7 @@
 
       environment = {
         PUID = "1000";
-        PGID = "100";
+        PGID = "1000";
         ND_SCANINTERVAL = "1h";
         ND_LOGLEVEL = "info";
         ND_ENABLESHARING = "true";
