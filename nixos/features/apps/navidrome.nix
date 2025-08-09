@@ -29,7 +29,7 @@
 
       volumes = [
         "/home/kog/.navidrome:/data" # Navidrome configuration and database
-        "/mnt/media/media/music:/music:ro" # Music directory (read-only)
+        "/mnt/media/media/music:/music" # Music directory (read-only)
       ];
     };
   };
