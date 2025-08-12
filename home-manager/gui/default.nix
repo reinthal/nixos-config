@@ -2,26 +2,23 @@
   lib,
   pkgs,
   ...
-}: let 
-# Packages used for interacting with OS
-shell-packages = with pkgs; [ 
-      hyprshot
-];
-desktop-apps = with pkgs;
+}: let
+  # Packages used for interacting with OS
+  shell-packages = with pkgs; [
+    hyprshot
+  ];
+  desktop-apps = with pkgs;
     [
       obsidian
       networkmanagerapplet
       zed-editor
       keepassxc
       remmina
-      signal-desktop
       telegram-desktop
       mpv
     ]
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
- in 
-
-{
+in {
   imports = [
     ./data-eng.nix
     ./marble.nix

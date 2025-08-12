@@ -63,7 +63,7 @@ in {
         kubectl
       ]
       ++ [
-        pkgs.unstable.opencode
+        pkgs.unstable.signal-desktop
         pkgs.unstable.claude-code
         pkgs.unstable.mcp-proxy
       ];
