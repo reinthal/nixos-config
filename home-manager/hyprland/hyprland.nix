@@ -38,7 +38,7 @@ in {
 
     extraConfig = lib.concatStrings [
       ''
-        monitor=eDP-1, 3456x2160, 0x0, 1.8
+        monitor=eDP-1, preferred, 0x0,2
         monitor=HDMI-A-1, preferred,auto-right,1
 
         # Fix pixelated extra screen
@@ -103,7 +103,7 @@ in {
       decoration = {
         rounding = 10;
         inactive_opacity = 0.70;
-        active_opacity = 1.00;
+        active_opacity = 1;
         dim_inactive = false;
         blur = {
           enabled = true;
