@@ -50,7 +50,6 @@ in {
         gh
         nodejs
         pyright
-        devenv
         nixd
         # data
         minio-client
@@ -66,6 +65,7 @@ in {
         pkgs.unstable.signal-desktop
         pkgs.unstable.claude-code
         pkgs.unstable.mcp-proxy
+        pkgs.unstable.devenv
       ];
 
     sessionVariables = {
