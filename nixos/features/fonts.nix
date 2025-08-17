@@ -57,5 +57,5 @@
       # Custom fonts from this repository (see pkgs/fonts)
       inherit (pkgs.local-pkgs.custom-fonts) material-icons feather-icons sf-pro monaspace;
     }
-    ++ [pkgs.spleen];
+    ++ [pkgs.spleen pkgs.inter];
 }
