@@ -24,6 +24,7 @@
       volumes = [
         "/home/kog/.pinchflat:/config" # Pinchflat configuration
         "/mnt/media/media/youtube:/downloads" # YouTube downloads directory
+        "/home/kog/.config/yt-dlp.txt:/config/extras/cookies.txt:ro" # yt-dlp cookies
       ];
     };
   };

@@ -30,6 +30,10 @@ in {
         path = "${homeDirectory}/.shhh/mail/ekonomigruppen";
         mode = "0400";
       };
+      "yt-dlp" = {
+        path = "${homeDirectory}/.config/yt-dlp.txt";
+        mode = "0400";
+      };
     };
     defaultSopsFile = ../secrets/shhh.yaml;
     age = {
