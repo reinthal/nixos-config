@@ -30,6 +30,7 @@ in {
       enable = true;
       package = pkgs.ungoogled-chromium;
       extensions = [
+        {id = "cclelndahbckbenkjhflpdbgdldlbecc";} # Get cookies.txt LOCALLY
         {id = "fihnjjcciajhdojfnbdddfaoknhalnja";} # i dont care about cookies
         {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
         {id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";} # dark reader
