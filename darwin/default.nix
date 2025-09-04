@@ -1,11 +1,14 @@
 {pkgs, ...}: {
   nix.extraOptions = ''
     experimental-features = nix-command flakes
+    extra-substituters = https://devenv.cachix.org
+    extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
   '';
 
   networking.hostName = "mbp";
   programs.zsh.enable = true;
-
+  system.primaryUser = "kog";
+  ids.gids.nixbld = 350;
   users.users.kog.home = "/Users/kog";
   environment = {
     shells = [pkgs.bash pkgs.zsh];
@@ -49,12 +52,11 @@
     casks = [
       "signal"
       "vlc"
-      "postman"
       "macfuse"
       "raycast"
-      "amethyst"
       "visual-studio-code"
       "zed"
+      "docker"
       "chromium"
     ];
 

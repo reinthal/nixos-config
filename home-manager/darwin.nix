@@ -7,7 +7,7 @@
 }: {
   imports = [
     ./gpg
-    ./cli
+    ./cli/darwin.nix
     ./terminal
   ];
 
