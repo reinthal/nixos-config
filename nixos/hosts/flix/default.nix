@@ -48,7 +48,10 @@
       10.22.21.10 nas.reinthal.me
     '';
     networkmanager.enable = true;
-    firewall.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [2283];
+    };
   };
   nixpkgs.config.allowUnfree = true;
 
@@ -56,11 +59,7 @@
     pinentry.curses
   ];
   programs.zsh.enable = true;
-
   time.timeZone = "Europe/Stockholm";
-
-  networking.firewall.allowedTCPPorts = [];
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
