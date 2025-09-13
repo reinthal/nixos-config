@@ -20,7 +20,11 @@
     ../../features/apps/pinchflat.nix
     inputs.home-manager.nixosModules.default
   ];
-
+  fileSystems."/mnt/photos" = {
+    device = "nas.reinthal.me:/mnt/tonberry/photos";
+    fsType = "nfs";
+    options = ["noauto" "x-systemd.automount" "x-systemd.device-timeout=30"];
+  };
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
