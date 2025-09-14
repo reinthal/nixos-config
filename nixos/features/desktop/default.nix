@@ -51,7 +51,7 @@
     # Wayland /  Hyprland
     libnotify
     wl-gammactl
-    rofi-wayland
+    rofi
     gnome-boxes
     gnome-text-editor # webcam tool
     gnome-clocks
