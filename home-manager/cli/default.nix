@@ -74,7 +74,7 @@ in {
       CLICOLOR = 1;
       EDITOR = "nvim";
       KEYID = "1B24ADB218CFB40E";
-      ANTHROPIC_API_KEY = builtins.readFile anthropicKey;
+      # ANTHROPIC_API_KEY = builtins.readFile anthropicKey;
     };
   };
 

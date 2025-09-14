@@ -18,11 +18,8 @@
     ../../features/desktop
     ../../features/sops.nix
     ../../features/nas.nix
-    ../../features/daw.nix
     ../../features/cli
     (import ../../features/networking "nixbook")
-    # Services
-    ../../features/apps/ollama.nix
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix
@@ -45,10 +42,8 @@
     allowedTCPPorts = [1716];
   };
 
-  # enable GPU support and audio
+  # enable audio
   hardware.asahi = {
-    useExperimentalGPUDriver = true;
-    experimentalGPUInstallMode = "replace";
     setupAsahiSound = true;
   };
 
@@ -72,12 +67,7 @@
         }
       ];
     };
-    zerotierone = {
-      enable = true;
-      joinNetworks = [
-        "e4da7455b22e6a55"
-      ];
-    };
+
     tailscale.enable = true;
   };
   environment.shellInit = ''
@@ -100,14 +90,12 @@
   };
 
   time.timeZone = "Europe/Stockholm";
-  # add the following line somewhere in `config#uration.nix`
-  # for example, in between locales and audio sections
 
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
-      stateVersion = "24.11";
+      stateVersion = "25.05";
     };
     users = {
       kog = import ../../../home-manager;
@@ -117,5 +105,5 @@
   environment.systemPackages = with pkgs; [
     pinentry.curses
   ];
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.11";
 }
