@@ -44,6 +44,7 @@
 
   # enable audio
   hardware.asahi = {
+    peripheralFirmwareDirectory = ./firmware;
     setupAsahiSound = true;
   };
 
