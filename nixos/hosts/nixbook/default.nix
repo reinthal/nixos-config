@@ -42,10 +42,18 @@
     allowedTCPPorts = [1716];
   };
 
-  # enable audio
-  hardware.asahi = {
+  hardware = {
+    asahi = {
     peripheralFirmwareDirectory = ./firmware;
     setupAsahiSound = true;
+   };
+   graphics = {
+    enable =true;
+    extraPackages = with pkgs; [
+      libGL
+      mesa
+    ];
+    };
   };
 
   # backlight control
