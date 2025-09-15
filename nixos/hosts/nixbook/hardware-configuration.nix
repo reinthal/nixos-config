@@ -12,27 +12,35 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["usb_storage" "usbhid" "sdhci_pci"];
-  boot.initrd.luks.devices."encrypted".device = "/dev/disk/by-uuid/4314646b-8590-42d1-a1c9-708d1c4ae9ae"; 
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd = {
+    systemd.enable = true;
+    availableKernelModules = ["usb_storage" "usbhid" "sdhci_pci"];
+    kernelModules = ["dm-snapshot"];
+    luks = {
+      devices."encrypted" = {
+        device = "/dev/disk/by-uuid/4314646b-8590-42d1-a1c9-708d1c4ae9ae";
+        crypttabExtraOpts = ["fido2-device=auto"];
+      };
+    };
+  };
   boot.kernelParams = ["apple_dcp.show_notch=1"];
   boot.m1n1CustomLogo = "${pkgs.nixos-icons}/share/icons/hicolor/256x256/apps/nix-snowflake.png";
   boot.kernelModules = [];
   boot.extraModulePackages = [];
 
-  fileSystems."/" =
-    { device = "/dev/mapper/vg-nixos";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/mapper/vg-nixos";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F07D-1E13";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/F07D-1E13";
+    fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
 
-  swapDevices =
-  [ { device = "/dev/mapper/vg-swap"; }
+  swapDevices = [
+    {device = "/dev/mapper/vg-swap";}
   ];
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
