@@ -1,5 +1,9 @@
 hostname: {
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.wlan0.disable_ipv6" = 1;
+  };
   networking = {
+    enableIPv6 = false;
     hostName = hostname;
     firewall.checkReversePath = false;
     networkmanager = {
@@ -16,4 +20,3 @@ hostname: {
     };
   };
 }
-
