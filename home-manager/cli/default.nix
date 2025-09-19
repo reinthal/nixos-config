@@ -22,6 +22,7 @@ in {
     packages = with pkgs;
       [
         # cli
+        wireguard-tools
         uv
         ngrok
         fd
@@ -50,12 +51,9 @@ in {
         # programming
         gh
         nodejs
-        pyright
         nixd
         # data
         minio-client
-        # dev
-        ruff
         # dev nix
         nixpkgs-fmt
         # devops

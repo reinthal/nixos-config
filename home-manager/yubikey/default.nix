@@ -2,10 +2,10 @@
 : {
   home = {
     packages = with pkgs; [
-      yubikey-personalization
-      yubico-piv-tool
-      yubioath-flutter
-      pam_u2f
+      unstable.yubikey-personalization
+      unstable.yubico-piv-tool
+      unstable.yubioath-flutter
+      unstable.pam_u2f
     ];
   };
 }

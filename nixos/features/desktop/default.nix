@@ -4,12 +4,10 @@
   ...
 }: {
   services = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     flatpak.enable = true;
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-    };
+    xserver.enable = true;
   };
 
   programs.hyprland = {
