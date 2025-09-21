@@ -9,9 +9,9 @@
   ];
   desktop-apps = with pkgs;
     [
+      anki
       obsidian
       networkmanagerapplet
-      zed-editor
       keepassxc
       remmina
       telegram-desktop
