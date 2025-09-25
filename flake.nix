@@ -13,7 +13,6 @@
     ];
   };
   inputs = {
-    nix-firefox-addons.url = "github:osipog/nix-firefox-addons";
     zen-browser.url = "github:reinthal/zen-browser-flake";
     sops-nix.url = "github:Mic92/sops-nix";
     pyprland.url = "github:hyprland-community/pyprland";
@@ -68,6 +67,7 @@
       in
         import ./pkgs {inherit pkgs;}
     );
+
     nixosConfigurations = {
       workstation = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
@@ -102,7 +102,8 @@
     overlays = let
       pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
     in
-      import ./overlays {inherit pkgs inputs;};
+      import ./overlays {inherit pkgs inputs;} // {
+      };
 
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs

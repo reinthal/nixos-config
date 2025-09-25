@@ -12,12 +12,9 @@
         search.default = "ddg";
         search.privateDefault = "ddg";
         containersForce = true;
-
-        extensions = {
-          force = true;
-          packages = with pkgs.firefoxAddons; [
-            ublock-origin
-          ];
+        # optional: without this the addons need to be enabled manually after first install
+        settings = {
+          "extensions.autoDisableScopes" = 0;
         };
 
         containers = {

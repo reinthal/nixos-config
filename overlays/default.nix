@@ -37,5 +37,4 @@
       config.allowUnfree = true;
     };
   };
-  pkgs.overlays = [inputs.nix-firefox-addons.overlays.default];
 }
