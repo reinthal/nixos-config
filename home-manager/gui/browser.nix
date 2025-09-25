@@ -11,6 +11,15 @@
         name = "default";
         search.default = "ddg";
         search.privateDefault = "ddg";
+        containersForce = true;
+
+        extensions = {
+          force = true;
+          packages = with pkgs.nur.repos.rycee.firefox-addons; [
+            privacy-badger
+          ];
+        };
+
         containers = {
             liu = {
               id = 1;
