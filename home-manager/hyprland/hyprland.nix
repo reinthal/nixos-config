@@ -198,7 +198,7 @@ in {
         [
           "SUPER, Return, exec, kitty"
           "SUPER, Space, exec, marble launcher"
-          "SUPER, W, exec, zen"
+          "SUPER, W, exec, firefox"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"

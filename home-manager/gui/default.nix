@@ -20,10 +20,9 @@
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
 in {
   imports = [
-    ./data-eng.nix
     ./marble.nix
     ./kdeconnect.nix
-    ./zen.nix
+    ./browser.nix
   ];
   programs = {
     chromium = {

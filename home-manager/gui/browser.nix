@@ -5,10 +5,10 @@
 }: {
   # Module installing brave as default browser
   home.packages = [
-    inputs.zen-browser.packages."${pkgs.system}".default
+    firefox
   ];
 
   home.sessionVariables = {
-    DEFAULT_BROWSER = "zen";
+    DEFAULT_BROWSER = "firefox";
   };
 }
