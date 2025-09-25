@@ -13,6 +13,7 @@
     ];
   };
   inputs = {
+    nix-firefox-addons.url = "github:osipog/nix-firefox-addons";
     zen-browser.url = "github:reinthal/zen-browser-flake";
     sops-nix.url = "github:Mic92/sops-nix";
     pyprland.url = "github:hyprland-community/pyprland";
