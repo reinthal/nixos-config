@@ -23,6 +23,7 @@ in {
       [
         # cli
         wireguard-tools
+        bitwarden-cli
         uv
         ngrok
         fd
