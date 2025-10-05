@@ -19,6 +19,7 @@
     ../../features/sops.nix
     ../../features/nas.nix
     ../../features/cli
+    ../../features/apps/syncthing.nix
     (import ../../features/networking "nixbook")
     # enable various features
     ../../features/sound.nix
@@ -44,15 +45,15 @@
 
   hardware = {
     asahi = {
-    peripheralFirmwareDirectory = ./firmware;
-    setupAsahiSound = true;
-   };
-   graphics = {
-    enable =true;
-    extraPackages = with pkgs; [
-      libGL
-      mesa
-    ];
+      peripheralFirmwareDirectory = ./firmware;
+      setupAsahiSound = true;
+    };
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        libGL
+        mesa
+      ];
     };
   };
 
