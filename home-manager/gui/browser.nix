@@ -18,28 +18,34 @@
         };
 
         containers = {
-            liu = {
-              id = 1;
-              name = "liu";
-              icon =  "briefcase";  
-              color = "blue";
-            };
+          liu = {
+            id = 1;
+            name = "liu";
+            icon = "briefcase";
+            color = "blue";
+          };
 
-            umu = {
-              id = 2;
-              name = "umu";
-              icon = "cart";
-              color = "turquoise";
-            };
+          umu = {
+            id = 2;
+            name = "umu";
+            icon = "cart";
+            color = "turquoise";
+          };
 
-            aisafety = {
-              name = "ai-safety";
-              id = 3;
-              icon = "fruit";
-              color = "green";
-            };
+          aisafety = {
+            name = "ai-safety";
+            id = 3;
+            icon = "fruit";
+            color = "green";
+          };
+          oro = {
+            name = "oro";
+            id = 4;
+            icon = "dollar";
+            color = "red";
           };
         };
+      };
     };
   };
 
