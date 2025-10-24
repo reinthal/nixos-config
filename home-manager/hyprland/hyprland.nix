@@ -99,9 +99,9 @@ in {
       };
       decoration = {
         rounding = 10;
-        inactive_opacity = 0.70;
+        inactive_opacity = 1;
         active_opacity = 1;
-        dim_inactive = false;
+        dim_inactive = true;
         blur = {
           enabled = true;
           size = 8;

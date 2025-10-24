@@ -10,7 +10,6 @@
     ./cli
     ./email
     ./terminal
-    ./gamedev
     ./yubikey
     ./scripts
     ./hyprland
