@@ -101,7 +101,7 @@ in {
         rounding = 10;
         inactive_opacity = 1;
         active_opacity = 1;
-        dim_inactive = true;
+        dim_inactive = false;
         blur = {
           enabled = true;
           size = 8;
