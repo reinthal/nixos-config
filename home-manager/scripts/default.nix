@@ -6,5 +6,6 @@
     ./toggle-scratchpad.nix
     ./hyprctl-reload.nix
     ./pgp-scripts.nix
+    ./switch.nix
   ];
 }
