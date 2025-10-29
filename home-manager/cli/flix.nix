@@ -22,13 +22,9 @@ in {
     packages = with pkgs;
       [
         # cli
-        wireguard-tools
-        bitwarden-cli
-        uv
         ngrok
         fd
         dig
-        lftp
         sops
         tree
         nmap
@@ -43,15 +39,9 @@ in {
         less
         wget
         lazygit
-        git-lfs
         btop
         tree
-        yt-dlp
-        svtplay-dl
-        inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
         # programming
-        gh
-        nodejs
         nixd
         # data
         minio-client
@@ -60,12 +50,6 @@ in {
         # devops
         k9s
         kubectl
-      ]
-      ++ [
-        pkgs.unstable.signal-desktop
-        pkgs.unstable.claude-code
-        pkgs.unstable.mcp-proxy
-        pkgs.unstable.devenv
       ];
 
     sessionVariables = {

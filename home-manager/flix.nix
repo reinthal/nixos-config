@@ -6,7 +6,7 @@
 }: {
   imports =
     [
-      ./cli
+      ./cli/flix.nix
       ./scripts
       ./sops.nix
     ];
