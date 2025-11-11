@@ -22,6 +22,7 @@ in {
     packages = with pkgs;
       [
         # cli
+        tdf
         wireguard-tools
         bitwarden-cli
         uv
@@ -51,7 +52,6 @@ in {
         inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
         # programming
         gh
-        nodejs
         nixd
         # data
         minio-client
