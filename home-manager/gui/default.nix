@@ -10,6 +10,7 @@
   desktop-apps = with pkgs;
     [
       anki
+      libreoffice-qt6-fresh
       obsidian
       networkmanagerapplet
       keepassxc
