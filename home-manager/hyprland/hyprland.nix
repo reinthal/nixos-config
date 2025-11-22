@@ -125,7 +125,7 @@ in {
           (g "tasks" "chromium --app=https://linear.app/reinthal/team/REI/active")
           (g "llm" "claude-desktop")
           (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
-          (g "teams1" "teams-for-linux")
+          (g "discord" "discord")
           (g "teams2" "flatpak run com.github.IsmaelMartinez.teams_for_linux")
           (g "email" "chromium --app=https://outlook.office.com")
           (g "codium" "codium")
@@ -215,7 +215,7 @@ in {
           "CTRL SUPER, G, exec, gamemode"
           "SUPER, O, togglespecialworkspace, obsidian"
           "SUPER, M, togglespecialworkspace, slack"
-          "SUPER, N, togglespecialworkspace, teams1"
+          "SUPER, N, togglespecialworkspace, discord"
           "SUPER, B, togglespecialworkspace, teams2"
           "SUPER, V, togglespecialworkspace, email"
           "SUPER, C, togglespecialworkspace, codium"
