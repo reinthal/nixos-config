@@ -21,6 +21,7 @@
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord pkgs.zoom];
 in {
   imports = [
+    ./waybar.nix
     ./kdeconnect.nix
     ./browser.nix
   ];
@@ -48,7 +49,6 @@ in {
   home.packages = desktop-apps;
   xdg = {
     enable = true;
-    #configFile."zed/settings.json".source = ./zed/settings.json;
     desktopEntries = {
       "org.gnome.Settings" = {
         name = "Settings";

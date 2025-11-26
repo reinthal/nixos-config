@@ -14,7 +14,7 @@ in {
     ++ [
       hyprland-contrib.scratchpad
     ]
-    ++ (with pkgs; [hyprshot]);
+    ++ (with pkgs; [hyprshot mako libnotify]);
   systemd.user.services."hyprctl-reload" = {
     Unit = {
       Description = "Reload Hyprland to fix sizing of borders after login.";
@@ -172,7 +172,7 @@ in {
       };
       exec-once = [
         "${pkgs.swww}/bin/swww-daemon"
-        "start"
+        "${pkgs.mako}/bin/mako"
       ];
 
       bindle = [
@@ -196,6 +196,9 @@ in {
           "SUPER, Return, exec, kitty"
           "SUPER, Space, exec, rofi -show drun"
           "SUPER, W, exec, firefox"
+          "SUPER, D, exec, makoctl dismiss"
+          "SUPER SHIFT, D, exec, makoctl dismiss -a"
+          "SUPER, B, exec, swww-wallpaper"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"

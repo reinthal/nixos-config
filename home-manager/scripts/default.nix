@@ -7,5 +7,7 @@
     ./hyprctl-reload.nix
     ./pgp-scripts.nix
     ./switch.nix
+    ./mako-waybar.nix
+    ./swww-wallpaper.nix
   ];
 }
