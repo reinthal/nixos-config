@@ -5,7 +5,7 @@
   ...
 }: let
   is_nvidia = builtins.currentSystem == "x86_64-linux";
-  hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
+  hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system};
 in {
   home.packages =
     lib.optionals is_nvidia [
@@ -126,7 +126,7 @@ in {
           (g "discord" "discord")
           (g "email" "chromium --app=https://outlook.office.com")
           (g "codium" "codium")
-          (g "signal-desktop" "signal-desktop --password-store=gnome-libsecret")
+          (g "signal-desktop" "signal-desktop")
           (g "obsidian" "obsidian")
         ];
 
@@ -134,16 +134,9 @@ in {
         f = regex: "float,title:^(${regex})$";
       in [
         "float,title:.*Bitwarden.*"
-        (f "org.gnome.Calculator")
-        (f "org.gnome.Nautilus")
         (f "pavucontrol")
         (f "nm-connection-editor")
         (f "blueberry.py")
-        (f "org.gnome.Settings")
-        (f "org.gnome.design.Palette")
-        (f "Color Picker")
-        (f "xdg-desktop-portal")
-        (f "xdg-desktop-portal-gnome")
       ];
 
       animations = {

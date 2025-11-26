@@ -2,8 +2,8 @@
   inputs,
   pkgs,
   ...
-}: let  
-marble = inputs.marble.packages.${pkgs.system}.default; 
+}: let
+marble = inputs.marble.packages.${pkgs.system}.default;
 shell-dependencies = with pkgs; [
     dart-sass
     fd
@@ -18,7 +18,6 @@ shell-dependencies = with pkgs; [
     networkmanager
     gtk3
     jq
-    mako
   ];
 in {
   programs.waybar = {
@@ -33,7 +32,7 @@ in {
           "HDMI-A-1"
         ];
         modules-left = [ "hyprland/workspaces" "wlr/taskbar" ];
-        modules-right = ["custom/notification" "battery" "clock" "temperature" ];
+        modules-right = ["battery" "clock" "temperature" ];
         
         battery = {
             format = "{capacity}% {icon}";
@@ -41,27 +40,6 @@ in {
         };
         clock = {
             format-alt =  "{:%a, %d. %b  %H:%M}";
-        };
-
-        "custom/notification" = {
-          tooltip = false;
-          format = "{icon}";
-          format-icons = {
-            notification = "<span foreground='red'><sup></sup></span>";
-            none = "";
-            dnd-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-none = "";
-            inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            inhibited-none = "";
-            dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-inhibited-none = "";
-          };
-          return-type = "json";
-          exec-if = "which makoctl";
-          exec = "mako-waybar";
-          on-click = "${pkgs.mako}/bin/makoctl dismiss";
-          on-click-right = "${pkgs.mako}/bin/makoctl dismiss -a";
-          interval = 5;
         };
 
         "hyprland/workspaces" = {
