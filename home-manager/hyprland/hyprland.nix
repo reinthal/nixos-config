@@ -124,7 +124,6 @@ in {
           (g "llm" "claude-desktop")
           (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
           (g "discord" "discord")
-          (g "teams2" "flatpak run com.github.IsmaelMartinez.teams_for_linux")
           (g "email" "chromium --app=https://outlook.office.com")
           (g "codium" "codium")
           (g "signal-desktop" "signal-desktop --password-store=gnome-libsecret")
@@ -214,7 +213,6 @@ in {
           "SUPER, O, togglespecialworkspace, obsidian"
           "SUPER, M, togglespecialworkspace, slack"
           "SUPER, N, togglespecialworkspace, discord"
-          "SUPER, B, togglespecialworkspace, teams2"
           "SUPER, V, togglespecialworkspace, email"
           "SUPER, C, togglespecialworkspace, codium"
           "SUPER, K, togglespecialworkspace, signal-desktop"

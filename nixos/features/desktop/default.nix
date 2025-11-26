@@ -6,7 +6,6 @@
   services = {
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    flatpak.enable = true;
     xserver.enable = true;
   };
 
@@ -15,20 +14,6 @@
     xwayland.enable = true;
   };
 
-  systemd.services.flatpak-repo = {
-    wantedBy = ["multi-user.target"];
-    path = [pkgs.flatpak];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-
-  #xdg.portal = {
-  #  enable = true;
-  #  extraPortals = with pkgs; [
-  #    xdg-desktop-portal-gtk
-  #  ];
-  #};
   # wayland-related
   security.polkit.enable = true;
   environment.systemPackages = with pkgs; [
