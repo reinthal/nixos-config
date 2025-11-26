@@ -21,7 +21,6 @@
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord pkgs.zoom];
 in {
   imports = [
-    ./marble.nix
     ./kdeconnect.nix
     ./browser.nix
   ];

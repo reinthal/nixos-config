@@ -28,10 +28,6 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    marble = {
-      url = "github:reinthal/shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     reinthalVim = {
       url = "github:reinthal/neovim";
       inputs.nixpkgs.follows = "nixpkgs";

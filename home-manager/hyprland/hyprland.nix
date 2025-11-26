@@ -6,7 +6,6 @@
 }: let
   is_nvidia = builtins.currentSystem == "x86_64-linux";
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.system};
-  marble = inputs.marble.packages.${pkgs.system}.default;
 in {
   home.packages =
     lib.optionals is_nvidia [
@@ -14,7 +13,6 @@ in {
     ]
     ++ [
       hyprland-contrib.scratchpad
-      marble
     ]
     ++ (with pkgs; [hyprshot]);
   systemd.user.services."hyprctl-reload" = {
@@ -197,7 +195,7 @@ in {
       in
         [
           "SUPER, Return, exec, kitty"
-          "SUPER, Space, exec, marble launcher"
+          "SUPER, Space, exec, rofi -show drun"
           "SUPER, W, exec, firefox"
 
           "SUPER, S, exec, scratchpad"
