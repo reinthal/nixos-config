@@ -123,7 +123,7 @@ in {
           (g "tasks" "chromium --app=https://linear.app/reinthal/team/REI/active")
           (g "llm" "claude-desktop")
           (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
-          (g "discord" "discord")
+          (g "discord" "chromium --app=https://discord.com/channels/@me")
           (g "email" "chromium --app=https://mail.proton.me/")
           (g "codium" "codium")
           (g "signal-desktop" "signal-desktop")
