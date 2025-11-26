@@ -164,6 +164,7 @@ in {
         };
       };
       exec-once = [
+        "${pkgs.waybar}/bin/waybar"
         "${pkgs.swww}/bin/swww-daemon"
         "${pkgs.mako}/bin/mako"
       ];
