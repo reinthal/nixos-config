@@ -55,9 +55,6 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    pinentry.curses
-  ];
   programs.zsh.enable = true;
   time.timeZone = "Europe/Stockholm";
   # This value determines the NixOS release from which the default

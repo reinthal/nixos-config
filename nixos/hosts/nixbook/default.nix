@@ -95,7 +95,7 @@
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryPackage = pkgs.pinentry.curses;
+      pinentryPackage = pkgs.pinentry-curses;
     };
   };
 
@@ -112,8 +112,5 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    pinentry.curses
-  ];
   system.stateVersion = "25.11";
 }

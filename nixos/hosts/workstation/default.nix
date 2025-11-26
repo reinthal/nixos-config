@@ -57,7 +57,7 @@
   environment.systemPackages = with pkgs; [
     usbutils
     gnome-remote-desktop
-    pinentry.curses
+    pinentry-curses
     droidcam
   ];
 
@@ -75,7 +75,7 @@
     ssh.startAgent = false;
     gnupg.agent.enable = true;
     gnupg.agent.enableSSHSupport = true;
-    gnupg.agent.pinentryPackage = pkgs.pinentry.curses;
+    gnupg.agent.pinentryPackage = pkgs.pinentry-curses;
   };
 
   programs.zsh.enable = true;

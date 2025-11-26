@@ -55,8 +55,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     gnome-remote-desktop
-    pinentry.curses
-    droidcam
+    pinentry-curses
   ];
 
   services = {
@@ -76,7 +75,7 @@
     ssh.startAgent = false;
     gnupg.agent.enable = true;
     gnupg.agent.enableSSHSupport = true;
-    gnupg.agent.pinentryPackage = pkgs.pinentry.curses;
+    gnupg.agent.pinentryPackage = pkgs.pinentry-curses;
   };
 
   programs.zsh.enable = true;
