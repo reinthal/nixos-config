@@ -26,10 +26,8 @@ in {
         wireguard-tools
         bitwarden-cli
         uv
-        ngrok
         fd
         dig
-        lftp
         sops
         tree
         nmap
@@ -47,8 +45,6 @@ in {
         git-lfs
         btop
         tree
-        yt-dlp
-        svtplay-dl
         inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
         # programming
         gh
