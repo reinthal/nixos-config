@@ -124,7 +124,7 @@ in {
           (g "llm" "claude-desktop")
           (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
           (g "discord" "discord")
-          (g "email" "chromium --app=https://outlook.office.com")
+          (g "email" "chromium --app=https://mail.proton.me/")
           (g "codium" "codium")
           (g "signal-desktop" "signal-desktop")
           (g "obsidian" "obsidian")
