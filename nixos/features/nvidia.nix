@@ -9,7 +9,7 @@
     enable = true;
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
-      vaapiVdpau
+      libva-vdpau-driver
     ];
   };
   # Add needed packages for graphics/gaming
@@ -18,10 +18,9 @@
     vulkan-loader
     vulkan-validation-layers
   ];
-  #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11; # TODO: Pinned to 6.10 due to compatability issues
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
-  hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit.enable = false;
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;

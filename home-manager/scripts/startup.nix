@@ -3,11 +3,11 @@
   inputs,
   ...
 }: let
-  pyprland = inputs.pyprland.packages.${pkgs.system}.pyprland;
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     export XKB_DEFAULT_LAYOUT=us
     export XCURSOR_THEME=Qogir
-    hyprctl setcursor Qogir 24
+    ${pkgs.hyprland}/bin/hyprctl setcursor Qogir 24
+
   '';
 in {
   home.packages = [startupScript];
