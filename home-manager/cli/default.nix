@@ -22,6 +22,7 @@ in {
     packages = with pkgs;
       [
         # cli
+        nodejs_24
         tdf
         wireguard-tools
         bitwarden-cli
