@@ -19,9 +19,19 @@
     # ...
     # });
 
-    ags = prev.ags.overrideAttrs (oldAttrs: rec {
-      buildInputs = oldAttrs.buildInputs ++ [pkgs.libdbusmenu-gtk3];
-    });
+    # Mesa patch for Firefox regression fix (Apple Silicon)
+    # Uses specific nixpkgs commit with working Mesa 25.3.0
+    mesa =
+      if prev.mesa.version == "25.3.0"
+      then
+        (import (builtins.fetchTarball {
+          url = "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz";
+          sha256 = "sha256-4PqRErxfe+2toFJFgcRKZ0UI9NSIOJa+7RXVtBhy4KE=";
+        }) {
+          localSystem = final.stdenv.hostPlatform;
+        })
+        .mesa
+      else prev.mesa;
   };
   master-packages = final: _prev: {
     master = import inputs.nixpkgs-master {
