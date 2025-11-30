@@ -3,7 +3,6 @@
   pkgs,
   ...
 }: let
-marble = inputs.marble.packages.${pkgs.system}.default;
 shell-dependencies = with pkgs; [
     dart-sass
     fd
