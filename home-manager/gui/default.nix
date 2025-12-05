@@ -17,6 +17,7 @@
       remmina
       telegram-desktop
       mpv
+      prismlauncher
     ]
     ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord pkgs.zoom];
 in {
