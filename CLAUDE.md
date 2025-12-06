@@ -5,10 +5,15 @@ code in this repository.
 
 ## MCP Server
 
-- Use the MCP-NixOs mcp server to verify packages
-- Use WebSearch on
-  https://home-manager-options.extranix.com/?query=**YOURQUERY&release=release-25.11
-  for home-manager configuration options
+Always use the MCP-NixOS server tools for package and configuration lookups:
+
+- **Package verification**: Use `nixos_search` and `nixos_info` to verify packages exist and get details
+- **Home Manager options**: Use `home_manager_search` and `home_manager_info` instead of web searches
+- **Darwin/macOS options**: Use `darwin_search` and `darwin_info` for nix-darwin configurations
+- **Version pinning**: Use `nixhub_package_versions` or `nixhub_find_version` when specific package versions are needed
+- **Flake packages**: Use `nixos_flakes_search` for community flakes and packages not in nixpkgs
+
+Prefer MCP tools over WebSearch for all NixOS, Home Manager, and nix-darwin queries.
 
 ## Development Commands
 

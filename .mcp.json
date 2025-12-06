@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "nixos": {
-      "command": "nix",
-      "args": ["run", "github:utensils/mcp-nixos", "--"]
+      "command": "uvx",
+      "args": ["mcp-nixos"]
     }
   }
 }
