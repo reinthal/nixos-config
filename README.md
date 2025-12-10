@@ -56,11 +56,12 @@ git clone https://github.com/reinthal/nixos-config
 cd nixos-config
 ```
 
-allow flakes
+allow flakes and trust root and current user
 
 ```
 sudo tee -a /etc/nix/nix.conf <<EOF
 experimental-features = nix-command flakes
+trusted-users = root $(whoami)
 EOF
 ```
 
