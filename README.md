@@ -56,6 +56,14 @@ git clone https://github.com/reinthal/nixos-config
 cd nixos-config
 ```
 
+allow flakes
+
+```
+sudo tee -a /etc/nix/nix.conf <<EOF
+experimental-features = nix-command flakes
+EOF
+```
+
 ```bash
 home-manager switch --flake .#kog@cli
 ```
