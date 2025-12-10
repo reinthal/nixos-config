@@ -65,7 +65,7 @@ EOF
 ```
 
 ```bash
-home-manager switch --flake .#kog@cli --impure
+home-manager switch --flake .#kog@cli && chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
 ```
 
 ## Hosts
