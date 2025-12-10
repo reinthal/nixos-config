@@ -33,6 +33,33 @@ my reproducible, declarative system setups for various machines and use cases.
 - **`overlays/`** - Package modifications
 - **`secrets/`** - SOPS-encrypted secrets
 
+## Bootstrapping a Linux environment
+
+```bash
+sudo apt update && sudo apt install -y curl git gh vim
+```
+
+installing nix
+
+```bash
+sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
+installing home manager
+
+```bash
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz home-manager && nix-channel --update && nix-shell '<home-manager>' -A install
+```
+
+```bash
+git clone https://github.com/reinthal/nixos-config
+cd nixos-config
+```
+
+```bash
+home-manager switch --flake .#kog@cli
+```
+
 ## Hosts
 
 | Host          | Description                              |

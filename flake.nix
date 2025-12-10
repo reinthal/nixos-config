@@ -132,5 +132,21 @@
         }
       ];
     };
+
+    # Standalone home-manager configurations
+    homeConfigurations = forAllSystems (
+      system: {
+        "kog@cli" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          extraSpecialArgs = {
+            inherit nixpkgs inputs outputs;
+            stateVersion = "25.11";
+          };
+          modules = [
+            ./home-manager/cli/default.nix
+          ];
+        };
+      }
+    );
   };
 }
