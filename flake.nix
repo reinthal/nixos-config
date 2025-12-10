@@ -152,6 +152,10 @@
         };
         modules = [
           ./home-manager/cli/default.nix
+          {
+            home.username = builtins.getEnv "USER";
+            home.homeDirectory = builtins.getEnv "HOME";
+          }
         ];
       };
     };
