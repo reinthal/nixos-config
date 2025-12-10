@@ -56,13 +56,21 @@ git clone https://github.com/reinthal/nixos-config
 cd nixos-config
 ```
 
-allow flakes and trust root and current user
+allow flakes and trust root and current user add devenv public key
 
 ```
 sudo tee -a /etc/nix/nix.conf <<EOF
 experimental-features = nix-command flakes
 trusted-users = root $(whoami)
+extra-substituters = https://devenv.cachix.org
+extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
 EOF
+```
+
+restart the nix daemon
+
+```bash
+sudo systemctl restart nix-daemon
 ```
 
 ```bash
