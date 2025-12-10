@@ -33,7 +33,7 @@ my reproducible, declarative system setups for various machines and use cases.
 - **`overlays/`** - Package modifications
 - **`secrets/`** - SOPS-encrypted secrets
 
-## Bootstrapping a Linux environment
+## Bootstrapping a Linux environment (Home-manager)
 
 ```bash
 sudo apt update && sudo apt install -y curl git gh vim
@@ -65,7 +65,7 @@ EOF
 ```
 
 ```bash
-home-manager switch --flake .#kog@cli
+home-manager switch --flake .#kog@cli --impure
 ```
 
 ## Hosts
