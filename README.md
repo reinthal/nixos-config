@@ -59,6 +59,12 @@ cd nixos-config
 allow flakes and trust root and current user add devenv public key
 
 ```
+sudo tee -a /etc/shells <<EOF
+$(which zsh)
+EOF
+```
+
+```
 sudo tee -a /etc/nix/nix.conf <<EOF
 experimental-features = nix-command flakes
 trusted-users = root $(whoami)
@@ -74,7 +80,7 @@ sudo systemctl restart nix-daemon
 ```
 
 ```bash
-home-manager switch --flake .#kog@cli && chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
+home-manager switch --flake .#kog@cli --impure && chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
 ```
 
 ## Hosts
