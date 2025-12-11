@@ -64,7 +64,7 @@ $(which zsh)
 EOF
 ```
 
-```
+```bash
 sudo tee -a /etc/nix/nix.conf <<EOF
 experimental-features = nix-command flakes
 trusted-users = root $(whoami)
@@ -80,7 +80,15 @@ sudo systemctl restart nix-daemon
 ```
 
 ```bash
-home-manager switch --flake .#kog@cli --impure && chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
+sudo tee -a /etc/shells <<EOF
+/home/$(whoami)/.nix-profile/bin/zsh
+EOF
+```
+
+install home-manager cli environment
+
+```bash
+home-manager switch --flake .#kog@cli --impure -b bkp && &&sudo chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
 ```
 
 ## Hosts
