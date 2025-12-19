@@ -10,7 +10,7 @@
       default_session.command = ''
         ${pkgs.tuigreet}/bin/tuigreet \
           --time \
-          --greeting 'Welcome to NixBook' \
+          --greeting 'Welcome' \
           --theme 'border=darkgray;text=cyan;prompt=green;time=gray;action=cyan;button=green;container=darkgray;input=gray' \
           --asterisks \
           --user-menu \
