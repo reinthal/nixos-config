@@ -1,10 +1,17 @@
-{pkgs, lib, config, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   services.greetd = {
     enable = true;
     settings = {
       default_session.command = ''
         ${pkgs.tuigreet}/bin/tuigreet \
           --time \
+          --greeting '❤	    ☉ ‿ ⚆     ❤' \
+          --theme 'border=darkgray;text=cyan;prompt=green;time=gray;action=cyan;button=green;container=darkgray;input=gray' \
           --asterisks \
           --user-menu \
           --cmd ${lib.getExe config.programs.hyprland.package}
