@@ -57,11 +57,18 @@
     };
   };
 
-  # backlight control
-
   services = {
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
+    upower.enable = true;
+    # Printer  and printer discovery
+    printing.enable = true;
+    # enable if printer issues
+    #avahi = {
+    #enable = true;
+    #nssmdns4 = true;
+    # openFirewall = true;
+    #};
     actkbd = {
       enable = true;
       bindings = [
@@ -77,7 +84,6 @@
         }
       ];
     };
-
     tailscale.enable = true;
   };
   environment.shellInit = ''
@@ -85,13 +91,6 @@
      ${pkgs.gnupg}/bin/gpg-connect-agent /bye
      export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   '';
-
-  services.printing.enable = true;
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
   programs = {
     ssh.startAgent = false;
     zsh.enable = true;

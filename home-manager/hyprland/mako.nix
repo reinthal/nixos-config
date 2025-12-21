@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  services.batsignal = {
+    enable = true;
+  };
   services.mako = {
     enable = true;
 
@@ -17,7 +20,7 @@
       text-color = "#d8dee9";
       border-color = "#88c0d0";
       border-size = 2;
-      border-radius = 10;  # Matches Hyprland rounding
+      border-radius = 10; # Matches Hyprland rounding
 
       # Icons - use hicolor (includes your custom icons) + fallback to Adwaita
       icon-path = "${pkgs.hicolor-icon-theme}/share/icons/hicolor:${pkgs.adwaita-icon-theme}/share/icons/Adwaita";
