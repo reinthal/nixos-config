@@ -88,30 +88,22 @@ EOF
 install home-manager cli environment
 
 ```bash
-home-manager switch --flake .#kog@cli --impure -b bkp && &&sudo chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
+home-manager switch --flake .#kog@cli --impure -b bkp && sudo chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
 ```
 
 ## Hosts
 
 | Host          | Description                              |
 | ------------- | ---------------------------------------- |
-| `workstation` | Primary desktop system                   |
-| `seed`        | Specialized system configuration         |
-| `build`       | x86 Proxmox VM for builds                |
+| `seed`        | Torrents and Jellyfin                    |
+| `build`       | x86 Proxmox VM Workstation               |
 | `flix`        | Media server (Jellyfin, Plex, Navidrome) |
 | `nixbook`     | Apple Silicon + NixOS configuration      |
-| `relay`       | Tor exit node setup                      |
+| `relay`       | Tor exit node                            |
 | `mbp`         | macOS Darwin system                      |
-| `dcp`         | DCP system configuration                 |
-| `default`     | Default system configuration             |
 | `flow`        | Flow system configuration                |
 
 ## Pinned Items
-
-- [ ] Input nixpkgs from hyprland hotfix PR
-      1284004bf6c6e50d8592b6efe83708931e75aec7
-- [ ] `features/nvidia.nix` boot.kernelPackages = lib.mkDefault
-      pkgs.linuxPackages_6_10;
 
 ## Building the System
 
