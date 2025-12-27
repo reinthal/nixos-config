@@ -15,6 +15,7 @@
     ../../features/cli/default.nix
     ../../features/apps/jellyfin.nix
     ../../features/apps/qbittorrent.nix
+    ../../features/apps/whisper.nix
     ../../features/apps/podman.nix
     ../../features/apps/navidrome.nix
     ../../features/apps/pinchflat.nix
