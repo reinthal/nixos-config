@@ -21,7 +21,7 @@ in {
     # specify my home-manager configs
     packages = with pkgs; [
       # cli
-      inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
+      pkgs.unstable.claude-code
       fd
       dig
       sops
