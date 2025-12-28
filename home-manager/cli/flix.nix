@@ -19,38 +19,32 @@ in {
 
     stateVersion = stateVersion;
     # specify my home-manager configs
-    packages = with pkgs;
-      [
-        # cli
-        ngrok
-        fd
-        dig
-        sops
-        tree
-        nmap
-        tcpdump
-        reinthalVim
-        ripgrep
-        tldr
-        jq
-        tree
-        yq
-        curl
-        less
-        wget
-        lazygit
-        btop
-        tree
-        # programming
-        nixd
-        # data
-        minio-client
-        # dev nix
-        nixpkgs-fmt
-        # devops
-        k9s
-        kubectl
-      ];
+    packages = with pkgs; [
+      # cli
+      inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
+      fd
+      dig
+      sops
+      tree
+      tcpdump
+      reinthalVim
+      ripgrep
+      tldr
+      jq
+      tree
+      yq
+      curl
+      less
+      lazygit
+      btop
+      tree
+      # programming
+      nixd
+      # data
+      minio-client
+      # dev nix
+      nixpkgs-fmt
+    ];
 
     sessionVariables = {
       PAGER = "less";
