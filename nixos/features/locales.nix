@@ -1,5 +1,5 @@
-{
-  time.timeZone = "Europe/Stockholm";
+{lib, ...}: {
+  time.timeZone = lib.mkDefault "Europe/Stockholm";
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {

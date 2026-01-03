@@ -104,9 +104,7 @@
       pinentryPackage = pkgs.pinentry-curses;
     };
   };
-
-  time.timeZone = null;
-
+  time.timeZone = lib.mkForce null;
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
