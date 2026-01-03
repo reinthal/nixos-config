@@ -60,6 +60,7 @@
   services = {
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
+    automatic-timezoned.enable = true;
     upower.enable = true;
     # Printer  and printer discovery
     printing.enable = true;
@@ -104,7 +105,7 @@
     };
   };
 
-  time.timeZone = "Europe/Stockholm";
+  time.timeZone = null;
 
   home-manager = {
     backupFileExtension = "hm-bkp";
