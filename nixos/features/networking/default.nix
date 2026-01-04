@@ -1,6 +1,6 @@
 hostname: {
   boot.kernel.sysctl = {
-    "net.ipv6.conf.wlan0.disable_ipv6" = 1;
+    "net.ipv6.conf.all.disable_ipv6" = 1;
   };
   networking = {
     enableIPv6 = false;
