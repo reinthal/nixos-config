@@ -10,7 +10,7 @@
 
 Welcome to my NixOS configuration repository! This is a multi-host flake-based
 setup supporting both NixOS and Darwin systems. These configurations represent
-my reproducible, declarative system setups for various machines and use cases.
+my reproducible, declarative system setups for my linux machines.
 
 ## Repository Structure
 
@@ -95,13 +95,11 @@ home-manager switch --flake .#kog@cli --impure -b bkp && sudo chsh -s $(which zs
 
 | Host          | Description                              |
 | ------------- | ---------------------------------------- |
-| `seed`        | Torrents and Jellyfin                    |
 | `build`       | x86 Proxmox VM Workstation               |
 | `flix`        | Media server (Jellyfin, Plex, Navidrome) |
 | `nixbook`     | Apple Silicon + NixOS configuration      |
 | `relay`       | Tor exit node                            |
 | `mbp`         | macOS Darwin system                      |
-| `flow`        | Flow system configuration                |
 
 ## Pinned Items
 
@@ -128,23 +126,18 @@ Once experimental features for flakes are enabled, use these convenient aliases:
 #### Apply new configurations:
 
 ```bash
-nixswitch
+switch
 ```
 
 #### Update system packages and configurations:
 
 ```bash
-nixup
+nix flake update
 ```
-
-#### Build specific hosts:
+or 
 
 ```bash
-sudo nixos-rebuild switch --flake '.#workstation' --impure
-sudo nixos-rebuild switch --flake '.#seed' --impure
-sudo nixos-rebuild switch --flake '.#relay' --impure
-sudo nixos-rebuild switch --flake '.#flix' --impure
-darwin-rebuild switch --flake .#mbp
+nix flake update nixpkgs-unstable
 ```
 
 #### Test configurations without switching:
@@ -153,16 +146,10 @@ darwin-rebuild switch --flake .#mbp
 sudo nixos-rebuild test --flake '.#<host>' --impure
 ```
 
-#### Update flake inputs:
-
-```bash
-nix flake update
-```
-
 #### Clean up old generations:
 
 ```bash
-./trim-generations.sh [--user|--home-manager|--channels|--system]
+sudo bash trim-generations.sh <n items> <n days> [user|home-manager|channels|system]
 ```
 
 ## Cache
