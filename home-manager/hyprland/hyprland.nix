@@ -125,7 +125,7 @@ in {
           (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
           (g "discord" "chromium --app=https://discord.com/channels/@me")
           (g "email" "chromium --app=https://mail.proton.me/")
-          (g "codium" "codium")
+          (g "code" "code")
           (g "signal-desktop" "signal-desktop")
           (g "obsidian" "obsidian")
         ];
@@ -164,7 +164,7 @@ in {
         };
       };
       exec-once = [
-        "start"   
+        "start"
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.swww}/bin/swww-daemon"
         "${pkgs.mako}/bin/mako"
@@ -212,7 +212,7 @@ in {
           "SUPER, M, togglespecialworkspace, slack"
           "SUPER, N, togglespecialworkspace, discord"
           "SUPER, V, togglespecialworkspace, email"
-          "SUPER, C, togglespecialworkspace, codium"
+          "SUPER, C, togglespecialworkspace, code"
           "SUPER, K, togglespecialworkspace, signal-desktop"
           "SUPER, J, togglespecialworkspace, llm"
           "SUPER, H, togglespecialworkspace, tasks"
