@@ -37,7 +37,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    apple-silicon.url = "github:nix-community/nixos-apple-silicon";
+    apple-silicon.url = "github:nix-community/nixos-apple-silicon/linux-6-18";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = {
@@ -98,7 +98,8 @@
     overlays = let
       pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
     in
-      import ./overlays {inherit pkgs inputs;} // {
+      import ./overlays {inherit pkgs inputs;}
+      // {
       };
 
     # Reusable nixos modules you might want to export
