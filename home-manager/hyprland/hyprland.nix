@@ -130,15 +130,6 @@ in {
           (g "obsidian" "obsidian")
         ];
 
-      windowrule = let
-        f = regex: "float,title:^(${regex})$";
-      in [
-        "float,title:.*Bitwarden.*"
-        (f "pavucontrol")
-        (f "nm-connection-editor")
-        (f "blueberry.py")
-      ];
-
       animations = {
         enabled = "yes";
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
