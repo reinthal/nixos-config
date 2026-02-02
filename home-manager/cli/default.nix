@@ -25,8 +25,8 @@ in {
         nodejs_24
         tdf
         wireguard-tools
-        bitwarden-cli
         uv
+        mcp-nixos
         fd
         dig
         sops

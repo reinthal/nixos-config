@@ -125,7 +125,7 @@ in {
           (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
           (g "discord" "chromium --app=https://discord.com/channels/@me")
           (g "email" "chromium --app=https://mail.proton.me/")
-          (g "code" "code")
+          (g "code" "codium")
           (g "signal-desktop" "signal-desktop")
           (g "obsidian" "obsidian")
         ];
