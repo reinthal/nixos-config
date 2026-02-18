@@ -16,14 +16,17 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
+
   fileSystems."/mnt/data" = {
     device = "/dev/disk/by-uuid/b98945bc-dc52-40c0-af38-e258dd4dbb6f";
     fsType = "ext4";
   };
-  fileSystems."/home/kog/.cache/huggingface/" = {
+
+  fileSystems."/home/kog/.cache/huggingface" = {
     device = "/dev/disk/by-uuid/b98945bc-dc52-40c0-af38-e258dd4dbb6f";
     fsType = "ext4";
   };
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/2ecd3465-e468-44ed-8e50-53b9e7412dd5";
     fsType = "ext4";
