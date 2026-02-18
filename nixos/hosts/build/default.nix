@@ -15,7 +15,6 @@
     ../../features/apps/syncthing.nix
     ../../features/desktop
     ../../features/sops.nix
-    ../../features/nvidia.nix
     ../../features/steam
     ../../features/cli/default.nix
     # enable various features
@@ -27,11 +26,14 @@
     inputs.home-manager.nixosModules.default
   ];
 
+  nvidia.enable = true;
+
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
       stateVersion = "24.11";
+      isNvidia = config.nvidia.enable;
     };
     users = {
       kog = import ../../../home-manager;

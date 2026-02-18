@@ -2,13 +2,13 @@
   pkgs,
   lib,
   inputs,
+  isNvidia ? false,
   ...
 }: let
-  is_nvidia = builtins.currentSystem == "x86_64-linux";
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system};
 in {
   home.packages =
-    lib.optionals is_nvidia [
+    lib.optionals isNvidia [
       pkgs.egl-wayland
     ]
     ++ [
@@ -68,7 +68,7 @@ in {
           # Hint electron apps to use wayland
           "NIXOS_OZONE_WL,1"
         ]
-        ++ lib.optionals is_nvidia [
+        ++ lib.optionals isNvidia [
           "AQ_DRM_DEVICES,/dev/dri/card0"
           "LIBVA_DRIVER_NAME,nvidia"
           "GBM_BACKEND,nvidia-drm"

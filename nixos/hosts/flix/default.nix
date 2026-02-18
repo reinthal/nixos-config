@@ -11,7 +11,6 @@
     ../../common.nix
     ../../features/nas.nix
     ../../features/sops.nix
-    ../../features/nvidia.nix
     ../../features/cli/default.nix
     ../../features/apps/jellyfin.nix
     ../../features/apps/qbittorrent.nix
@@ -26,6 +25,8 @@
     fsType = "nfs";
     options = ["noauto" "x-systemd.automount" "x-systemd.device-timeout=30"];
   };
+  nvidia.enable = true;
+
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
