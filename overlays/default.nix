@@ -33,14 +33,10 @@
         .mesa
       else prev.mesa;
   };
-  master-packages = final: _prev: {
-    master = import inputs.nixpkgs-master {
-      system = final.system;
-      config.allowunfree = true;
-    };
-  };
-  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.unstable'
+  # When applied, the nixpkgs-unstable set (same branch as the main nixpkgs,
+  # but independently pinned) will be accessible through 'pkgs.unstable'.
+  # Use pkgs.unstable.<name> for packages that should update more frequently
+  # than the rest of the system (e.g. fast-moving tools like claude-code, devenv).
   unstable-packages = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {
       system = final.system;

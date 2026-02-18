@@ -19,10 +19,7 @@
     pyprland.inputs.nixpkgs.follows = "nixpkgs";
     claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
-    nixpkgs-master = {
-      url = "github:NixOS/nixpkgs/master";
-    };
-    nixpkgs-unstable.url = "github:NixOs/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
@@ -142,7 +139,6 @@
           config.allowUnfree = true;
           overlays = [
             outputs.overlays.unstable-packages
-            outputs.overlays.master-packages
             outputs.overlays.additions
             outputs.overlays.modifications
           ];

@@ -3,7 +3,7 @@
 <div align="center">
 
 ![Built with Nix](https://img.shields.io/badge/Built_With-Nix-5277C3.svg?style=for-the-badge&logo=nixos&logoColor=white)
-![NixOS](https://img.shields.io/badge/NixOS-25.05-5277C3.svg?style=for-the-badge&logo=nixos&logoColor=white)
+![NixOS](https://img.shields.io/badge/NixOS-unstable-5277C3.svg?style=for-the-badge&logo=nixos&logoColor=white)
 ![Flakes](https://img.shields.io/badge/Flakes-Enabled-blue.svg?style=for-the-badge&logo=nixos&logoColor=white)
 
 </div>
@@ -100,6 +100,64 @@ home-manager switch --flake .#kog@cli --impure -b bkp && sudo chsh -s $(which zs
 | `nixbook`     | Apple Silicon + NixOS configuration      |
 | `relay`       | Tor exit node                            |
 | `mbp`         | macOS Darwin system                      |
+
+## Package Channels
+
+This flake uses two nixpkgs inputs that both track the `nixpkgs-unstable`
+branch but are pinned independently in `flake.lock`. The reason the entire
+setup runs on unstable is the `nixos-apple-silicon` module, which requires
+kernel support only available on the unstable branch.
+
+### Inputs
+
+| Input | Branch | Accessed as | Purpose |
+|---|---|---|---|
+| `nixpkgs` | `nixpkgs-unstable` | `pkgs.*` | Default system and home-manager packages |
+| `nixpkgs-unstable` | `nixpkgs-unstable` | `pkgs.unstable.*` | High-churn packages on a faster update cadence |
+
+Both inputs track the same upstream branch. The separation exists so that
+`pkgs.unstable.*` packages can be updated independently (via
+`nix flake update nixpkgs-unstable`) without triggering a full system rebuild
+from a new `nixpkgs` pin.
+
+### When to use `pkgs.unstable.*`
+
+Add a package under `pkgs.unstable.<name>` when:
+- It moves fast and you want updates more frequently than system rebuilds
+- You had a breakage in the main `nixpkgs` pin and need a newer snapshot
+- The package lags behind in the main pin (e.g. waiting for a Hydra build)
+
+Current `pkgs.unstable.*` packages:
+
+| Package | File |
+|---|---|
+| `signal-desktop` | `home-manager/cli/default.nix` |
+| `claude-code` | `home-manager/cli/default.nix`, `home-manager/cli/flix.nix` |
+| `mcp-proxy` | `home-manager/cli/default.nix` |
+| `devenv` | `home-manager/cli/default.nix` |
+| `ollama` | `modules/ollama.nix` |
+| `meilisearch` | `nixos/features/apps/jellyfin.nix` |
+
+### Update paths
+
+Update only the high-churn input (fast, low rebuild impact):
+
+```bash
+nix flake update nixpkgs-unstable
+```
+
+Update everything (full system rebuild on next `switch`):
+
+```bash
+nix flake update
+```
+
+Update a single other input:
+
+```bash
+nix flake update home-manager
+nix flake update apple-silicon
+```
 
 ## Pinned Items
 
