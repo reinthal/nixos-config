@@ -69,15 +69,12 @@ in {
           "NIXOS_OZONE_WL,1"
         ]
         ++ lib.optionals isNvidia [
-          "AQ_DRM_DEVICES,/dev/dri/card0"
           "LIBVA_DRIVER_NAME,nvidia"
           "GBM_BACKEND,nvidia-drm"
           "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         ];
 
-      cursor = {
-        no_hardware_cursors = true;
-      };
+      cursor = {};
       # Switchable keyboard layout
       input = {
         kb_layout = "us,se";
