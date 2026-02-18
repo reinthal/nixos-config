@@ -110,6 +110,7 @@
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
       stateVersion = "25.05";
+      isNvidia = false;
     };
     users = {
       kog = import ../../../home-manager;
