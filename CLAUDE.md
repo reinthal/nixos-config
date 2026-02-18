@@ -5,13 +5,19 @@ code in this repository.
 
 ## MCP Server
 
-Always use the MCP-NixOS server tools for package and configuration lookups:
+Always use the MCP-NixOS server tools for package and configuration lookups.
+The server is named `nixos` and exposes two tools:
 
-- **Package verification**: Use `nixos_search` and `nixos_info` to verify packages exist and get details
-- **Home Manager options**: Use `home_manager_search` and `home_manager_info` instead of web searches
-- **Darwin/macOS options**: Use `darwin_search` and `darwin_info` for nix-darwin configurations
-- **Version pinning**: Use `nixhub_package_versions` or `nixhub_find_version` when specific package versions are needed
-- **Flake packages**: Use `nixos_flakes_search` for community flakes and packages not in nixpkgs
+- `mcp__nixos__nix` - Main query tool with `action` (search|info|options) and
+  `source` (nixos|home-manager|darwin|flakes|wiki|nix-dev|noogle) parameters
+- `mcp__nixos__nix_versions` - Get package version history from NixHub
+
+Common usage patterns:
+- **Package search**: `action: search, source: nixos`
+- **Home Manager options**: `action: options, source: home-manager`
+- **Darwin/macOS options**: `action: options, source: darwin`
+- **Flake packages**: `action: search, source: flakes`
+- **Version pinning**: use `mcp__nixos__nix_versions`
 
 Prefer MCP tools over WebSearch for all NixOS, Home Manager, and nix-darwin queries.
 
@@ -44,20 +50,30 @@ systems.
   subdirectories
 - `home-manager/` - User-level configurations including GUI, CLI, and desktop
   environments
+- `darwin/` - macOS/nix-darwin system configuration
 - `modules/` - Reusable nixos/ and home-manager/ modules
-- `pkgs/` - Custom packages and fonts
-- `overlays/` - Package modifications
+- `pkgs/` - Custom packages (accessed as `pkgs.local-pkgs.<name>`)
+- `overlays/` - Package modifications and channel overlays
 - `secrets/` - SOPS-encrypted secrets
 
 ### Host Types
 
-- `workstation` - deprecated desktop system
-- `seed` - Specialized system configuration
-- `build` - x86 Proxmox VM for builds
-- `relay` - Tor exit node setup
-- `flix` - Media server (Jellyfin, Plex, Navidrome)
-- `nixbook` - Apple Silicon + NixOS configuration
-- `mbp` - macOS Darwin system
+**NixOS hosts** (defined in `nixos/hosts/`):
+
+- `workstation` - Desktop system
+- `seed` - Specialized system with S3FS music bucket mounting
+- `build` - x86 Proxmox VM for builds (NVIDIA, Steam, dev tools)
+- `relay` - Tor exit node with high-load server tuning
+- `flix` - Media server (Jellyfin, Navidrome, Pinchflat)
+- `nixbook` - Apple Silicon laptop (Asahi Linux via apple-silicon input)
+
+**Darwin host**:
+
+- `mbp` - macOS system (nix-darwin, aarch64-darwin)
+
+**Standalone Home Manager**:
+
+- `kog@cli` - CLI-only config for non-NixOS systems (x86_64-linux)
 
 ### Key Configuration Patterns
 
@@ -84,6 +100,11 @@ systems.
 
 ### Package Channels
 
-Uses stable (25.11), unstable, and master branches via flake inputs. Master
-packages available as `inputs.master.legacyPackages.${system}.<package>`.
+The primary `nixpkgs` input tracks `nixpkgs-unstable`. Two additional channels
+are available via overlays:
 
+- `pkgs.unstable` - explicit nixos-unstable snapshot (`nixpkgs-unstable` input)
+- `pkgs.master` - bleeding-edge master branch (`nixpkgs-master` input)
+
+There is no stable channel. Use `pkgs.unstable.<package>` or
+`pkgs.master.<package>` when a specific channel is needed.
