@@ -7,7 +7,6 @@
     enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
-    enableNvidia = true;
   };
   virtualisation.oci-containers.backend = "podman";
   environment.systemPackages = [
