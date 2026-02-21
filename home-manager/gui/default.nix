@@ -19,7 +19,7 @@
       mpv
       prismlauncher
     ]
-    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord pkgs.zoom];
+    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.reaper pkgs.slack pkgs.spotify pkgs.discord pkgs.zoom];
 in {
   imports = [
     ./waybar.nix
