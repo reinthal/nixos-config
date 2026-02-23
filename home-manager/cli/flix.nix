@@ -1,19 +1,8 @@
 {
   pkgs,
-  inputs,
   stateVersion,
-  config,
   ...
-}: let
-  reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
-  configDirectory = config.xdg.configHome;
-  anthropicKey = "${configDirectory}/Claude/api.key";
-in {
-  xdg = {
-    configFile."distrobox/distrobox.conf".source = ../dotfiles/distrobox.conf;
-    configFile."opencode/.opencode.json".source = ../dotfiles/.opencode.json;
-  };
-
+}: {
   home = {
     file.".inputrc".source = ../dotfiles/.inputrc;
 
@@ -23,16 +12,11 @@ in {
       # cli
       pkgs.unstable.claude-code
       fd
-      dig
       sops
       tree
-      tcpdump
-      reinthalVim
-      ripgrep
-      tldr
+      neovim
       jq
       tree
-      yq
       curl
       less
       lazygit
@@ -41,7 +25,6 @@ in {
       # programming
       nixd
       # data
-      minio-client
       # dev nix
       nixpkgs-fmt
     ];
@@ -51,7 +34,6 @@ in {
       CLICOLOR = 1;
       EDITOR = "nvim";
       KEYID = "1B24ADB218CFB40E";
-      # ANTHROPIC_API_KEY = builtins.readFile anthropicKey;
     };
   };
 
@@ -70,10 +52,6 @@ in {
       lfs.enable = true;
       userEmail = "email@reinthal.me";
       userName = "Alexander Reinthal";
-      signing = {
-        signByDefault = true;
-        key = "1B24ADB218CFB40E";
-      };
     };
 
     bat = {
