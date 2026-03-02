@@ -13,6 +13,7 @@ in {
     ]
     ++ [
       hyprland-contrib.scratchpad
+      pkgs.local-pkgs.hyprland-keybindings-menu
     ]
     ++ (with pkgs; [hyprshot mako libnotify]);
   systemd.user.services."hyprctl-reload" = {
@@ -125,6 +126,7 @@ in {
           (g "code" "codium")
           (g "signal-desktop" "signal-desktop")
           (g "obsidian" "obsidian")
+          (g "vault" "chromium --app=https://vault.reinthal.me")
         ];
 
       animations = {
@@ -178,6 +180,7 @@ in {
         [
           "SUPER, Return, exec, kitty"
           "SUPER, Space, exec, rofi -show drun"
+          "SUPER, slash, exec, hyprland-keybindings-menu"
           "SUPER, W, exec, firefox"
           "SUPER, D, exec, makoctl dismiss"
           "SUPER SHIFT, D, exec, makoctl dismiss -a"
@@ -193,7 +196,8 @@ in {
           "SUPER, Q, killactive"
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
-          "SUPER, P, togglesplit"
+          "SUPER, T, togglesplit"
+          "SUPER, P, togglespecialworkspace, vault"
           "CTRL SUPER,Q,exec,swaylock"
           "CTRL SUPER, G, exec, gamemode"
           "SUPER, O, togglespecialworkspace, obsidian"

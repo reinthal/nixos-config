@@ -3,6 +3,7 @@
 {pkgs ? (import ../nixpkgs.nix) {}}: rec {
   custom-fonts = pkgs.callPackage ./fonts {};
   trim-screencast = pkgs.callPackage ./trim-screencast.nix {};
+  hyprland-keybindings-menu = pkgs.callPackage ./hyprland-keybindings-menu.nix {};
   wrapWine = pkgs.callPackage ./wrapWine.nix {};
   kindle_1_17 = pkgs.callPackage ./wineApps/kindle.nix {
     inherit wrapWine;
