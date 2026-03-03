@@ -64,7 +64,9 @@ in {
         pkgs.unstable.mcp-proxy
         pkgs.unstable.devenv
       ];
-
+    sessionPath = [
+      "$HOME/.npm-global/bin"
+    ];
     sessionVariables = {
       PAGER = "less";
       CLICOLOR = 1;
@@ -119,11 +121,13 @@ in {
     zsh = {
       enable = true;
       autocd = true;
-      history.share = true;
+      history = {
+        share = true;
+        append = true;
+      };
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-
       shellAliases = {
         ls = "eza --color=auto -F";
         l = "eza -l --color=auto -F";
