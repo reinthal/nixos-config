@@ -91,6 +91,19 @@ install home-manager cli environment
 home-manager switch --flake .#kog@cli --impure -b bkp && sudo chsh -s $(which zsh) && echo  'WELCOME TO NIXLAND'  && zsh
 ```
 
+### Applying changes (standalone)
+
+After the initial bootstrap, the `home-manager` binary is no longer in `PATH`
+because home-manager takes over `~/.nix-profile`. Use `nix run` instead:
+
+```bash
+nix run home-manager/master -- switch --flake .#"kog@cli" --impure
+```
+
+The `--impure` flag is required because the config reads `$USER` and `$HOME`
+via `builtins.getEnv` to set `home.username` and `home.homeDirectory`, keeping
+the config user-agnostic without needing separate flakes per user.
+
 ## Hosts
 
 | Host          | Description                              |
