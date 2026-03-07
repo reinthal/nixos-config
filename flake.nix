@@ -155,6 +155,24 @@
           }
         ];
       };
+      "claw@cli" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+          overlays = [
+            outputs.overlays.unstable-packages
+            outputs.overlays.additions
+            outputs.overlays.modifications
+          ];
+        };
+        extraSpecialArgs = {
+          inherit nixpkgs inputs outputs;
+          stateVersion = "25.11";
+        };
+        modules = [
+          ./home-manager/cli/openclaw.nix
+        ];
+      };
     };
   };
 }
