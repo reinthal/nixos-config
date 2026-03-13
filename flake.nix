@@ -171,6 +171,10 @@
         };
         modules = [
           ./home-manager/cli/openclaw.nix
+          {
+            home.username = "claw";
+            home.homeDirectory = "/home/claw";
+          }
         ];
       };
     };

@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  secretsFile ? ../secrets/shhh.yaml,
   ...
 }: let
   homeDirectory = config.home.homeDirectory;
@@ -25,7 +26,7 @@ in {
       "apple/icloud_username" = {};
       "apple/icloud_password" = {};
     };
-    defaultSopsFile = ../secrets/shhh.yaml;
+    defaultSopsFile = secretsFile;
     age = {
       keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
       generateKey = true;

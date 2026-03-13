@@ -1,0 +1,30 @@
+{
+  pkgs,
+  lib,
+  outputs,
+  stateVersion,
+  ...
+}: {
+  imports = [
+    ./cli/openclaw.nix
+    ./email
+    (import ./sops.nix {secretsFile = ../secrets/shared.yaml;})
+  ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+    config = {
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
+  };
+  # Don"t change this when you change package input. Leave it alone.
+  home = {
+    stateVersion = stateVersion;
+  };
+}
