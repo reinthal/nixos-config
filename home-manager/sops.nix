@@ -34,6 +34,8 @@ in {
         path = "${homeDirectory}/.config/yt-dlp.txt";
         mode = "0400";
       };
+      "apple/icloud_username" = {};
+      "apple/icloud_password" = {};
     };
     defaultSopsFile = ../secrets/shhh.yaml;
     age = {

@@ -143,5 +143,16 @@ in {
       enable = true;
       enableZshIntegration = true;
     };
+
+    khal = {
+      enable = true;
+      locale = {
+        timeformat = "%H:%M";
+        dateformat = "%Y-%m-%d";
+        longdateformat = "%Y-%m-%d";
+        datetimeformat = "%Y-%m-%d %H:%M";
+        longdatetimeformat = "%Y-%m-%d %H:%M";
+      };
+    };
   };
 }
