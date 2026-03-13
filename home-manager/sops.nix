@@ -24,6 +24,7 @@ in {
       };
       "apple/icloud_username" = {};
       "apple/icloud_password" = {};
+      "google/app_password" = {};
     };
     defaultSopsFile = ../secrets/shhh.yaml;
     age = {

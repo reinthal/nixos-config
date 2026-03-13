@@ -48,6 +48,31 @@
           type = "discover";
         };
       };
+
+      # Google Calendar
+      google = {
+        local = {
+          type = "filesystem";
+          fileExt = ".ics";
+        };
+
+        remote = {
+          type = "caldav";
+          url = "https://apidata.googleusercontent.com/caldav/v2/";
+          userName = "alexander.reinthal@gmail.com";
+          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."google/app_password".path}"];
+        };
+
+        vdirsyncer = {
+          enable = true;
+          collections = ["from a" "from b"];
+        };
+
+        khal = {
+          enable = true;
+          type = "discover";
+        };
+      };
     };
   };
 
@@ -65,7 +90,7 @@
 
         remote = {
           type = "carddav";
-          url = "https://carddav.icloud.com";
+          url = "https://contacts.icloud.com";
           userName = "kog@wlots.st";
           passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."apple/icloud_password".path}"];
         };
