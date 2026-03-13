@@ -3,6 +3,11 @@
   pkgs,
   ...
 }: {
+  # Enable vdirsyncer program (generates config file)
+  programs.vdirsyncer = {
+    enable = true;
+  };
+
   # Enable vdirsyncer systemd service (runs sync periodically)
   services.vdirsyncer = {
     enable = true;
@@ -27,14 +32,14 @@
         remote = {
           type = "caldav";
           url = "https://caldav.icloud.com";
-          userNameCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets.apple.icloud_username.path}"];
-          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets.apple.icloud_password.path}"];
+          userName = "kog@wlots.st";
+          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."apple/icloud_password".path}"];
         };
 
         vdirsyncer = {
           enable = true;
           collections = ["from a" "from b"]; # Sync all collections discovered from server
-          conflictResolution = "remote wins"; # Uncomment if needed
+          conflictResolution = "remote wins";
         };
 
         khal = {
@@ -60,8 +65,8 @@
         remote = {
           type = "carddav";
           url = "https://carddav.icloud.com";
-          userNameCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets.apple.icloud_username.path}"];
-          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets.apple.icloud_password.path}"];
+          userName = "kog@wlots.st";
+          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."apple/icloud_password".path}"];
         };
 
         vdirsyncer = {
