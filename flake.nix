@@ -170,7 +170,7 @@
           stateVersion = "25.11";
         };
         modules = [
-          ./home-manager/cli/openclaw.nix
+          ./home-manager/claw.nix
           {
             home.username = "claw";
             home.homeDirectory = "/home/claw";

@@ -3,12 +3,14 @@
   lib,
   outputs,
   stateVersion,
+  inputs,
+  config,
   ...
 }: {
   imports = [
     ./cli/openclaw.nix
     ./email
-    (import ./sops.nix {secretsFile = ../secrets/shared.yaml;})
+    (import ./sops.nix {inherit inputs config; secretsFile = ../secrets/shared.yaml;})
   ];
 
   nixpkgs = {
