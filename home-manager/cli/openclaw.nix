@@ -9,6 +9,34 @@
   configDirectory = config.xdg.configHome;
   anthropicKey = "${configDirectory}/Claude/api.key";
 in {
+  services.podman = {
+    enable = true;
+    settings.containers = {
+      # Enable Docker-compatible socket behavior
+    };
+  };
+
+  # Podman user socket — needed for Traefik's docker.sock bind
+  systemd.user.sockets.podman = {
+    Unit.Description = "Podman API Socket (rootless)";
+    Socket = {
+      ListenStream = "%t/podman/podman.sock";
+      SocketMode = "0660";
+    };
+    Install.WantedBy = ["sockets.target"];
+  };
+
+  systemd.user.services.podman = {
+    Unit = {
+      Description = "Podman API Service (rootless)";
+      Requires = ["podman.socket"];
+      After = ["podman.socket"];
+    };
+    Service = {
+      Type = "exec";
+      ExecStart = "${pkgs.podman}/bin/podman system service --time=0";
+    };
+  };
   home = {
     username = "claw";
     homeDirectory = "/home/claw";
@@ -17,6 +45,7 @@ in {
     packages = with pkgs;
       [
         # cli
+        managarr
         nodejs_24
         tdf
         uv
@@ -43,6 +72,7 @@ in {
         gh
         # data
         # dev nix
+        chromium
       ]
       ++ [
         pkgs.unstable.codex
@@ -51,6 +81,7 @@ in {
       ];
     sessionPath = [
       "$HOME/.npm-global/bin"
+      "$HOME/.local/bin"
     ];
     sessionVariables = {
       PAGER = "less";
