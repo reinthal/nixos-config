@@ -46,6 +46,7 @@ in {
       [
         # cli
         managarr
+        khal
         nodejs_24
         tdf
         uv
