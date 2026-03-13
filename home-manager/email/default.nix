@@ -23,6 +23,7 @@
       # iCloud CalDAV calendar
       icloud = {
         primary = true;
+        primaryCollection = "home";
 
         local = {
           type = "filesystem";
