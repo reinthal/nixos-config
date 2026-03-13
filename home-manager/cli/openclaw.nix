@@ -45,7 +45,9 @@ in {
     packages = with pkgs;
       [
         # cli
+        age
         managarr
+        vdirsyncer
         khal
         nodejs_24
         tdf
