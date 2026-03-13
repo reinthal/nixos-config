@@ -48,31 +48,6 @@
           type = "discover";
         };
       };
-
-      # Google Calendar
-      google = {
-        local = {
-          type = "filesystem";
-          fileExt = ".ics";
-        };
-
-        remote = {
-          type = "caldav";
-          url = "https://apidata.googleusercontent.com/caldav/v2/";
-          userName = "alexander.reinthal@gmail.com";
-          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."google/app_password".path}"];
-        };
-
-        vdirsyncer = {
-          enable = true;
-          collections = ["from a" "from b"];
-        };
-
-        khal = {
-          enable = true;
-          type = "discover";
-        };
-      };
     };
   };
 
