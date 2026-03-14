@@ -30,6 +30,7 @@
     # modules
     outputs.nixosModules.dual-function-keys
     outputs.nixosModules.v4l2-loopback
+    outputs.nixosModules.ferroxide
 
     # key mappings
     ../../features/key-mappings/caps-to-ctrl-esc.nix
@@ -86,6 +87,10 @@
       ];
     };
     tailscale.enable = true;
+    ferroxide = {
+      enable = true;
+      mode = "caldav";
+    };
   };
   environment.shellInit = ''
     export GPG_TTY="$(tty)"

@@ -7,4 +7,5 @@
   v4l2-loopback = import ./v4l2-loopback.nix;
   meilisearch = import ./meilisearch.nix;
   nvidia = import ./nvidia.nix;
+  ferroxide = import ./ferroxide.nix;
 }
