@@ -18,6 +18,11 @@
     (import ./gui {inherit lib pkgs;})
   ];
 
+  services = {
+    protonmail-bridge.enable = true;
+    gnome-keyring.enable = true;
+  };
+
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
