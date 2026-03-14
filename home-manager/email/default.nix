@@ -50,28 +50,64 @@
       };
 
       # Proton Mail Bridge CalDAV calendar
-      protonmmail = {
+      protonmail = {
         local = {
           type = "filesystem";
           fileExt = ".ics";
+          path = "${config.home.homeDirectory}/.local/share/calendars/ProtonMirror";
         };
 
         remote = {
           type = "caldav";
-          url = "https://127.0.0.1:8081";
+          url = "http://127.0.0.1:8081";
           passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/bridge_pw".path}"];
         };
 
         vdirsyncer = {
           enable = true;
-          collections = ["from a" "from b"];
+          collections = [
+            [
+              "ProtonMirror"
+              "q2zVgfHcJ-_us1hjWde6kihJJCqsiI7gAIYLNb5PkdHg7i_ji3oNyMNnDMQhEwPmQBBzokMInDGZNsMSL3bjGw=="
+              "ProtonMirror"
+            ]
+          ];
           conflictResolution = "remote wins";
           userNameCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/username".path}"];
+          auth = "basic";
         };
 
         khal = {
           enable = true;
           type = "discover";
+        };
+      };
+
+      # iCloud mirror target for ProtonMirror
+      icloud_protonmirror = {
+        local = {
+          type = "filesystem";
+          fileExt = ".ics";
+          path = "${config.home.homeDirectory}/.local/share/calendars/ProtonMirror";
+        };
+
+        remote = {
+          type = "caldav";
+          url = "https://caldav.icloud.com";
+          userName = "kog@wlots.st";
+          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."apple/icloud_password".path}"];
+        };
+
+        vdirsyncer = {
+          enable = true;
+          collections = [
+            [
+              "ProtonMirror"
+              "808c61e1-3fe3-4998-aa29-f334d6270a49"
+              "ProtonMirror"
+            ]
+          ];
+          conflictResolution = "local wins";
         };
       };
     };
@@ -103,7 +139,7 @@
       };
 
       # Proton Mail Bridge CardDAV contacts
-      protonmmail = {
+      protonmail = {
         local = {
           type = "filesystem";
           fileExt = ".vcf";
@@ -111,7 +147,7 @@
 
         remote = {
           type = "carddav";
-          url = "https://127.0.0.1:8080";
+          url = "http://127.0.0.1:8080";
           passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/bridge_pw".path}"];
         };
 
@@ -119,6 +155,7 @@
           enable = true;
           collections = ["from a" "from b"];
           userNameCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/username".path}"];
+          auth = "basic";
         };
       };
     };
