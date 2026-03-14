@@ -10,11 +10,13 @@
   imports = [
     ./cli/openclaw.nix
     ./email
-    (import ./sops.nix {inherit inputs config; secretsFile = ../secrets/shared.yaml;})
+    (import ./sops.nix {
+      inherit inputs config;
+      secretsFile = ../secrets/shared.yaml;
+    })
   ];
 
   services.gnome-keyring.enable = true;
-  services.protonmail-bridge.enable = true;
 
   nixpkgs = {
     overlays = [

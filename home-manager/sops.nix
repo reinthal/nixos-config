@@ -25,6 +25,10 @@ in {
       };
       "apple/icloud_username" = {};
       "apple/icloud_password" = {};
+      "protonmmail/smtp/token" = {};
+      "protonmmail/smtp/username" = {};
+      "protonmmail/smtp/server" = {};
+      "protonmmail/smtp/port" = {};
     };
     defaultSopsFile = secretsFile;
     age = {

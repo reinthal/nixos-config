@@ -19,7 +19,6 @@
   ];
 
   services = {
-    protonmail-bridge.enable = true;
     gnome-keyring.enable = true;
   };
 
