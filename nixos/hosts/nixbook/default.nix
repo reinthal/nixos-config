@@ -111,6 +111,7 @@
       inherit pkgs inputs outputs;
       stateVersion = "25.05";
       isNvidia = false;
+      secretsFile = ../../../secrets/shhh.yaml;
     };
     users = {
       kog = import ../../../home-manager;

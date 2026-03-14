@@ -34,6 +34,7 @@
       inherit pkgs inputs outputs;
       stateVersion = "24.11";
       isNvidia = config.nvidia.enable;
+      secretsFile = ../../../secrets/shhh.yaml;
     };
     users = {
       kog = import ../../../home-manager;

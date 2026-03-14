@@ -48,6 +48,7 @@
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
       stateVersion = "24.11";
+      secretsFile = ../../../secrets/shhh.yaml;
     };
     users = {
       kog = import ../../../home-manager;
