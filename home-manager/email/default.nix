@@ -48,6 +48,32 @@
           type = "discover";
         };
       };
+
+      # Proton Mail Bridge CalDAV calendar
+      protonmmail = {
+        local = {
+          type = "filesystem";
+          fileExt = ".ics";
+        };
+
+        remote = {
+          type = "caldav";
+          url = "https://127.0.0.1:8081";
+          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/bridge_pw".path}"];
+        };
+
+        vdirsyncer = {
+          enable = true;
+          collections = ["from a" "from b"];
+          conflictResolution = "remote wins";
+          userNameCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/username".path}"];
+        };
+
+        khal = {
+          enable = true;
+          type = "discover";
+        };
+      };
     };
   };
 
@@ -73,6 +99,26 @@
         vdirsyncer = {
           enable = true;
           collections = ["from a" "from b"]; # Sync all collections
+        };
+      };
+
+      # Proton Mail Bridge CardDAV contacts
+      protonmmail = {
+        local = {
+          type = "filesystem";
+          fileExt = ".vcf";
+        };
+
+        remote = {
+          type = "carddav";
+          url = "https://127.0.0.1:8080";
+          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/bridge_pw".path}"];
+        };
+
+        vdirsyncer = {
+          enable = true;
+          collections = ["from a" "from b"];
+          userNameCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/username".path}"];
         };
       };
     };

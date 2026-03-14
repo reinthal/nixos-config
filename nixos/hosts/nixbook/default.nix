@@ -89,7 +89,7 @@
     tailscale.enable = true;
     ferroxide = {
       enable = true;
-      mode = "caldav";
+      mode = "serve";
     };
   };
   environment.shellInit = ''
