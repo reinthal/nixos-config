@@ -36,3 +36,4 @@
 
 ## Agent-Specific Instructions
 - For NixOS/Home Manager/nix-darwin lookups, prefer the MCP NixOS tools (`mcp__nixos__nix`, `mcp__nixos__nix_versions`) over web search.
+- Always use the NixOS MCP tools to confirm specific package names, module configuration options, or when creating new modules.

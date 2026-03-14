@@ -20,6 +20,7 @@ Common usage patterns:
 - **Version pinning**: use `mcp__nixos__nix_versions`
 
 Prefer MCP tools over WebSearch for all NixOS, Home Manager, and nix-darwin queries.
+Always use the MCP-NixOS tools to confirm specific package names, module configuration options, or when creating new modules.
 
 ## Development Commands
 
