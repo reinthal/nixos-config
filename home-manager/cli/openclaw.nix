@@ -45,6 +45,7 @@ in {
     packages = with pkgs;
       [
         # cli
+        bun
         age
         managarr
         vdirsyncer
