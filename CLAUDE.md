@@ -91,6 +91,7 @@ systems.
 - SOPS for secrets management with `secrets/shhh.yaml`
 - GPG and Yubikey support configured
 - Secrets referenced via `config.sops.secrets.<name>.path`
+- **IMPORTANT**: Never decrypt secrets files with `sops -d`. To check what secret keys exist, use `cat secrets/shhh.yaml` - keys are visible but values are encrypted
 
 ### Binary Caches
 

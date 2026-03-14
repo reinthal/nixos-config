@@ -32,6 +32,7 @@
 ## Security & Configuration Tips
 - Secrets are managed with SOPS; reference them via `config.sops.secrets.<name>.path`.
 - Avoid committing plaintext secrets or host-specific credentials.
+- **IMPORTANT**: Never decrypt secrets files with `sops -d`. To check what secret keys exist, use `cat secrets/shhh.yaml` - keys are visible but values are encrypted.
 
 ## Agent-Specific Instructions
 - For NixOS/Home Manager/nix-darwin lookups, prefer the MCP NixOS tools (`mcp__nixos__nix`, `mcp__nixos__nix_versions`) over web search.
