@@ -9,10 +9,10 @@
 }: {
   imports = [
     ./cli/openclaw.nix
-    (import ./sops.nix {
-      inherit inputs config;
-      secretsFile = ../secrets/shared.yaml;
-    })
+    # (import ./sops.nix {
+    #   inherit inputs config;
+    #   secretsFile = ../secrets/shared.yaml;
+    # })
   ];
 
   services.gnome-keyring.enable = true;
