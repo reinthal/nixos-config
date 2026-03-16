@@ -46,6 +46,7 @@ in {
       [
         # cli
         bun
+        wacli
         age
         managarr
         vdirsyncer
@@ -84,6 +85,7 @@ in {
         pkgs.unstable.devenv
       ];
     sessionPath = [
+      "/home/linuxbrew/.linuxbrew/bin"
       "$HOME/.npm-global/bin"
       "$HOME/.local/bin"
     ];
