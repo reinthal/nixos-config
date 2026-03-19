@@ -27,6 +27,8 @@ in {
       "apple/icloud_password" = {};
       "protonmail/bridge_pw" = {};
       "protonmail/username" = {};
+      "gcalendar/client_id" = {};
+      "gcalendar/client_secret" = {};
     };
     defaultSopsFile = secretsFile;
     age = {

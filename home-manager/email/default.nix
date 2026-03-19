@@ -83,6 +83,40 @@
         };
       };
 
+      # Google Calendar (OAuth)
+      google = {
+        local = {
+          type = "filesystem";
+          fileExt = ".ics";
+          path = "${config.home.homeDirectory}/.local/share/calendars/Google";
+        };
+
+        remote = {
+          type = "google_calendar";
+        };
+
+        vdirsyncer = {
+          enable = true;
+          tokenFile = "${config.home.homeDirectory}/.config/vdirsyncer/google-calendar-token";
+          clientIdCommand = [
+            "${pkgs.coreutils}/bin/printf"
+            "%s"
+            "683189906705-akr3qsd7n34t4drc0qf02tii6vpk518h.apps.googleusercontent.com"
+          ];
+          clientSecretCommand = [
+            "${pkgs.coreutils}/bin/cat"
+            "${config.sops.secrets."gcalendar/client_secret".path}"
+          ];
+          collections = ["from a" "from b"]; # Sync all collections discovered from server
+          conflictResolution = "remote wins";
+        };
+
+        khal = {
+          enable = true;
+          type = "discover";
+        };
+      };
+
       # iCloud mirror target for ProtonMirror
       icloud_protonmirror = {
         local = {
