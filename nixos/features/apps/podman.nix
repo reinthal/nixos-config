@@ -11,7 +11,6 @@
   virtualisation.oci-containers.backend = "podman";
   environment.systemPackages = [
     pkgs.podman-compose
-    pkgs.distrobox
     pkgs.nvidia-container-toolkit
     pkgs.nvtopPackages.panthor
   ];

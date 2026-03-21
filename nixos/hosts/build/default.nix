@@ -11,7 +11,7 @@
     ../../common.nix
     ../../features/coms
     ../../features/nas.nix
-    ../../features/apps/podman.nix
+    ../../features/apps/docker.nix
     ../../features/apps/syncthing.nix
     ../../features/desktop
     ../../features/sops.nix
