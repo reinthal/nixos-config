@@ -31,6 +31,11 @@ sudo apt install -y curl git gh vim zsh
 # Install Nix (daemon mode)
 if ! command -v nix >/dev/null 2>&1; then
   sh <(curl -L https://nixos.org/nix/install) --daemon
+  # Ensure Nix is available in this shell without requiring a new login.
+  if [[ -r /etc/profile.d/nix.sh ]]; then
+    # shellcheck disable=SC1091
+    . /etc/profile.d/nix.sh
+  fi
 fi
 
 # Install Home Manager via channels (bootstrap)
