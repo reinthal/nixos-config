@@ -23,6 +23,7 @@ in {
       [
         # cli
         nodejs_24
+        tidal-dl
         tdf
         wireguard-tools
         uv
