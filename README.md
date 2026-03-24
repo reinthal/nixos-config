@@ -35,6 +35,14 @@ my reproducible, declarative system setups for my linux machines.
 
 ## Bootstrapping a Linux environment (Home-manager)
 
+You can run the full bootstrap as a script:
+
+```bash
+./scripts/bootstrap-home-manager.sh
+```
+
+Manual steps:
+
 ```bash
 sudo apt update && sudo apt install -y curl git gh vim
 ```
