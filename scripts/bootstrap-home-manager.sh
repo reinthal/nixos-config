@@ -65,8 +65,25 @@ ensure_line "/home/$(whoami)/.nix-profile/bin/zsh" /etc/shells
 # Restart Nix daemon to pick up nix.conf changes
 sudo systemctl restart nix-daemon
 
+# Detect system architecture and choose appropriate flake config
+ARCH=$(uname -m)
+case "$ARCH" in
+  x86_64)
+    FLAKE_CONFIG="kog@cli"
+    ;;
+  aarch64|arm64)
+    FLAKE_CONFIG="kog@cli-aarch64"
+    ;;
+  *)
+    echo "Unsupported architecture: $ARCH" >&2
+    exit 1
+    ;;
+esac
+
+echo "Detected architecture: $ARCH, using flake config: $FLAKE_CONFIG"
+
 # Install the CLI home-manager config and switch shell
-home-manager switch --flake .#kog@cli --impure -b bkp
+home-manager switch --flake ".#$FLAKE_CONFIG" --impure -b bkp
 sudo chsh -s "$(command -v zsh)" "$(whoami)"
 
 echo "WELCOME TO NIXLAND"
