@@ -49,7 +49,7 @@
         };
       };
 
-      # Proton Mail Bridge CalDAV calendar
+      # Proton Mail subscription calendar (ICS)
       protonmail = {
         local = {
           type = "filesystem";
@@ -58,23 +58,14 @@
         };
 
         remote = {
-          type = "caldav";
-          url = "http://127.0.0.1:8081";
-          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/bridge_pw".path}"];
+          type = "http";
+          url = "https://calendar.proton.me/api/calendar/v1/url/RXshcc0AgOWV3fruLLD95HoA8YzQuUD7muNPq9DRaQC7kOM0AWymFpWXtQIgksMXqwt8GFzWwA982umokM3TOw==/calendar.ics?CacheKey=-eoPYJakgSs-CjyHe9x0vA%3D%3D";
         };
 
         vdirsyncer = {
           enable = true;
-          collections = [
-            [
-              "ProtonMirror"
-              "q2zVgfHcJ-_us1hjWde6kihJJCqsiI7gAIYLNb5PkdHg7i_ji3oNyMNnDMQhEwPmQBBzokMInDGZNsMSL3bjGw=="
-              "ProtonMirror"
-            ]
-          ];
+          collections = null;
           conflictResolution = "remote wins";
-          userNameCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."protonmail/username".path}"];
-          auth = "basic";
         };
 
         khal = {
@@ -117,33 +108,6 @@
         };
       };
 
-      # iCloud mirror target for ProtonMirror
-      icloud_protonmirror = {
-        local = {
-          type = "filesystem";
-          fileExt = ".ics";
-          path = "${config.home.homeDirectory}/.local/share/calendars/ProtonMirror";
-        };
-
-        remote = {
-          type = "caldav";
-          url = "https://caldav.icloud.com";
-          userName = "kog@wlots.st";
-          passwordCommand = ["${pkgs.coreutils}/bin/cat" "${config.sops.secrets."apple/icloud_password".path}"];
-        };
-
-        vdirsyncer = {
-          enable = true;
-          collections = [
-            [
-              "ProtonMirror"
-              "808c61e1-3fe3-4998-aa29-f334d6270a49"
-              "ProtonMirror"
-            ]
-          ];
-          conflictResolution = "local wins";
-        };
-      };
     };
   };
 
