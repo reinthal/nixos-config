@@ -37,7 +37,15 @@
   ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.efi.canTouchEfiVariables = false;
+
+  # Automatic garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   networking.firewall = {
     enable = true;
@@ -65,6 +73,10 @@
     upower.enable = true;
     # Printer  and printer discovery
     printing.enable = true;
+    journald.extraConfig = ''
+      SystemMaxUse=500M
+      MaxRetentionSec=7day
+    '';
     # enable if printer issues
     #avahi = {
     #enable = true;

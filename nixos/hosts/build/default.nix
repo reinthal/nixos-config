@@ -44,6 +44,7 @@
   # Bootloader.
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.hostName = "build"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -53,6 +54,13 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Automatic garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -65,6 +73,10 @@
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
     meilisearch.enable = false;
+    journald.extraConfig = ''
+      SystemMaxUse=500M
+      MaxRetentionSec=7day
+    '';
   };
   environment.shellInit = ''
     export GPG_TTY="$(tty)"
