@@ -75,6 +75,10 @@ systems.
 **Standalone Home Manager**:
 
 - `kog@cli` - CLI-only config for non-NixOS systems (x86_64-linux)
+- `kog@cli-aarch64` - CLI-only config for non-NixOS systems (aarch64-linux)
+
+Run with: `nix run nixpkgs#home-manager -- switch --flake .#kog@cli-aarch64 --impure`
+(Replace `kog@cli-aarch64` with `kog@cli` for x86_64 systems)
 
 ### Key Configuration Patterns
 

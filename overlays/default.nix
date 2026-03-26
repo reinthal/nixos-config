@@ -43,4 +43,13 @@
       config.allowUnfree = true;
     };
   };
+
+  # When applied, the nixpkgs master branch will be accessible through 'pkgs.master'.
+  # Use pkgs.master.<name> for bleeding-edge packages from the master branch.
+  master-packages = final: _prev: {
+    master = import inputs.nixpkgs-master {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
 }

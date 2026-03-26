@@ -9,6 +9,7 @@
   ];
   desktop-apps = with pkgs;
     [
+      master.lmstudio
       anki
       libreoffice-qt6-fresh
       obsidian

@@ -20,6 +20,7 @@
     claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
@@ -141,6 +142,7 @@
             outputs.overlays.unstable-packages
             outputs.overlays.additions
             outputs.overlays.modifications
+            outputs.overlays.master-packages
           ];
         };
         extraSpecialArgs = {
@@ -163,6 +165,7 @@
             outputs.overlays.unstable-packages
             outputs.overlays.additions
             outputs.overlays.modifications
+            outputs.overlays.master-packages
           ];
         };
         extraSpecialArgs = {
@@ -185,6 +188,7 @@
             outputs.overlays.unstable-packages
             outputs.overlays.additions
             outputs.overlays.modifications
+            outputs.overlays.master-packages
           ];
         };
         extraSpecialArgs = {
