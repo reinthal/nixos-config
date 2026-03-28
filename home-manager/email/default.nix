@@ -4,6 +4,30 @@
   ...
 }: let
   calBase = "${config.home.homeDirectory}/.local/share/calendars";
+  statusBase = "${config.home.homeDirectory}/.local/share/vdirsyncer/status";
+
+  # Separate vdirsyncer config for cross-provider sync pairs
+  crossSyncConfig = pkgs.writeText "vdirsyncer-cross-sync" ''
+    [general]
+    status_path = "${statusBase}"
+
+    [pair google_to_icloud_sekten]
+    a = "google_sekten_local"
+    b = "icloud_sekten_local"
+    collections = null
+    conflict_resolution = "a wins"
+
+    [storage google_sekten_local]
+    type = "filesystem"
+    path = "${calBase}/Google/f5s78enb50i5h34qor4nak64v0@group.calendar.google.com"
+    fileext = ".ics"
+
+    [storage icloud_sekten_local]
+    type = "filesystem"
+    path = "${calBase}/icloud/7ff0cadc-7dba-4de8-a2d2-df9e41b0e545"
+    fileext = ".ics"
+    read_only = true
+  '';
 in {
   # Enable vdirsyncer program (generates config file)
   programs.vdirsyncer = {
@@ -225,6 +249,35 @@ in {
           color = "#8e44ad";
         };
       };
+    };
+  };
+
+  # Cross-provider sync: Google Sekten -> iCloud Sekten/WLOTS (one-way)
+  systemd.user.services.vdirsyncer-cross-sync = {
+    Unit = {
+      Description = "Sync Google Sekten calendar to iCloud Sekten/WLOTS";
+      After = ["vdirsyncer.service"];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.writeShellScript "vdirsyncer-cross-sync" ''
+        ${pkgs.vdirsyncer}/bin/vdirsyncer -c ${crossSyncConfig} discover
+        ${pkgs.vdirsyncer}/bin/vdirsyncer -c ${crossSyncConfig} sync
+      ''}";
+    };
+  };
+
+  systemd.user.timers.vdirsyncer-cross-sync = {
+    Unit = {
+      Description = "Run cross-provider calendar sync every 15 minutes";
+    };
+    Timer = {
+      OnCalendar = "*:0/15";
+      Persistent = true;
+      RandomizedDelaySec = 60;
+    };
+    Install = {
+      WantedBy = ["timers.target"];
     };
   };
 
