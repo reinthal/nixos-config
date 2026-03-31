@@ -21,7 +21,7 @@
       prismlauncher
       reaper
     ]
-    ++ lib.optionals (builtins.currentSystem == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
+    ++ lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
 in {
   imports = [
     ./waybar.nix

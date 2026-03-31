@@ -47,7 +47,8 @@ in {
         git-lfs
         btop
         tree
-        inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
+        # TEMP: Disabled until upstream fixes nodePackages.asar reference
+        # inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
         # programming
         gh
         nixd
@@ -92,8 +93,12 @@ in {
     git = {
       enable = true;
       lfs.enable = true;
-      userEmail = "email@reinthal.me";
-      userName = "Alexander Reinthal";
+      settings = {
+        user = {
+          email = "email@reinthal.me";
+          name = "Alexander Reinthal";
+        };
+      };
       signing = {
         signByDefault = true;
         key = "1B24ADB218CFB40E";
@@ -122,6 +127,7 @@ in {
 
     zsh = {
       enable = true;
+      dotDir = "${config.xdg.configHome}/zsh";
       autocd = true;
       history = {
         share = true;

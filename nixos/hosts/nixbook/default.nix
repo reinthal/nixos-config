@@ -109,7 +109,6 @@
     zsh.enable = true;
     dconf.enable = true;
     nix-ld.enable = true;
-    light.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;

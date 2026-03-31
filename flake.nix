@@ -17,7 +17,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
     pyprland.url = "github:hyprland-community/pyprland";
     pyprland.inputs.nixpkgs.follows = "nixpkgs";
-    claude-desktop.url = "github:aaddrick/claude-desktop-debian";
+    claude-desktop.url = "github:reinthal/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
@@ -36,7 +36,7 @@
     darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     apple-silicon.url = "github:nix-community/nixos-apple-silicon";
-    apple-silicon.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = {
     self,
