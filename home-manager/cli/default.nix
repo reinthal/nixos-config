@@ -59,10 +59,12 @@ in {
         # devops
         k9s
         kubectl
+        claude-code
+        codex
+        bubblewrap
       ]
       ++ [
         pkgs.unstable.signal-desktop
-        pkgs.unstable.codex
         pkgs.unstable.claude-code
         pkgs.unstable.mcp-proxy
         pkgs.unstable.devenv
