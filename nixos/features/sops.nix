@@ -13,6 +13,20 @@
       nas = {
         owner = config.users.users.kog.name;
       };
+      "s3/client_id" = {
+        owner = config.users.users.kog.name;
+      };
+      "s3/secret_key" = {
+        owner = config.users.users.kog.name;
+      };
+      "nix_cache/secret_key" = {
+        path = "/etc/nix/signing-key.sec";
+        mode = "0400";
+      };
+      "nix_cache/credentials" = {
+        path = "/root/.aws/credentials";
+        mode = "0400";
+      };
     };
     defaultSopsFile = ../../secrets/shhh.yaml;
     age = {

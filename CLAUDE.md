@@ -98,6 +98,32 @@ Run with: `nix run nixpkgs#home-manager -- switch --flake .#kog@cli-aarch64 --im
 - Secrets referenced via `config.sops.secrets.<name>.path`
 - **IMPORTANT**: Never decrypt secrets files with `sops -d`. To check what secret keys exist, use `cat secrets/shhh.yaml` - keys are visible but values are encrypted
 
+#### Security Boundary: NixOS vs Home Manager
+
+**CRITICAL SECURITY RULE**: Maintain strict separation between system (root) and user configurations.
+
+- **NixOS configuration** (`nixos/`): System-level, root-owned, immutable
+  - Scripts run as root MUST be defined in `pkgs/` or `nixos/`
+  - Secrets for root processes go in `nixos/features/sops.nix`
+  - Never use home-manager configurations for root processes
+
+- **Home Manager** (`home-manager/`): User-level, user-writable
+  - Scripts and configs here can be modified by the user
+  - Using these for root processes creates privilege escalation risk
+  - Secrets here are for user processes only
+
+**Examples:**
+- ✅ System script in `pkgs/cache-upload.nix` → `environment.systemPackages`
+- ✅ Root secrets in `nixos/features/sops.nix` → `/etc/` or `/root/`
+- ❌ Root using scripts from `home-manager/scripts/` (privilege escalation)
+- ❌ Root using secrets from `home-manager/sops.nix` (security boundary violation)
+- ❌ Scripts with fallback to user paths (e.g., checking `~/.config` then `/etc`)
+
+**Why this matters:**
+- If root scripts trust user-writable files, users can inject malicious code/keys
+- Example: signing key in `~/.config` allows user to sign malicious packages as trusted
+- Always enforce single source of truth for root operations
+
 ### Binary Caches
 
 - Private: `https://minio.nas.reinthal.me/nix-cache`

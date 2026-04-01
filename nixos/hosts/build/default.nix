@@ -46,6 +46,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Enable cross-compilation via QEMU user emulation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   networking.hostName = "build"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -62,10 +65,18 @@
     options = "--delete-older-than 30d";
   };
 
+  # Binary cache signing
+  nix.settings = {
+    secret-key-files = [ "/etc/nix/signing-key.sec" ];
+    # Uncomment to auto-upload all builds to cache:
+    post-build-hook = "";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pinentry-curses
+    local-pkgs.cache-upload
   ];
 
   services = {

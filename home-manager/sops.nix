@@ -11,14 +11,6 @@ in {
   ];
   sops = {
     secrets = {
-      "nix_cache/secret_key" = {
-        path = "${homeDirectory}/.config/nix/secret.key";
-        mode = "0400";
-      };
-      "nix_cache/nixbuilder" = {
-        path = "${homeDirectory}/.aws/credentials";
-        mode = "0400";
-      };
       "yt-dlp" = {
         path = "${homeDirectory}/.config/yt-dlp.txt";
         mode = "0400";

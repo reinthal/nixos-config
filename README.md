@@ -238,5 +238,5 @@ nix store sign --recursive --key-file ~/.config/nix/secret.key /run/current-syst
 ```
 
 ```
-nix copy --to 's3://nix-cache?profile=nixbuilder&endpoint=minio.nas.reinthal.me' /run/current-system
+nix copy --to 's3://nix-cache' /run/current-system
 ```
