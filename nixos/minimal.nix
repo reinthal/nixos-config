@@ -50,6 +50,9 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
+      # Use all available CPU cores for builds
+      cores = 0;  # 0 = use all cores
+      max-jobs = "auto";  # number of parallel builds
 
       # binary caches
       substituters = [];
