@@ -47,8 +47,7 @@ in {
         git-lfs
         btop
         tree
-        # TEMP: Disabled until upstream fixes nodePackages.asar reference
-        # inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
+        inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
         # programming
         gh
         nixd
