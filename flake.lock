@@ -29,15 +29,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1774986702,
-        "narHash": "sha256-eYWztA5XI9tBzIOGbOkJ38CrGOTJdg8kxbQ4QkkeifY=",
-        "owner": "reinthal",
+        "lastModified": 1775182538,
+        "narHash": "sha256-TWHsEO1YhuTJXWwf8AjnKQ6y7fotfhFNkzyL4pt/UVY=",
+        "owner": "aaddrick",
         "repo": "claude-desktop-debian",
-        "rev": "f04ec24184c58c21d0af3d898b4158daebb5a633",
+        "rev": "0782c5a70e0e14ea1b5bf8778ec65b0df070e010",
         "type": "github"
       },
       "original": {
-        "owner": "reinthal",
+        "owner": "aaddrick",
         "repo": "claude-desktop-debian",
         "type": "github"
       }
