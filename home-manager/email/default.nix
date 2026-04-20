@@ -21,12 +21,12 @@
     type = "filesystem"
     path = "${calBase}/Google/f5s78enb50i5h34qor4nak64v0@group.calendar.google.com"
     fileext = ".ics"
+    read_only = true
 
     [storage icloud_sekten_local]
     type = "filesystem"
     path = "${calBase}/icloud/7ff0cadc-7dba-4de8-a2d2-df9e41b0e545"
     fileext = ".ics"
-    read_only = true
   '';
 in {
   # Enable vdirsyncer program (generates config file)
