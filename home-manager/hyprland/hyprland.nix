@@ -120,6 +120,7 @@ in {
         ++ [
           (g "tasks" "chromium --app=https://linear.app/reinthal/team/REI/active")
           (g "llm" "claude-desktop")
+          (g "toggl" "chromium --app=https://track.toggl.com/timer")
           (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
           (g "discord" "chromium --app=https://discord.com/channels/@me")
           (g "email" "chromium --app=https://mail.proton.me/")
@@ -205,10 +206,10 @@ in {
           "SUPER, N, togglespecialworkspace, discord"
           "SUPER, V, togglespecialworkspace, email"
           "SUPER, C, togglespecialworkspace, code"
-          "SUPER, K, togglespecialworkspace, signal-desktop"
-          "SUPER, J, togglespecialworkspace, llm"
           "SUPER, H, togglespecialworkspace, tasks"
-
+          "SUPER, J, togglespecialworkspace, llm"
+          "SUPER, K, togglespecialworkspace, signal-desktop"
+          "SUPER, L, togglespecialworkspace, toggl"
           (mvfocus "k" "u")
           (mvfocus "j" "d")
           (mvfocus "l" "r")
