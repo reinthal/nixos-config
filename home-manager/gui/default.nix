@@ -39,6 +39,7 @@ in {
         {id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";} # dark reader
         {id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # sponsor block youtube
         {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
+        {id = "fcoeoabgfenejglbffodgkkbkcdhcgfn";} # claude
       ];
     };
 
