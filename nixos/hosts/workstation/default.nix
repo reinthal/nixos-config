@@ -25,6 +25,7 @@
     outputs.nixosModules.dual-function-keys
     ../../features/key-mappings/caps-to-ctrl-esc.nix
     inputs.home-manager.nixosModules.default
+    inputs.handy.nixosModules.default
   ];
   nixpkgs.hostPlatform = "x86_64-linux";
   # Bootloader.
@@ -82,6 +83,7 @@
 
   time.timeZone = "Europe/Stockholm";
 
+  programs.handy.enable = true;
   programs.dconf.enable = true;
 
   # Enable networking
@@ -97,7 +99,7 @@
   users.users.kog = {
     isNormalUser = true;
     description = "kog";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "input"];
     packages = with pkgs; [
       #  thunderbird
     ];

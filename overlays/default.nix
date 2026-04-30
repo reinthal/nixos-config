@@ -9,6 +9,7 @@
     # nest everything under a namespace that's not likely to collide
     # with anything in nixpkgs
     local-pkgs = import ../pkgs {pkgs = final;};
+    handy = inputs.handy.packages.${final.stdenv.hostPlatform.system}.handy;
   };
 
   # This one contains whatever you want to overlay
