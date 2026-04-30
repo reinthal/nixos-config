@@ -105,6 +105,7 @@ in {
       signing = {
         signByDefault = true;
         key = "1B24ADB218CFB40E";
+        format = "openpgp";
       };
     };
 
