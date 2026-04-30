@@ -142,6 +142,11 @@ in {
         ];
       };
 
+      windowrule = [
+        "float on, match:class ^(org\\.gnome\\.Nautilus)$"
+        "size 900 600, match:class ^(org\\.gnome\\.Nautilus)$"
+      ];
+
       plugin = {
         overview = {
           centerAligned = true;
