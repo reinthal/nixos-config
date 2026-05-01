@@ -191,7 +191,6 @@ in {
           "SUPER, D, exec, makoctl dismiss"
           "SUPER SHIFT, D, exec, makoctl dismiss -a"
           "SUPER, B, exec, swww-wallpaper"
-          "SUPER SHIFT, Space, exec, handy --toggle-transcription"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"

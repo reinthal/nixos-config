@@ -20,7 +20,6 @@
       mpv
       prismlauncher
       reaper
-      handy
     ]
     ++ lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
 in {
