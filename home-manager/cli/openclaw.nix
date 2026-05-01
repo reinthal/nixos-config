@@ -52,7 +52,6 @@ in {
         vdirsyncer
         khal
         nodejs_24
-        tdf
         uv
         mcp-nixos
         dig

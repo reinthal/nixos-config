@@ -19,20 +19,6 @@
     # ...
     # });
 
-    # Mesa patch for Firefox regression fix (Apple Silicon)
-    # Uses specific nixpkgs commit with working Mesa 25.3.0
-    mesa =
-      if prev.mesa.version == "25.3.0"
-      then
-        (import (builtins.fetchTarball {
-          url = "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz";
-          sha256 = "sha256-4PqRErxfe+2toFJFgcRKZ0UI9NSIOJa+7RXVtBhy4KE=";
-        }) {
-          localSystem = final.stdenv.hostPlatform;
-        })
-        .mesa
-      else prev.mesa;
-  };
   # When applied, the nixpkgs-unstable set (same branch as the main nixpkgs,
   # but independently pinned) will be accessible through 'pkgs.unstable'.
   # Use pkgs.unstable.<name> for packages that should update more frequently

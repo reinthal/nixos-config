@@ -13,7 +13,6 @@
     ../../features/locales.nix
     ../../features/apps/vm-services.nix
     ../../features/apps/tor.nix
-    ../../features/apps/zabbix.nix
   ];
   # Bootloader.
   boot.loader.grub.enable = true;

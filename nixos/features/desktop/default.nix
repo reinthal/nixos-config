@@ -3,7 +3,6 @@
   inputs,
   ...
 }: {
-
   imports = [
     ../greetd.nix
   ];
@@ -28,7 +27,6 @@
     nautilus
     # disk utility
     baobab
-    wireshark
     # Wayland /  Hyprland
     libnotify
     wl-gammactl

@@ -22,9 +22,7 @@ in {
     packages = with pkgs;
       [
         # cli
-        nodejs_24
         tidal-dl
-        tdf
         wireguard-tools
         uv
         mcp-nixos
@@ -51,16 +49,9 @@ in {
         # programming
         gh
         nixd
-        # data
-        minio-client
         # dev nix
         nixpkgs-fmt
-        # devops
-        k9s
-        kubectl
         claude-code
-        codex
-        bubblewrap
       ]
       ++ [
         pkgs.unstable.signal-desktop
@@ -79,7 +70,6 @@ in {
       SHELL = "${pkgs.zsh}/bin/zsh";
       # Fix SSL certificate path for uv and other tools expecting OpenSSL default location
       SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-      # ANTHROPIC_API_KEY = builtins.readFile anthropicKey;
     };
   };
 
