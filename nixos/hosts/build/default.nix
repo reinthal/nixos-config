@@ -9,7 +9,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
-    ../../features/coms
     ../../features/nas.nix
     ../../features/apps/docker.nix
     ../../features/apps/syncthing.nix
@@ -48,7 +47,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable cross-compilation via QEMU user emulation
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
   networking.hostName = "build"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -67,7 +66,7 @@
 
   # Binary cache signing
   nix.settings = {
-    secret-key-files = [ "/etc/nix/signing-key.sec" ];
+    secret-key-files = ["/etc/nix/signing-key.sec"];
     # Uncomment to auto-upload all builds to cache:
     post-build-hook = "";
   };

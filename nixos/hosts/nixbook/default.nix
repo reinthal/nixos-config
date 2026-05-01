@@ -14,7 +14,6 @@
     inputs.apple-silicon.nixosModules.apple-silicon-support
 
     ../../features/apps/podman.nix
-    ../../features/coms
     ../../features/desktop
     ../../features/sops.nix
     ../../features/nas.nix

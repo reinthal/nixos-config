@@ -27,7 +27,6 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
-      outputs.overlays.modifications
       outputs.overlays.unstable-packages
       outputs.overlays.master-packages
     ];
@@ -51,8 +50,8 @@
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
       # Use all available CPU cores for builds
-      cores = 0;  # 0 = use all cores
-      max-jobs = "auto";  # number of parallel builds
+      cores = 0; # 0 = use all cores
+      max-jobs = "auto"; # number of parallel builds
 
       # binary caches
       substituters = [];

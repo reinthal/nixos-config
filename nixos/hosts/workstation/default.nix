@@ -11,7 +11,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../common.nix
-    ../../features/coms
     ../../features/apps/podman.nix
     ../../features/desktop
     ../../features/sops.nix

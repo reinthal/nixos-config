@@ -22,6 +22,8 @@ in {
     packages = with pkgs;
       [
         # cli
+        nodejs_24
+        bun
         tidal-dl
         wireguard-tools
         uv
