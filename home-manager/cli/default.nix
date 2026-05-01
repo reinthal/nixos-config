@@ -63,6 +63,7 @@ in {
       ];
     sessionPath = [
       "$HOME/.npm-global/bin"
+      "$HOME/.cache/.bun/bin"
     ];
     sessionVariables = {
       PAGER = "less";
