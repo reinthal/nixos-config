@@ -71,15 +71,20 @@ if [[ -d /usr/local/cuda ]] && command -v nvidia-smi >/dev/null 2>&1; then
   IS_LAMBDA=true
 fi
 
-# Create /run/opengl-driver/lib symlink for Nix CUDA compatibility.
-# Nix tools (devenv, nix-shell) expect driver libs at /run/opengl-driver/lib
-# but on Ubuntu/Debian they live in /usr/lib/x86_64-linux-gnu/.
+# Symlink only NVIDIA/CUDA driver libs into /run/opengl-driver/lib.
+# Nix tools expect driver libs at /run/opengl-driver/lib but symlinking the
+# entire /usr/lib/x86_64-linux-gnu causes glibc conflicts with Nix's own glibc.
 if [[ "$IS_LAMBDA" == true ]]; then
-  if [[ ! -d /run/opengl-driver/lib ]]; then
-    sudo mkdir -p /run/opengl-driver
-    sudo ln -sfn /usr/lib/x86_64-linux-gnu /run/opengl-driver/lib
-    echo "Created /run/opengl-driver/lib -> /usr/lib/x86_64-linux-gnu"
-  fi
+  sudo mkdir -p /run/opengl-driver/lib
+  for lib in libcuda.so libcuda.so.1 libnvidia-ml.so.1 libnvidia-ml.so \
+             libcudadebugger.so.1 libnvidia-ptxjitcompiler.so.1 \
+             libnvidia-nvvm.so.4 libnvidia-gpucomp.so; do
+    src="/usr/lib/x86_64-linux-gnu/$lib"
+    if [[ -e "$src" ]]; then
+      sudo ln -sfn "$src" "/run/opengl-driver/lib/$lib"
+    fi
+  done
+  echo "Symlinked NVIDIA/CUDA driver libs into /run/opengl-driver/lib/"
 fi
 
 # Detect system architecture and choose appropriate flake config
