@@ -1,10 +1,10 @@
 {
   inputs,
   config,
-  secretsFile ? ../secrets/shhh.yaml,
   ...
 }: let
   homeDirectory = config.home.homeDirectory;
+  secretsFile = ../secrets/shhh.yaml;
 in {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
