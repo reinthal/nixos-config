@@ -2,7 +2,7 @@
   description = "Alex config flake";
   nixConfig = {
     substituters = [
-      "https://tree-ams5-0003.secure.backblaze.com/file/reinthal-nix-store"
+      "https://reinthal-nix-store.s3.eu-central-003.backblazeb2.com"
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
     ];
