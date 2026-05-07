@@ -127,7 +127,7 @@ Run with: `nix run nixpkgs#home-manager -- switch --flake .#kog@cli-aarch64 --im
 
 ### Binary Caches
 
-- Private: `https://minio.nas.reinthal.me/nix-cache`
+- Private: `https://tree-ams5-0003.secure.backblaze.com/reinthal-nix-store`
 - Official: `https://cache.nixos.org`
 - Community: `https://nix-community.cachix.org`
 

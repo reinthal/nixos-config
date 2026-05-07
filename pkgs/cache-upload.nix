@@ -36,7 +36,7 @@ let
         exit 0
     fi
 
-    CACHE_URL="s3://nix-cache?endpoint=minio.nas.reinthal.me&scheme=https"
+    CACHE_URL="s3://reinthal-nix-store?endpoint=tree-ams5-0003.secure.backblaze.com&scheme=https"
 
     # Signing key must be system-level only (security: no user-writable fallback)
     SIGNING_KEY="/etc/nix/signing-key.sec"

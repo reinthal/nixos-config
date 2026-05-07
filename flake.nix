@@ -2,14 +2,14 @@
   description = "Alex config flake";
   nixConfig = {
     substituters = [
-      "https://minio.nas.reinthal.me/nix-cache"
+      "https://tree-ams5-0003.secure.backblaze.com/reinthal-nix-store"
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
     ];
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "minio.nas.reinthal.me-1:snkldWl4cS1qcKxjNyHX+wTtOAv/hpT5SITsYlzKFUA="
+      "reinthal-nix-store:PKEXEQXsLCz9vWz71iaD1TYRLa4XbDQxjL8rrAccDwg="
     ];
   };
   inputs = {

@@ -17,8 +17,7 @@ in {
       };
       "apple/icloud_username" = {};
       "apple/icloud_password" = {};
-      "protonmail/bridge_pw" = {};
-      "protonmail/username" = {};
+
       "gcalendar/client_id" = {};
       "gcalendar/client_secret" = {};
     };
