@@ -30,8 +30,11 @@
         if [[ -e /run/current-system ]]; then
             PATHS=("/run/current-system")
             echo "No paths specified, uploading current system closure..."
+        elif [[ -e "${homeDirectory}/.local/state/nix/profiles/home-manager" ]]; then
+            PATHS=("${homeDirectory}/.local/state/nix/profiles/home-manager")
+            echo "No paths specified, uploading current home-manager generation..."
         else
-            echo "Error: No paths specified and /run/current-system not found"
+            echo "Error: No paths specified and neither /run/current-system nor home-manager profile found"
             exit 1
         fi
     else
