@@ -7,7 +7,7 @@
   cache-upload = pkgs.writeShellScriptBin "cache-upload" ''
     set -euo pipefail
 
-    CACHE_URL="s3://reinthal-nix-store?endpoint=tree-ams5-0003.secure.backblaze.com&scheme=https"
+    CACHE_URL="s3://reinthal-nix-store?endpoint=s3.eu-central-003.backblazeb2.com&scheme=https"
     SIGNING_KEY="${homeDirectory}/.config/nix/signing-key.sec"
 
     if [[ "''${1:-}" == "--help" || "''${1:-}" == "-h" ]]; then
