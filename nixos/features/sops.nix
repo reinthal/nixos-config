@@ -23,10 +23,6 @@
         path = "/etc/nix/signing-key.sec";
         mode = "0400";
       };
-      "nix_cache/credentials" = {
-        path = "/root/.aws/credentials";
-        mode = "0400";
-      };
     };
     defaultSopsFile = ../../secrets/shhh.yaml;
     age = {

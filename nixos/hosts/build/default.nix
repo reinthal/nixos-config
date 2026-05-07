@@ -63,18 +63,13 @@
     options = "--delete-older-than 30d";
   };
 
-  # Binary cache signing
-  nix.settings = {
-    secret-key-files = ["/etc/nix/signing-key.sec"];
-    # Uncomment to auto-upload all builds to cache:
-    post-build-hook = "";
-  };
+  # Binary cache signing (daemon needs root-level key for builds)
+  nix.settings.secret-key-files = ["/etc/nix/signing-key.sec"];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pinentry-curses
-    local-pkgs.cache-upload
   ];
 
   services = {

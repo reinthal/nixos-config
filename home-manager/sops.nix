@@ -20,6 +20,14 @@ in {
 
       "gcalendar/client_id" = {};
       "gcalendar/client_secret" = {};
+      "nix_cache/secret_key" = {
+        path = "${homeDirectory}/.config/nix/signing-key.sec";
+        mode = "0400";
+      };
+      "nix_cache/credentials" = {
+        path = "${homeDirectory}/.aws/credentials";
+        mode = "0400";
+      };
     };
     defaultSopsFile = secretsFile;
     age = {
