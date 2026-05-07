@@ -182,7 +182,7 @@
       };
       "ubuntu@lambda" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          system = "x86_64-linux";
+          system = builtins.currentSystem;
           config.allowUnfree = true;
           overlays = [
             outputs.overlays.unstable-packages

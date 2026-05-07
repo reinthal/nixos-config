@@ -93,7 +93,11 @@ case "$ARCH" in
     fi
     ;;
   aarch64|arm64)
-    FLAKE_CONFIG="kog@cli-aarch64"
+    if [[ "$IS_LAMBDA" == true ]]; then
+      FLAKE_CONFIG="ubuntu@lambda"
+    else
+      FLAKE_CONFIG="kog@cli-aarch64"
+    fi
     ;;
   *)
     echo "Unsupported architecture: $ARCH" >&2
