@@ -5,7 +5,7 @@
   config,
   ...
 }: let
-  reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
+  reinthalVim = inputs.reinthalVim.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
   home = {
     file.".inputrc".source = ../dotfiles/.inputrc;

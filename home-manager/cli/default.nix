@@ -5,7 +5,7 @@
   config,
   ...
 }: let
-  reinthalVim = inputs.reinthalVim.packages.${pkgs.system}.default;
+  reinthalVim = inputs.reinthalVim.packages.${pkgs.stdenv.hostPlatform.system}.default;
   configDirectory = config.xdg.configHome;
   anthropicKey = "${configDirectory}/Claude/api.key";
 in {
@@ -49,7 +49,7 @@ in {
         git-lfs
         btop
         tree
-        inputs.claude-desktop.packages.${pkgs.system}.claude-desktop
+        inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
         # programming
         gh
         nixd

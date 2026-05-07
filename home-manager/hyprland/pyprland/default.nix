@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  pyprland = inputs.pyprland.packages.${pkgs.system}.pyprland;
+  pyprland = inputs.pyprland.packages.${pkgs.stdenv.hostPlatform.system}.pyprland;
 in {
   home.packages = [
     pyprland
