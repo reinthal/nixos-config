@@ -20,7 +20,6 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
-      outputs.overlays.modifications
       outputs.overlays.unstable-packages
       outputs.overlays.master-packages
     ];

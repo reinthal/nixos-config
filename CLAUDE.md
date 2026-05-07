@@ -76,6 +76,7 @@ systems.
 
 - `kog@cli` - CLI-only config for non-NixOS systems (x86_64-linux)
 - `kog@cli-aarch64` - CLI-only config for non-NixOS systems (aarch64-linux)
+- `ubuntu@lambda` - Lambda GPU servers with CUDA symlinks (x86_64-linux)
 
 Run with: `nix run nixpkgs#home-manager -- switch --flake .#kog@cli-aarch64 --impure`
 (Replace `kog@cli-aarch64` with `kog@cli` for x86_64 systems)
@@ -140,3 +141,19 @@ are available via overlays:
 
 There is no stable channel. Use `pkgs.unstable.<package>` or
 `pkgs.master.<package>` when a specific channel is needed.
+
+### Overlays
+
+To add a new package override overlay in `overlays/default.nix`:
+
+```nix
+modifications = final: prev: {
+  example = prev.example.overrideAttrs (oldAttrs: {
+    # patches, version changes, compilation flags, etc.
+  });
+};
+```
+
+Then add `outputs.overlays.modifications` to the `nixpkgs.overlays` list in
+each home-manager/host config that needs it, and to the `overlays` list in
+each standalone `homeConfigurations` entry in `flake.nix`.

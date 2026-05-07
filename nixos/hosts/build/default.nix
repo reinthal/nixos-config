@@ -14,7 +14,6 @@
     ../../features/apps/syncthing.nix
     ../../features/desktop
     ../../features/sops.nix
-    ../../features/steam
     ../../features/cli/default.nix
     # enable various features
     ../../features/sound.nix

@@ -65,11 +65,32 @@ ensure_line "/home/$(whoami)/.nix-profile/bin/zsh" /etc/shells
 # Restart Nix daemon to pick up nix.conf changes
 sudo systemctl restart nix-daemon
 
+# Detect if running on a Lambda GPU server (Ubuntu with NVIDIA/CUDA)
+IS_LAMBDA=false
+if [[ -d /usr/local/cuda ]] && command -v nvidia-smi >/dev/null 2>&1; then
+  IS_LAMBDA=true
+fi
+
+# Create /run/opengl-driver/lib symlink for Nix CUDA compatibility.
+# Nix tools (devenv, nix-shell) expect driver libs at /run/opengl-driver/lib
+# but on Ubuntu/Debian they live in /usr/lib/x86_64-linux-gnu/.
+if [[ "$IS_LAMBDA" == true ]]; then
+  if [[ ! -d /run/opengl-driver/lib ]]; then
+    sudo mkdir -p /run/opengl-driver
+    sudo ln -sfn /usr/lib/x86_64-linux-gnu /run/opengl-driver/lib
+    echo "Created /run/opengl-driver/lib -> /usr/lib/x86_64-linux-gnu"
+  fi
+fi
+
 # Detect system architecture and choose appropriate flake config
 ARCH=$(uname -m)
 case "$ARCH" in
   x86_64)
-    FLAKE_CONFIG="kog@cli"
+    if [[ "$IS_LAMBDA" == true ]]; then
+      FLAKE_CONFIG="ubuntu@lambda"
+    else
+      FLAKE_CONFIG="kog@cli"
+    fi
     ;;
   aarch64|arm64)
     FLAKE_CONFIG="kog@cli-aarch64"

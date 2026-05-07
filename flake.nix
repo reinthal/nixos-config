@@ -141,7 +141,7 @@
           overlays = [
             outputs.overlays.unstable-packages
             outputs.overlays.additions
-            outputs.overlays.modifications
+
             outputs.overlays.master-packages
           ];
         };
@@ -164,7 +164,7 @@
           overlays = [
             outputs.overlays.unstable-packages
             outputs.overlays.additions
-            outputs.overlays.modifications
+
             outputs.overlays.master-packages
           ];
         };
@@ -180,6 +180,28 @@
           }
         ];
       };
+      "ubuntu@lambda" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+          overlays = [
+            outputs.overlays.unstable-packages
+            outputs.overlays.additions
+            outputs.overlays.master-packages
+          ];
+        };
+        extraSpecialArgs = {
+          inherit nixpkgs inputs outputs;
+          stateVersion = "25.11";
+        };
+        modules = [
+          ./home-manager/lambda.nix
+          {
+            home.username = "ubuntu";
+            home.homeDirectory = "/home/ubuntu";
+          }
+        ];
+      };
       "claw@cli" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
@@ -187,7 +209,7 @@
           overlays = [
             outputs.overlays.unstable-packages
             outputs.overlays.additions
-            outputs.overlays.modifications
+
             outputs.overlays.master-packages
           ];
         };

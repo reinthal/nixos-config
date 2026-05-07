@@ -11,14 +11,6 @@
     local-pkgs = import ../pkgs {pkgs = final;};
   };
 
-  # This one contains whatever you want to overlay
-  # You can change versions, add patches, set compilation flags, anything really.
-  # https://nixos.wiki/wiki/Overlays
-  #modifications = final: prev: {
-  # example = prev.example.overrideAttrs (oldAttrs: rec {
-  # ...
-  # });
-
   # When applied, the nixpkgs-unstable set (same branch as the main nixpkgs,
   # but independently pinned) will be accessible through 'pkgs.unstable'.
   # Use pkgs.unstable.<name> for packages that should update more frequently
