@@ -27,6 +27,7 @@ in {
         nodejs_24
         bun
         tidal-dl
+        rustic
         wireguard-tools
         uv
         mcp-nixos
@@ -55,7 +56,6 @@ in {
         nixd
         # dev nix
         nixpkgs-fmt
-        claude-code
       ]
       ++ [
         pkgs.unstable.signal-desktop
