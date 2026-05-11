@@ -6,8 +6,6 @@
   ...
 }: let
   reinthalVim = inputs.reinthalVim.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  configDirectory = config.xdg.configHome;
-  anthropicKey = "${configDirectory}/Claude/api.key";
 in {
   imports = [../scripts/cache-upload.nix];
 
@@ -26,8 +24,6 @@ in {
         # cli
         nodejs_24
         bun
-        tidal-dl
-        rustic
         wireguard-tools
         uv
         mcp-nixos
@@ -39,13 +35,11 @@ in {
         tcpdump
         reinthalVim
         ripgrep
-        tldr
         jq
         tree
         yq
         curl
         less
-        wget
         lazygit
         git-lfs
         btop
@@ -53,14 +47,11 @@ in {
         inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
         # programming
         gh
-        nixd
-        # dev nix
         nixpkgs-fmt
       ]
       ++ [
         pkgs.unstable.signal-desktop
         pkgs.unstable.claude-code
-        pkgs.unstable.mcp-proxy
         pkgs.unstable.devenv
       ];
     sessionPath = [
