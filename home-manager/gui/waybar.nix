@@ -7,7 +7,7 @@ shell-dependencies = with pkgs; [
     dart-sass
     fd
     brightnessctl
-    swww
+    awww
     slurp
     wf-recorder
     wl-clipboard

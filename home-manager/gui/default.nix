@@ -43,7 +43,7 @@ in {
       ];
     };
 
-    vscode = {
+    vscodium = {
       enable = true;
       mutableExtensionsDir = true;
       package = pkgs.vscodium;

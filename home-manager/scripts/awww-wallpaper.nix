@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  swww-wallpaper = pkgs.writeShellScriptBin "swww-wallpaper" ''
+  awww-wallpaper = pkgs.writeShellScriptBin "awww-wallpaper" ''
     # Default wallpaper directory
     WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 
@@ -21,10 +21,10 @@
     fi
 
     # Set the wallpaper
-    ${pkgs.swww}/bin/swww img "$WALLPAPER" --transition-type fade --transition-fps 60
+    ${pkgs.awww}/bin/awww img "$WALLPAPER" --transition-type fade --transition-fps 60
 
     ${pkgs.libnotify}/bin/notify-send "Wallpaper changed" "$(basename "$WALLPAPER")"
   '';
 in {
-  home.packages = [swww-wallpaper];
+  home.packages = [awww-wallpaper];
 }

@@ -7,6 +7,6 @@
     ./toggle-scratchpad.nix
     ./pgp-scripts.nix
     ./switch.nix
-    ./swww-wallpaper.nix
+    ./awww-wallpaper.nix
   ];
 }

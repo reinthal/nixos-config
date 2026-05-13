@@ -162,7 +162,7 @@ in {
       exec-once = [
         "start"
         "${pkgs.waybar}/bin/waybar"
-        "${pkgs.swww}/bin/swww-daemon"
+        "${pkgs.awww}/bin/awww-daemon"
         "${pkgs.mako}/bin/mako"
       ];
 
@@ -190,7 +190,7 @@ in {
           "SUPER, W, exec, firefox"
           "SUPER, D, exec, makoctl dismiss"
           "SUPER SHIFT, D, exec, makoctl dismiss -a"
-          "SUPER, B, exec, swww-wallpaper"
+          "SUPER, B, exec, awww-wallpaper"
 
           "SUPER, S, exec, scratchpad"
           "SUPER, r, exec, scratchpad -g -l"
