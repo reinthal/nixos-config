@@ -26,6 +26,13 @@
     options = ["noauto" "x-systemd.automount" "x-systemd.device-timeout=30"];
   };
   nvidia.enable = true;
+  hardware.nvidia.package = lib.mkForce (config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    version = "580.105.08";
+    sha256_64bit = "sha256:0x9l55imfqhpin6c5j3204fzlyc4snfsdkq4vmsfpwvjhqcfiinr";
+    openSha256 = "sha256:013kk58lm9w82l1vl43jxs4plvxysb096b5cmcwbqhm1fjvqqs8l";
+    settingsSha256 = "sha256:1dlc52md0m7d193xvfbrdiwz4v9792zgj44pnw6nwsipalxxdz32";
+    persistencedSha256 = "sha256:1qmf3f3zrjlzfdfzxrlmzisg0pi1fnpyw1qc1ak4i32ldhl2j7xa";
+  });
 
   home-manager = {
     backupFileExtension = "hm-bkp";
@@ -39,7 +46,7 @@
   };
 
   # Bootloader.
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
