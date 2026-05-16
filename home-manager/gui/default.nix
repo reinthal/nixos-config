@@ -9,16 +9,12 @@
   ];
   desktop-apps = with pkgs;
     [
-      master.lmstudio
-      anki
       libreoffice-qt6-fresh
       obsidian
       networkmanagerapplet
       keepassxc
       remmina
-      telegram-desktop
       mpv
-      prismlauncher
       reaper
     ]
     ++ lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
@@ -42,7 +38,10 @@ in {
         {id = "fcoeoabgfenejglbffodgkkbkcdhcgfn";} # claude
       ];
     };
-
+    ghostty = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     vscodium = {
       enable = true;
       mutableExtensionsDir = true;
