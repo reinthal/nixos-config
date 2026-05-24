@@ -202,7 +202,6 @@ in {
           "SUPER, Q, killactive"
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
-          "SUPER, T, togglesplit"
           "SUPER, P, togglespecialworkspace, vault"
           "CTRL SUPER,Q,exec,swaylock"
           "CTRL SUPER, G, exec, gamemode"
