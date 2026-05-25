@@ -3,7 +3,7 @@
   makeWrapper,
   symlinkJoin,
   bash,
-  rofi,
+  fuzzel,
   libnotify,
   coreutils,
 }: let
@@ -11,12 +11,15 @@
     writeScript "hyprland-keybindings-menu"
     ''
       #!${bash}/bin/bash
-      # Hyprland Keybindings Menu - Searchable rofi interface
+      # Hyprland Keybindings Menu - Searchable fuzzel interface
 
       # Format: "Keybind | Description | Category"
       keybindings=(
           "SUPER + Return|Open terminal (kitty)|Applications"
-          "SUPER + Space|Application launcher (rofi)|Applications"
+          "SUPER + Space|Application launcher (fuzzel)|Applications"
+          "SUPER SHIFT + C|Bluetooth manager (bzmenu)|Applications"
+          "SUPER SHIFT + V|Wi-Fi manager (iwmenu)|Applications"
+          "SUPER SHIFT + B|Audio manager (pwmenu)|Applications"
           "SUPER + /|Keybindings menu (searchable)|Applications"
           "SUPER + W|Open Firefox|Applications"
           "SUPER + H|Toggle Tasks (linear.app)|Applications"
@@ -68,18 +71,18 @@
           "SUPER + Right Click|Resize window|Mouse"
       )
 
-      # Format for display in rofi
+      # Format for display in fuzzel
       menu=""
       for binding in "''${keybindings[@]}"; do
           IFS='|' read -r key desc category <<< "$binding"
           menu+="$(printf '%-30s  %-50s  [%s]\n' "$key" "$desc" "$category")\n"
       done
 
-      # Show in rofi
-      selected=$(echo -e "$menu" | ${rofi}/bin/rofi -dmenu -i -p "Keybindings" \
-          -theme-str 'window {width: 1200px;}' \
-          -theme-str 'listview {lines: 20;}' \
-          -no-custom)
+      # Show in fuzzel
+      selected=$(echo -e "$menu" | ${fuzzel}/bin/fuzzel --dmenu \
+          --prompt "Keybindings: " \
+          --width=120 \
+          --lines=20)
 
       # If something was selected, show a notification with the keybind
       if [ -n "$selected" ]; then
@@ -90,7 +93,7 @@
 in
   symlinkJoin {
     name = "hyprland-keybindings-menu";
-    paths = [bash rofi libnotify coreutils];
+    paths = [bash fuzzel libnotify coreutils];
     buildInputs = [makeWrapper];
     postBuild = ''
       cp ${script} $out/bin/hyprland-keybindings-menu

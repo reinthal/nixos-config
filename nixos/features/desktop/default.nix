@@ -30,6 +30,9 @@
     # Wayland /  Hyprland
     libnotify
     wl-gammactl
-    rofi
+    fuzzel
+    bzmenu
+    iwmenu
+    pwmenu
   ];
 }

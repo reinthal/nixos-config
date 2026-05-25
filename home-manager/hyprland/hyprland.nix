@@ -185,7 +185,10 @@ in {
       in
         [
           "SUPER, Return, exec, kitty"
-          "SUPER, Space, exec, rofi -show drun"
+          "SUPER, Space, exec, fuzzel"
+          "SUPER SHIFT, C, exec, bzmenu -l fuzzel"
+          "SUPER SHIFT, V, exec, iwmenu -l fuzzel"
+          "SUPER SHIFT, B, exec, pwmenu -l fuzzel"
           "SUPER, slash, exec, hyprland-keybindings-menu"
           "SUPER, W, exec, firefox"
           "SUPER, D, exec, makoctl dismiss"
