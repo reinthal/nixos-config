@@ -182,6 +182,20 @@ nix flake update apple-silicon
 
 ## Pinned Items
 
+Inputs held back from `nix flake update` because the latest upstream rev breaks
+the build. Re-check each entry periodically and remove once upstream lands a
+fix.
+
+| Input | Pinned rev | Reason | Upstream tracking |
+|---|---|---|---|
+| `claude-desktop` | `b8fe6b850266c25b6e588ac82202ea9cfb9294e3` | Patcher anchor `addTrustedFolder` regex stopped matching upstream Claude Desktop shape on rev `2ae2172`, breaking the nix build. | aaddrick/claude-desktop-debian #672 (bug), #674 (fix PR) |
+
+Re-pin with:
+
+```bash
+nix flake lock --override-input claude-desktop github:aaddrick/claude-desktop-debian/<rev>
+```
+
 ## Building the System
 
 ### First Time Setup

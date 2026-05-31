@@ -125,6 +125,21 @@ Run with: `nix run nixpkgs#home-manager -- switch --flake .#kog@cli-aarch64 --im
 - Example: signing key in `~/.config` allows user to sign malicious packages as trusted
 - Always enforce single source of truth for root operations
 
+### Pinned Inputs
+
+Some flake inputs are deliberately held back from `nix flake update` because
+the latest upstream rev breaks the build. The authoritative list lives in
+README.md under "Pinned Items".
+
+**Before running `nix flake update` or proposing input bumps:**
+- Check README.md "Pinned Items" for inputs that must stay pinned.
+- If `nix flake update` would advance a pinned input, restore it with:
+  `nix flake lock --override-input <name> github:<owner>/<repo>/<rev>`
+- When a pinned input is restored upstream (PR merged, build green), remove
+  the entry from README.md and let the next `nix flake update` advance it.
+- When adding a new pin, record it in README.md with: rev, reason, and the
+  upstream issue/PR URL so the pin can be lifted later.
+
 ### Binary Caches
 
 - Private: `https://tree-ams5-0003.secure.backblaze.com/reinthal-nix-store`
