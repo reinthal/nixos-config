@@ -6,7 +6,7 @@ This document lists all keybindings configured in `hyprland.nix`.
 
 | Keybind | Action |
 |---------|--------|
-| `SUPER + Return` | Open terminal (kitty) |
+| `SUPER + Return` | Open terminal (ghostty) |
 | `SUPER + Space` | Application launcher (rofi) |
 | `SUPER + /` | Keybindings menu (searchable) |
 | `SUPER + W` | Open Firefox |

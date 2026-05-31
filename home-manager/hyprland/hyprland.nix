@@ -184,7 +184,7 @@ in {
         arr = [1 2 3 4 5 6 7];
       in
         [
-          "SUPER, Return, exec, kitty"
+          "SUPER, Return, exec, ghostty"
           "SUPER, Space, exec, fuzzel"
           "SUPER SHIFT, C, exec, bzmenu -l fuzzel"
           "SUPER SHIFT, V, exec, iwmenu -l fuzzel"
