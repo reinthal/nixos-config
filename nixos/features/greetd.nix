@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   ...
 }: {
@@ -17,7 +16,7 @@
           --theme 'border=darkgray;text=cyan;prompt=green;time=gray;action=cyan;button=green;container=darkgray;input=gray' \
           --asterisks \
           --user-menu \
-          --cmd ${lib.getExe config.programs.hyprland.package}
+          --cmd ${config.programs.hyprland.package}/bin/start-hyprland
       '';
     };
   };
