@@ -204,6 +204,7 @@ in {
           "CTRL ALT, D, exit"
           "SUPER, Q, killactive"
           "SUPER, F, togglefloating"
+          "SUPER, A, layoutmsg, togglesplit"
           "SUPER, G, fullscreen"
           "SUPER, P, togglespecialworkspace, vault"
           "CTRL SUPER,Q,exec,swaylock"
