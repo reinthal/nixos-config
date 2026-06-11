@@ -47,6 +47,7 @@ in {
         inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
         # programming
         gh
+        forgejo-cli
         nixpkgs-fmt
       ]
       ++ [
