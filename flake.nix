@@ -72,6 +72,10 @@
         specialArgs = {inherit nixpkgs self inputs outputs;};
         modules = [./nixos/hosts/seed];
       };
+      seek = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit nixpkgs self inputs outputs;};
+        modules = [./nixos/hosts/seek];
+      };
 
       build = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};

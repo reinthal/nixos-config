@@ -120,6 +120,7 @@ the config user-agnostic without needing separate flakes per user.
 | `flix`        | Media server (Jellyfin, Plex, Navidrome) |
 | `nixbook`     | Apple Silicon + NixOS configuration      |
 | `relay`       | Tor exit node                            |
+| `seek`        | Monitoring host (Docker, minimal CLI)    |
 | `mbp`         | macOS Darwin system                      |
 
 ## Package Channels
