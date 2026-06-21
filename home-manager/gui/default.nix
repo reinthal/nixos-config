@@ -42,10 +42,17 @@ in {
       enable = true;
       enableZshIntegration = true;
     };
+    vscode = {
+      enable = true;
+      mutableExtensionsDir = true;
+    };
     vscodium = {
       enable = true;
       mutableExtensionsDir = true;
-      package = pkgs.vscodium;
+      # vscode and vscodium share files (e.g. LICENSES.chromium.html), which
+      # collide in the home-manager-path buildEnv. Lower vscodium's priority so
+      # the conflict resolves in favour of vscode; both editors still install.
+      package = lib.lowPrio pkgs.vscodium;
     };
   };
 
