@@ -17,6 +17,7 @@
     ../../features/desktop
     ../../features/sops.nix
     ../../features/nas.nix
+    ../../features/apps/wlots-client.nix
     ../../features/cli
     ../../features/apps/syncthing.nix
     (import ../../features/networking "nixbook")
