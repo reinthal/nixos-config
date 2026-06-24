@@ -81,6 +81,7 @@ in {
         kb_layout = "us,se";
         kb_options = [
           "grp:alt_space_toggle"
+          "altwin:swap_lalt_lwin"
         ];
         repeat_delay = 200;
       };
