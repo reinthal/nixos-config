@@ -80,7 +80,8 @@ in {
       input = {
         kb_layout = "us,se";
         kb_options = [
-          "grp:win_space_toggle"
+          "grp:alt_space_toggle"
+          "altwin:swap_lalt_lwin"
         ];
         repeat_delay = 200;
       };
@@ -172,52 +173,52 @@ in {
       ];
 
       bindm = [
-        "ALT, mouse:273, resizewindow"
-        "ALT, mouse:272, movewindow"
+        "SUPER, mouse:273, resizewindow"
+        "SUPER, mouse:272, movewindow"
       ];
 
       bind = let
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
-        mvfocus = binding "ALT CTRL" "movefocus";
-        ws = binding "ALT" "workspace";
-        mvtows = binding "ALT SHIFT" "movetoworkspace";
+        mvfocus = binding "SUPER ALT" "movefocus";
+        ws = binding "SUPER" "workspace";
+        mvtows = binding "SUPER SHIFT" "movetoworkspace";
         arr = [1 2 3 4 5 6 7];
       in
         [
-          "ALT, Return, exec, ghostty"
-          "ALT, Space, exec, fuzzel"
-          "ALT SHIFT, C, exec, bzmenu -l fuzzel"
-          "ALT SHIFT, V, exec, iwmenu -l fuzzel"
-          "ALT SHIFT, B, exec, pwmenu -l fuzzel"
-          "ALT, slash, exec, hyprland-keybindings-menu"
-          "ALT, W, exec, firefox"
-          "ALT, D, exec, makoctl dismiss"
-          "ALT SHIFT, D, exec, makoctl dismiss -a"
-          "ALT, B, exec, awww-wallpaper"
+          "SUPER, Return, exec, ghostty"
+          "SUPER, Space, exec, fuzzel"
+          "SUPER SHIFT, C, exec, bzmenu -l fuzzel"
+          "SUPER SHIFT, V, exec, iwmenu -l fuzzel"
+          "SUPER SHIFT, B, exec, pwmenu -l fuzzel"
+          "SUPER, slash, exec, hyprland-keybindings-menu"
+          "SUPER, W, exec, firefox"
+          "SUPER, D, exec, makoctl dismiss"
+          "SUPER SHIFT, D, exec, makoctl dismiss -a"
+          "SUPER, B, exec, awww-wallpaper"
 
-          "ALT, S, exec, scratchpad"
-          "ALT, r, exec, scratchpad -g -l"
+          "SUPER, S, exec, scratchpad"
+          "SUPER, r, exec, scratchpad -g -l"
           "CTRL SHIFT, s, exec, toggle-scratchpad"
 
-          "ALTSHIFT, S, exec, hyprshot -m region --clipboard-only"
+          "SUPERSHIFT, S, exec, hyprshot -m region --clipboard-only"
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, D, exit"
-          "ALT, Q, killactive"
-          "ALT, F, togglefloating"
-          "ALT, A, layoutmsg, togglesplit"
-          "ALT, G, fullscreen"
-          "ALT, P, togglespecialworkspace, vault"
-          "CTRL ALT,Q,exec,swaylock"
-          "CTRL ALT, G, exec, gamemode"
-          "ALT, O, togglespecialworkspace, obsidian"
-          "ALT, M, togglespecialworkspace, slack"
-          "ALT, N, togglespecialworkspace, discord"
-          "ALT, V, togglespecialworkspace, email"
-          "ALT, C, togglespecialworkspace, code"
-          "ALT, H, togglespecialworkspace, tasks"
-          "ALT, J, togglespecialworkspace, llm"
-          "ALT, K, togglespecialworkspace, signal-desktop"
-          "ALT, L, togglespecialworkspace, toggl"
+          "SUPER, Q, killactive"
+          "SUPER, F, togglefloating"
+          "SUPER, A, layoutmsg, togglesplit"
+          "SUPER, G, fullscreen"
+          "SUPER, P, togglespecialworkspace, vault"
+          "CTRL SUPER,Q,exec,swaylock"
+          "CTRL SUPER, G, exec, gamemode"
+          "SUPER, O, togglespecialworkspace, obsidian"
+          "SUPER, M, togglespecialworkspace, slack"
+          "SUPER, N, togglespecialworkspace, discord"
+          "SUPER, V, togglespecialworkspace, email"
+          "SUPER, C, togglespecialworkspace, code"
+          "SUPER, H, togglespecialworkspace, tasks"
+          "SUPER, J, togglespecialworkspace, llm"
+          "SUPER, K, togglespecialworkspace, signal-desktop"
+          "SUPER, L, togglespecialworkspace, toggl"
           (mvfocus "k" "u")
           (mvfocus "j" "d")
           (mvfocus "l" "r")
