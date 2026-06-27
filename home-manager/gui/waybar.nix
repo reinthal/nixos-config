@@ -17,6 +17,7 @@ shell-dependencies = with pkgs; [
     networkmanager
     gtk3
     jq
+    local-pkgs.timer-bar
   ];
 in {
   programs.waybar = {
@@ -32,8 +33,17 @@ in {
           "DP-2"
         ];
         modules-left = [ "hyprland/workspaces" "wlr/taskbar" ];
-        modules-right = ["battery" "clock" "temperature" ];
-        
+        modules-right = ["custom/timer" "battery" "clock" "temperature" ];
+
+        "custom/timer" = {
+          exec = "${pkgs.local-pkgs.timer-bar}/bin/timer-bar status";
+          return-type = "json";
+          interval = 1;
+          on-click = "${pkgs.local-pkgs.timer-bar}/bin/timer-bar menu";
+          on-click-right = "${pkgs.local-pkgs.timer-bar}/bin/timer-bar stop";
+          tooltip = true;
+        };
+
         battery = {
             format = "{capacity}% {icon}";
             format-icons = ["" "" "" "" ""];

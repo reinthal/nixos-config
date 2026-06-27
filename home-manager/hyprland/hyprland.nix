@@ -190,6 +190,7 @@ in {
           "SUPER SHIFT, V, exec, iwmenu -l fuzzel"
           "SUPER SHIFT, B, exec, pwmenu -l fuzzel"
           "SUPER, slash, exec, hyprland-keybindings-menu"
+          "SUPER SHIFT, T, exec, timer-bar menu"
           "SUPER, W, exec, firefox"
           "SUPER, D, exec, makoctl dismiss"
           "SUPER SHIFT, D, exec, makoctl dismiss -a"
