@@ -16,6 +16,9 @@
       remmina
       mpv
       reaper
+      # gpgme-json: native-messaging host so Mailvelope (Chromium) talks to gpg.
+      # Binary lives in the `dev` output, not `out`.
+      gpgme.dev
     ]
     ++ lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [pkgs.slack pkgs.spotify pkgs.discord];
 in {
@@ -28,15 +31,17 @@ in {
     chromium = {
       enable = true;
       package = pkgs.ungoogled-chromium;
-      extensions = [
-        {id = "cclelndahbckbenkjhflpdbgdldlbecc";} # Get cookies.txt LOCALLY
-        {id = "fihnjjcciajhdojfnbdddfaoknhalnja";} # i dont care about cookies
-        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
-        {id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";} # dark reader
-        {id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # sponsor block youtube
-        {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
-        {id = "fcoeoabgfenejglbffodgkkbkcdhcgfn";} # claude
-      ];
+      # NOTE: ungoogled-chromium strips Web Store / external_update_url support,
+      # so declarative `extensions = [...]` never installs. Install the
+      # chromium-web-store helper manually, then add these via its UI:
+      #   kajibbejlbohfaggdiogboambcijhkke  Mailvelope
+      #   cclelndahbckbenkjhflpdbgdldlbecc  Get cookies.txt LOCALLY
+      #   fihnjjcciajhdojfnbdddfaoknhalnja  I don't care about cookies
+      #   cjpalhdlnbpafiamejdnhcphjbkeiagm  uBlock Origin
+      #   eimadpbcbfnmbkopoojfekhnkhdbieeh  Dark Reader
+      #   mnjggcdmjocbbbhaepdhchncahnbgone  SponsorBlock
+      #   nngceckbapebfimnlniiiahkandclblb  Bitwarden
+      #   fcoeoabgfenejglbffodgkkbkcdhcgfn  Claude
     };
     ghostty = {
       enable = true;
@@ -59,5 +64,17 @@ in {
   home.packages = desktop-apps;
   xdg = {
     enable = true;
+    # Native-messaging host so Mailvelope (Chromium) drives gpg via gpgme-json.
+    # drduh YubiKey-Guide: gpgmejson.json. Path points at the nix store binary.
+    # https://drduh.github.io/YubiKey-Guide/#mailvelope
+    configFile."chromium/NativeMessagingHosts/gpgmejson.json".text = builtins.toJSON {
+      name = "gpgmejson";
+      description = "Integration with GnuPG";
+      path = "${pkgs.gpgme.dev}/bin/gpgme-json";
+      type = "stdio";
+      allowed_origins = [
+        "chrome-extension://kajibbejlbohfaggdiogboambcijhkke/"
+      ];
+    };
   };
 }
