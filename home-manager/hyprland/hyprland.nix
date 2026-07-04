@@ -32,24 +32,23 @@ in {
   };
   wayland.windowManager.hyprland = {
     enable = true;
+    # Pin legacy default; config below is hyprlang syntax, not lua.
+    # HM flipped the default to "lua" for stateVersion >= 26.05.
+    configType = "hyprlang";
     xwayland.enable = true;
     systemd.variables = ["--all"];
 
-    extraConfig = lib.concatStrings [
-      ''
-        monitor=eDP-1, preferred, 0x0,2
-        monitor=HDMI-A-1, 3440x1440@75.05Hz,auto-up,1.33
-
-        # Fix pixelated extra screen
-        xwayland {
-          force_zero_scaling = true
-        }
-
-        # toolkit-specific scale
-      ''
-    ];
-
     settings = {
+      monitor = [
+        "eDP-1, preferred, 0x0,2"
+        "HDMI-A-1, 3440x1440@75.05Hz,auto-up,1.33"
+      ];
+
+      # Fix pixelated extra screen
+      xwayland = {
+        force_zero_scaling = true;
+      };
+
       env =
         [
           # Hyprland/WAYLAND
