@@ -12,7 +12,6 @@
     ../../features/nas.nix
     ../../features/apps/docker.nix
     ../../features/apps/syncthing.nix
-    ../../features/desktop
     ../../features/sops.nix
     ../../features/cli/default.nix
     # enable various features
@@ -24,14 +23,12 @@
     inputs.home-manager.nixosModules.default
   ];
 
-  nvidia.enable = true;
-
   home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
       stateVersion = "24.11";
-      isNvidia = config.nvidia.enable;
+      isNvidia = false;
       secretsFile = ../../../secrets/shhh.yaml;
     };
     users = {
