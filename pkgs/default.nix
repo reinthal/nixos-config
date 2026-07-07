@@ -3,6 +3,7 @@
 {pkgs ? (import ../nixpkgs.nix) {}}: rec {
   custom-fonts = pkgs.callPackage ./fonts {};
   trim-screencast = pkgs.callPackage ./trim-screencast.nix {};
+  setup-gpg-forward = pkgs.callPackage ./setup-gpg-forward.nix {};
   hyprland-keybindings-menu = pkgs.callPackage ./hyprland-keybindings-menu.nix {};
   timer-bar = pkgs.callPackage ./timer-bar.nix {
     workMinutes = 30;
