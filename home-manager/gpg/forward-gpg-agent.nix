@@ -1,4 +1,4 @@
-{...}: let
+{pkgs, ...}: let
   # gpg-agent forwarding over SSH.
   #
   # Signs/decrypts on a remote host using THIS machine's Yubikey. The remote
@@ -26,6 +26,9 @@
     StreamLocalBindUnlink = "yes";
   };
 in {
+  # `setup-gpg-forward <user@host>` — provision the remote + verify the forward.
+  home.packages = [pkgs.local-pkgs.setup-gpg-forward];
+
   programs.ssh = {
     enable = true;
     # Opt out of the deprecated implicit defaults; set them explicitly below.
