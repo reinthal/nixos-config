@@ -47,7 +47,7 @@ in {
         ControlPersist = "no";
       };
       # gpaulo-ord-0 (Docker container) — reachable only by IP, no working name.
-      "216.153.53.92" = forwardTo 1001 // {User = "alexander";};
+      "207.53.234.101" = forwardTo 1001 // {User = "alexander";};
       "build.reinthal.me" =
         forwardTo 1000
         // {
