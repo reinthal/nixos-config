@@ -115,6 +115,8 @@
       pinentryPackage = pkgs.pinentry-curses;
     };
   };
+  networking.hosts."216.153.53.92" = ["gpaulo-ord-0"];
+
   time.timeZone = lib.mkForce null;
   home-manager = {
     backupFileExtension = "hm-bkp";

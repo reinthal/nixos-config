@@ -93,6 +93,11 @@
     gnupg.agent.pinentryPackage = pkgs.pinentry-curses;
   };
 
+  # Allow forwarding a remote gpg-agent socket onto the standard agent path:
+  # sshd unlinks the local agent's stale socket before binding the forward.
+  # Lets nixbook's Yubikey sign here (see home-manager/gpg/forward-gpg-agent.nix).
+  services.openssh.settings.StreamLocalBindUnlink = true;
+
   programs.zsh.enable = true;
 
   time.timeZone = "Europe/Stockholm";

@@ -88,6 +88,19 @@ if [[ "$IS_LAMBDA" == true ]]; then
   echo "Symlinked NVIDIA/CUDA driver libs into /run/opengl-driver/lib/"
 fi
 
+# Allow a client (e.g. nixbook) to forward its Yubikey gpg-agent socket onto
+# this host's standard agent path: sshd must unlink a stale forwarded socket
+# before binding. Mirrors services.openssh.settings.StreamLocalBindUnlink used
+# on the NixOS hosts. Best-effort — skipped when there's no sshd (containers).
+if [[ -d /etc/ssh/sshd_config.d ]]; then
+  printf 'StreamLocalBindUnlink yes\n' \
+    | $SUDO tee /etc/ssh/sshd_config.d/10-gpg-forward.conf >/dev/null
+  $SUDO systemctl reload ssh 2>/dev/null \
+    || $SUDO systemctl reload sshd 2>/dev/null \
+    || true
+  echo "Enabled StreamLocalBindUnlink for gpg-agent forwarding."
+fi
+
 # Choose flake config. Priority: explicit env override > known hostname >
 # arch + GPU-host heuristic. FLAKE_CONFIG can be set to force any config.
 ARCH=$(uname -m)
