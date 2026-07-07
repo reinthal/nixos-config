@@ -92,12 +92,29 @@ fi
 # this host's standard agent path: sshd must unlink a stale forwarded socket
 # before binding. Mirrors services.openssh.settings.StreamLocalBindUnlink used
 # on the NixOS hosts. Best-effort — skipped when there's no sshd (containers).
-if [[ -d /etc/ssh/sshd_config.d ]]; then
-  printf 'StreamLocalBindUnlink yes\n' \
-    | $SUDO tee /etc/ssh/sshd_config.d/10-gpg-forward.conf >/dev/null
+if command -v sshd >/dev/null 2>&1 || [[ -f /etc/ssh/sshd_config ]]; then
+  # Write the setting where sshd will read it: a drop-in if the main config
+  # includes one, otherwise appended directly to sshd_config.
+  if [[ -d /etc/ssh/sshd_config.d ]] \
+    && grep -qE '^\s*Include\s+/etc/ssh/sshd_config\.d/' /etc/ssh/sshd_config 2>/dev/null; then
+    printf 'StreamLocalBindUnlink yes\n' \
+      | $SUDO tee /etc/ssh/sshd_config.d/10-gpg-forward.conf >/dev/null
+  else
+    ensure_line_sudo() {
+      $SUDO grep -qxF "$1" "$2" 2>/dev/null \
+        || printf '%s\n' "$1" | $SUDO tee -a "$2" >/dev/null
+    }
+    ensure_line_sudo "StreamLocalBindUnlink yes" /etc/ssh/sshd_config
+  fi
+
+  # Reload sshd to pick up the change. Try systemd, then sysv/openrc, then
+  # HUP the listener directly (works without any init system). HUP re-reads
+  # config without dropping the current session.
   $SUDO systemctl reload ssh 2>/dev/null \
     || $SUDO systemctl reload sshd 2>/dev/null \
-    || true
+    || $SUDO service ssh reload 2>/dev/null \
+    || $SUDO sh -c 'kill -HUP "$(cat /run/sshd.pid 2>/dev/null || pgrep -x sshd | head -1)"' 2>/dev/null \
+    || echo "Could not reload sshd; restart it manually to apply." >&2
   echo "Enabled StreamLocalBindUnlink for gpg-agent forwarding."
 fi
 
