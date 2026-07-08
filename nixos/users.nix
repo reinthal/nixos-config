@@ -22,6 +22,7 @@
       "networkmanager"
       "wheel"
       "reinthal"
+      "video"
     ];
     shell = pkgs.zsh;
     uid = 1000;

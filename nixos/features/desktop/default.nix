@@ -8,6 +8,8 @@
   ];
   services = {
     xserver.enable = true;
+    # Grant seat users access to /sys/class/backlight for brightnessctl.
+    udev.packages = [pkgs.brightnessctl];
   };
 
   programs.hyprland = {
@@ -34,5 +36,7 @@
     bzmenu
     iwmenu
     pwmenu
+    # Backlight control for hyprland media keys
+    brightnessctl
   ];
 }
