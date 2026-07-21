@@ -246,6 +246,12 @@ sudo nixos-rebuild test --flake '.#<host>' --impure
 sudo bash trim-generations.sh <n items> <n days> [user|home-manager|channels|system]
 ```
 
+If `/nix/store` is far bigger than your current system closure even after
+trimming generations, the space is pinned by live GC roots (usually per-project
+`devenv`/`direnv` shells and stray `result` symlinks). See
+[`docs/reclaiming-store-space.md`](docs/reclaiming-store-space.md) for how to
+find and clear them.
+
 ## Cache
 
 ```

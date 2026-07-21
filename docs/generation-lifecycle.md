@@ -259,3 +259,11 @@ This repository includes `trim-generations.sh` for manual cleanup:
 ```
 
 See `trim-generations.sh` for more options.
+
+## Store Still Full After Trimming Generations?
+
+Generation cleanup only frees paths that *no generation* references. If
+`/nix/store` stays huge after trimming, the space is pinned by other GC roots —
+most often per-project `devenv`/`direnv` shells and stray `result` symlinks. See
+[`reclaiming-store-space.md`](./reclaiming-store-space.md) for the full
+diagnostic procedure.
