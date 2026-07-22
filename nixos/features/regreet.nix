@@ -31,9 +31,12 @@
 
   # Run the greeter inside Hyprland instead of the cage default that
   # programs.regreet sets. mkForce overrides that default_session.
-  services.greetd.settings.default_session.command = lib.mkForce ''
-    ${config.programs.hyprland.package}/bin/Hyprland --config /etc/greetd/hyprland.lua
-  '';
+  # NOTE: single-line string, NOT a Nix ''...'' block. A multiline value gets
+  # serialized to a TOML """...""" string, which greetd 0.10.3's config parser
+  # rejects ("expected equals sign on line, but found none") — greetd then exits
+  # in ~20ms and no greeter ever starts (looks like a hang at graphical.target).
+  services.greetd.settings.default_session.command =
+    lib.mkForce "${config.programs.hyprland.package}/bin/Hyprland --config /etc/greetd/hyprland.lua";
 
   programs.regreet = {
     enable = true;
