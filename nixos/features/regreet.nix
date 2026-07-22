@@ -1,11 +1,25 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
 
-  # ReGreet: GTK greeter for greetd. programs.regreet.enable also enables greetd
-  # and runs the greeter inside cage (a minimal KMS/DRM Wayland compositor), so
-  # it uses the GPU path — not the legacy fbcon/framebuffer path that hung
-  # tuigreet on Asahi 7.0.13.
+  environment.etc."greetd/hyprland.lua".text = ''
+    hl.on("hyprland.start", function()
+        hl.exec_cmd("regreet; hyprctl dispatch 'hl.dsp.exit()'")
+    end)
+    hl.config({
+        misc = {
+            disable_hyprland_logo = true,
+            disable_splash_rendering = true,
+            disable_hyprland_guiutils_check = true,
+        },
+    })
+  '';
+
   programs.regreet = {
     enable = true;
     theme = {
