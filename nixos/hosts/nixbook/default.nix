@@ -53,6 +53,7 @@
 
   hardware = {
     asahi = {
+      enable = true;
       peripheralFirmwareDirectory = ./firmware;
       setupAsahiSound = true;
     };

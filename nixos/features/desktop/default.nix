@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ../sddm.nix
+    ../regreet.nix
   ];
   services = {
     xserver.enable = true;
