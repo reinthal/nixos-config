@@ -26,7 +26,6 @@ in {
         bun
         wireguard-tools
         uv
-        mcp-nixos
         fd
         dig
         sops
