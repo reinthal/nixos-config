@@ -160,9 +160,9 @@ in {
       };
       exec-once = [
         "start"
-        "${pkgs.waybar}/bin/waybar"
+        # waybar replaced by wayle (systemd user service, see gui/wayle.nix)
         "${pkgs.awww}/bin/awww-daemon"
-        "${pkgs.mako}/bin/mako"
+        # mako replaced by wayle's notification daemon (see gui/wayle.nix)
       ];
 
       # Non-repeating, active while locked: mute toggles.

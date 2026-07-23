@@ -21,7 +21,9 @@ shell-dependencies = with pkgs; [
   ];
 in {
   programs.waybar = {
-    enable = true;
+    # Disabled in favour of wayle (see wayle.nix). Kept imported so its shell
+    # tooling (slurp, pavucontrol, wl-clipboard, brightnessctl, ...) stays.
+    enable = false;
     settings = {
       mainBar = {
         layer = "top";

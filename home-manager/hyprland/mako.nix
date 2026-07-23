@@ -3,7 +3,10 @@
     enable = true;
   };
   services.mako = {
-    enable = true;
+    # Disabled: wayle's `notifications` module is the notification daemon now.
+    # Two daemons race for org.freedesktop.Notifications. batsignal (above)
+    # stays — it just emits notifications into wayle's daemon.
+    enable = false;
 
     settings = {
       # Font matching your system's default

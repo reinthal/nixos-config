@@ -24,6 +24,7 @@
 in {
   imports = [
     ./waybar.nix
+    ./wayle.nix
     ./kdeconnect.nix
     ./browser.nix
   ];
