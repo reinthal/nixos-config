@@ -23,6 +23,7 @@
       "wheel"
       "reinthal"
       "video"
+      "kvm"
     ];
     shell = pkgs.zsh;
     uid = 1000;

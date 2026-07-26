@@ -106,6 +106,9 @@
      export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   '';
   programs = {
+    steam-asahi = {
+      enable = true;
+    };
     ssh.startAgent = false;
     zsh.enable = true;
     dconf.enable = true;

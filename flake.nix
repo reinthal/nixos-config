@@ -13,6 +13,7 @@
     ];
   };
   inputs = {
+    asahi-steam = "github.com:sm-idk/steam-asahi";
     zen-browser.url = "github:reinthal/zen-browser-flake";
     sops-nix.url = "github:Mic92/sops-nix";
     pyprland.url = "github:hyprland-community/pyprland";
@@ -93,7 +94,7 @@
       nixbook = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         # > Our main nixos configuration file <
-        modules = [./nixos/hosts/nixbook];
+        modules = [./nixos/hosts/nixbook self.steam-asahi.nixosModules.default];
       };
     };
 

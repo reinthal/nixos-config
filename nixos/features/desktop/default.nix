@@ -11,9 +11,7 @@
     # Grant seat users access to /sys/class/backlight for brightnessctl.
     udev.packages = [pkgs.brightnessctl];
   };
-
   programs = {
-    steam.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
