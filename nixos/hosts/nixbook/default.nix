@@ -13,6 +13,9 @@
     # apple-silicon hardware support
     inputs.apple-silicon.nixosModules.apple-silicon-support
 
+    # steam via muvm (Asahi)
+    inputs.steam-asahi.nixosModules.default
+
     ../../features/apps/podman.nix
     ../../features/desktop
     ../../features/sops.nix
