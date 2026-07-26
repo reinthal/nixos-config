@@ -15,7 +15,11 @@ in {
       hyprland-contrib.scratchpad
       pkgs.local-pkgs.hyprland-keybindings-menu
     ]
-    ++ (with pkgs; [hyprshot mako libnotify]);
+    # mako removed: its D-Bus activation file (fr.emersion.mako.service) would
+    # auto-start mako on the first notification and steal
+    # org.freedesktop.Notifications from wayle's daemon. libnotify stays for
+    # notify-send. See gui/wayle.nix.
+    ++ (with pkgs; [hyprshot libnotify]);
   systemd.user.services."hyprctl-reload" = {
     Unit = {
       Description = "Reload Hyprland to fix sizing of borders after login.";
@@ -200,8 +204,8 @@ in {
           "SUPER, slash, exec, hyprland-keybindings-menu"
           "SUPER SHIFT, T, exec, timer-bar menu"
           "SUPER, W, exec, firefox"
-          "SUPER, D, exec, makoctl dismiss"
-          "SUPER SHIFT, D, exec, makoctl dismiss -a"
+          "SUPER, D, exec, wayle notify dismiss-all"
+          "SUPER SHIFT, D, exec, wayle notify dismiss-all"
           "SUPER, B, exec, awww-wallpaper"
 
           "SUPER, S, exec, scratchpad"

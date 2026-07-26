@@ -45,6 +45,10 @@
           border-show = true;
         };
         weather = {
+          # open-meteo geocodes this name. Disambiguate with "City, Country"
+          # if a plain name resolves to the wrong place.
+          location = "Gothenburg, Sweden";
+          units = "metric";
           time-format = "24h";
         };
       };
