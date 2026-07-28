@@ -70,6 +70,49 @@
   };
 
   services = {
+    borgbackup.jobs = let
+      common-excludes = [
+        # Largest cache dirs
+        ".hf"
+        ".cache"
+        "*/cache2" # firefox
+        "*/Cache"
+        ".config/Slack/logs"
+        ".config/Code/CachedData"
+        ".container-diff"
+        ".npm/_cacache"
+        # Work related dirs
+        "*/node_modules"
+        "*/bower_components"
+        "*/_build"
+        "*/.tox"
+        "*/venv"
+        "*/.venv"
+        "*/.devenv"
+        "Downloads"
+      ];
+      work-dirs = [
+        "/home/kog/repos"
+      ];
+      basicBorgJob = name: {
+        encryption.mode = "none";
+        environment.BORG_RSH = "ssh -o 'StrictHostKeyChecking=no' -i /home/kog/.ssh/id_ed25519";
+        environment.BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
+        extraCreateArgs = "--verbose --stats --checkpoint-interval 600";
+        repo = "ssh://borgwarehouse@borg.nas.reinthal.me:2222/./${name}";
+        compression = "zstd,1";
+        startAt = "daily";
+        user = "kog";
+      };
+    in {
+      home-kog =
+        basicBorgJob "bc3e7c14"
+        // rec {
+          paths = "/home/kog";
+          exclude = work-dirs ++ map (x: paths + "/" + x) common-excludes;
+        };
+    };
+
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
     automatic-timezoned.enable = true;
