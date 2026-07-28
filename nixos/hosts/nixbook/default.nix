@@ -69,6 +69,10 @@
     };
   };
 
+  sops.secrets.borg_passphrase = {
+    owner = config.users.users.kog.name;
+  };
+
   services = {
     borgbackup.jobs = let
       common-excludes = [
@@ -95,9 +99,11 @@
         "/home/kog/repos"
       ];
       basicBorgJob = name: {
-        encryption.mode = "none";
+        encryption = {
+          mode = "repokey-blake2";
+          passCommand = "cat ${config.sops.secrets.borg_passphrase.path}";
+        };
         environment.BORG_RSH = "ssh -o 'StrictHostKeyChecking=no' -i /home/kog/.ssh/id_ed25519";
-        environment.BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
         extraCreateArgs = "--verbose --stats --checkpoint-interval 600";
         repo = "ssh://borgwarehouse@borg.nas.reinthal.me:2222/./${name}";
         compression = "zstd,1";
@@ -106,7 +112,7 @@
       };
     in {
       home-kog =
-        basicBorgJob "bc3e7c14"
+        basicBorgJob "a7b0609d"
         // rec {
           paths = "/home/kog";
           exclude = work-dirs ++ map (x: paths + "/" + x) common-excludes;
