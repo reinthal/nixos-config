@@ -9,6 +9,7 @@
   ];
   desktop-apps = with pkgs;
     [
+      burpsuite
       libreoffice-qt6-fresh
       obsidian
       networkmanagerapplet

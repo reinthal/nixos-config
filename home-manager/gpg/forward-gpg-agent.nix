@@ -60,6 +60,12 @@ in {
           PubkeyAuthentication = true;
           IdentityAgent = "/run/user/1000/gnupg/S.gpg-agent.ssh";
         };
+      # Oracle Cloud Ubuntu VM — auth with this host's id_ed25519 (kog@nixbook).
+      "150.136.45.203" = {
+        User = "ubuntu";
+        IdentityFile = "~/.ssh/id_ed25519";
+        IdentitiesOnly = true;
+      };
     };
   };
 }
