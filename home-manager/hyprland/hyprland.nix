@@ -45,7 +45,7 @@ in {
     settings = {
       monitor = [
         "eDP-1, preferred, 0x0,2"
-        "HDMI-A-1, 3440x1440@75.05Hz,auto-up,1.33"
+        "HDMI-A-1, 2560x1440@120.00Hz,auto-right,1.0"
       ];
 
       # Fix pixelated extra screen
@@ -124,7 +124,7 @@ in {
           (g "tasks" "chromium --app=https://linear.app/reinthal/team/REI/active")
           (g "llm" "claude-desktop")
           (g "toggl" "chromium --app=https://track.toggl.com/timer")
-          (g "slack" "chromium --app=https://app.slack.com/client/T02MLJA4G/C06DHG3NJTS")
+          (g "slack" "chromium --app=https://app.slack.com/client/T0APN9P320M/C0APRMV97GA")
           (g "discord" "chromium --app=https://discord.com/channels/@me")
           (g "email" "chromium --app=https://mail.proton.me/")
           (g "code" "codium")
