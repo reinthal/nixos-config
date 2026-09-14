@@ -44,8 +44,15 @@ in {
 
     settings = {
       monitor = [
-        "eDP-1, preferred, 0x0,2"
-        "HDMI-A-1, 2560x1440@120.00Hz,auto-right,1.0"
+        "eDP-1, preferred, 0x0, 2"
+        # Acer ultrawide, matched by description (stable across ports).
+        # Get desc for new screens with: hyprctl monitors all
+        "desc:Acer Technologies CB342CK 0x00003726, 3440x1440@99.98Hz, auto-up, 1.0"
+        # Asahi's dcp driver exposes no EDID make/model, so desc: never matches
+        # on nixbook — match the ultrawide by port there instead.
+        "HDMI-A-1, 3440x1440@99.98Hz, auto-up, 1.0"
+        # Fallback for any monitor without an explicit rule (the other screen).
+        ", 2560x1440@120.00Hz, auto-right, 1.0"
       ];
 
       # Fix pixelated extra screen
