@@ -212,7 +212,7 @@ in {
           "SUPER, slash, exec, hyprland-keybindings-menu"
           "SUPER SHIFT, T, exec, timer-bar menu"
           "SUPER, W, exec, firefox"
-          "SUPER SHIFT, W, exec, calendar"
+          "SUPER SHIFT, W, togglespecialworkspace, calendar"
           "SUPER, D, exec, wayle notify dismiss-all"
           "SUPER SHIFT, D, exec, wayle notify dismiss-all"
           "SUPER, B, exec, awww-wallpaper"
