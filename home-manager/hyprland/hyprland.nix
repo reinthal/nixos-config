@@ -138,6 +138,7 @@ in {
           (g "signal-desktop" "signal-desktop")
           (g "obsidian" "obsidian")
           (g "vault" "chromium --app=https://vault.reinthal.me")
+          (g "calendar" "chromium --app=https://calendar.proton.me/u/0/")
         ];
 
       animations = {
@@ -211,6 +212,7 @@ in {
           "SUPER, slash, exec, hyprland-keybindings-menu"
           "SUPER SHIFT, T, exec, timer-bar menu"
           "SUPER, W, exec, firefox"
+          "SUPER SHIFT, W, exec, calendar"
           "SUPER, D, exec, wayle notify dismiss-all"
           "SUPER SHIFT, D, exec, wayle notify dismiss-all"
           "SUPER, B, exec, awww-wallpaper"
