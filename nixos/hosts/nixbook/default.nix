@@ -90,7 +90,6 @@
     signoff = {
       enable = true;
       ttlSecs = 300;
-      keysFile = ./signoff_keys.json;
     };
     monitor = {
       enable = true;
