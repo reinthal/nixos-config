@@ -152,6 +152,7 @@
             outputs.overlays.additions
 
             outputs.overlays.master-packages
+            outputs.overlays.modifications
           ];
         };
         extraSpecialArgs = {
@@ -175,6 +176,7 @@
             outputs.overlays.additions
 
             outputs.overlays.master-packages
+            outputs.overlays.modifications
           ];
         };
         extraSpecialArgs = {
@@ -197,6 +199,7 @@
             outputs.overlays.unstable-packages
             outputs.overlays.additions
             outputs.overlays.master-packages
+            outputs.overlays.modifications
           ];
         };
         extraSpecialArgs = {
@@ -219,6 +222,7 @@
             outputs.overlays.unstable-packages
             outputs.overlays.additions
             outputs.overlays.master-packages
+            outputs.overlays.modifications
           ];
         };
         extraSpecialArgs = {
@@ -242,6 +246,7 @@
             outputs.overlays.additions
 
             outputs.overlays.master-packages
+            outputs.overlays.modifications
           ];
         };
         extraSpecialArgs = {

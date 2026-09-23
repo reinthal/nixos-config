@@ -15,16 +15,23 @@
   coreutils,
   procps,
   gawk,
+  wayle,
   workMinutes ? 30,
   restMinutes ? 10,
+  # wayle bar background per pomodoro phase (CSS token or hex, see wayle's
+  # ColorValue). Empty string leaves the bar alone.
+  workBarColor ? "status-error",
+  restBarColor ? "status-success",
 }:
 writeShellApplication {
   name = "timer-bar";
-  runtimeInputs = [fuzzel libnotify coreutils procps gawk];
+  runtimeInputs = [fuzzel libnotify coreutils procps gawk wayle];
   text = ''
     # Defaults baked from nix, overridable via environment.
     WORK_MIN="''${TIMER_WORK_MIN:-${toString workMinutes}}"
     REST_MIN="''${TIMER_REST_MIN:-${toString restMinutes}}"
+    WORK_BAR_COLOR="''${TIMER_WORK_BAR_COLOR-${workBarColor}}"
+    REST_BAR_COLOR="''${TIMER_REST_BAR_COLOR-${restBarColor}}"
 
     STATE_DIR="''${XDG_RUNTIME_DIR:-/tmp}/timer-bar"
     STATE="$STATE_DIR/state"
@@ -36,7 +43,22 @@ writeShellApplication {
       printf '%s|%s|%s|%s\n' "$1" "$2" "$3" "$4" > "$STATE"
     }
 
-    clear_state() { rm -f "$STATE"; }
+    # Tint the wayle bar for the current phase. Runtime override only
+    # (runtime.toml); reset falls back to the nix-managed config. Failures are
+    # ignored so the timer still works when wayle isn't running (e.g. waybar).
+    set_bar_color() {
+      [ -n "$1" ] || return 0
+      wayle config set bar.bg "$1" >/dev/null 2>&1 || true
+    }
+
+    reset_bar_color() {
+      wayle config reset bar.bg >/dev/null 2>&1 || true
+    }
+
+    clear_state() {
+      rm -f "$STATE"
+      reset_bar_color
+    }
 
     stop_daemon() {
       if [ -f "$PIDF" ]; then
@@ -74,12 +96,14 @@ writeShellApplication {
         total=$((work * 60))
         end=$(( $(date +%s) + total ))
         write_state "Work" "work" "$end" "$total"
+        set_bar_color "$WORK_BAR_COLOR"
         sleep "$total"
         notify "Work done" "Break for $rest min."
 
         total=$((rest * 60))
         end=$(( $(date +%s) + total ))
         write_state "Rest" "rest" "$end" "$total"
+        set_bar_color "$REST_BAR_COLOR"
         sleep "$total"
         notify "Break over" "Back to work for $work min."
       done
@@ -133,14 +157,18 @@ writeShellApplication {
         "$icon" "$bar" "$mm" "$ss" "$label" "$mm" "$ss" "$frac" "$phase"
     }
 
-    # Prompt for minutes via fuzzel. Presets shown; typing any number works too
-    # (fuzzel --dmenu returns the typed text). Default preset listed first.
+    # Prompt for minutes via fuzzel. Free-text input only: a preset list would
+    # swallow short numbers (typing "1" filters to "10" and Enter picks that).
+    # The single "default" entry has no digits, so typed numbers never match it
+    # and fuzzel prints them verbatim; plain Enter selects it. Esc cancels.
     # Echoes a positive integer on success, nothing on cancel/invalid.
     prompt_minutes() {
       prompt="$1"
       default="$2"
-      mins="$(printf '%s\n5\n10\n15\n25\n45\n' "$default" \
-        | fuzzel --dmenu --prompt "$prompt" --placeholder "preset or type minutes" --lines=6)"
+      mins="$(printf 'default\n' \
+        | fuzzel --dmenu --prompt "$prompt" --placeholder "minutes (Enter = $default)" --lines=1)" \
+        || return 0
+      case "$mins" in default*) mins="$default" ;; esac
       mins="''${mins//[[:space:]]/}"
       if [ -n "$mins" ] && [ "$mins" -gt 0 ] 2>/dev/null; then
         echo "$mins"

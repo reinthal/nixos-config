@@ -22,6 +22,7 @@ in {
     packages = with pkgs;
       [
         # cli
+        cyberstrike
         nodejs_24
         bun
         wireguard-tools

@@ -1,4 +1,6 @@
-{...}: {
+{pkgs, ...}: let
+  timer-bar = "${pkgs.local-pkgs.timer-bar}/bin/timer-bar";
+in {
   # Wayle: Rust/GTK4 Wayland shell (successor to HyprPanel by the same author).
   # Runs as a systemd user service bound to the graphical session; no exec-once
   # needed. Package (pkgs.wayle) and this module both ship in nixpkgs-unstable /
@@ -25,6 +27,7 @@
                 name = "sys";
                 modules = [];
               }
+              "custom-timer"
               "network"
               "battery"
               "notifications"
@@ -40,6 +43,21 @@
         font-sans = "UbuntuSans Nerd Font";
       };
       modules = {
+        # Countdown/pomodoro bar (pkgs/timer-bar.nix). Emits waybar-style JSON;
+        # wayle uses its `text`/`tooltip` fields directly. Empty output when no
+        # timer is running, so the module hides itself.
+        custom = [
+          {
+            id = "timer";
+            command = "${timer-bar} status";
+            interval-ms = 1000;
+            hide-if-empty = true;
+            icon-show = false;
+            class-format = "{{ class }}";
+            left-click = "${timer-bar} menu";
+            right-click = "${timer-bar} stop";
+          }
+        ];
         hyprland-workspaces = {
           app-icons-show = true;
           border-show = true;

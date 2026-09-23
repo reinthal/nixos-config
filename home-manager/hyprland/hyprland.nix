@@ -50,7 +50,7 @@ in {
         "desc:Acer Technologies CB342CK 0x00003726, 3440x1440@99.98Hz, auto-up, 1.0"
         # Asahi's dcp driver exposes no EDID make/model, so desc: never matches
         # on nixbook — match the ultrawide by port there instead.
-        "HDMI-A-1, 3440x1440@99.98Hz, auto-up, 1.0"
+        "HDMI-A-1, 3440x1440@99.98Hz, auto-up, 1.33"
         # Fallback for any monitor without an explicit rule (the other screen).
         ", 2560x1440@120.00Hz, auto-right, 1.0"
       ];
@@ -212,7 +212,7 @@ in {
           "SUPER, slash, exec, hyprland-keybindings-menu"
           "SUPER SHIFT, T, exec, timer-bar menu"
           "SUPER, W, exec, firefox"
-          "SUPER SHIFT, W, togglespecialworkspace, calendar"
+          "SUPER, E, togglespecialworkspace, calendar"
           "SUPER, D, exec, wayle notify dismiss-all"
           "SUPER SHIFT, D, exec, wayle notify dismiss-all"
           "SUPER, B, exec, awww-wallpaper"
