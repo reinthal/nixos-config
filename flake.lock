@@ -419,6 +419,26 @@
         "type": "github"
       }
     },
+    "prempti": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790170604,
+        "narHash": "sha256-L7MRRK+cXCL94w8PufVs7mz62U0PdvB6maLjaw1cIVA=",
+        "owner": "reinthal",
+        "repo": "prempti",
+        "rev": "530ecfcb9117cad1f47d52382a0c53bd061c7d8c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "reinthal",
+        "repo": "prempti",
+        "type": "github"
+      }
+    },
     "pyprland": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -496,6 +516,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "prempti": "prempti",
         "pyprland": "pyprland",
         "reinthalVim": "reinthalVim",
         "sops-nix": "sops-nix",

@@ -36,6 +36,9 @@
 
     # key mappings
     ../../features/key-mappings/caps-to-ctrl-esc.nix
+
+    # Prempti / Kebnetrails: Falco + LLM policy layer for Claude Code
+    inputs.prempti.nixosModules.prempti
   ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -71,6 +74,27 @@
 
   sops.secrets.borg_passphrase = {
     owner = config.users.users.kog.name;
+  };
+
+  # Bare API token in shhh.yaml; the user unit wants an EnvironmentFile.
+  sops.secrets.kebnetrails_api_key = {
+    owner = config.users.users.kog.name;
+  };
+  sops.templates."kebnetrails.env" = {
+    owner = config.users.users.kog.name;
+    content = "KEBNETRAILS_API_KEY=${config.sops.placeholder.kebnetrails_api_key}";
+  };
+
+  services.prempti = {
+    enable = true;
+    monitor = {
+      enable = true;
+      endpoint = "https://openrouter.ai/api/v1";
+      model = "deepseek/deepseek-v4.1-flash";
+      environmentFile = config.sops.templates."kebnetrails.env".path;
+      roeFile = ./roe.md;
+      skipTools = ["Read" "Glob" "Grep"];
+    };
   };
 
   services = {
