@@ -426,11 +426,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790195533,
-        "narHash": "sha256-xJZU0AM4RRYDV7MpxxmIDmkwSs4E5vwR4F3G4NF8jyk=",
+        "lastModified": 1790197563,
+        "narHash": "sha256-8PADFr3AhJVPPWP+3F//GySNY5rWbux7mqQixys3deo=",
         "owner": "reinthal",
         "repo": "prempti",
-        "rev": "ae8c5e1ef52b94a7db359a0a3c36721d8c7c921b",
+        "rev": "941b2fca2205d10872fa3915b90def446cfd1b21",
         "type": "github"
       },
       "original": {

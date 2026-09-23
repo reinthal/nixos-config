@@ -87,6 +87,11 @@
 
   services.prempti = {
     enable = true;
+    signoff = {
+      enable = true;
+      ttlSecs = 300;
+      keysFile = ./signoff_keys.json;
+    };
     monitor = {
       enable = true;
       endpoint = "https://openrouter.ai/api/v1";
@@ -144,7 +149,7 @@
     };
 
     pcscd.enable = true;
-    udev.packages = [pkgs.yubikey-personalization];
+    udev.packages = [pkgs.yubikey-personalization pkgs.libfido2];
     automatic-timezoned.enable = true;
     upower.enable = true;
     # Printer  and printer discovery
