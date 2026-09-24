@@ -1,0 +1,98 @@
+{
+  pkgs,
+  stateVersion,
+  ...
+}: {
+  home = {
+    file.".inputrc".source = ../dotfiles/.inputrc;
+
+    stateVersion = stateVersion;
+    # specify my home-manager configs
+    packages = with pkgs; [
+      # cli
+      pkgs.unstable.claude-code
+      fd
+      sops
+      tree
+      neovim
+      jq
+      tree
+      curl
+      less
+      lazygit
+      btop
+      tree
+      # programming
+      nixd
+      nixpkgs-fmt
+    ];
+
+    sessionVariables = {
+      PAGER = "less";
+      CLICOLOR = 1;
+      EDITOR = "nvim";
+      KEYID = "1B24ADB218CFB40E";
+    };
+  };
+
+  programs = {
+    tmux = {
+      enable = true;
+      mouse = true;
+    };
+
+    gh = {
+      enable = true;
+      gitCredentialHelper.enable = true;
+    };
+    git = {
+      enable = true;
+      lfs.enable = true;
+      userEmail = "email@reinthal.me";
+      userName = "Alexander Reinthal";
+    };
+
+    bat = {
+      enable = true;
+      config.theme = "TwoDark";
+    };
+
+    direnv = {
+      enable = true;
+      config = {
+        global.load_dotenv = true;
+      };
+      enableZshIntegration = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    eza.enable = true;
+
+    zsh = {
+      enable = true;
+      autocd = true;
+      history.share = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+
+      shellAliases = {
+        ls = "eza --color=auto -F";
+        l = "eza -l --color=auto -F";
+        g = "git";
+        gs = "git status";
+        gc = "git commit -m";
+        gd = "git diff";
+      };
+    };
+
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+  };
+}

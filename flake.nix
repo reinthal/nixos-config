@@ -70,9 +70,9 @@
     );
 
     nixosConfigurations = {
-      workstation = nixpkgs.lib.nixosSystem {
+      aligned-intelligence = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
-        modules = [./nixos/hosts/workstation];
+        modules = [./nixos/hosts/aligned-intelligence];
       };
       seed = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
