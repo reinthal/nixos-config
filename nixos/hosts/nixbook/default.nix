@@ -84,9 +84,9 @@
     owner = config.users.users.kog.name;
     content = "KEBNETRAILS_API_KEY=${config.sops.placeholder.kebnetrails_api_key}";
   };
-
+  # disable controls here
   services.prempti = {
-    enable = true;
+    enable = false;
     signoff = {
       enable = true;
       ttlSecs = 300;
