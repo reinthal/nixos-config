@@ -29,7 +29,7 @@ home-manager = {
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "aicab"; # Define your hostname.
+  networking.hostName = "aligned-intelligence"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -43,7 +43,7 @@ home-manager = {
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-  };
+  p;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."kog" = {
     isNormalUser = true;
@@ -55,6 +55,7 @@ home-manager = {
   };
 
   # Install firefox.
+programs.nix-ld.enable = true;
 programs.zsh.enable = true;
   programs.firefox.enable = true;
 
