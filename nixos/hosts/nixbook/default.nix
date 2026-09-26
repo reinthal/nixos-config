@@ -23,6 +23,7 @@
     ../../features/apps/wlots-client.nix
     ../../features/cli
     ../../features/apps/syncthing.nix
+    ../../features/apps/spice-client.nix
     (import ../../features/networking "nixbook")
     # enable various features
     ../../features/sound.nix
