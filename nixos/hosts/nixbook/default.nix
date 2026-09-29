@@ -41,6 +41,11 @@
     # Prempti / Kebnetrails: Falco + LLM policy layer for Claude Code
     inputs.prempti.nixosModules.prempti
   ];
+  # Experimental Asahi "fairydust" kernel: USB-C DisplayPort alt-mode output.
+  # Built by CI (.github/workflows/asahi-fairydust-kernel.yml) and pushed to
+  # the B2 cache so `switch` does not compile it locally.
+  nixpkgs.overlays = [outputs.overlays.asahi-fairydust];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 50;
@@ -154,10 +159,10 @@
     upower.enable = true;
     # Printer  and printer discovery
     printing.enable = true;
-    journald.extraConfig = ''
-      SystemMaxUse=500M
-      MaxRetentionSec=7day
-    '';
+    journald.settings.Journal = {
+      SystemMaxUse = "500M";
+      MaxRetentionSec = "7day";
+    };
     # enable if printer issues
     #avahi = {
     #enable = true;

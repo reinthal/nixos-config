@@ -92,7 +92,7 @@ On the user's `PATH` after `switch`.
 
 | Command | What it does |
 |---|---|
-| `switch` | `sudo nixos-rebuild switch --flake ~/nixos-config#$HOSTNAME --impure` (clears a stale Firefox search backup first). |
+| `switch` | `sudo nixos-rebuild switch --flake ~/nixos-config#$HOSTNAME` (clears a stale Firefox search backup first). |
 | `cache-upload [paths...]` | Sign store paths with the SOPS-deployed key and push to the B2 binary cache. No args → current system closure. |
 | `secret <file>` | GPG-encrypt `<file>` to `$KEYID` → `<file>.<timestamp>.enc` (armored). |
 | `reveal <file>.enc` | GPG-decrypt back to the original filename. |

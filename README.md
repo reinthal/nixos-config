@@ -181,6 +181,46 @@ nix flake update home-manager
 nix flake update apple-silicon
 ```
 
+## Asahi fairydust kernel
+
+`nixbook` boots the upstream Asahi Linux
+[`fairydust`](https://github.com/AsahiLinux/linux/tree/fairydust) branch instead
+of the stock `linux-asahi` from `nixos-apple-silicon`. It is the experimental
+branch that enables USB-C DisplayPort alt-mode output (one "blessed" port per
+machine, front-left on MacBooks; one USB-C display; hot-plug can be flaky).
+Upstream ships it as-is with no support.
+
+- Package: `pkgs/linux-asahi-fairydust/default.nix` (copy of the
+  `nixos-apple-silicon` kernel package with `src` pinned to a `fairydust`
+  commit). Exposed as `packages.aarch64-linux.linux-asahi-fairydust`.
+- Overlay: `overlays.asahi-fairydust` replaces `linux-asahi`, applied only in
+  `nixos/hosts/nixbook/default.nix`.
+- CI: `.github/workflows/asahi-fairydust-kernel.yml` builds
+  `nixosConfigurations.nixbook.config.boot.kernelPackages.kernel` on a
+  GitHub-hosted `ubuntu-24.04-arm` runner, signs it and pushes it to the B2
+  cache. Runs on pushes to `flaked` touching the kernel package, overlays,
+  nixbook host or `flake.lock`, and on manual dispatch. Wait for the run to
+  finish before `switch`, otherwise the laptop compiles the kernel itself.
+
+Repository secrets the workflow needs (Settings → Secrets → Actions):
+
+| Secret | Value |
+|---|---|
+| `NIX_SIGNING_KEY` | contents of `nix_cache/secret_key` from `secrets/shhh.yaml` (the `reinthal-nix-store` signing key) |
+| `B2_ACCESS_KEY_ID` | B2 application key id with write access to `reinthal-nix-store` |
+| `B2_SECRET_ACCESS_KEY` | matching B2 application key |
+
+Bump the kernel: pick a new commit on `fairydust`, update `rev`, `version`
+(from the tree's `Makefile`) and `hash` in
+`pkgs/linux-asahi-fairydust/default.nix`:
+
+```bash
+nix flake prefetch --json github:AsahiLinux/linux/<rev> | jq -r .hash
+```
+
+To go back to the stock kernel, drop the `nixpkgs.overlays` line in the
+nixbook host config.
+
 ## Pinned Items
 
 Inputs held back from `nix flake update` because the latest upstream rev breaks
@@ -204,7 +244,7 @@ nix flake lock --override-input claude-desktop github:aaddrick/claude-desktop-de
 For NixOS systems:
 
 ```bash
-sudo nixos-rebuild switch --flake '.#<hostname>' --impure
+sudo nixos-rebuild switch --flake '.#<hostname>'
 ```
 
 For Darwin (macOS) systems:
@@ -237,7 +277,7 @@ nix flake update nixpkgs-unstable
 #### Test configurations without switching:
 
 ```bash
-sudo nixos-rebuild test --flake '.#<host>' --impure
+sudo nixos-rebuild test --flake '.#<host>'
 ```
 
 #### Clean up old generations:

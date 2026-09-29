@@ -104,12 +104,7 @@
     };
 
     # Your custom packages and modifications, exported as overlays
-    overlays = let
-      pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
-    in
-      import ./overlays {inherit pkgs inputs;}
-      // {
-      };
+    overlays = import ./overlays {inherit inputs;};
 
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
@@ -195,7 +190,7 @@
       };
       "ubuntu@lambda" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          system = builtins.currentSystem;
+          system = "x86_64-linux";
           config.allowUnfree = true;
           overlays = [
             outputs.overlays.unstable-packages

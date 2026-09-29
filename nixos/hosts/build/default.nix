@@ -74,10 +74,10 @@
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
     meilisearch.enable = false;
-    journald.extraConfig = ''
-      SystemMaxUse=500M
-      MaxRetentionSec=7day
-    '';
+    journald.settings.Journal = {
+      SystemMaxUse = "500M";
+      MaxRetentionSec = "7day";
+    };
   };
   environment.shellInit = ''
     export GPG_TTY="$(tty)"

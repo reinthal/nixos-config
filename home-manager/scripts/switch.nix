@@ -5,7 +5,7 @@
        rm $FF_BKP;
     fi
     HOSTNAME=$(${pkgs.hostname}/bin/hostname)
-    sudo nixos-rebuild switch --flake ~/nixos-config#$HOSTNAME --impure
+    sudo nixos-rebuild switch --flake ~/nixos-config#$HOSTNAME
   '';
 in {
   home.packages = [switch];
