@@ -6,8 +6,8 @@ name: Asahi fairydust kernel
 # laptop substitutes instead of compiling for ~1h.
 #
 # Required repository secrets:
-#   NIX_SIGNING_KEY       contents of the `reinthal-nix-store` secret key
-#                         (same key SOPS deploys to /etc/nix/signing-key.sec)
+#   NIX_SIGNING_KEY       dedicated CI signing key `reinthal-nix-store-ci`
+#                         (public half: ci-pub-key.pub, trusted in flake.nix)
 #   B2_ACCESS_KEY_ID      Backblaze B2 application key id with write access
 #   B2_SECRET_ACCESS_KEY  Backblaze B2 application key
 
@@ -63,7 +63,7 @@ jobs:
             cores = 0
             sandbox = true
             substituters = https://reinthal-nix-store.s3.eu-central-003.backblazeb2.com https://cache.nixos.org https://nix-community.cachix.org
-            trusted-public-keys = reinthal-nix-store:PKEXEQXsLCz9vWz71iaD1TYRLa4XbDQxjL8rrAccDwg= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
+            trusted-public-keys = reinthal-nix-store:PKEXEQXsLCz9vWz71iaD1TYRLa4XbDQxjL8rrAccDwg= reinthal-nix-store-ci:uauSdxPq9pb+rA+eydO4XfH6AUr4m/nBigsaycX0uVs= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
 
       - name: Evaluate kernel derivation
         id: eval
