@@ -108,33 +108,33 @@ because home-manager takes over `~/.nix-profile`. Use `nix run` instead:
 nix run home-manager/master -- switch --flake .#"kog@cli" --impure
 ```
 
-The `--impure` flag is required because the config reads `$USER` and `$HOME`
-via `builtins.getEnv` to set `home.username` and `home.homeDirectory`, keeping
-the config user-agnostic without needing separate flakes per user.
+The `--impure` flag is required because the config reads `$USER` and `$HOME` via
+`builtins.getEnv` to set `home.username` and `home.homeDirectory`, keeping the
+config user-agnostic without needing separate flakes per user.
 
 ## Hosts
 
-| Host          | Description                              |
-| ------------- | ---------------------------------------- |
-| `build`       | x86 Proxmox VM Workstation               |
-| `flix`        | Media server (Jellyfin, Plex, Navidrome) |
-| `nixbook`     | Apple Silicon + NixOS configuration      |
-| `relay`       | Tor exit node                            |
-| `seek`        | Monitoring host (Docker, minimal CLI)    |
-| `mbp`         | macOS Darwin system                      |
+| Host      | Description                              |
+| --------- | ---------------------------------------- |
+| `build`   | x86 Proxmox VM Workstation               |
+| `flix`    | Media server (Jellyfin, Plex, Navidrome) |
+| `nixbook` | Apple Silicon + NixOS configuration      |
+| `relay`   | Tor exit node                            |
+| `seek`    | Monitoring host (Docker, minimal CLI)    |
+| `mbp`     | macOS Darwin system                      |
 
 ## Package Channels
 
-This flake uses two nixpkgs inputs that both track the `nixpkgs-unstable`
-branch but are pinned independently in `flake.lock`. The reason the entire
-setup runs on unstable is the `nixos-apple-silicon` module, which requires
-kernel support only available on the unstable branch.
+This flake uses two nixpkgs inputs that both track the `nixpkgs-unstable` branch
+but are pinned independently in `flake.lock`. The reason the entire setup runs
+on unstable is the `nixos-apple-silicon` module, which requires kernel support
+only available on the unstable branch.
 
 ### Inputs
 
-| Input | Branch | Accessed as | Purpose |
-|---|---|---|---|
-| `nixpkgs` | `nixpkgs-unstable` | `pkgs.*` | Default system and home-manager packages |
+| Input              | Branch             | Accessed as       | Purpose                                        |
+| ------------------ | ------------------ | ----------------- | ---------------------------------------------- |
+| `nixpkgs`          | `nixpkgs-unstable` | `pkgs.*`          | Default system and home-manager packages       |
 | `nixpkgs-unstable` | `nixpkgs-unstable` | `pkgs.unstable.*` | High-churn packages on a faster update cadence |
 
 Both inputs track the same upstream branch. The separation exists so that
@@ -145,20 +145,21 @@ from a new `nixpkgs` pin.
 ### When to use `pkgs.unstable.*`
 
 Add a package under `pkgs.unstable.<name>` when:
+
 - It moves fast and you want updates more frequently than system rebuilds
 - You had a breakage in the main `nixpkgs` pin and need a newer snapshot
 - The package lags behind in the main pin (e.g. waiting for a Hydra build)
 
 Current `pkgs.unstable.*` packages:
 
-| Package | File |
-|---|---|
-| `signal-desktop` | `home-manager/cli/default.nix` |
-| `claude-code` | `home-manager/cli/default.nix`, `home-manager/cli/flix.nix` |
-| `mcp-proxy` | `home-manager/cli/default.nix` |
-| `devenv` | `home-manager/cli/default.nix` |
-| `ollama` | `modules/ollama.nix` |
-| `meilisearch` | `nixos/features/apps/jellyfin.nix` |
+| Package          | File                                                        |
+| ---------------- | ----------------------------------------------------------- |
+| `signal-desktop` | `home-manager/cli/default.nix`                              |
+| `claude-code`    | `home-manager/cli/default.nix`, `home-manager/cli/flix.nix` |
+| `mcp-proxy`      | `home-manager/cli/default.nix`                              |
+| `devenv`         | `home-manager/cli/default.nix`                              |
+| `ollama`         | `modules/ollama.nix`                                        |
+| `meilisearch`    | `nixos/features/apps/jellyfin.nix`                          |
 
 ### Update paths
 
@@ -205,22 +206,21 @@ Upstream ships it as-is with no support.
 Secrets the workflow needs, scoped to the GitHub environment `god` (Settings →
 Environments → god → Secrets; the job declares `environment: god`):
 
-| Secret | Value |
-|---|---|
-| `NIX_SIGNING_KEY` | dedicated CI signing key `reinthal-nix-store-ci` (separate from the host key in `nix_cache/secret_key`, so a leaked GitHub secret can be revoked alone). Public half is `ci-pub-key.pub`, trusted in `flake.nix` `nixConfig.trusted-public-keys` and the workflow |
-| `B2_ACCESS_KEY_ID` | B2 application key id with write access to `reinthal-nix-store` |
-| `B2_SECRET_ACCESS_KEY` | matching B2 application key |
+| Secret                 | Value                                                                                                                                                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NIX_SIGNING_KEY`      | dedicated CI signing key `reinthal-nix-store-ci` (separate from the host key in `nix_cache/secret_key`, so a leaked GitHub secret can be revoked alone). Public half is `ci-pub-key.pub`, trusted in `flake.nix` `nixConfig.trusted-public-keys` and the workflow |
+| `B2_ACCESS_KEY_ID`     | B2 application key id with write access to `reinthal-nix-store`                                                                                                                                                                                                   |
+| `B2_SECRET_ACCESS_KEY` | matching B2 application key                                                                                                                                                                                                                                       |
 
-Bump the kernel: pick a new commit on `fairydust`, update `rev`, `version`
-(from the tree's `Makefile`) and `hash` in
-`pkgs/linux-asahi-fairydust/default.nix`:
+Bump the kernel: pick a new commit on `fairydust`, update `rev`, `version` (from
+the tree's `Makefile`) and `hash` in `pkgs/linux-asahi-fairydust/default.nix`:
 
 ```bash
 nix flake prefetch --json github:AsahiLinux/linux/<rev> | jq -r .hash
 ```
 
-To go back to the stock kernel, drop the `nixpkgs.overlays` line in the
-nixbook host config.
+To go back to the stock kernel, drop the `nixpkgs.overlays` line in the nixbook
+host config.
 
 ## Pinned Items
 
@@ -229,14 +229,7 @@ the build. Re-check each entry periodically and remove once upstream lands a
 fix.
 
 | Input | Pinned rev | Reason | Upstream tracking |
-|---|---|---|---|
-| `claude-desktop` | `b8fe6b850266c25b6e588ac82202ea9cfb9294e3` | Patcher anchor `addTrustedFolder` regex stopped matching upstream Claude Desktop shape on rev `2ae2172`, breaking the nix build. | aaddrick/claude-desktop-debian #672 (bug), #674 (fix PR) |
-
-Re-pin with:
-
-```bash
-nix flake lock --override-input claude-desktop github:aaddrick/claude-desktop-debian/<rev>
-```
+| ----- | ---------- | ------ | ----------------- |
 
 ## Building the System
 
@@ -269,7 +262,8 @@ switch
 ```bash
 nix flake update
 ```
-or 
+
+or
 
 ```bash
 nix flake update nixpkgs-unstable
