@@ -54,9 +54,19 @@
       cores = 0; # 0 = use all cores
       max-jobs = "auto"; # number of parallel builds
 
-      # binary caches
-      substituters = [];
-      trusted-public-keys = [];
+      # binary caches. Kept in nix.conf (not only flake.nix nixConfig): flake
+      # nixConfig is ignored unless the user accepts it interactively, and root
+      # (nixos-rebuild via sudo) has its own trusted-settings.json, so CI-signed
+      # paths in the B2 cache silently fall back to local builds otherwise.
+      substituters = [
+        "https://reinthal-nix-store.s3.eu-central-003.backblazeb2.com"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "reinthal-nix-store:PKEXEQXsLCz9vWz71iaD1TYRLa4XbDQxjL8rrAccDwg="
+        "reinthal-nix-store-ci:uauSdxPq9pb+rA+eydO4XfH6AUr4m/nBigsaycX0uVs="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
   };
   environment.systemPackages = with pkgs; [

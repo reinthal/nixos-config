@@ -71,21 +71,36 @@ jobs:
         id: eval
         run: |
           drv=$(nix eval --raw "$KERNEL_ATTR.drvPath")
-          out=$(nix eval --raw "$KERNEL_ATTR.outPath")
+          # The kernel derivation has several outputs (out, dev, modules).
+          # NixOS needs all of them, and Nix cannot substitute a derivation
+          # whose outputs are only partially cached: it rebuilds everything.
+          # So every output must be pushed, not just $out.
+          outs=""
+          for o in $(nix eval --json "$KERNEL_ATTR.outputs" | jq -r '.[]'); do
+            outs="$outs $(nix eval --raw "$KERNEL_ATTR.$o.outPath")"
+          done
+          outs="${outs# }"
           echo "drv=$drv" >> "$GITHUB_OUTPUT"
-          echo "out=$out" >> "$GITHUB_OUTPUT"
-          echo "kernel: $out"
+          echo "outs=$outs" >> "$GITHUB_OUTPUT"
+          echo "kernel outputs: $outs"
 
       - name: Skip if already cached
         id: cached
         run: |
-          if nix path-info --store "https://reinthal-nix-store.s3.eu-central-003.backblazeb2.com" \
-               "${{ steps.eval.outputs.out }}" >/dev/null 2>&1; then
-            echo "already in cache, nothing to do"
-            echo "hit=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "hit=false" >> "$GITHUB_OUTPUT"
+          hit=true
+          for p in ${{ steps.eval.outputs.outs }}; do
+            if nix path-info --store "https://reinthal-nix-store.s3.eu-central-003.backblazeb2.com" \
+                 "$p" >/dev/null 2>&1; then
+              echo "cached: $p"
+            else
+              echo "missing: $p"
+              hit=false
+            fi
+          done
+          if [ "$hit" = true ]; then
+            echo "all outputs in cache, nothing to do"
           fi
+          echo "hit=$hit" >> "$GITHUB_OUTPUT"
 
       - name: Preflight B2 credentials
         # Fail here, not after a 2 h build: verify the secrets exist and can
@@ -123,7 +138,7 @@ jobs:
       - name: Build kernel
         if: steps.cached.outputs.hit != 'true'
         run: |
-          nix build -L --no-link --print-build-logs "$KERNEL_ATTR"
+          nix build -L --no-link --print-build-logs "$KERNEL_ATTR^*"
           df -h /
 
       - name: Sign and push to B2 cache
@@ -137,23 +152,28 @@ jobs:
           umask 077
           keyfile=$(mktemp)
           printf '%s' "$NIX_SIGNING_KEY" > "$keyfile"
-          out="${{ steps.eval.outputs.out }}"
-          nix store sign --recursive --key-file "$keyfile" "$out"
-          nix copy --to "$CACHE_URL" "$out"
+          outs="${{ steps.eval.outputs.outs }}"
+          # shellcheck disable=SC2086  # word-split the space-separated paths
+          nix store sign --recursive --key-file "$keyfile" $outs
+          nix copy --to "$CACHE_URL" $outs
           rm -f "$keyfile"
-          echo "pushed $out"
+          echo "pushed $outs"
 
       - name: Save kernel as artifact if push failed
         # Insurance: the build is ~2 h on this runner. If signing/pushing
         # fails, keep the closure so it can be pushed by hand:
         #   nix copy --from file://$PWD/kernel-nar --all --no-check-sigs
-        #   nix store sign --recursive --key-file <key> <out>
-        #   nix copy --to <CACHE_URL> <out>
+        #   nix store sign --recursive --key-file <key> <out> <dev> <modules>
+        #   nix copy --to <CACHE_URL> <out> <dev> <modules>
         if: failure() && steps.cached.outputs.hit != 'true'
         run: |
-          out="${{ steps.eval.outputs.out }}"
-          if [ -e "$out" ]; then
-            nix copy --to "file://$PWD/kernel-nar" "$out"
+          built=""
+          for p in ${{ steps.eval.outputs.outs }}; do
+            [ -e "$p" ] && built="$built $p"
+          done
+          if [ -n "$built" ]; then
+            # shellcheck disable=SC2086
+            nix copy --to "file://$PWD/kernel-nar" $built
             du -sh kernel-nar
           fi
 
