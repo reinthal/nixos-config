@@ -48,7 +48,7 @@
       node_modules = old.node_modules.overrideAttrs (nmOld: {
         outputHash =
           if prev.stdenv.hostPlatform.system == "aarch64-linux"
-          then "sha256-cixPB97YgEDuohCci38ZdjXfvTqCs3ihNIlRt4Go5RU="
+          then "sha256-dV132lqQIdKsoDA/iUiu4ByKWfnP1KnQOrM/2jivzfI="
           else nmOld.outputHash;
       });
     });
