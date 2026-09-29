@@ -202,7 +202,8 @@ Upstream ships it as-is with no support.
   nixbook host or `flake.lock`, and on manual dispatch. Wait for the run to
   finish before `switch`, otherwise the laptop compiles the kernel itself.
 
-Repository secrets the workflow needs (Settings → Secrets → Actions):
+Secrets the workflow needs, scoped to the GitHub environment `god` (Settings →
+Environments → god → Secrets; the job declares `environment: god`):
 
 | Secret | Value |
 |---|---|

@@ -5,7 +5,7 @@ name: Asahi fairydust kernel
 # the closure to the private Backblaze B2 binary cache so `switch` on the
 # laptop substitutes instead of compiling for ~1h.
 #
-# Required repository secrets:
+# Required secrets (GitHub environment `god`, see `gh secret list --env god`):
 #   NIX_SIGNING_KEY       dedicated CI signing key `reinthal-nix-store-ci`
 #                         (public half: ci-pub-key.pub, trusted in flake.nix)
 #   B2_ACCESS_KEY_ID      Backblaze B2 application key id with write access
@@ -38,6 +38,8 @@ jobs:
   build:
     name: Build and push (aarch64-linux)
     runs-on: ubuntu-24.04-arm
+    # Secrets (B2_*, NIX_SIGNING_KEY) are environment-scoped, not repo-scoped.
+    environment: god
     timeout-minutes: 350
     steps:
       - name: Free runner disk space
@@ -85,6 +87,32 @@ jobs:
             echo "hit=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Preflight B2 credentials
+        # Fail here, not after a 2 h build: verify the secrets exist and can
+        # write to the bucket by PUTting and deleting a tiny probe object.
+        if: steps.cached.outputs.hit != 'true'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.B2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.B2_SECRET_ACCESS_KEY }}
+          NIX_SIGNING_KEY: ${{ secrets.NIX_SIGNING_KEY }}
+        run: |
+          set -euo pipefail
+          for v in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY NIX_SIGNING_KEY; do
+            if [ -z "${!v}" ]; then
+              echo "::error::repository secret for $v is not set"
+              exit 1
+            fi
+          done
+          probe="https://s3.eu-central-003.backblazeb2.com/reinthal-nix-store/ci-preflight-${GITHUB_RUN_ID}"
+          curl --fail --silent --show-error \
+            --aws-sigv4 "aws:amz:eu-central-003:s3" \
+            --user "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
+            -X PUT --data-binary "preflight" "$probe"
+          curl --silent --aws-sigv4 "aws:amz:eu-central-003:s3" \
+            --user "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
+            -X DELETE "$probe" || true
+          echo "B2 write access OK"
+
       - name: Build kernel
         if: steps.cached.outputs.hit != 'true'
         run: |
@@ -107,3 +135,25 @@ jobs:
           nix copy --to "$CACHE_URL" "$out"
           rm -f "$keyfile"
           echo "pushed $out"
+
+      - name: Save kernel as artifact if push failed
+        # Insurance: the build is ~2 h on this runner. If signing/pushing
+        # fails, keep the closure so it can be pushed by hand:
+        #   nix copy --from file://$PWD/kernel-nar --all --no-check-sigs
+        #   nix store sign --recursive --key-file <key> <out>
+        #   nix copy --to <CACHE_URL> <out>
+        if: failure() && steps.cached.outputs.hit != 'true'
+        run: |
+          out="${{ steps.eval.outputs.out }}"
+          if [ -e "$out" ]; then
+            nix copy --to "file://$PWD/kernel-nar" "$out"
+            du -sh kernel-nar
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: failure() && steps.cached.outputs.hit != 'true' && hashFiles('kernel-nar/nix-cache-info') != ''
+        with:
+          name: linux-asahi-fairydust-nar
+          path: kernel-nar
+          retention-days: 7
+          if-no-files-found: ignore
