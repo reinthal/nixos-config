@@ -10,6 +10,7 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "reinthal-nix-store:PKEXEQXsLCz9vWz71iaD1TYRLa4XbDQxjL8rrAccDwg="
+      "reinthal-nix-store-ci:uauSdxPq9pb+rA+eydO4XfH6AUr4m/nBigsaycX0uVs="
     ];
   };
   inputs = {

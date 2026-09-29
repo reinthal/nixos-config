@@ -206,7 +206,7 @@ Repository secrets the workflow needs (Settings → Secrets → Actions):
 
 | Secret | Value |
 |---|---|
-| `NIX_SIGNING_KEY` | contents of `nix_cache/secret_key` from `secrets/shhh.yaml` (the `reinthal-nix-store` signing key) |
+| `NIX_SIGNING_KEY` | dedicated CI signing key `reinthal-nix-store-ci` (separate from the host key in `nix_cache/secret_key`, so a leaked GitHub secret can be revoked alone). Public half is `ci-pub-key.pub`, trusted in `flake.nix` `nixConfig.trusted-public-keys` and the workflow |
 | `B2_ACCESS_KEY_ID` | B2 application key id with write access to `reinthal-nix-store` |
 | `B2_SECRET_ACCESS_KEY` | matching B2 application key |
 
