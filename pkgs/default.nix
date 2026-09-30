@@ -3,6 +3,7 @@
 {pkgs ? (import ../nixpkgs.nix) {}}:
 rec {
   custom-fonts = pkgs.callPackage ./fonts {};
+  evilginx = pkgs.callPackage ./evilginx {};
   trim-screencast = pkgs.callPackage ./trim-screencast.nix {};
   setup-gpg-forward = pkgs.callPackage ./setup-gpg-forward.nix {};
   hyprland-keybindings-menu = pkgs.callPackage ./hyprland-keybindings-menu.nix {};

@@ -2,7 +2,9 @@
 # without having to repeat yourself.
 # Also see https://github.com/Mic92/dotfiles/blob/master/nixos/.sops.yaml
 # for a more complex example.
+#
 keys:
+  - &pentest age14c2slc3h4gjqxgr09v8suu3p4v7ausygcr9dd58nfqaeegt39dyqw0lnd4
   - &claw age1wvk0ndan8vhch78tewjdr7x8jkz8jvs0h40qp3ff0flw4d68u3gqln7m9x
   - &kog age1rktgpvuzkq47s89sncwf94d8gpqe9y59gm6gjsla2m48eqrt7y2sg4w0cx
 creation_rules:
@@ -10,6 +12,10 @@ creation_rules:
     key_groups:
     - age:
       - *kog
+  - path_regex: ^secrets/pentest.env$
+    key_groups:
+    - age:
+      - *pentest
   - path_regex: secrets/shared.yaml
     key_groups:
     - age:

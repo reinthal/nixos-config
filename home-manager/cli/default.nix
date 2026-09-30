@@ -119,6 +119,16 @@ in {
     zsh = {
       enable = true;
       dotDir = "${config.xdg.configHome}/zsh";
+      # Standalone (non-NixOS) single-user Nix: the installer only wires PATH
+      # into ~/.profile, which zsh login shells never read. Source the profile
+      # script from .zshenv (sourced by every zsh, incl. login) so
+      # ~/.nix-profile/bin (eza, ripgrep, all HM packages) lands on PATH.
+      # No-op on NixOS hosts, where PATH already includes the profile.
+      envExtra = ''
+        if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+          . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+        fi
+      '';
       autocd = true;
       history = {
         share = true;
