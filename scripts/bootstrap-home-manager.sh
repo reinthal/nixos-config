@@ -162,11 +162,16 @@ echo "Detected architecture: $ARCH, using flake config: $FLAKE_CONFIG"
 home-manager switch --flake ".#$FLAKE_CONFIG" --impure -b bkp
 
 # Register zsh as a valid login shell and set it as default. Best-effort:
-# containers may lack /etc/shells write access or a working chsh.
+# containers / cloud-init may lack /etc/shells access, a tty, or a working chsh.
 ZSH_BIN="$(command -v zsh)"
-$SUDO sh -c "grep -qxF '$ZSH_BIN' /etc/shells 2>/dev/null || echo '$ZSH_BIN' >>/etc/shells" || true
-$SUDO sh -c "grep -qxF '$HOME/.nix-profile/bin/zsh' /etc/shells 2>/dev/null || echo '$HOME/.nix-profile/bin/zsh' >>/etc/shells" || true
-$SUDO chsh -s "$ZSH_BIN" "$(whoami)" || echo "chsh failed (non-fatal); start zsh manually if needed." >&2
+if [ -n "$ZSH_BIN" ]; then
+  $SUDO sh -c "grep -qxF '$ZSH_BIN' /etc/shells 2>/dev/null || echo '$ZSH_BIN' >>/etc/shells" || true
+  $SUDO chsh -s "$ZSH_BIN" "$(id -un)" || echo "chsh failed (non-fatal); start zsh manually." >&2
+fi
 
 echo "WELCOME TO NIXLAND"
-exec zsh
+# Only drop into an interactive zsh when attached to a terminal. Under cloud-init
+# (su - kog -c ...) there is no tty, and `exec zsh` would hang the runcmd or die.
+if [ -t 0 ] && [ -t 1 ]; then
+  exec zsh -l
+fi
