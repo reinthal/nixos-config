@@ -22,7 +22,8 @@ in {
     packages = with pkgs;
       [
         # cli
-        cyberstrike
+        # cyberstrike: nixpkgs package broken; installed via bun in
+        # scripts/bootstrap-home-manager.sh (bun add -g @cyberstrike-io/cyberstrike)
         nodejs_24
         bun
         wireguard-tools
@@ -58,6 +59,7 @@ in {
     sessionPath = [
       "$HOME/.npm-global/bin"
       "$HOME/.cache/.bun/bin"
+      "$HOME/.bun/bin" # bun global installs (e.g. cyberstrike)
     ];
     sessionVariables = {
       PAGER = "less";

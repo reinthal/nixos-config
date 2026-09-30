@@ -38,19 +38,8 @@
 
   # Package modifications (patches, version changes, per-platform fixes).
   modifications = final: prev: {
-    # nixpkgs ships a single node_modules FOD hash computed on x86_64, so on
-    # aarch64 the x64-only native deps get reused and the build can't resolve
-    # @opentui/core-linux-arm64. Give aarch64-linux its own hash. nixpkgs also
-    # lists only x86_64-linux in meta.platforms; add aarch64-linux so the
-    # package evaluates without NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM (--impure).
-    cyberstrike = prev.cyberstrike.overrideAttrs (old: {
-      meta = old.meta // {platforms = prev.lib.unique (old.meta.platforms ++ ["aarch64-linux"]);};
-      node_modules = old.node_modules.overrideAttrs (nmOld: {
-        outputHash =
-          if prev.stdenv.hostPlatform.system == "aarch64-linux"
-          then "sha256-dV132lqQIdKsoDA/iUiu4ByKWfnP1KnQOrM/2jivzfI="
-          else nmOld.outputHash;
-      });
-    });
+    # cyberstrike removed: the nixpkgs package is broken. Installed via
+    # `bun add -g @cyberstrike-io/cyberstrike@latest` in
+    # scripts/bootstrap-home-manager.sh instead.
   };
 }

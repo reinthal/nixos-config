@@ -161,6 +161,16 @@ echo "Detected architecture: $ARCH, using flake config: $FLAKE_CONFIG"
 # Install the CLI home-manager config
 home-manager switch --flake ".#$FLAKE_CONFIG" --impure -b bkp
 
+# bun / pnpm / yarn global tools. cyberstrike is installed here rather than via
+# nixpkgs (the nix package is currently broken). bun comes from the HM profile.
+export PATH="$HOME/.bun/bin:$PATH"
+if command -v bun >/dev/null 2>&1; then
+  bun add -g @cyberstrike-io/cyberstrike@latest || \
+    echo "bun global install of cyberstrike failed (non-fatal)." >&2
+else
+  echo "bun not found on PATH; skipped cyberstrike install." >&2
+fi
+
 # Register zsh as a valid login shell and set it as default. Best-effort:
 # containers / cloud-init may lack /etc/shells access, a tty, or a working chsh.
 ZSH_BIN="$(command -v zsh)"
