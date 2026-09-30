@@ -47,7 +47,7 @@ in {
         "eDP-1, preferred, 0x0, 2"
         # Acer ultrawide, matched by description (stable across ports).
         # Get desc for new screens with: hyprctl monitors all
-        "desc:Acer Technologies CB342CK 0x00003726, 3440x1440@99.98Hz, auto-up, 1.0"
+        "desc:Acer Technologies CB342CK 0x00003726, 3440x1440@174.96Hz, auto-up, 1.0"
         # Asahi's dcp driver exposes no EDID make/model, so desc: never matches
         # on nixbook — match the ultrawide by port there instead.
         "HDMI-A-1, 3440x1440@99.98Hz, auto-up, 1.25"
