@@ -24,8 +24,6 @@
         exit 1
     fi
 
-    export AWS_SHARED_CREDENTIALS_FILE="${homeDirectory}/.aws/credentials"
-
     if [[ $# -eq 0 ]]; then
         if [[ -e /run/current-system ]]; then
             PATHS=("/run/current-system")
