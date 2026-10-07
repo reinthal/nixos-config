@@ -61,7 +61,11 @@ programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    # Needed so gpg-agent socket forwarding can replace a stale socket.
+    settings.StreamLocalBindUnlink = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

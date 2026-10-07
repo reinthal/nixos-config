@@ -60,6 +60,18 @@ in {
           PubkeyAuthentication = true;
           IdentityAgent = "/run/user/1000/gnupg/S.gpg-agent.ssh";
         };
+      # aligned-intelligence (NixOS, tailscale MagicDNS) — same auth as build.
+      "aligned-intelligence" =
+        forwardTo 1000
+        // {
+          HostName = "aligned-intelligence.tail2b04a.ts.net";
+          User = "kog";
+          IdentityFile = "~/.ssh/openpgp";
+          IdentitiesOnly = true;
+          PreferredAuthentications = "publickey";
+          PubkeyAuthentication = true;
+          IdentityAgent = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+        };
       # Oracle Cloud Ubuntu VM — auth with this host's id_ed25519 (kog@nixbook).
       "150.136.45.203" = {
         User = "ubuntu";
