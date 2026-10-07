@@ -44,11 +44,17 @@ home-manager = {
     layout = "us";
     variant = "";
   };
+  # Docker daemon (bash arena)
+  virtualisation.docker.enable = true;
+
+  # QEMU guest agent (host-side shutdown, IP reporting, fs freeze)
+  services.qemuGuest.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."kog" = {
     isNormalUser = true;
     description = "kog";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     #  thunderbird
     ];
