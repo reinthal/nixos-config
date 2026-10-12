@@ -1,18 +1,21 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, pkgs, inputs, outputs,... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-     ../../common.nix
-     ../../features/sops.nix
-     ../../features/cli/default.nix
-    ];
-home-manager = {
+  config,
+  pkgs,
+  inputs,
+  outputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../common.nix
+    ../../features/sops.nix
+    ../../features/cli/default.nix
+  ];
+  home-manager = {
     backupFileExtension = "hm-bkp";
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
@@ -54,15 +57,15 @@ home-manager = {
   users.users."kog" = {
     isNormalUser = true;
     description = "kog";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
   # Install firefox.
-programs.nix-ld.enable = true;
-programs.zsh.enable = true;
+  programs.nix-ld.enable = true;
+  programs.zsh.enable = true;
   programs.firefox.enable = true;
 
   # Allow unfree packages
@@ -73,6 +76,14 @@ programs.zsh.enable = true;
     settings.StreamLocalBindUnlink = true;
   };
 
+  # Receive nixbook's forwarded gpg-agent socket (Yubikey signs here, see
+  # home-manager/gpg/forward-gpg-agent.nix). No local agent or key material:
+  #  - gpg client only, it talks to the forwarded socket
+  #  - sshd can't bind into a missing dir, so create the socket dir at login
+  #  - unlink a stale socket left by a previous session before binding
+  environment.systemPackages = [pkgs.gnupg];
+  systemd.user.tmpfiles.rules = ["d %t/gnupg 0700 - - -"];
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -80,5 +91,4 @@ programs.zsh.enable = true;
   # networking.firewall.enable = false;
 
   system.stateVersion = "26.05"; # Did you read the comment?
-
 }

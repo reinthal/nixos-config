@@ -14,6 +14,7 @@ in {
     packages = with pkgs; [
       # cli
       pkgs.unstable.claude-code
+      texliveFull
       fd
       sops
       tree
