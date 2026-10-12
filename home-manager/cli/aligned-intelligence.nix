@@ -1,8 +1,11 @@
 {
   pkgs,
+  inputs,
   stateVersion,
   ...
-}: {
+}: let
+  reinthalVim = inputs.reinthalVim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+in {
   home = {
     file.".inputrc".source = ../dotfiles/.inputrc;
 
@@ -14,7 +17,8 @@
       fd
       sops
       tree
-      neovim
+      reinthalVim
+      ripgrep
       jq
       tree
       curl
