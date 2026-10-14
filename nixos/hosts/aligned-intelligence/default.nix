@@ -53,6 +53,11 @@
   # QEMU guest agent (host-side shutdown, IP reporting, fs freeze)
   services.qemuGuest.enable = true;
 
+  # Tailscale: nixbook reaches this host via MagicDNS
+  # (aligned-intelligence.tail2b04a.ts.net, see home-manager/gpg/forward-gpg-agent.nix).
+  services.tailscale.enable = true;
+  networking.firewall.trustedInterfaces = ["tailscale0"];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."kog" = {
     isNormalUser = true;
