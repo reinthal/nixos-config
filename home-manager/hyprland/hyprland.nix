@@ -6,6 +6,7 @@
   ...
 }: let
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system};
+  discordy = inputs.discordy.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   lua = lib.generators.mkLuaInline;
   toLua = lib.generators.toLua {multiline = false;};
@@ -28,6 +29,8 @@ in {
     ]
     ++ [
       hyprland-contrib.scratchpad
+      discordy
+      pkgs.slacky
       pkgs.local-pkgs.hyprland-keybindings-menu
     ]
     # mako removed: its D-Bus activation file (fr.emersion.mako.service) would
@@ -79,7 +82,7 @@ in {
           output = "DP-1";
           mode = "3440x1440@174.96Hz";
           position = "auto-right";
-          scale = 1.25;
+          scale = 1.6;
         }
         # Fallback for any monitor without an explicit rule (the other screen).
         {
@@ -138,7 +141,7 @@ in {
           preserve_split = true;
         };
         decoration = {
-          rounding = 10;
+          rounding = 5;
           inactive_opacity = 1;
           active_opacity = 1;
           dim_inactive = false;
@@ -176,8 +179,8 @@ in {
           (g "tasks" "chromium --app=https://linear.app/reinthal/team/REI/active")
           (g "llm" "claude-desktop")
           (g "toggl" "chromium --app=https://track.toggl.com/timer")
-          (g "slack" "chromium --app=https://app.slack.com/client/T0APN9P320M/C0APRMV97GA")
-          (g "discord" "chromium --app=https://discord.com/channels/@me")
+          (g "slack" "slacky")
+          (g "discord" "discordy")
           (g "email" "chromium --app=https://mail.proton.me/")
           (g "code" "codium")
           (g "signal-desktop" "signal-desktop")

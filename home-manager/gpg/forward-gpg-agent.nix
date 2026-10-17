@@ -60,11 +60,11 @@ in {
           PubkeyAuthentication = true;
           IdentityAgent = "/run/user/1000/gnupg/S.gpg-agent.ssh";
         };
-      # aligned-intelligence (NixOS, tailscale MagicDNS) — same auth as build.
+      # aligned-intelligence (NixOS, tailscale IP — no MagicDNS dependency) — same auth as build.
       "aligned-intelligence" =
         forwardTo 1000
         // {
-          HostName = "aligned-intelligence.tail2b04a.ts.net";
+          HostName = "100.108.255.127";
           User = "kog";
           IdentityFile = "~/.ssh/openpgp";
           IdentitiesOnly = true;
