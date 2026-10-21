@@ -235,7 +235,7 @@
           }
         ];
       };
-      "alexander@gpaulo-ord-0" = home-manager.lib.homeManagerConfiguration {
+      "q_alexander@cw-login" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
@@ -253,8 +253,8 @@
         modules = [
           ./home-manager/lambda.nix
           {
-            home.username = "alexander";
-            home.homeDirectory = "/home/alexander";
+            home.username = "q_alexander";
+            home.homeDirectory = "/home/q_alexander";
           }
         ];
       };

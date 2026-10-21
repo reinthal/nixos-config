@@ -22,7 +22,7 @@
     ];
     # Unlink a stale remote socket before binding. Only takes effect if the
     # remote sshd has `StreamLocalBindUnlink yes` (set for build via nixos;
-    # on gpaulo add it to /etc/ssh/sshd_config.d/).
+    # on non-NixOS hosts bootstrap-home-manager.sh adds it to /etc/ssh/sshd_config.d/).
     StreamLocalBindUnlink = "yes";
   };
 in {
@@ -46,8 +46,21 @@ in {
         ControlPath = "~/.ssh/master-%r@%n:%p";
         ControlPersist = "no";
       };
-      # gpaulo-ord-0 (Docker container) — reachable only by IP, no working name.
-      "207.53.234.101" = forwardTo 1001 // {User = "alexander";};
+      # cw-login — auth with the Yubikey OpenPGP key, same as build.
+      # Remote uid assumed 1000; verify with: gpgconf --list-dirs agent-socket
+      "cw-login" =
+        forwardTo 1000
+        // {
+          HostName = "216.153.49.84";
+          User = "q_alexander";
+          IdentityFile = "~/.ssh/openpgp";
+          IdentitiesOnly = true;
+          PreferredAuthentications = "publickey";
+          PubkeyAuthentication = true;
+          IdentityAgent = "/run/user/1000/gnupg/S.gpg-agent.ssh";
+          ServerAliveInterval = 30;
+          ServerAliveCountMax = 3;
+        };
       "build.reinthal.me" =
         forwardTo 1000
         // {

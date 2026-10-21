@@ -21,8 +21,8 @@ Bootstraps a non-NixOS Linux host (Ubuntu/Debian, containers included) with Nix
 
 - Single-user (`--no-daemon`) Nix — works without systemd (Docker/Kubernetes).
 - Runs as root or as an unprivileged user with `sudo`.
-- Picks the flake config by: `FLAKE_CONFIG` env override → known hostname
-  (`gpaulo-ord-0`) → arch + GPU-host heuristic (`kog@cli`, `kog@cli-aarch64`,
+- Picks the flake config by: `FLAKE_CONFIG` env override → known user
+  (`q_alexander` → `q_alexander@cw-login`) → arch + GPU-host heuristic (`kog@cli`, `kog@cli-aarch64`,
   `ubuntu@lambda`).
 - On GPU hosts, symlinks NVIDIA/CUDA driver libs into `/run/opengl-driver/lib`.
 - Enables sshd `StreamLocalBindUnlink` so a client can forward its gpg-agent
@@ -32,7 +32,7 @@ Bootstraps a non-NixOS Linux host (Ubuntu/Debian, containers included) with Nix
 # on the target host
 ./scripts/bootstrap-home-manager.sh
 # force a specific config
-FLAKE_CONFIG="alexander@gpaulo-ord-0" ./scripts/bootstrap-home-manager.sh
+FLAKE_CONFIG="q_alexander@cw-login" ./scripts/bootstrap-home-manager.sh
 ```
 
 ### `trim-generations.sh`
@@ -65,7 +65,7 @@ declarative in `home-manager/gpg/forward-gpg-agent.nix`.
 ```bash
 setup-gpg-forward <user@host> [gpg-key-id-or-email]
 # KEY defaults to git user.signingkey, then $GPG_KEY
-setup-gpg-forward alexander@216.153.53.92
+setup-gpg-forward cw-login
 ```
 
 ### `timer-bar`

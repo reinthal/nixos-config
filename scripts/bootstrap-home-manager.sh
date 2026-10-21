@@ -126,10 +126,10 @@ HOSTNAME_SHORT="$(hostname -s 2>/dev/null || hostname)"
 if [[ -n "${FLAKE_CONFIG:-}" ]]; then
   : # honor caller-provided value
 else
-  case "$HOSTNAME_SHORT" in
-    gpaulo-ord-0)
-      # 8x A40 GPU cluster node
-      FLAKE_CONFIG="alexander@gpaulo-ord-0"
+  case "$HOSTNAME_SHORT:$(id -un)" in
+    *:q_alexander)
+      # cw-login GPU host
+      FLAKE_CONFIG="q_alexander@cw-login"
       ;;
     *)
       case "$ARCH" in
