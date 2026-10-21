@@ -15,6 +15,7 @@ in {
       # cli
       pkgs.unstable.claude-code
       texliveFull
+      uv
       fd
       sops
       tree

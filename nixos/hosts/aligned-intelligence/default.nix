@@ -49,7 +49,12 @@
     variant = "";
   };
   # Docker daemon (bash arena)
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    # Images, build cache and containers on the 100 GB data disk; / filled up during
+    # the AIS-407 BashArena runs (50 task images + build cache ~45 GB).
+    daemon.settings.data-root = "/data/docker";
+  };
 
   # AIS-391: BashArena's sandbox router only DNATs TCP/80 to its fake external
   # 192.0.2.10; every other port was forwarded to the uplink and got us a
