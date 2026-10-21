@@ -6,7 +6,6 @@
   ...
 }: let
   hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system};
-  discordy = inputs.discordy.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   lua = lib.generators.mkLuaInline;
   toLua = lib.generators.toLua {multiline = false;};
@@ -29,7 +28,6 @@ in {
     ]
     ++ [
       hyprland-contrib.scratchpad
-      discordy
       pkgs.slacky
       pkgs.local-pkgs.hyprland-keybindings-menu
     ]
@@ -180,7 +178,7 @@ in {
           (g "llm" "claude-desktop")
           (g "toggl" "chromium --app=https://track.toggl.com/timer")
           (g "slack" "slacky")
-          (g "discord" "discordy")
+          (g "discord" "vesktop")
           (g "email" "chromium --app=https://mail.proton.me/")
           (g "code" "codium")
           (g "signal-desktop" "signal-desktop")

@@ -63,26 +63,6 @@
         "type": "github"
       }
     },
-    "discordy": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1792221969,
-        "narHash": "sha256-fOFqQ4U2BAzHeDWCP8lyWjoGuLkZDY8bYf55HZexbO0=",
-        "owner": "reinthal",
-        "repo": "Discordy",
-        "rev": "b780a494311f0bacb4a765726e1e7437c5392977",
-        "type": "github"
-      },
-      "original": {
-        "owner": "reinthal",
-        "repo": "Discordy",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "locked": {
         "lastModified": 1761640442,
@@ -531,7 +511,6 @@
         "apple-silicon": "apple-silicon",
         "claude-desktop": "claude-desktop",
         "darwin": "darwin",
-        "discordy": "discordy",
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
         "nixpkgs": "nixpkgs",

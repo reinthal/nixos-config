@@ -10,6 +10,7 @@
   desktop-apps = with pkgs;
     [
       burpsuite
+      vesktop
       libreoffice-qt6-fresh
       obsidian
       networkmanagerapplet
