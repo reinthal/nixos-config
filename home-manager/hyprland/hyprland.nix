@@ -80,7 +80,7 @@ in {
           output = "DP-1";
           mode = "3440x1440@174.96Hz";
           position = "auto-right";
-          scale = 1.6;
+          scale = 1.25;
         }
         # Fallback for any monitor without an explicit rule (the other screen).
         {
