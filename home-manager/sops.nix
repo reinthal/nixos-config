@@ -20,6 +20,7 @@ in {
 
       "gcalendar/client_id" = {};
       "gcalendar/client_secret" = {};
+      "spotify/client_id" = {};
       "nix_cache/secret_key" = {
         path = "${homeDirectory}/.config/nix/signing-key.sec";
         mode = "0400";

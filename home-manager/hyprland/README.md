@@ -9,6 +9,8 @@ This document lists all keybindings configured in `hyprland.nix`.
 | `SUPER + Return` | Open terminal (ghostty) |
 | `SUPER + Space` | Application launcher (rofi) |
 | `SUPER + /` | Keybindings menu (searchable) |
+| `CTRL SHIFT + Space` | Spotify artist search (fuzzel) |
+| `SUPER SHIFT + Space` | Spotify queue browser (fuzzel) |
 | `SUPER + W` | Open Firefox |
 | `SUPER + H` | Toggle Tasks (linear.app) |
 | `SUPER + J` | Toggle LLM (claude-desktop) |
@@ -86,6 +88,9 @@ This document lists all keybindings configured in `hyprland.nix`.
 |---------|--------|
 | `XF86AudioRaiseVolume` | Increase volume 5% |
 | `XF86AudioLowerVolume` | Decrease volume 5% |
+| `XF86AudioPlay` / `XF86AudioPause` | Play/pause (MPRIS via wayle) |
+| `XF86AudioNext` | Next track |
+| `XF86AudioPrev` | Previous track |
 
 ## Mouse Bindings
 

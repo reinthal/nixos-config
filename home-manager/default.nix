@@ -8,6 +8,7 @@
   imports = [
     ./gpg
     ./cli
+    ./cli/spotify-player.nix
     ./email
     ./terminal
     ./yubikey

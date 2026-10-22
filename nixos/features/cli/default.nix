@@ -6,6 +6,5 @@
     devenv
     borgbackup
     ghostty.terminfo
-    spotify-player
   ];
 }

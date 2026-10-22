@@ -16,6 +16,8 @@
       # Format: "Keybind | Description | Category"
       keybindings=(
           "SUPER + Return|Open terminal (kitty)|Applications"
+          "CTRL SHIFT + Space|Spotify artist search|Applications"
+          "SUPER SHIFT + Space|Spotify queue browser|Applications"
           "SUPER + Space|Application launcher (fuzzel)|Applications"
           "SUPER SHIFT + C|Bluetooth manager (bzmenu)|Applications"
           "SUPER SHIFT + V|Wi-Fi manager (iwmenu)|Applications"

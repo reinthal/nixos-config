@@ -245,6 +245,12 @@ in {
           (bindl "XF86AudioMute" (exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
           (bindl "XF86AudioMicMute" (exec "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
 
+          # Media keys -> MPRIS via wayle (spotify-player daemon, or whatever is active)
+          (bindl "XF86AudioPlay" (exec "wayle media play-pause"))
+          (bindl "XF86AudioPause" (exec "wayle media play-pause"))
+          (bindl "XF86AudioNext" (exec "wayle media next"))
+          (bindl "XF86AudioPrev" (exec "wayle media previous"))
+
           (bindle "XF86AudioRaiseVolume" (exec "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"))
           (bindle "XF86AudioLowerVolume" (exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
           (bindle "XF86MonBrightnessUp" (exec "brightnessctl set 5%+"))
@@ -260,6 +266,8 @@ in {
           (bind "SUPER + SHIFT + B" (exec "pwmenu -l fuzzel"))
           (bind "SUPER + slash" (exec "hyprland-keybindings-menu"))
           (bind "SUPER + SHIFT + T" (exec "timer-bar menu"))
+          (bind "CTRL + SHIFT + Space" (exec "spotify-search"))
+          (bind "SUPER + SHIFT + Space" (exec "spotify-queue"))
           (bind "SUPER + W" (exec "firefox"))
           (bind "SUPER + E" (toggleSpecial "calendar"))
           (bind "SUPER + D" (exec "wayle notify dismiss-all"))

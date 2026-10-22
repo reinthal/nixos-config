@@ -131,6 +131,21 @@ in {
           . "$HOME/.nix-profile/etc/profile.d/nix.sh"
         fi
       '';
+      # Word motion on ctrl/alt+arrows (xterm CSI 1;5 / 1;3 sequences, which
+      # ghostty sends). Ctrl+Backspace (^H in ghostty) / Ctrl+Delete kill words.
+      # Zsh defaults to the vi insert keymap here (EDITOR=nvim), bind in both.
+      initContent = ''
+        for m in viins emacs; do
+          bindkey -M $m "^[[1;5D" backward-word
+          bindkey -M $m "^[[1;5C" forward-word
+          bindkey -M $m "^[[1;3D" backward-word
+          bindkey -M $m "^[[1;3C" forward-word
+          bindkey -M $m "^H" backward-kill-word
+          bindkey -M $m "^[[3;5~" kill-word
+        done
+        # Treat / and - as word boundaries so jumps stop at path segments.
+        WORDCHARS='*?_.[]~=&;!#$%^(){}<>'
+      '';
       autocd = true;
       history = {
         share = true;
