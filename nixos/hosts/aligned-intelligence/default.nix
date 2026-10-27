@@ -71,6 +71,7 @@
     homeLan = ["10.22.12.0/24"];
     block = extra: net: ''
       iptables -A egress-guard ${extra} -d ${net} -m limit --limit 10/min -j LOG --log-prefix "egress-guard: "
+      iptables -A egress-guard ${extra} -d ${net} -p icmp -j DROP
       iptables -A egress-guard ${extra} -d ${net} -j REJECT --reject-with icmp-admin-prohibited
     '';
   in {
@@ -78,6 +79,10 @@
     trustedInterfaces = ["tailscale0"];
     extraCommands = ''
       iptables -N egress-guard 2>/dev/null || iptables -F egress-guard
+      # Container-to-container traffic on one Docker bridge (e.g. a BashArena sandbox
+      # reaching its router, which DNATs 192.0.2.10:80 to the local database) never
+      # leaves the host; only routed egress is guarded.
+      iptables -A egress-guard -m physdev --physdev-is-bridged -j RETURN
       ${lib.concatMapStrings (block "") testNets}
       ${lib.concatMapStrings (block "! -o tailscale0") homeLan}
       iptables -N DOCKER-USER 2>/dev/null || true
