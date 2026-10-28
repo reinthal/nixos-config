@@ -118,6 +118,7 @@
         ".config/Slack/logs"
         ".config/Code/CachedData"
         ".container-diff"
+        ".local/share/containers" # rootless podman overlay storage (unreadable sub-uid dirs break backup)
         ".npm/_cacache"
         # Work related dirs
         "*/node_modules"
@@ -141,6 +142,7 @@
         extraCreateArgs = "--verbose --stats --checkpoint-interval 600";
         repo = "ssh://borgwarehouse@borg.nas.reinthal.me:2222/./${name}";
         compression = "zstd,1";
+        failOnWarnings = false;
         startAt = "daily";
         user = "kog";
       };
