@@ -102,6 +102,10 @@
         # > Our main nixos configuration file <
         modules = [./nixos/hosts/nixbook];
       };
+    framebook = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit nixpkgs self inputs outputs;};
+        modules = [./nixos/hosts/framebook];
+      };
     };
 
     # Your custom packages and modifications, exported as overlays
