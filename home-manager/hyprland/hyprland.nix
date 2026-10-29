@@ -107,7 +107,7 @@ in {
           # Get desc for new screens with: hyprctl monitors all
           {
             output = "desc:Acer Technologies CB342CK 0x00003726";
-            mode = "3440x1440@99.98Hz";
+            mode = "3440x1440@75.05Hz";
             position = "auto-up";
             scale = 1;
           }
@@ -115,7 +115,7 @@ in {
           # on nixbook — match the ultrawide by port there instead.
           {
             output = "DP-1";
-            mode = "3440x1440@174.96Hz";
+            mode = "3440x1440@75.05Hz";
             position = "auto-right";
             scale = 1.25;
           }
