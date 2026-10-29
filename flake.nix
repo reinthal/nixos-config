@@ -22,8 +22,6 @@
     sops-nix.url = "github:Mic92/sops-nix";
     prempti.url = "github:reinthal/prempti";
     prempti.inputs.nixpkgs.follows = "nixpkgs";
-    pyprland.url = "github:hyprland-community/pyprland";
-    pyprland.inputs.nixpkgs.follows = "nixpkgs";
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
