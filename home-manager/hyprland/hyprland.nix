@@ -2,12 +2,10 @@
   config,
   pkgs,
   lib,
-  inputs,
   isNvidia ? false,
   ...
 }: let
   cfg = config.local.hyprland;
-  hyprland-contrib = inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system};
 
   lua = lib.generators.mkLuaInline;
   toLua = lib.generators.toLua {multiline = false;};
@@ -65,7 +63,6 @@ in {
         pkgs.egl-wayland
       ]
       ++ [
-        hyprland-contrib.scratchpad
         pkgs.local-pkgs.hyprland-keybindings-menu
       ]
       # mako removed: its D-Bus activation file (fr.emersion.mako.service) would
@@ -299,10 +296,6 @@ in {
             (bind "SUPER + D" (exec "wayle notify dismiss-all"))
             (bind "SUPER + SHIFT + D" (exec "wayle notify dismiss-all"))
             (bind "SUPER + B" (exec "awww-wallpaper"))
-
-            (bind "SUPER + S" (exec "scratchpad"))
-            (bind "SUPER + R" (exec "scratchpad -g -l"))
-            (bind "CTRL + SHIFT + S" (exec "toggle-scratchpad"))
 
             (bind "SUPER + SHIFT + S" (exec "hyprshot -m region --clipboard-only"))
             (bind "ALT + Tab" (focus {last = true;}))

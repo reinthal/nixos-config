@@ -52,10 +52,6 @@
           "SUPER SHIFT + Left|Move window to previous workspace|Workspaces"
           "SUPER SHIFT + Right|Move window to next workspace|Workspaces"
 
-          "SUPER + S|Open scratchpad|Scratchpad"
-          "SUPER + r|Scratchpad -g -l|Scratchpad"
-          "CTRL SHIFT + s|Toggle scratchpad|Scratchpad"
-
           "SUPER + D|Dismiss notification|Notifications"
           "SUPER SHIFT + D|Dismiss all notifications|Notifications"
 

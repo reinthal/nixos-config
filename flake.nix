@@ -29,10 +29,6 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     reinthalVim = {
       url = "github:reinthal/neovim";
       inputs.nixpkgs.follows = "nixpkgs";

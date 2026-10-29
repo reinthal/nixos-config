@@ -256,26 +256,6 @@
         "type": "github"
       }
     },
-    "hyprland-contrib": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1787301232,
-        "narHash": "sha256-qSzrIIqQUtEVeVZxQLj/L4p7+xKBEtPhgMTzFW2c6P8=",
-        "owner": "hyprwm",
-        "repo": "contrib",
-        "rev": "57baf317e5196a8286b80976771ef55febad8660",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hyprwm",
-        "repo": "contrib",
-        "type": "github"
-      }
-    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -589,7 +569,6 @@
         "claude-desktop": "claude-desktop",
         "darwin": "darwin",
         "home-manager": "home-manager",
-        "hyprland-contrib": "hyprland-contrib",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",
         "nixpkgs-master": "nixpkgs-master",
