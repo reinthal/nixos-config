@@ -118,6 +118,7 @@ config user-agnostic without needing separate flakes per user.
 | --------- | ---------------------------------------- |
 | `build`   | x86 Proxmox VM Workstation               |
 | `flix`    | Media server (Jellyfin, Plex, Navidrome) |
+| `framebook` | Framework laptop (Hyprland or GNOME)   |
 | `nixbook` | Apple Silicon + NixOS configuration      |
 | `relay`   | Tor exit node                            |
 | `seek`    | Monitoring host (Docker, minimal CLI)    |

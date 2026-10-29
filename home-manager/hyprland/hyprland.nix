@@ -41,6 +41,9 @@ in {
       Description = "Reload Hyprland to fix sizing of borders after login.";
       After = ["xdg-desktop-portal-hyprland.service" "graphical-session.target"];
       Requires = ["xdg-desktop-portal-hyprland.service"];
+      # graphical-session.target is also reached by the GNOME session on hosts
+      # that offer both (framebook); there is no hyprctl socket there.
+      ConditionEnvironment = "!XDG_CURRENT_DESKTOP=GNOME";
     };
     Service = {
       Type = "oneshot";

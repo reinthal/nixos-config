@@ -1,6 +1,21 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   timer-bar = "${pkgs.local-pkgs.timer-bar}/bin/timer-bar";
 in {
+  # wayle draws its bar through wlr-layer-shell, which GNOME Shell does not
+  # implement. On hosts that offer a GNOME session next to Hyprland (framebook)
+  # graphical-session.target is reached either way, so skip the unit when the
+  # session is GNOME instead of letting it restart-loop into a failed state.
+  # Upstream already sets ConditionEnvironment = "WAYLAND_DISPLAY"; both
+  # conditions must hold.
+  systemd.user.services.wayle.Unit.ConditionEnvironment = lib.mkForce [
+    "WAYLAND_DISPLAY"
+    "!XDG_CURRENT_DESKTOP=GNOME"
+  ];
+
   # Wayle: Rust/GTK4 Wayland shell (successor to HyprPanel by the same author).
   # Runs as a systemd user service bound to the graphical session; no exec-once
   # needed. Package (pkgs.wayle) and this module both ship in nixpkgs-unstable /

@@ -67,6 +67,7 @@ systems.
 - `relay` - Tor exit node with high-load server tuning
 - `flix` - Media server (Jellyfin, Navidrome, Pinchflat)
 - `nixbook` - Apple Silicon laptop (Asahi Linux via apple-silicon input)
+- `framebook` - Framework laptop (Intel); Hyprland or GNOME, picked in ReGreet
 
 **Darwin host**:
 
