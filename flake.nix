@@ -34,15 +34,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nvf.inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
     apple-silicon.url = "github:nix-community/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -78,10 +82,6 @@
       seed = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit nixpkgs self inputs outputs;};
         modules = [./nixos/hosts/seed];
-      };
-      seek = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit nixpkgs self inputs outputs;};
-        modules = [./nixos/hosts/seek];
       };
 
       build = nixpkgs.lib.nixosSystem {
@@ -259,30 +259,6 @@
           {
             home.username = "q_alexander";
             home.homeDirectory = "/home/q_alexander";
-          }
-        ];
-      };
-      "claw@cli" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-          overlays = [
-            outputs.overlays.unstable-packages
-            outputs.overlays.additions
-
-            outputs.overlays.master-packages
-            outputs.overlays.modifications
-          ];
-        };
-        extraSpecialArgs = {
-          inherit nixpkgs inputs outputs;
-          stateVersion = "25.11";
-        };
-        modules = [
-          ./home-manager/claw.nix
-          {
-            home.username = "claw";
-            home.homeDirectory = "/home/claw";
           }
         ];
       };

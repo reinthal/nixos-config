@@ -40,6 +40,8 @@
     # lanzaboote (signed UKIs); see the enrollment steps in the file
     ../../features/secure-boot.nix
     ../../features/fingerprint.nix
+    # least-privilege: sudo (wheel-only), nix-daemon (wheel-only), no root login
+    ../../features/hardening.nix
 
     # modules
     outputs.nixosModules.dual-function-keys
@@ -60,6 +62,20 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 30d";
+  };
+
+  # Automatic updates: weekly rebuild from the flake pushed to GitHub. It applies
+  # whatever is committed (including the pinned flake.lock) and never runs
+  # `nix flake update` itself, so it can't auto-switch onto a broken pinned
+  # input — new versions land only when you update + commit + push. The host is
+  # picked by hostname (framebook). fwupd (above) covers firmware separately.
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:reinthal/nixos-config";
+    dates = "daily";
+    randomizedDelaySec = "45min";
+    persistent = true; # catch up if the laptop was off at the scheduled time
+    allowReboot = false; # kernel/initrd updates apply at the next manual reboot
   };
 
   hardware.graphics.enable = true;
