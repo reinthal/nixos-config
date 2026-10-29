@@ -93,10 +93,11 @@ in
     };
   };
 
-  # systemd initrd so cryptsetup can use the FIDO2 tokens (same as nixbook).
-  # Both YubiKeys are enrolled with PIN + touch, plus a recovery key that is
-  # kept in cold storage; see the enrollment steps in ./default.nix.
-  boot.initrd.systemd.enable = true;
+  # FIDO2 LUKS unlock needs systemd-initrd, which is now the only initrd
+  # upstream (the scripted initrd was removed, taking boot.initrd.systemd.enable
+  # with it — setting it is a hard error). Both YubiKeys are enrolled with
+  # PIN + touch, plus a recovery key kept in cold storage; see the enrollment
+  # steps in ./default.nix.
   boot.initrd.luks.devices."cryptroot" = {
     device = "/dev/disk/by-uuid/e46d7c02-531e-425e-9c8a-e7230c3bf628";
     crypttabExtraOpts = ["fido2-device=auto"];
