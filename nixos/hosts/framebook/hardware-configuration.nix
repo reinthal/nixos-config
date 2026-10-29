@@ -93,8 +93,14 @@ in
     };
   };
 
-  boot.initrd.luks.devices."cryptroot".device =
-    "/dev/disk/by-uuid/e46d7c02-531e-425e-9c8a-e7230c3bf628";
+  # systemd initrd so cryptsetup can use the FIDO2 tokens (same as nixbook).
+  # Both YubiKeys are enrolled with PIN + touch, plus a recovery key that is
+  # kept in cold storage; see the enrollment steps in ./default.nix.
+  boot.initrd.systemd.enable = true;
+  boot.initrd.luks.devices."cryptroot" = {
+    device = "/dev/disk/by-uuid/e46d7c02-531e-425e-9c8a-e7230c3bf628";
+    crypttabExtraOpts = ["fido2-device=auto"];
+  };
 
   swapDevices = [ { device = "/swap/swapfile"; } ];
 

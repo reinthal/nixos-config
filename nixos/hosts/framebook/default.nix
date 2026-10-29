@@ -2,6 +2,19 @@
 #
 # Two desktop sessions are available and picked at login in the ReGreet
 # greeter: "hyprland" (primary, configured by home-manager) and "gnome".
+#
+# LUKS: unlocked with either YubiKey (FIDO2, PIN + touch). One-time setup,
+# with the current passphrase still in place:
+#
+#   DEV=/dev/disk/by-uuid/e46d7c02-531e-425e-9c8a-e7230c3bf628
+#   sudo systemd-cryptenroll $DEV --fido2-device=auto \
+#     --fido2-with-client-pin=yes --fido2-with-user-presence=yes   # key 1, then key 2
+#   sudo systemd-cryptenroll $DEV --recovery-key   # write down -> cold storage
+#   # reboot and test: key 1, key 2, and the recovery key (no key plugged in:
+#   # the passphrase prompt appears after the token timeout)
+#   sudo systemd-cryptenroll $DEV --wipe-slot=password
+#   sudo cryptsetup luksHeaderBackup $DEV --header-backup-file luks-header.img
+#   # header backup -> cold storage, taken AFTER the password slot is gone
 {
   config,
   lib,
@@ -24,6 +37,9 @@
     (import ../../features/networking "framebook")
     ../../features/sound.nix
     ../../features/bluetooth.nix
+    # lanzaboote (signed UKIs); see the enrollment steps in the file
+    ../../features/secure-boot.nix
+    ../../features/fingerprint.nix
 
     # modules
     outputs.nixosModules.dual-function-keys
@@ -32,8 +48,7 @@
     ../../features/key-mappings/caps-to-ctrl-esc.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  # systemd-boot settings; the installer itself is lanzaboote (secure-boot.nix).
   boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -53,6 +68,12 @@
   services.displayManager.defaultSession = "hyprland";
 
   services = {
+    # YubiKeys: OpenPGP card (pcscd) for gpg, FIDO2 for LUKS.
+    pcscd.enable = true;
+    udev.packages = [pkgs.yubikey-personalization pkgs.libfido2];
+    # gpg-agent is the only ssh agent (home-manager/gpg/agent.nix). GNOME's
+    # gcr agent would otherwise claim SSH_AUTH_SOCK in both sessions.
+    gnome.gcr-ssh-agent.enable = false;
     # Framework ships firmware updates through LVFS.
     fwupd.enable = true;
     upower.enable = true;
@@ -66,6 +87,11 @@
   time.timeZone = lib.mkForce null;
 
   programs = {
+    # Keyring browser for the secrets apps keep in gnome-keyring.
+    seahorse.enable = true;
+    # Installs hyprlock and its PAM service (fprint config: fingerprint.nix).
+    hyprlock.enable = true;
+    ssh.startAgent = false;
     firefox.enable = true;
     zsh.enable = true;
     nix-ld.enable = true;
@@ -80,7 +106,7 @@
       secretsFile = ../../../secrets/shhh.yaml;
     };
     users = {
-      kog = import ../../../home-manager;
+      kog = import ../../../home-manager/framebook.nix;
     };
   };
 

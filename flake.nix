@@ -43,6 +43,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.2.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     apple-silicon.url = "github:nix-community/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };
