@@ -93,14 +93,18 @@
     # Framework ships firmware updates through LVFS.
     fwupd.enable = true;
     upower.enable = true;
-    automatic-timezoned.enable = true;
+    # Pinned to Europe/Stockholm below. automatic-timezoned (geoclue) never
+    # registered a client and failed every run, leaving the clock on UTC; all
+    # of Sweden is one zone anyway. Flip back to true + time.timeZone = null to
+    # retry location-based tz (e.g. if this laptop starts travelling).
+    automatic-timezoned.enable = false;
     printing.enable = true;
     journald.settings.Journal = {
       SystemMaxUse = "500M";
       MaxRetentionSec = "7day";
     };
   };
-  time.timeZone = lib.mkForce null;
+  time.timeZone = "Europe/Stockholm";
 
   programs = {
     # Keyring browser for the secrets apps keep in gnome-keyring.
