@@ -63,7 +63,6 @@ in {
     ./yubikey
     ./scripts
     ./hyprland
-    ./hyprland/hyprlock.nix
     ./theme.nix
     ./sops.nix
     ./gui/base.nix
@@ -91,7 +90,7 @@ in {
       email = "proton-mail";
       calendar = "proton-mail";
     };
-    lockCommand = "pidof hyprlock || hyprlock";
+    locker = "hyprlock";
     # Native Spotify client (gui/base.nix) instead of spotify-player.
     spotifyPlayerBinds = false;
   };

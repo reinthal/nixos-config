@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+lib.mkIf (config.local.hyprland.locker == "swaylock") {
   home.packages = [pkgs.swaylock];
 
   xdg.configFile."swaylock/config".text = ''

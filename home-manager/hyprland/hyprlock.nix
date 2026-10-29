@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+lib.mkIf (config.local.hyprland.locker == "hyprlock") {
   home.packages = [pkgs.hyprlock];
 
   xdg.configFile."hypr/hyprlock.conf".text = ''

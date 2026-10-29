@@ -29,10 +29,19 @@ in {
       type = lib.types.attrsOf lib.types.str;
       description = "Apps opened by special workspaces, keyed by handle.";
     };
+    locker = lib.mkOption {
+      type = lib.types.enum ["swaylock" "hyprlock"];
+      default = "swaylock";
+      description = ''
+        Screen locker. Selects the package + config (swaylock.nix /
+        hyprlock.nix, both gated on this) and the default lockCommand.
+        Hosts override per device (framebook uses hyprlock; see
+        home-manager/framebook.nix).
+      '';
+    };
     lockCommand = lib.mkOption {
       type = lib.types.str;
-      default = "swaylock";
-      description = "Command bound to CTRL + SUPER + Q.";
+      description = "Command bound to CTRL + SUPER + Q. Defaults from `locker`.";
     };
     # spotify-search / spotify-queue talk to the spotify-player daemon
     # (cli/spotify-player.nix); hosts on the native client turn them off.
@@ -44,6 +53,12 @@ in {
   };
 
   config = {
+    local.hyprland.lockCommand = lib.mkDefault (
+      if cfg.locker == "hyprlock"
+      then "pidof hyprlock || hyprlock"
+      else "swaylock"
+    );
+
     local.hyprland.scratchpads = lib.mapAttrs (_: lib.mkDefault) {
       tasks = "chromium --app=https://linear.app/reinthal/team/REI/active";
       llm = "claude-desktop";
