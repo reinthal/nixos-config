@@ -24,7 +24,7 @@
     ../../features/cli
     ../../features/apps/syncthing.nix
     ../../features/apps/spice-client.nix
-    (import ../../features/networking "nixbook")
+    (import ../../features/networking { hostname = "nixbook"; })
     # enable various features
     ../../features/sound.nix
     ../../features/bluetooth.nix

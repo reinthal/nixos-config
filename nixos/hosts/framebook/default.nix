@@ -34,7 +34,10 @@
     ../../features/gnome-desktop
     ../../features/sops.nix
     ../../features/cli
-    (import ../../features/networking "framebook")
+    (import ../../features/networking {
+      hostname = "framebook";
+      wifiBackend = "wpa_supplicant";
+    })
     ../../features/sound.nix
     ../../features/bluetooth.nix
     # lanzaboote (signed UKIs); see the enrollment steps in the file
