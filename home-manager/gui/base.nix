@@ -23,6 +23,24 @@
       gpgme.dev
     ]
     ++ lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [pkgs.spotify];
+
+  # Open Remote - SSH (jeanp413): the open-source remote-ssh extension that
+  # works on VSCodium. Microsoft's ms-vscode-remote.remote-ssh in nixpkgs is
+  # proprietary and license-locked to official VS Code builds, so it's unusable
+  # here. This one isn't packaged in nixpkgs, so build it from the Open VSX vsix.
+  # Bump: curl -s https://open-vsx.org/api/jeanp413/open-remote-ssh/latest for
+  # the version, then nix-prefetch-url the download URL and nix hash convert.
+  open-remote-ssh = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      publisher = "jeanp413";
+      name = "open-remote-ssh";
+      version = "0.5.1";
+    };
+    vsix = pkgs.fetchurl {
+      url = "https://open-vsx.org/api/jeanp413/open-remote-ssh/0.5.1/file/jeanp413.open-remote-ssh-0.5.1.vsix";
+      hash = "sha256-JBY4LGA/lJFi1cnbuh/jZ8+TcqIXa7yx+NhKWj7TZMo=";
+    };
+  };
 in {
   imports = [
     ./waybar.nix
@@ -53,11 +71,19 @@ in {
 
     vscodium = {
       enable = true;
+      # Declared extensions are symlinked in; mutableExtensionsDir keeps the UI
+      # able to install others too. Only valid while the default profile is the
+      # only profile (home-manager asserts this).
       mutableExtensionsDir = true;
       # vscode and vscodium share files (e.g. LICENSES.chromium.html), which
       # collide in the home-manager-path buildEnv. Lower vscodium's priority so
       # the conflict resolves in favour of vscode; both editors still install.
       package = lib.lowPrio pkgs.vscodium;
+      profiles.default.extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide # Nix language support (jnoortheen)
+        astral-sh.ty # ty type checker + language server (Astral)
+        open-remote-ssh # Open Remote - SSH (jeanp413), defined above
+      ];
     };
   };
 
