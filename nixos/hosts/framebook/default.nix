@@ -100,7 +100,7 @@
     # the overnight nixos-upgrade timer (system.autoUpgrade, below) can run. On
     # battery the lid still suspends (services.logind.lidSwitch default). The
     # idle-suspend path (hypridle, home-manager) is AC-aware the same way.
-    logind.lidSwitchExternalPower = "lock";
+    logind.settings.Login.HandleLidSwitchExternalPower = "lock";
     # Pinned to Europe/Stockholm below. automatic-timezoned (geoclue) never
     # registered a client and failed every run, leaving the clock on UTC; all
     # of Sweden is one zone anyway. Flip back to true + time.timeZone = null to
