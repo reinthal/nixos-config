@@ -53,6 +53,21 @@
   discord = withKeyring pkgs.discord;
   proton-mail = withKeyring pkgs.protonmail-desktop;
   proton-pass = withKeyring pkgs.proton-pass;
+
+  # Idle-suspend only on battery. On AC the machine stays awake so the overnight
+  # nixos-upgrade timer (system.autoUpgrade, daily) can run. Scans every
+  # Mains-type power supply and bails out (no suspend) if any is online.
+  suspendUnlessCharging = pkgs.writeShellScript "suspend-unless-charging" ''
+    for ps in /sys/class/power_supply/*; do
+      [ -r "$ps/type" ] || continue
+      read -r t < "$ps/type"
+      [ "$t" = "Mains" ] || continue
+      if [ -r "$ps/online" ] && read -r o < "$ps/online" && [ "$o" = "1" ]; then
+        exit 0
+      fi
+    done
+    exec ${pkgs.systemd}/bin/systemctl suspend
+  '';
 in {
   imports = [
     ./gpg
@@ -121,7 +136,8 @@ in {
         }
         {
           timeout = 600;
-          on-timeout = "systemctl suspend";
+          # Suspend only on battery; stay awake on AC for overnight updates.
+          on-timeout = "${suspendUnlessCharging}";
         }
       ];
     };
