@@ -114,6 +114,32 @@
   };
   time.timeZone = "Europe/Stockholm";
 
+  # WORKAROUND (remove when upstream lands): the Intel Lunar Lake Bluetooth
+  # controller (btintel_pcie) fails its suspend D-state transition and returns
+  # -EBUSY, which aborts the whole system suspend ("Failed to put system to
+  # sleep. System resumed again: Device or resource busy"). The dirty resume
+  # then wedges the Goodix fingerprint sensor, so hyprlock's unlock verify times
+  # out (see docs/framebook-issues.md #3). Soft-blocking Bluetooth before sleep
+  # quiesces the controller so suspend succeeds; unblock on resume, but only if
+  # we were the ones who blocked it (a manual `rfkill block` survives a cycle).
+  # Confirmed kernel regression, fix not yet merged: bluetooth-next PR #834
+  # series. Tracking: README "Temporary workarounds" + docs/framebook-issues.md.
+  powerManagement = {
+    powerDownCommands = ''
+      if ${pkgs.util-linux}/bin/rfkill list bluetooth \
+         | ${pkgs.gnugrep}/bin/grep -q "Soft blocked: no"; then
+        ${pkgs.coreutils}/bin/touch /run/bluetooth-unblock-on-resume
+        ${pkgs.util-linux}/bin/rfkill block bluetooth
+      fi
+    '';
+    resumeCommands = ''
+      if [ -e /run/bluetooth-unblock-on-resume ]; then
+        ${pkgs.coreutils}/bin/rm -f /run/bluetooth-unblock-on-resume
+        ${pkgs.util-linux}/bin/rfkill unblock bluetooth
+      fi
+    '';
+  };
+
   programs = {
     # Keyring browser for the secrets apps keep in gnome-keyring.
     seahorse.enable = true;

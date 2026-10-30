@@ -232,6 +232,15 @@ fix.
 | Input | Pinned rev | Reason | Upstream tracking |
 | ----- | ---------- | ------ | ----------------- |
 
+### Temporary workarounds
+
+Config that only exists to dodge an upstream bug. Re-check on each
+`nix flake update` and delete once the fix ships.
+
+| Workaround | Where | Reason | Upstream tracking |
+| ---------- | ----- | ------ | ----------------- |
+| `rfkill block bluetooth` around suspend | `nixos/hosts/framebook/default.nix` (`powerManagement.powerDownCommands`/`resumeCommands`) | `btintel_pcie` (Intel Lunar Lake) fails its suspend D-state transition → `-EBUSY` aborts system suspend → dirty resume wedges the Goodix fingerprint sensor (framebook issue #3) | [bluetooth-next PR #834](https://github.com/bluez/bluetooth-next/pull/834) series (unmerged as of 2026-09); `docs/framebook-issues.md` §3 |
+
 ## Building the System
 
 ### First Time Setup
