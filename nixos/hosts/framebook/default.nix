@@ -84,9 +84,10 @@
   hardware.graphics.enable = true;
 
   # Preselected session in ReGreet; the dropdown also offers "gnome".
-  services.displayManager.defaultSession = "hyprland";
-
   services = {
+    displayManager.defaultSession = "hyprland";
+
+    tailscale.enable = true;
     # YubiKeys: OpenPGP card (pcscd) for gpg, FIDO2 for LUKS.
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization pkgs.libfido2];
