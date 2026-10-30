@@ -50,10 +50,7 @@ in {
       enable = true;
       enableZshIntegration = true;
     };
-    vscode = {
-      enable = true;
-      mutableExtensionsDir = true;
-    };
+
     vscodium = {
       enable = true;
       mutableExtensionsDir = true;
