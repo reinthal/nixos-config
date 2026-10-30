@@ -118,23 +118,21 @@ in {
             position = "0x0";
             scale = 2;
           }
-          # Acer ultrawide, matched by description (stable across ports).
-          # Get desc for new screens with: hyprctl monitors all
-          {
-            output = "desc:Acer Technologies CB342CK 0x00003726";
-            mode = "3440x1440@75.05Hz";
-            position = "auto-up";
-            scale = 1;
-          }
-          # Asahi's dcp driver exposes no EDID make/model, so desc: never matches
-          # on nixbook — match the ultrawide by port there instead.
+
           {
             output = "DP-1";
             mode = "3440x1440@75.05Hz";
             position = "auto-right";
             scale = 1.25;
           }
-          # Fallback for any monitor without an explicit rule (the other screen).
+
+          {
+            output = "desc:Acer Technologies CB342CK 0x00003726";
+            mode = "3440x1440@75.05Hz";
+            position = "auto-up";
+            scale = 1;
+          }
+
           {
             output = "";
             mode = "2560x1440@120.00Hz";
