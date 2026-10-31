@@ -155,6 +155,10 @@
 
   home-manager = {
     backupFileExtension = "hm-bkp";
+    # Activate in the user session, not at boot: activation runs gpg, which
+    # would otherwise spawn orphan keyboxd/gpg-agent/scdaemon that hold the
+    # YubiKey before login.
+    startAsUserService = true;
     extraSpecialArgs = {
       inherit pkgs inputs outputs;
       stateVersion = "25.05";
