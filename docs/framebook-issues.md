@@ -185,3 +185,27 @@ yet** — watch the PRs above and drop the workaround once the fix lands.
 
 To re-capture after a failed unlock: `journalctl -b 0 | grep -iE
 "btintel_pcie|Failed to put system to sleep|transfer timed out|fprint"`.
+
+**Observations 2026-10-31 (after the rfkill workaround; no fix applied):**
+- Since the workaround, suspends complete cleanly (`Finished System Suspend`,
+  no `Failed to put system to sleep`) in this boot.
+- One `transfer timed out` still occurred after a **clean** resume:
+  - 22:05:39 suspend finished, `rfkill unblock`, hyprlock `PrepareForSleep
+    (start: false)` → `started verifying` (same second).
+  - 22:05:41 fprintd: `Device reported an error during verify: transfer timed
+    out` → hyprlock `verify-unknown-error`, fingerprint stopped; unlocked by
+    password.
+  - The previous resume (22:04:16) restarted verify without a timeout.
+- Counts per boot (clean suspends / aborted suspends / `transfer timed out`):
+  boot 0: 2/0/1, -3: 5/0/0, -4: 2/0/0, -5: 7/5/4 (-1, -2: none).
+- Sensor is USB `27c6:609c` at `/sys/bus/usb/devices/3-7`, with
+  `power/control=auto`, `autosuspend_delay_ms=2000`, `persist=1` (read while
+  awake, not at resume time).
+- Unverified hypothesis: USB runtime autosuspend of the sensor. The only link
+  is the ~2 s gap matching `autosuspend_delay_ms`; one sample is not enough.
+  Evidence still needed: sensor `power/runtime_status` at resume, libfprint
+  debug log (`G_MESSAGES_DEBUG=all`) of the failing transfer, and timeout rate
+  over more clean resumes.
+- Unrelated: hyprlock v0.9.6 logs a config error on every start,
+  `input-field:fail_transition` does not exist
+  (`home-manager/hyprland/hyprlock.nix:79`).

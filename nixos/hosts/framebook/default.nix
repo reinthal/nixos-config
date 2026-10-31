@@ -108,7 +108,6 @@
     # of Sweden is one zone anyway. Flip back to true + time.timeZone = null to
     # retry location-based tz (e.g. if this laptop starts travelling).
     automatic-timezoned.enable = false;
-    printing.enable = true;
     journald.settings.Journal = {
       SystemMaxUse = "500M";
       MaxRetentionSec = "7day";

@@ -74,7 +74,6 @@ in {
     ./gpg/agent.nix
     ./cli
     ./email
-    ./terminal
     ./yubikey
     ./scripts
     ./hyprland

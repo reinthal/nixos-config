@@ -1,0 +1,45 @@
+# vulnix whitelist, applied by scripts/vulnix-scan.sh (local and CI).
+#
+# Only verified false positives: vulnix matches CVEs by package name, so CVEs
+# for unrelated software with the same name land on our packages. Each entry
+# is scoped to its CVE ids, so a new real CVE for the package still shows up.
+# Checked against the NVD descriptions on 2026-10-31.
+
+[shellcheck]
+cve = ["CVE-2021-28794"]
+comment = "Unofficial ShellCheck VS Code extension, not shellcheck itself"
+
+[malcontent]
+cve = ["CVE-2026-24845", "CVE-2026-28407"]
+comment = "Chainguard's malcontent scanner; ours is GNOME parental controls (via flatpak)"
+
+[go]
+cve = ["CVE-2023-49292"]
+comment = "ecies Go library, not the Go toolchain"
+
+[git]
+cve = [
+  "CVE-2021-21684",
+  "CVE-2022-30947",
+  "CVE-2022-36882",
+  "CVE-2022-36883",
+  "CVE-2022-36884",
+  "CVE-2022-38663",
+]
+comment = "Jenkins Git Plugin, not git"
+
+[dash]
+cve = ["CVE-2024-21485"]
+comment = "Plotly Dash (Python web framework), not the dash shell"
+
+[bolt]
+cve = ["CVE-2021-27367", "CVE-2022-31321", "CVE-2023-5214", "CVE-2025-34086"]
+comment = "Bolt CMS / Puppet Bolt; ours is the Thunderbolt daemon"
+
+[obsidian]
+cve = ["CVE-2023-24044"]
+comment = "Plesk Obsidian, not the Obsidian notes app"
+
+[ada]
+cve = ["CVE-2024-9410"]
+comment = "Ada.cx Sentry configuration, not the ada URL parser"
