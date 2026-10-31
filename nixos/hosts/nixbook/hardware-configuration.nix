@@ -13,7 +13,6 @@
   ];
 
   boot.initrd = {
-    systemd.enable = true;
     availableKernelModules = ["usb_storage" "usbhid" "sdhci_pci"];
     kernelModules = ["dm-snapshot"];
     luks = {

@@ -14,16 +14,10 @@
     ];
   };
   inputs = {
-    steam-asahi = {
-      url = "github:sm-idk/steam-asahi";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    zen-browser.url = "github:reinthal/zen-browser-flake";
     sops-nix.url = "github:Mic92/sops-nix";
-    prempti.url = "github:reinthal/prempti";
-    prempti.inputs.nixpkgs.follows = "nixpkgs";
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
+
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
@@ -44,7 +38,7 @@
       url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     apple-silicon.url = "github:nix-community/nixos-apple-silicon";
     apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
   };

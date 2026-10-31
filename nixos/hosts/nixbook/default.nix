@@ -13,9 +13,6 @@
     # apple-silicon hardware support
     inputs.apple-silicon.nixosModules.apple-silicon-support
 
-    # steam via muvm (Asahi)
-    inputs.steam-asahi.nixosModules.default
-
     ../../features/apps/podman.nix
     ../../features/desktop
     ../../features/sops.nix
@@ -36,11 +33,7 @@
     outputs.nixosModules.v4l2-loopback
 
     # key mappings
-    ../../features/key-mappings/caps-to-ctrl-esc.nix
-
-    # Prempti / Kebnetrails: Falco + LLM policy layer for Claude Code
-    inputs.prempti.nixosModules.prempti
-  ];
+    ../../features/key-mappings/caps-to-ctrl-esc.nix  ];
   # Experimental Asahi "fairydust" kernel: USB-C DisplayPort alt-mode output.
   # Built by CI (.github/workflows/asahi-fairydust-kernel.yml) and pushed to
   # the B2 cache so `switch` does not compile it locally.
@@ -80,31 +73,6 @@
 
   sops.secrets.borg_passphrase = {
     owner = config.users.users.kog.name;
-  };
-
-  # Bare API token in shhh.yaml; the user unit wants an EnvironmentFile.
-  sops.secrets.kebnetrails_api_key = {
-    owner = config.users.users.kog.name;
-  };
-  sops.templates."kebnetrails.env" = {
-    owner = config.users.users.kog.name;
-    content = "KEBNETRAILS_API_KEY=${config.sops.placeholder.kebnetrails_api_key}";
-  };
-  # disable controls here
-  services.prempti = {
-    enable = false;
-    signoff = {
-      enable = true;
-      ttlSecs = 300;
-    };
-    monitor = {
-      enable = true;
-      endpoint = "https://openrouter.ai/api/v1";
-      model = "deepseek/deepseek-v4.1-flash";
-      environmentFile = config.sops.templates."kebnetrails.env".path;
-      roeFile = ./roe.md;
-      skipTools = ["Read" "Glob" "Grep"];
-    };
   };
 
   services = {
@@ -194,9 +162,6 @@
      export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
   '';
   programs = {
-    steam-asahi = {
-      enable = true;
-    };
     ssh.startAgent = false;
     zsh.enable = true;
     dconf.enable = true;

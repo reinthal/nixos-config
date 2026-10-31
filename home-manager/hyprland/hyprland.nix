@@ -216,14 +216,9 @@ in {
             workspace = toString ws;
             inherit monitor;
           };
-          g = handle: cmd: {
-            workspace = "special:${handle}";
-            on_created_empty = cmd;
-          };
         in
           (map (f "0") ws_monitor0) # half of the ws to monitor 0
-          ++ (map (f "1") ws_monitor1) # half of the ws to monitor 1
-          ++ lib.mapAttrsToList g cfg.scratchpads;
+          ++ (map (f "1") ws_monitor1); # half of the ws to monitor 1
 
         curve = {
           _args = [
@@ -255,18 +250,34 @@ in {
           }
         ];
 
-        on = {
-          _args = [
-            "hyprland.start"
-            # waybar and mako replaced by wayle (systemd user service, see
-            # gui/wayle.nix)
-            (lua ''
-              function()
-                hl.exec_cmd("start")
-                hl.exec_cmd("${pkgs.awww}/bin/awww-daemon")
-              end'')
-          ];
-        };
+        on = [
+          {
+            _args = [
+              "hyprland.start"
+              # waybar and mako replaced by wayle (systemd user service, see
+              # gui/wayle.nix)
+              (lua ''
+                function()
+                  hl.exec_cmd("start")
+                  hl.exec_cmd("${pkgs.awww}/bin/awww-daemon")
+                end'')
+            ];
+          }
+          # Fill scratchpads on first open (replaces the deprecated
+          # on_created_empty workspace rule).
+          {
+            _args = [
+              "workspace.created"
+              (lua ''
+                function(ws)
+                  local scratchpads = ${toLua cfg.scratchpads}
+                  if not (ws and ws.special and ws.is_empty) then return end
+                  local cmd = scratchpads[(ws.name:gsub("^special:", ""))]
+                  if cmd then hl.exec_cmd(cmd) end
+                end'')
+            ];
+          }
+        ];
 
         bind = let
           # Non-repeating, active while locked: mute toggles.
