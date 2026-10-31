@@ -7,7 +7,6 @@
   imports =
     [
       ./cli/flix.nix
-      ./scripts/switch.nix
       ./sops.nix
     ];
 

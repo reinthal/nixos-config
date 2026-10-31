@@ -63,6 +63,7 @@ in {
       #   mnjggcdmjocbbbhaepdhchncahnbgone  SponsorBlock
       #   nngceckbapebfimnlniiiahkandclblb  Bitwarden
       #   fcoeoabgfenejglbffodgkkbkcdhcgfn  Claude
+      #   mahgnmmldchnmmdfkfcoindpgkadhhhc  ElevenReader
     };
     ghostty = {
       enable = true;

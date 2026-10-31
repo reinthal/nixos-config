@@ -86,13 +86,22 @@ timer-bar [menu|status|stop]
 
 ---
 
+## System commands (`nixos/features/deploy-checkout.nix`)
+
+On every NixOS host via `environment.systemPackages`.
+
+| Command | What it does |
+|---|---|
+| `switch` | Syncs the root-owned `/etc/nixos-config` to `origin/flaked` (`nixos-config-sync.service`), then `sudo nixos-rebuild switch --flake /etc/nixos-config#$HOSTNAME`. The sync refuses commits not signed by the YubiKey or GitHub's web-flow key, so commit (signed) and push first; it warns about uncommitted/unpushed work in `~/nixos-config`. To try an unpushed change: `sudo nixos-rebuild test --flake ~/nixos-config#$HOSTNAME`. Clears a stale Firefox search backup first. |
+
+---
+
 ## Home Manager commands (`home-manager/scripts/`)
 
 On the user's `PATH` after `switch`.
 
 | Command | What it does |
 |---|---|
-| `switch` | `sudo nixos-rebuild switch --flake ~/nixos-config#$HOSTNAME` (clears a stale Firefox search backup first). |
 | `cache-upload [paths...]` | Sign store paths with the SOPS-deployed key and push to the B2 binary cache. No args → current system closure. |
 | `secret <file>` | GPG-encrypt `<file>` to `$KEYID` → `<file>.<timestamp>.enc` (armored). |
 | `reveal <file>.enc` | GPG-decrypt back to the original filename. |

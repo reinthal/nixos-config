@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ../../users.nix
     ../../features/locales.nix
+    ../../features/deploy-checkout.nix
     ../../features/apps/vm-services.nix
     ../../features/apps/tor.nix
   ];

@@ -7,7 +7,6 @@
   imports =
     [
       ./cli/aligned-intelligence.nix
-      ./scripts/switch.nix
       ./sops.nix
     ];
 

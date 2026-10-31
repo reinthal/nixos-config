@@ -100,13 +100,28 @@ jobs:
           echo "pushed $out"
 
       - name: Commit updated lock to flaked
+        # Committed through the GraphQL API instead of `git commit` + push, so
+        # GitHub signs it with its web-flow key. Machines only deploy commits
+        # signed by the YubiKey or that key (nixos/features/deploy-checkout.nix);
+        # an unsigned commit here would block every deploy. expectedHeadOid
+        # makes the commit fail if flaked moved since checkout.
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           if git diff --quiet -- flake.lock; then
             echo "flake.lock unchanged; nothing to commit"
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(flake): update inputs" -- flake.lock
-          git push origin HEAD:flaked
+          # shellcheck disable=SC2016 # $input is a GraphQL variable
+          gh api graphql \
+            -f query='mutation($input: CreateCommitOnBranchInput!) {
+              createCommitOnBranch(input: $input) { commit { oid url } } }' \
+            --input - <<EOF
+          {"variables": {"input": {
+            "branch": {"repositoryNameWithOwner": "${{ github.repository }}", "branchName": "flaked"},
+            "expectedHeadOid": "$(git rev-parse HEAD)",
+            "message": {"headline": "chore(flake): update inputs"},
+            "fileChanges": {"additions": [{"path": "flake.lock", "contents": "$(base64 -w0 flake.lock)"}]}
+          }}}
+          EOF

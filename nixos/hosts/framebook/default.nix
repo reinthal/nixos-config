@@ -67,14 +67,15 @@
     options = "--delete-older-than 30d";
   };
 
-  # Automatic updates: weekly rebuild from the flake pushed to GitHub. It applies
-  # whatever is committed (including the pinned flake.lock) and never runs
+  # Automatic updates: daily rebuild from the root-owned /etc/nixos-config
+  # checkout, which nixos-config-sync resets to origin/flaked right before
+  # (features/deploy-checkout.nix sets `flake`). It applies whatever is
+  # committed (including the pinned flake.lock) and never runs
   # `nix flake update` itself, so it can't auto-switch onto a broken pinned
   # input — new versions land only when you update + commit + push. The host is
   # picked by hostname (framebook). fwupd (above) covers firmware separately.
   system.autoUpgrade = {
     enable = true;
-    flake = "github:reinthal/nixos-config";
     dates = "daily";
     randomizedDelaySec = "45min";
     persistent = true; # catch up if the laptop was off at the scheduled time

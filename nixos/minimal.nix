@@ -14,6 +14,7 @@
     inputs.home-manager.nixosModules.home-manager
     ./users.nix
     ./features/locales.nix
+    ./features/deploy-checkout.nix
   ];
   home-manager.extraSpecialArgs = {inherit inputs outputs;};
 
