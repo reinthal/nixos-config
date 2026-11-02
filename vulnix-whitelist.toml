@@ -1,8 +1,54 @@
 # vulnix whitelist: https://github.com/nix-community/vulnix#whitelisting
 #
-# Entries are pinned to name-version and list exact CVEs, so a version bump or a
-# new CVE on the same package alerts again. Each entry needs a comment saying why
-# it is accepted.
+# Every entry lists exact CVEs, so a new CVE on the same package still alerts.
+# Each entry needs a comment saying why it is accepted.
+
+# --- Verified false positives (any version) ---
+# vulnix matches CVEs by package name, so CVEs for unrelated software with the
+# same name land on our packages. Checked against the NVD descriptions on
+# 2026-10-31.
+
+[shellcheck]
+cve = ["CVE-2021-28794"]
+comment = "Unofficial ShellCheck VS Code extension, not shellcheck itself"
+
+[malcontent]
+cve = ["CVE-2026-24845", "CVE-2026-28407"]
+comment = "Chainguard's malcontent scanner; ours is GNOME parental controls (via flatpak)"
+
+[go]
+cve = ["CVE-2023-49292"]
+comment = "ecies Go library, not the Go toolchain"
+
+[git]
+cve = [
+  "CVE-2021-21684",
+  "CVE-2022-30947",
+  "CVE-2022-36882",
+  "CVE-2022-36883",
+  "CVE-2022-36884",
+  "CVE-2022-38663",
+]
+comment = "Jenkins Git Plugin, not git"
+
+[dash]
+cve = ["CVE-2024-21485"]
+comment = "Plotly Dash (Python web framework), not the dash shell"
+
+[bolt]
+cve = ["CVE-2021-27367", "CVE-2022-31321", "CVE-2023-5214", "CVE-2025-34086"]
+comment = "Bolt CMS / Puppet Bolt; ours is the Thunderbolt daemon"
+
+[obsidian]
+cve = ["CVE-2023-24044"]
+comment = "Plesk Obsidian, not the Obsidian notes app"
+
+[ada]
+cve = ["CVE-2024-9410"]
+comment = "Ada.cx Sentry configuration, not the ada URL parser"
+
+# --- CVSS>8 baseline (pinned to name-version) ---
+# A version bump drops the match, so the package alerts again until re-triaged.
 
 ["brotli-1.2.0"]
 cve = ["CVE-2026-111497"]
