@@ -5,9 +5,11 @@ name: Vulnix scan
 #
 # The scan itself is scripts/vulnix-scan.sh; run it locally the same way.
 #
-# Report-only: findings go to the job summary and a JSON artifact; the job does
-# not fail on vulnerabilities, only when vulnix itself errors. nixpkgs always
-# carries some open/disputed CVEs, so a red job on every run would be noise.
+# Findings go to the job summary and a JSON artifact. The job fails (so GitHub
+# notifies) when vulnix itself errors or when any finding has a CVSS v3 score
+# above CVSS_FAIL_ABOVE. Lower scores are report-only: nixpkgs always carries
+# some open/disputed CVEs, so failing on every one would be noise. Silence a
+# reviewed false positive with the whitelist below.
 #
 # Runs daily after update-flake.yml (04:00), since that workflow's lock commit
 # uses GITHUB_TOKEN and so does not trigger the push event below.
@@ -79,7 +81,9 @@ jobs:
         # from B2, which update-flake.yml pushes to), scans its runtime closure
         # and prints a markdown table.
         run: |
-          set -uo pipefail
+          # Steps run under `bash -e`; turn -e off so exit 2 (findings) reaches
+          # the rc check below instead of killing the step at the pipeline.
+          set +e -uo pipefail
           scripts/vulnix-scan.sh -o vulnix.json framebook | tee -a "$GITHUB_STEP_SUMMARY"
           rc=${PIPESTATUS[0]}
           # 0: nothing found, 2: vulnerabilities found, anything else: error.
@@ -87,6 +91,16 @@ jobs:
             echo "::error::vulnix scan exited with $rc"
             exit "$rc"
           fi
+          [ "$rc" -eq 0 ] && exit 0
+          high=$(jq -r --argjson t "$CVSS_FAIL_ABOVE" '
+            map(select(([.cvssv3_basescore[]?] | max // 0) > $t) | .name)
+            | join(", ")' vulnix.json)
+          if [ -n "$high" ]; then
+            echo "::error::CVSS > $CVSS_FAIL_ABOVE in: $high"
+            exit 1
+          fi
+        env:
+          CVSS_FAIL_ABOVE: 8
 
       - uses: actions/upload-artifact@v4
         if: always() && hashFiles('vulnix.json') != ''

@@ -113,15 +113,19 @@ jobs:
             echo "flake.lock unchanged; nothing to commit"
             exit 0
           fi
+          # `--input -` makes stdin the whole request body (-f fields would
+          # turn into URL params), so the query has to live inside the JSON.
           # shellcheck disable=SC2016 # $input is a GraphQL variable
-          gh api graphql \
-            -f query='mutation($input: CreateCommitOnBranchInput!) {
+          jq -n \
+            --arg query 'mutation($input: CreateCommitOnBranchInput!) {
               createCommitOnBranch(input: $input) { commit { oid url } } }' \
-            --input - <<EOF
-          {"variables": {"input": {
-            "branch": {"repositoryNameWithOwner": "${{ github.repository }}", "branchName": "flaked"},
-            "expectedHeadOid": "$(git rev-parse HEAD)",
-            "message": {"headline": "chore(flake): update inputs"},
-            "fileChanges": {"additions": [{"path": "flake.lock", "contents": "$(base64 -w0 flake.lock)"}]}
-          }}}
-          EOF
+            --arg repo "${{ github.repository }}" \
+            --arg head "$(git rev-parse HEAD)" \
+            --arg lock "$(base64 -w0 flake.lock)" \
+            '{query: $query, variables: {input: {
+              branch: {repositoryNameWithOwner: $repo, branchName: "flaked"},
+              expectedHeadOid: $head,
+              message: {headline: "chore(flake): update inputs"},
+              fileChanges: {additions: [{path: "flake.lock", contents: $lock}]}
+            }}}' \
+            | gh api graphql --input -

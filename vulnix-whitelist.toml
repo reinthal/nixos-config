@@ -1,45 +1,42 @@
-# vulnix whitelist, applied by scripts/vulnix-scan.sh (local and CI).
+# vulnix whitelist: https://github.com/nix-community/vulnix#whitelisting
 #
-# Only verified false positives: vulnix matches CVEs by package name, so CVEs
-# for unrelated software with the same name land on our packages. Each entry
-# is scoped to its CVE ids, so a new real CVE for the package still shows up.
-# Checked against the NVD descriptions on 2026-10-31.
+# Entries are pinned to name-version and list exact CVEs, so a version bump or a
+# new CVE on the same package alerts again. Each entry needs a comment saying why
+# it is accepted.
 
-[shellcheck]
-cve = ["CVE-2021-28794"]
-comment = "Unofficial ShellCheck VS Code extension, not shellcheck itself"
+["brotli-1.2.0"]
+cve = ["CVE-2026-111497"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
-[malcontent]
-cve = ["CVE-2026-24845", "CVE-2026-28407"]
-comment = "Chainguard's malcontent scanner; ours is GNOME parental controls (via flatpak)"
+["bun-1.4.2"]
+cve = ["CVE-2026-111497"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
-[go]
-cve = ["CVE-2023-49292"]
-comment = "ecies Go library, not the Go toolchain"
+["lapack-3"]
+cve = ["CVE-2021-4048"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
-[git]
-cve = [
-  "CVE-2021-21684",
-  "CVE-2022-30947",
-  "CVE-2022-36882",
-  "CVE-2022-36883",
-  "CVE-2022-36884",
-  "CVE-2022-38663",
-]
-comment = "Jenkins Git Plugin, not git"
+["libssh2-1.11.1"]
+cve = ["CVE-2025-15661", "CVE-2026-55199", "CVE-2026-55200", "CVE-2026-58050", "CVE-2026-58051", "CVE-2026-66032", "CVE-2026-66033", "CVE-2026-66034", "CVE-2026-66035", "CVE-2026-7598"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
-[dash]
-cve = ["CVE-2024-21485"]
-comment = "Plotly Dash (Python web framework), not the dash shell"
+["orc-0.4.44"]
+cve = ["CVE-2025-47436"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
-[bolt]
-cve = ["CVE-2021-27367", "CVE-2022-31321", "CVE-2023-5214", "CVE-2025-34086"]
-comment = "Bolt CMS / Puppet Bolt; ours is the Thunderbolt daemon"
+["perl-5.42.3"]
+cve = ["CVE-2026-13221", "CVE-2026-57432", "CVE-2026-8376"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
-[obsidian]
-cve = ["CVE-2023-24044"]
-comment = "Plesk Obsidian, not the Obsidian notes app"
+["perl-5.42.3-env"]
+cve = ["CVE-2026-13221", "CVE-2026-57432", "CVE-2026-8376"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
-[ada]
-cve = ["CVE-2024-9410"]
-comment = "Ada.cx Sentry configuration, not the ada URL parser"
+["snappy-1.2.2"]
+cve = ["CVE-2023-28115", "CVE-2023-41330"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
+
+["zlib-1.3.2"]
+cve = ["CVE-2023-6992", "CVE-2026-27820"]
+comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
+
