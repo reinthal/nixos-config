@@ -73,11 +73,19 @@ in {
           PubkeyAuthentication = true;
           IdentityAgent = "/run/user/1000/gnupg/S.gpg-agent.ssh";
         };
-      # aligned-intelligence (NixOS, tailscale IP — no MagicDNS dependency) — same auth as build.
+      # Proxmox host fronting the aligned-intelligence VM; used only as a jump host.
+      "pve.aligned-intelligence.eu" = {
+        User = "root";
+      };
+      # aligned-intelligence (NixOS VM on pve) — reached via the PVE jump host on
+      # its internal IP (same host key as its tailscale IP 100.108.255.127).
+      # Same auth as build. The gpg-agent RemoteForward rides the end-to-end
+      # session, so the jump host never sees the forwarded socket.
       "aligned-intelligence" =
         forwardTo 1000
         // {
-          HostName = "100.108.255.127";
+          HostName = "10.99.1.50";
+          ProxyJump = "pve.aligned-intelligence.eu";
           User = "kog";
           IdentityFile = "~/.ssh/openpgp";
           IdentitiesOnly = true;

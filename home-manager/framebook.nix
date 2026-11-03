@@ -84,6 +84,27 @@ in {
 
   # gnome-keyring is started by PAM at the ReGreet login (nixos regreet.nix)
   # and unlocked with the login password. Don't run a second daemon here.
+  #
+  # But the PAM-started daemon (`--login`) exits after 120 s (LOGIN_TIMEOUT in
+  # gkd-main.c) unless something runs `--start` to finish initializing it.
+  # GNOME does that via the gnome-keyring-secrets XDG autostart entry; Hyprland
+  # doesn't run XDG autostart. Without it, the first secret lookup after 2 min
+  # D-Bus-activates a fresh, *locked* daemon and prompts for the password.
+  systemd.user.services.gnome-keyring-init = {
+    Unit = {
+      Description = "Finish initializing the PAM-started gnome-keyring daemon";
+      PartOf = ["graphical-session.target"];
+      After = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "oneshot";
+      # Keeps the cgroup alive in case --start had to spawn a daemon itself.
+      RemainAfterExit = true;
+      # Same command as gnome-keyring's own XDG autostart entry.
+      ExecStart = "/run/wrappers/bin/gnome-keyring-daemon --start --components=secrets";
+    };
+    Install.WantedBy = ["graphical-session.target"];
+  };
 
   home.packages = [
     slack
