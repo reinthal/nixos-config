@@ -52,18 +52,25 @@ in {
     chromium = {
       enable = true;
       package = pkgs.ungoogled-chromium;
-      # NOTE: ungoogled-chromium strips Web Store / external_update_url support,
-      # so declarative `extensions = [...]` never installs. Install the
-      # chromium-web-store helper manually, then add these via its UI:
-      #   kajibbejlbohfaggdiogboambcijhkke  Mailvelope
-      #   cclelndahbckbenkjhflpdbgdldlbecc  Get cookies.txt LOCALLY
-      #   fihnjjcciajhdojfnbdddfaoknhalnja  I don't care about cookies
-      #   cjpalhdlnbpafiamejdnhcphjbkeiagm  uBlock Origin
-      #   eimadpbcbfnmbkopoojfekhnkhdbieeh  Dark Reader
-      #   mnjggcdmjocbbbhaepdhchncahnbgone  SponsorBlock
-      #   nngceckbapebfimnlniiiahkandclblb  Bitwarden
-      #   fcoeoabgfenejglbffodgkkbkcdhcgfn  Claude
-      #   mahgnmmldchnmmdfkfcoindpgkadhhhc  ElevenReader
+      # ungoogled-chromium ignores Web Store update URLs, so each extension is
+      # a pinned CRX (fetched from the Web Store) installed via `crxPath`.
+      # Pins live in ./chromium-extensions.json; they don't auto-update in the
+      # browser. Bump with scripts/update-chromium-extensions.sh (also run
+      # daily by .github/workflows/update-flake.yml). To add one, add
+      # `"<id>": {"name": "..."}` to the JSON and run the script.
+      extensions =
+        lib.mapAttrsToList (id: ext: {
+          inherit id;
+          inherit (ext) version;
+          crxPath = pkgs.fetchurl {
+            name = "${id}-${ext.version}.crx";
+            # Always serves the newest version; the pinned hash catches drift
+            # (and the B2 cache keeps the pinned file substitutable).
+            url = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=${pkgs.ungoogled-chromium.version}&acceptformat=crx3&x=id%3D${id}%26uc";
+            inherit (ext) hash;
+          };
+        })
+        (lib.importJSON ./chromium-extensions.json);
     };
     ghostty = {
       enable = true;

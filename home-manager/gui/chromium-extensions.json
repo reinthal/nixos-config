@@ -1,0 +1,47 @@
+{
+  "kajibbejlbohfaggdiogboambcijhkke": {
+    "name": "Mailvelope",
+    "version": "6.3.0",
+    "hash": "sha256-7OyynVxMqKItIhHnxFlyBOcN7QQXXI5uNOIQX6xOPdQ="
+  },
+  "cclelndahbckbenkjhflpdbgdldlbecc": {
+    "name": "Get cookies.txt LOCALLY",
+    "version": "0.7.2",
+    "hash": "sha256-K7DpVES1k6UwQaOHhSgBF5ce9EBNHRgg2RH3ZXk5y3Y="
+  },
+  "fihnjjcciajhdojfnbdddfaoknhalnja": {
+    "name": "I don't care about cookies",
+    "version": "3.6.1",
+    "hash": "sha256-dq+hUaaC/9boHZrfPhcvC9keLtwRNEZWaa57Pb3nfH4="
+  },
+  "ddkjiahejlhfcafbddmgiahcphecmpfh": {
+    "name": "uBlock Origin Lite",
+    "version": "2026.1103.1743",
+    "hash": "sha256-spD3fN6TARbPbRXIlCcJcgStSolYKBoJBhnfSc92Dko="
+  },
+  "eimadpbcbfnmbkopoojfekhnkhdbieeh": {
+    "name": "Dark Reader",
+    "version": "4.9.134",
+    "hash": "sha256-hkpzAcaEGzQGbDU3wS6rHBei9MyPJ8XwXs4rEbJhVYY="
+  },
+  "mnjggcdmjocbbbhaepdhchncahnbgone": {
+    "name": "SponsorBlock",
+    "version": "6.1.6",
+    "hash": "sha256-VYf+K2qZRhAcoN3nxu/nanVcXuW21uY9/EjH9zbNtP8="
+  },
+  "nngceckbapebfimnlniiiahkandclblb": {
+    "name": "Bitwarden",
+    "version": "2026.10.2",
+    "hash": "sha256-HJlRefdYYxBMim44nhBQVoqCwNLAfWrPa2JwPSSUMMk="
+  },
+  "fcoeoabgfenejglbffodgkkbkcdhcgfn": {
+    "name": "Claude",
+    "version": "1.0.105",
+    "hash": "sha256-HUV+3Sj8fFV42jN4UFH++SeVVm59EcRHKmP+/nd1Xg0="
+  },
+  "mahgnmmldchnmmdfkfcoindpgkadhhhc": {
+    "name": "ElevenReader",
+    "version": "1.3.3",
+    "hash": "sha256-gQ3NwuCCB8/N8BzYVugGKdmOQCzfAwKZo2oLbxIKGIY="
+  }
+}
