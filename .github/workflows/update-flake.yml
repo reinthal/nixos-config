@@ -4,7 +4,8 @@ name: Update flake inputs
 # from the refreshed lock, sign + push its closure to the private B2 cache, and
 # only then commit the new flake.lock straight to `flaked` (the default branch).
 # The same run re-pins the Chromium extension CRXs
-# (scripts/update-chromium-extensions.sh) and commits them with the lock.
+# (scripts/update-chromium-extensions.sh) and bumps Proton Meet
+# (scripts/update-proton-meet.sh), committing both with the lock.
 #
 # No pull request, no third-party action: the build IS the gate. The job is
 # fail-closed — if the updated lock doesn't build, it stops before committing,
@@ -93,6 +94,18 @@ jobs:
           scripts/update-chromium-extensions.sh | tee -a "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Update Proton Meet
+        # Bumps pkgs/proton-meet.json to Proton's latest Stable .deb (checked
+        # against Proton's published SHA-256). Gated by the build below: if
+        # the new release needs an Electron major nixpkgs doesn't have yet,
+        # the build fails and nothing is committed.
+        run: |
+          set -euo pipefail
+          echo "### Proton Meet" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          scripts/update-proton-meet.sh | tee -a "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
       - name: Build framebook system from the new lock
         # Fail-closed: if the update doesn't build, the job stops here and
         # nothing is committed. Check the Actions tab for a red run.
@@ -114,7 +127,7 @@ jobs:
           rm -f "$keyfile"
           echo "pushed $out"
 
-      - name: Commit updated lock + extension pins to flaked
+      - name: Commit updated lock + extension/proton-meet pins to flaked
         # Committed through the GraphQL API instead of `git commit` + push, so
         # GitHub signs it with its web-flow key. Machines only deploy commits
         # signed by the YubiKey or that key (nixos/features/deploy-checkout.nix);
@@ -125,20 +138,22 @@ jobs:
         run: |
           set -euo pipefail
           ext=home-manager/gui/chromium-extensions.json
-          if git diff --quiet -- flake.lock "$ext"; then
-            echo "flake.lock and $ext unchanged; nothing to commit"
+          meet=pkgs/proton-meet.json
+          if git diff --quiet -- flake.lock "$ext" "$meet"; then
+            echo "flake.lock, $ext and $meet unchanged; nothing to commit"
             exit 0
           fi
           # Only include files that changed; headline says what moved.
           parts=()
           adds='[]'
-          for f in flake.lock "$ext"; do
+          for f in flake.lock "$ext" "$meet"; do
             git diff --quiet -- "$f" && continue
             adds=$(jq -c --arg p "$f" --arg c "$(base64 -w0 "$f")" \
               '. + [{path: $p, contents: $c}]' <<<"$adds")
           done
           git diff --quiet -- flake.lock || parts+=("update inputs")
           git diff --quiet -- "$ext" || parts+=("update chromium extensions")
+          git diff --quiet -- "$meet" || parts+=("update proton-meet $(jq -r .version "$meet")")
           joined=$(IFS=,; echo "${parts[*]}")
           headline="chore(flake): ${joined//,/, }"
           # `--input -` makes stdin the whole request body (-f fields would

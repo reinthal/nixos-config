@@ -3,7 +3,7 @@
 # Same base as ./default.nix, except:
 #   - native clients instead of PWAs / third-party clients:
 #     Slack, Discord, Proton Mail (+ Calendar), Proton Pass, Proton VPN,
-#     Proton Authenticator
+#     Proton Authenticator, Proton Meet
 #   - no LibreOffice
 #   - native Spotify instead of the spotify-player TUI/daemon
 #   - gpg-agent comes from home-manager (drduh setup, ./gpg/agent.nix)
@@ -53,6 +53,8 @@
   discord = withKeyring pkgs.discord;
   proton-mail = withKeyring pkgs.protonmail-desktop;
   proton-pass = withKeyring pkgs.proton-pass;
+  # Not in nixpkgs: pkgs/proton-meet.nix (via the `additions` overlay).
+  proton-meet = withKeyring pkgs.local-pkgs.proton-meet;
 
   # Idle-suspend only on battery. On AC the machine stays awake so the overnight
   # nixos-upgrade timer (system.autoUpgrade, daily) can run. Scans every
@@ -111,6 +113,7 @@ in {
     discord
     proton-mail
     proton-pass
+    proton-meet
     pkgs.proton-vpn
     pkgs.proton-authenticator
   ];

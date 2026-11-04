@@ -28,6 +28,7 @@
     ./hardware-configuration.nix
     ../../common.nix
     ../../features/apps/podman.nix
+    ../../features/apps/syncthing.nix
     # Hyprland + the ReGreet greeter (greetd)
     ../../features/desktop
     # GNOME registered as a second session in that same greeter
