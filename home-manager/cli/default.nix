@@ -10,7 +10,6 @@ in {
   imports = [../scripts/cache-upload.nix];
 
   xdg = {
-    configFile."distrobox/distrobox.conf".source = ../dotfiles/distrobox.conf;
     configFile."opencode/.opencode.json".source = ../dotfiles/.opencode.json;
   };
 
