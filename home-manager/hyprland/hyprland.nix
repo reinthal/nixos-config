@@ -207,6 +207,12 @@ in {
           animations = {
             enabled = true;
           };
+          # Don't auto-switch to HDR/wide-gamut on fullscreen: it forces a
+          # modeset (screen blackout) and the 8-bit eDP-1 panel can't do it
+          # properly ("wide color gamut is enabled but not in 10-bit mode").
+          render = {
+            cm_auto_hdr = 0;
+          };
         };
 
         workspace_rule = let
