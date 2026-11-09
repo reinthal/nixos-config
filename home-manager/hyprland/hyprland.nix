@@ -119,9 +119,11 @@ in {
             scale = 2;
           }
 
+          # Dell U3225QE: 31.5" 4K (~140 PPI) @ 120Hz. 1.25 divides 3840x2160
+          # cleanly -> 3072x1728 logical, so no fractional-pixel blur.
           {
-            output = "DP-1";
-            mode = "3440x1440@75.05Hz";
+            output = "desc:Dell Inc. DELL U3225QE C4RDKJ4";
+            mode = "3840x2160@120.00Hz";
             position = "auto-right";
             scale = 1.25;
           }
