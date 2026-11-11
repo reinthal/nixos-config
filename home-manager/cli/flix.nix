@@ -50,8 +50,8 @@
     git = {
       enable = true;
       lfs.enable = true;
-      userEmail = "email@reinthal.me";
-      userName = "Alexander Reinthal";
+      settings.user.email = "email@reinthal.me";
+      settings.user.name = "Alexander Reinthal";
     };
 
     bat = {

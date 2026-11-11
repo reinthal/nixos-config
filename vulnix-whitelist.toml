@@ -86,3 +86,38 @@ comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individuall
 cve = ["CVE-2023-6992", "CVE-2026-27820"]
 comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
 
+
+# --- Triaged (pinned to name-version) ---
+
+["ffmpeg-8.1.3"]
+cve = [
+  "CVE-2025-25468",
+  "CVE-2025-25469",
+  "CVE-2026-52295",
+  "CVE-2026-52296",
+  "CVE-2026-52297",
+  "CVE-2026-70628",
+  "CVE-2026-70629",
+  "CVE-2026-70630",
+  "CVE-2026-70631",
+  "CVE-2026-70632",
+  "CVE-2026-96611",
+  "CVE-2026-107675",
+  "CVE-2026-107676",
+  "CVE-2026-107677",
+  "CVE-2026-107678",
+  "CVE-2026-107696",
+]
+comment = "Triaged 2026-11-11: 2025-2546x/52295-7/70628-32/96611 say 'before 9.0', but each fix commit (or its release/8.1 cherry-pick) reverse-applies cleanly to 8.1.3, so they already shipped (also true for jellyfin-ffmpeg 8.1.3-2 on flix). The 107xxx ones are still open, same low-impact triage as ffmpeg-9.0.2 below."
+
+["ffmpeg-9.0.2"]
+cve = [
+  "CVE-2025-25468",
+  "CVE-2025-25469",
+  "CVE-2026-107675",
+  "CVE-2026-107676",
+  "CVE-2026-107677",
+  "CVE-2026-107678",
+  "CVE-2026-107696",
+]
+comment = "Triaged 2026-11-11: 2025-2546x are fixed (d5873be, in 8.1.3 already). Still open: 107675 sftp:// host-key check, 107696 rtsp:// redirect loop, 107677 DASH .mpd loop (we never open such URLs); 107678 crafted-MP4 stack-exhaustion crash and 107676 3-byte leak into remux output. All DoS or low impact; no RCE. Re-check on bump."

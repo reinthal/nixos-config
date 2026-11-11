@@ -17,7 +17,6 @@
     ../../features/apps/qbittorrent.nix
     ../../features/apps/podman.nix
     ../../features/apps/navidrome.nix
-    ../../features/apps/pinchflat.nix
     inputs.home-manager.nixosModules.default
   ];
   fileSystems."/mnt/photos" = {
@@ -62,6 +61,26 @@
       allowedTCPPorts = [2283 8888];
     };
   };
+  # Automatic updates, same model as framebook: daily rebuild from the
+  # root-owned /etc/nixos-config checkout (features/deploy-checkout.nix, via
+  # minimal.nix), which only advances over signed commits on origin/flaked.
+  # update-flake.yml builds flix and pushes it to B2 before committing a lock
+  # bump, so this substitutes instead of compiling. Never reboots on its own:
+  # root is LUKS-encrypted and needs the passphrase at boot, so kernel/driver
+  # updates take effect at the next manual reboot.
+  system.autoUpgrade = {
+    enable = true;
+    dates = "daily";
+    randomizedDelaySec = "45min";
+    persistent = true;
+    allowReboot = false;
+  };
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   nixpkgs.config.allowUnfree = true;
   programs.zsh.enable = true;
   time.timeZone = "Europe/Stockholm";

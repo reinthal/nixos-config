@@ -1,7 +1,7 @@
 name: Update flake inputs
 
-# Weekly (and on demand): run `nix flake update`, build the framebook system
-# from the refreshed lock, sign + push its closure to the private B2 cache, and
+# Weekly (and on demand): run `nix flake update`, build the framebook and flix
+# systems from the refreshed lock, sign + push their closures to the private B2 cache, and
 # only then commit the new flake.lock straight to `flaked` (the default branch).
 # The same run re-pins the Chromium extension CRXs
 # (scripts/update-chromium-extensions.sh) and bumps Proton Meet
@@ -10,7 +10,7 @@ name: Update flake inputs
 # No pull request, no third-party action: the build IS the gate. The job is
 # fail-closed — if the updated lock doesn't build, it stops before committing,
 # so a broken update never reaches `flaked` and never reaches the daily
-# `system.autoUpgrade` on framebook. Pushing the closure first also warms the
+# `system.autoUpgrade` on framebook or flix. Pushing the closures first also warms the
 # B2 cache so that autoUpgrade substitutes instead of compiling.
 #
 # Pinned inputs: `nix flake update` advances every input. If a bump would break
@@ -41,11 +41,12 @@ permissions:
 
 env:
   CACHE_URL: "s3://reinthal-nix-store?endpoint=s3.eu-central-003.backblazeb2.com&scheme=https&region=eu-central-003"
-  SYSTEM_ATTR: ".#nixosConfigurations.framebook.config.system.build.toplevel"
+  # Hosts that run system.autoUpgrade; each must build before a lock commit.
+  HOSTS: "framebook flix"
 
 jobs:
   update:
-    name: Update inputs, build + push framebook, commit to flaked
+    name: Update inputs, build + push framebook and flix, commit to flaked
     runs-on: ubuntu-24.04
     # Secrets (B2_*, NIX_SIGNING_KEY) are environment-scoped, not repo-scoped.
     environment: god
@@ -106,10 +107,16 @@ jobs:
           scripts/update-proton-meet.sh | tee -a "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Build framebook system from the new lock
+      - name: Build framebook + flix systems from the new lock
         # Fail-closed: if the update doesn't build, the job stops here and
         # nothing is committed. Check the Actions tab for a red run.
-        run: nix build -L --no-link --print-build-logs "$SYSTEM_ATTR"
+        run: |
+          set -euo pipefail
+          attrs=()
+          for h in $HOSTS; do
+            attrs+=(".#nixosConfigurations.$h.config.system.build.toplevel")
+          done
+          nix build -L --no-link --print-build-logs "${attrs[@]}"
 
       - name: Sign and push closure to B2 cache
         env:
@@ -121,11 +128,13 @@ jobs:
           umask 077
           keyfile=$(mktemp)
           printf '%s' "$NIX_SIGNING_KEY" > "$keyfile"
-          out=$(nix eval --raw "$SYSTEM_ATTR.outPath")
-          nix store sign --recursive --key-file "$keyfile" "$out"
-          nix copy --to "$CACHE_URL" "$out"
+          for h in $HOSTS; do
+            out=$(nix eval --raw ".#nixosConfigurations.$h.config.system.build.toplevel.outPath")
+            nix store sign --recursive --key-file "$keyfile" "$out"
+            nix copy --to "$CACHE_URL" "$out"
+            echo "pushed $h: $out"
+          done
           rm -f "$keyfile"
-          echo "pushed $out"
 
       - name: Commit updated lock + extension/proton-meet pins to flaked
         # Committed through the GraphQL API instead of `git commit` + push, so

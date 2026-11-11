@@ -65,7 +65,7 @@ systems.
 - `seed` - Specialized system with S3FS music bucket mounting
 - `build` - x86 Proxmox VM for builds (NVIDIA, Steam, dev tools)
 - `relay` - Tor exit node with high-load server tuning
-- `flix` - Media server (Jellyfin, Navidrome, Pinchflat)
+- `flix` - Media server (Jellyfin, Navidrome)
 - `nixbook` - Apple Silicon laptop (Asahi Linux via apple-silicon input)
 - `framebook` - Framework laptop (Intel); Hyprland or GNOME, picked in ReGreet
 
