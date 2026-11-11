@@ -78,7 +78,7 @@ in {
         User = "root";
       };
       # aligned-intelligence (NixOS VM on pve) — reached via the PVE jump host on
-      # its internal IP (same host key as its tailscale IP 100.108.255.127).
+      # its internal IP.
       # Same auth as build. The gpg-agent RemoteForward rides the end-to-end
       # session, so the jump host never sees the forwarded socket.
       "aligned-intelligence" =

@@ -59,7 +59,7 @@
   # AIS-391: BashArena's sandbox router only DNATs TCP/80 to its fake external
   # 192.0.2.10; every other port was forwarded to the uplink and got us a
   # Hetzner portscan report. Never let documentation ranges (RFC 5737) or the
-  # home LAN (seen leaking via tailscale NAT traversal) leave this VM.
+  # home LAN leave this VM.
   # Container traffic is filtered in DOCKER-USER: Docker inserts its own
   # FORWARD accepts above anything appended to FORWARD, but never touches
   # DOCKER-USER.
@@ -75,8 +75,6 @@
       iptables -A egress-guard ${extra} -d ${net} -j REJECT --reject-with icmp-admin-prohibited
     '';
   in {
-    # Tailscale peers (nixbook) are trusted.
-    trustedInterfaces = ["tailscale0"];
     extraCommands = ''
       iptables -N egress-guard 2>/dev/null || iptables -F egress-guard
       # Container-to-container traffic on one Docker bridge (e.g. a BashArena sandbox
@@ -84,7 +82,7 @@
       # leaves the host; only routed egress is guarded.
       iptables -A egress-guard -m physdev --physdev-is-bridged -j RETURN
       ${lib.concatMapStrings (block "") testNets}
-      ${lib.concatMapStrings (block "! -o tailscale0") homeLan}
+      ${lib.concatMapStrings (block "") homeLan}
       iptables -N DOCKER-USER 2>/dev/null || true
       iptables -C DOCKER-USER -j egress-guard 2>/dev/null || iptables -I DOCKER-USER -j egress-guard
       iptables -C FORWARD -j egress-guard 2>/dev/null || iptables -I FORWARD -j egress-guard
@@ -102,9 +100,8 @@
   # QEMU guest agent (host-side shutdown, IP reporting, fs freeze)
   services.qemuGuest.enable = true;
 
-  # Tailscale stays enabled as a fallback; laptops ssh in via the
-  # pve.aligned-intelligence.eu jump host (see home-manager/gpg/forward-gpg-agent.nix).
-  services.tailscale.enable = true;
+  # Laptops ssh in via the pve.aligned-intelligence.eu jump host
+  # (see home-manager/gpg/forward-gpg-agent.nix).
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."kog" = {

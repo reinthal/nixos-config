@@ -154,7 +154,6 @@
         }
       ];
     };
-    tailscale.enable = true;
   };
   environment.shellInit = ''
     export GPG_TTY="$(tty)"

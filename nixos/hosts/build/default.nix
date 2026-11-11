@@ -70,7 +70,6 @@
   ];
 
   services = {
-    tailscale.enable = true;
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
     meilisearch.enable = false;

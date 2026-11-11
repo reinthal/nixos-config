@@ -89,7 +89,6 @@
   services = {
     displayManager.defaultSession = "hyprland";
 
-    tailscale.enable = true;
     # YubiKeys: OpenPGP card (pcscd) for gpg, FIDO2 for LUKS.
     pcscd.enable = true;
     udev.packages = [pkgs.yubikey-personalization pkgs.libfido2];
