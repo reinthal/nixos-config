@@ -16,8 +16,8 @@
   },
   "ddkjiahejlhfcafbddmgiahcphecmpfh": {
     "name": "uBlock Origin Lite",
-    "version": "2026.1103.1743",
-    "hash": "sha256-spD3fN6TARbPbRXIlCcJcgStSolYKBoJBhnfSc92Dko="
+    "version": "2026.1110.1816",
+    "hash": "sha256-+DD5sqxsQNzn8ZNxf9KGpMlm6JmQGNWj51mY2BdRu4o="
   },
   "eimadpbcbfnmbkopoojfekhnkhdbieeh": {
     "name": "Dark Reader",
@@ -36,12 +36,12 @@
   },
   "fcoeoabgfenejglbffodgkkbkcdhcgfn": {
     "name": "Claude",
-    "version": "1.0.105",
-    "hash": "sha256-HUV+3Sj8fFV42jN4UFH++SeVVm59EcRHKmP+/nd1Xg0="
+    "version": "1.0.107",
+    "hash": "sha256-vmTrTdkF7X/1CkIdn9QjKT5M6LVsD97iT6Tq8XmHpDQ="
   },
   "mahgnmmldchnmmdfkfcoindpgkadhhhc": {
     "name": "ElevenReader",
-    "version": "1.3.3",
-    "hash": "sha256-gQ3NwuCCB8/N8BzYVugGKdmOQCzfAwKZo2oLbxIKGIY="
+    "version": "2.0.1",
+    "hash": "sha256-5OKgucO1CFIwNT04GIiQSVtCHn1v/QeghYAsxgw2IaA="
   }
 }
