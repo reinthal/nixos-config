@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  imports = [./keybindings.nix];
+
   nix.extraOptions = ''
     experimental-features = nix-command flakes
     extra-substituters = https://devenv.cachix.org
@@ -21,8 +23,9 @@
 
   system = {
     keyboard = {
+      # Caps lock is handled by Karabiner (keybindings.nix); keeping the
+      # (now empty) mapping on clears the old hidutil caps -> escape remap.
       enableKeyMapping = true;
-      remapCapsLockToEscape = true;
     };
     defaults = {
       finder.AppleShowAllExtensions = true;
