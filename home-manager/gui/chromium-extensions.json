@@ -31,8 +31,8 @@
   },
   "nngceckbapebfimnlniiiahkandclblb": {
     "name": "Bitwarden",
-    "version": "2026.10.2",
-    "hash": "sha256-HJlRefdYYxBMim44nhBQVoqCwNLAfWrPa2JwPSSUMMk="
+    "version": "2026.11.0",
+    "hash": "sha256-W7/EQcarOCqGd7EzrqP8P/K67XzP5usbFhcbQpiTc/I="
   },
   "fcoeoabgfenejglbffodgkkbkcdhcgfn": {
     "name": "Claude",
@@ -41,7 +41,7 @@
   },
   "mahgnmmldchnmmdfkfcoindpgkadhhhc": {
     "name": "ElevenReader",
-    "version": "2.0.1",
-    "hash": "sha256-5OKgucO1CFIwNT04GIiQSVtCHn1v/QeghYAsxgw2IaA="
+    "version": "2.2.0",
+    "hash": "sha256-T6rm8yMSjnnwD0Vjtb+NKQ0U80ImcBDLli6DqXh3zNE="
   }
 }
