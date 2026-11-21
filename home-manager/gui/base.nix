@@ -11,7 +11,6 @@
   # ./default.nix (shared hosts) or ../framebook.nix.
   desktop-apps = with pkgs;
     [
-      burpsuite
       obsidian
       networkmanagerapplet
       keepassxc

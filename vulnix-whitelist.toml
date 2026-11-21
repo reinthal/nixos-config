@@ -50,10 +50,6 @@ comment = "Ada.cx Sentry configuration, not the ada URL parser"
 # --- CVSS>8 baseline (pinned to name-version) ---
 # A version bump drops the match, so the package alerts again until re-triaged.
 
-["brotli-1.2.0"]
-cve = ["CVE-2026-111497"]
-comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
-
 ["bun-1.4.2"]
 cve = ["CVE-2026-111497"]
 comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individually triaged"
@@ -89,6 +85,10 @@ comment = "Bulk-accepted 2026-11-02 to baseline the CVSS>8 gate; not individuall
 
 # --- Triaged (pinned to name-version) ---
 
+["brotli-1.2.1"]
+cve = ["CVE-2026-111497"]
+comment = "Triaged 2026-11-21: false positive. The decoder overflow is fixed in google/brotli 1.0.10, 1.1.1 and 1.2.1 (NVD: google:brotli 1.2.0 up to, excluding, 1.2.1). vulnix matches on product name only, so the record's andybalholm:brotli (Go port) range '< 1.2.7' lands on our C brotli 1.2.1. Replaces the bulk-accepted brotli-1.2.0 entry, which really was vulnerable."
+
 ["ffmpeg-8.1.3"]
 cve = [
   "CVE-2025-25468",
@@ -107,8 +107,9 @@ cve = [
   "CVE-2026-107677",
   "CVE-2026-107678",
   "CVE-2026-107696",
+  "CVE-2026-125064",
 ]
-comment = "Triaged 2026-11-11: 2025-2546x/52295-7/70628-32/96611 say 'before 9.0', but each fix commit (or its release/8.1 cherry-pick) reverse-applies cleanly to 8.1.3, so they already shipped (also true for jellyfin-ffmpeg 8.1.3-2 on flix). The 107xxx ones are still open, same low-impact triage as ffmpeg-9.0.2 below."
+comment = "Triaged 2026-11-11: 2025-2546x/52295-7/70628-32/96611 say 'before 9.0', but each fix commit (or its release/8.1 cherry-pick) reverse-applies cleanly to 8.1.3, so they already shipped (also true for jellyfin-ffmpeg 8.1.3-2 on flix). The 107xxx ones and 125064 are still open, same low-impact triage as ffmpeg-9.0.2 below."
 
 ["ffmpeg-9.0.2"]
 cve = [
@@ -119,5 +120,6 @@ cve = [
   "CVE-2026-107677",
   "CVE-2026-107678",
   "CVE-2026-107696",
+  "CVE-2026-125064",
 ]
-comment = "Triaged 2026-11-11: 2025-2546x are fixed (d5873be, in 8.1.3 already). Still open: 107675 sftp:// host-key check, 107696 rtsp:// redirect loop, 107677 DASH .mpd loop (we never open such URLs); 107678 crafted-MP4 stack-exhaustion crash and 107676 3-byte leak into remux output. All DoS or low impact; no RCE. Re-check on bump."
+comment = "Triaged 2026-11-11: 2025-2546x are fixed (d5873be, in 8.1.3 already). Still open: 107675 sftp:// host-key check, 107696 rtsp:// redirect loop, 107677 DASH .mpd loop (we never open such URLs); 107678 crafted-MP4 stack-exhaustion crash and 107676 3-byte leak into remux output. All DoS or low impact; no RCE. Added 2026-11-21: 125064 (CVSS 5.5) NULL deref in the G.726 decoder on a crafted AVI with a ~256 MB audio chunk; crashes the decoding process only, fix ec887b1 is not in a release yet. Re-check on bump."
