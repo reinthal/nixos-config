@@ -39,6 +39,7 @@
       hostname = "framebook";
       wifiBackend = "wpa_supplicant";
     })
+    ../../features/nas.nix
     ../../features/sound.nix
     ../../features/bluetooth.nix
     # lanzaboote (signed UKIs); see the enrollment steps in the file
