@@ -9,22 +9,19 @@ in {
     enable = true;
     package = pkgs.unstable.meilisearch;
   };
-  # Runs as the module's default `jellyfin` system user (not kog), so an
-  # ffmpeg exploit via a crafted library file stays inside that account.
+  # Runs as kog: NAS media is 1000:1000 (kog:reinthal) with mode 770/700, so
+  # the `jellyfin` system user can't read it (12.4's MigrateLinkedChildren
+  # migration crashed on /mnt/media/media/music).
   services.jellyfin = {
     enable = true;
     openFirewall = true;
+    user = "kog";
   };
 
-  users.users.jellyfin.extraGroups = [
-    "users" # media on the NAS is group `users` (qbittorrent writes PGID 100, UMASK 002)
-    "video" # GPU device nodes for NVENC/NVDEC
-    "render"
-  ];
-
-  # Jellyfin used to run as kog, so its existing state is kog-owned. The
-  # module's `d` rules only fix the top-level dirs; `Z` re-owns the contents
-  # recursively (modes untouched). Can be dropped once flix has switched.
+  # A brief switch to the `jellyfin` user re-owned the state to uid 994. `Z`
+  # re-owns the contents back to cfg.user recursively (modes untouched); the
+  # module's `d` rules only fix the top-level dirs. Can be dropped once flix
+  # has switched.
   systemd.tmpfiles.settings.jellyfinOwnership = {
     "${cfg.dataDir}"."Z" = {
       inherit (cfg) user group;
