@@ -39,8 +39,8 @@
           "SUPER + G|Toggle fullscreen|Window Management"
           "SUPER + T|Toggle split layout|Window Management"
           "ALT + Tab|Focus current or last window|Window Management"
-          "SUPER + Tab|Next window (all workspaces)|Window Management"
-          "SUPER SHIFT + Tab|Previous window (all workspaces)|Window Management"
+          "SUPER + Tab|Window switcher (hold SUPER, release to focus)|Window Management"
+          "SUPER SHIFT + Tab|Window switcher, backwards|Window Management"
 
           "SUPER ALT + k|Move focus up|Focus Navigation"
           "SUPER ALT + j|Move focus down|Focus Navigation"

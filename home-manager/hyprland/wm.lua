@@ -108,9 +108,28 @@ function wm.launcher_up(cmd)
   chord = false
 end
 
--- Focus the next (step 1) or previous (step -1) window, across all regular
--- workspaces, ordered by workspace and then by position on screen.
-function wm.cycle(step)
+-- Window switcher: hold SUPER, press Tab (SHIFT + Tab goes back) to move
+-- through the windows, release SUPER to focus the selected one; Escape
+-- cancels. Windows are a stack, most recently focused on top, starting on the
+-- one below the current window. While it runs the "switcher" submap is
+-- active; hyprland-window-switcher only draws the list in fuzzel.
+local SWITCHER = "switcher"
+local LIST = (os.getenv("XDG_RUNTIME_DIR") or "/tmp") .. "/hyprland-window-switcher.tsv"
+-- Running switch: { wins = windows in stack order, index = selected one,
+-- gen = which switch this is }, nil otherwise.
+local sw = nil
+-- Both start from the clock: the drawing script keeps the last values it saw
+-- in files that outlive a config reload, which resets these.
+local gen = os.time() * 1000
+-- Orders the drawing script's calls, so a late one cannot redraw a stale list.
+local seq = os.time() * 1000
+
+local function draw(args)
+  seq = seq + 1
+  hl.exec_cmd(string.format("hyprland-window-switcher %d %s", seq, args))
+end
+
+local function stack()
   local wins = {}
   for _, w in ipairs(hl.get_windows()) do
     -- Special workspaces have no id (their `special` flag is not reliable).
@@ -119,31 +138,70 @@ function wm.cycle(step)
       wins[#wins + 1] = w
     end
   end
-  if #wins == 0 then return end
-
-  local function key(w)
-    local at = type(w.at) == "table" and w.at or {}
-    return w.workspace.id, at.x or at[1] or 0, at.y or at[2] or 0
-  end
-  table.sort(wins, function(a, b)
-    local aw, ax, ay = key(a)
-    local bw, bx, by = key(b)
-    if aw ~= bw then return aw < bw end
-    if ax ~= bx then return ax < bx end
-    if ay ~= by then return ay < by end
-    return a.address < b.address
-  end)
-
-  local active = hl.get_active_window()
-  local index
-  for i, w in ipairs(wins) do
-    if active and w.address == active.address then index = i end
-  end
-  if not index then index = step > 0 and 0 or 1 end
-
-  local target = wins[(index - 1 + step) % #wins + 1]
-  hl.dispatch(hl.dsp.focus({ window = target }))
+  table.sort(wins, function(a, b) return a.focus_history_id < b.focus_history_id end)
+  return wins
 end
+
+function wm.switch(step)
+  if not sw then
+    local wins = stack()
+    if #wins == 0 then return end
+    local f = io.open(LIST, "w")
+    if not f then return end
+    for _, w in ipairs(wins) do
+      local clean = function(s) return (tostring(s or ""):gsub("[\t\n]", " ")) end
+      f:write(w.workspace.id, "\t", clean(w.class), "\t", clean(w.title), "\n")
+    end
+    f:close()
+    gen = gen + 1
+    sw = { wins = wins, index = 1, gen = gen }
+    hl.dispatch(hl.dsp.submap(SWITCHER))
+  end
+  sw.index = (sw.index - 1 + step) % #sw.wins + 1
+  draw(string.format("show %d %d", sw.gen, sw.index - 1))
+end
+
+local function finish()
+  local w = sw and sw.wins[sw.index]
+  sw = nil
+  hl.dispatch(hl.dsp.submap("reset"))
+  draw("hide")
+  return w
+end
+
+function wm.switch_commit()
+  if not sw then return end
+  local target = finish()
+  -- The window may have closed while the list was up.
+  for _, w in ipairs(hl.get_windows()) do
+    if w.address == target.address then
+      hl.dispatch(hl.dsp.focus({ window = w }))
+      return
+    end
+  end
+end
+
+function wm.switch_cancel()
+  if sw then finish() end
+end
+
+-- A click on an entry (index counts from 0) in switch `g`.
+function wm.switch_pick(g, index)
+  if not sw or sw.gen ~= g or not sw.wins[index + 1] then return end
+  sw.index = index + 1
+  wm.switch_commit()
+end
+
+hl.define_submap(SWITCHER, function()
+  hl.bind("SUPER + Tab", function() wm.switch(1) end)
+  hl.bind("SUPER + SHIFT + Tab", function() wm.switch(-1) end)
+  hl.bind("SUPER + Super_L", wm.switch_commit, { release = true })
+  hl.bind("SUPER + Super_R", wm.switch_commit, { release = true })
+  hl.bind("SUPER + SHIFT + Super_L", wm.switch_commit, { release = true })
+  hl.bind("SUPER + SHIFT + Super_R", wm.switch_commit, { release = true })
+  hl.bind("SUPER + Escape", wm.switch_cancel)
+  hl.bind("Escape", wm.switch_cancel)
+end)
 
 -- Put every existing workspace on its monitor and make each monitor show one
 -- of its own workspaces.

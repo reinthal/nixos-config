@@ -31,8 +31,8 @@ This document lists all keybindings configured in `hyprland.nix`.
 | `SUPER + G` | Toggle fullscreen |
 | `SUPER + T` | Toggle split layout |
 | `ALT + Tab` | Focus current or last window |
-| `SUPER + Tab` | Next window, across all workspaces |
-| `SUPER SHIFT + Tab` | Previous window, across all workspaces |
+| `SUPER + Tab` | Window switcher: hold SUPER, Tab to move down the list (most recent first), release SUPER to focus; Escape cancels |
+| `SUPER SHIFT + Tab` | Window switcher, moving up the list |
 
 ## Focus Navigation
 
