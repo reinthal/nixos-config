@@ -6,7 +6,5 @@
     ./switch-keys.nix
     ./pgp-scripts.nix
     ./awww-wallpaper.nix
-    ./spotify-search.nix
-    ./spotify-queue.nix
   ];
 }

@@ -5,7 +5,6 @@
 #     Slack, Discord, Proton Mail (+ Calendar), Proton Pass, Proton VPN,
 #     Proton Authenticator, Proton Meet
 #   - no LibreOffice
-#   - native Spotify instead of the spotify-player TUI/daemon
 #   - gpg-agent comes from home-manager (drduh setup, ./gpg/agent.nix)
 #   - hyprlock with fingerprint unlock + hypridle auto-lock
 #   - Electron apps keep their secrets in gnome-keyring
@@ -121,7 +120,7 @@ in {
   programs.chromium.commandLineArgs = [passwordStoreFlag];
 
   local.hyprland = {
-    scratchpads = {
+    apps = {
       slack = "slack";
       discord = "discord";
       # Proton Mail desktop also contains Calendar (switch from the app).
@@ -129,8 +128,6 @@ in {
       calendar = "proton-mail";
     };
     locker = "hyprlock";
-    # Native Spotify client (gui/base.nix) instead of spotify-player.
-    spotifyPlayerBinds = false;
   };
 
   # Fingerprint is read by hyprlock itself (fprintd over D-Bus), in parallel
