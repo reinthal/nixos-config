@@ -154,8 +154,21 @@ function wm.switch(step)
     end
     f:close()
     gen = gen + 1
-    sw = { wins = wins, index = 1, gen = gen }
+    sw = { wins = wins, index = 1, gen = gen, seen_held = false }
     hl.dispatch(hl.dsp.submap(SWITCHER))
+    -- Releasing SUPER focuses the selection. A release bind cannot catch it:
+    -- Hyprland only fires one that was armed when its keys went down, and
+    -- SUPER went down before the submap was entered. So poll the key instead.
+    -- Only commit once SUPER was seen held, so a missed read leaves Enter or
+    -- Escape to finish rather than switching at once.
+    sw.timer = hl.timer(function()
+      if not sw then return end
+      if hl.is_key_down("Super_L") or hl.is_key_down("Super_R") then
+        sw.seen_held = true
+      elseif sw.seen_held then
+        wm.switch_commit()
+      end
+    end, { timeout = 25, type = "repeat" })
   end
   sw.index = (sw.index - 1 + step) % #sw.wins + 1
   draw(string.format("show %d %d", sw.gen, sw.index - 1))
@@ -163,6 +176,7 @@ end
 
 local function finish()
   local w = sw and sw.wins[sw.index]
+  if sw and sw.timer then sw.timer:set_enabled(false) end
   sw = nil
   hl.dispatch(hl.dsp.submap("reset"))
   draw("hide")
@@ -195,10 +209,6 @@ end
 hl.define_submap(SWITCHER, function()
   hl.bind("SUPER + Tab", function() wm.switch(1) end)
   hl.bind("SUPER + SHIFT + Tab", function() wm.switch(-1) end)
-  hl.bind("SUPER + Super_L", wm.switch_commit, { release = true })
-  hl.bind("SUPER + Super_R", wm.switch_commit, { release = true })
-  hl.bind("SUPER + SHIFT + Super_L", wm.switch_commit, { release = true })
-  hl.bind("SUPER + SHIFT + Super_R", wm.switch_commit, { release = true })
   hl.bind("SUPER + Escape", wm.switch_cancel)
   hl.bind("Escape", wm.switch_cancel)
 end)
