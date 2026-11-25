@@ -1,0 +1,98 @@
+diff -ru a/crates/windows-lib/src/icon.rs b/crates/windows-lib/src/icon.rs
+--- a/crates/windows-lib/src/icon.rs	2026-11-25 22:58:05.323353088 +0100
++++ b/crates/windows-lib/src/icon.rs	2026-11-25 22:58:17.409846084 +0100
+@@ -1,11 +1,31 @@
+ use crate::desktop_map::{add_path_for_icon_by_pid_exec, get_icon_name_by_name_from_desktop_files};
+ use core_lib::{WarnWithDetails, default};
+-use relm4::adw::gtk::Image;
++use relm4::adw::gtk::gdk::Display;
++use relm4::adw::gtk::prelude::*;
++use relm4::adw::gtk::{IconTheme, Image, ImageType};
+ use std::fs;
+ use std::path::Path;
+ use tracing::{debug_span, trace, warn};
+ 
+-pub fn set_icon(class: &str, pid: i32, image: &Image) {
++/// Sets the icon for a client. Returns whether a real icon was found (not the
++/// generic fallback, and not a name the icon theme cannot resolve).
++pub fn set_icon(class: &str, pid: i32, image: &Image) -> bool {
++    set_icon_inner(class, pid, image);
++    image_resolves(image)
++}
++
++fn image_resolves(image: &Image) -> bool {
++    match image.storage_type() {
++        ImageType::IconName => image.icon_name().is_some_and(|name| {
++            name != "application-x-executable"
++                && Display::default().is_some_and(|d| IconTheme::for_display(&d).has_icon(&name))
++        }),
++        ImageType::Empty => false,
++        _ => true,
++    }
++}
++
++fn set_icon_inner(class: &str, pid: i32, image: &Image) {
+     let image = image.clone();
+     let _span = debug_span!("icon", class = class).entered();
+ 
+diff -ru a/crates/windows-lib/src/shared/workspace_clients.rs b/crates/windows-lib/src/shared/workspace_clients.rs
+--- a/crates/windows-lib/src/shared/workspace_clients.rs	2026-11-25 22:58:05.334353035 +0100
++++ b/crates/windows-lib/src/shared/workspace_clients.rs	2026-11-25 22:58:17.438802883 +0100
+@@ -95,7 +95,7 @@
+         let client_h_w =
+             scale(self.data.height, self.scale).min(scale(self.data.width, self.scale));
+         if client_h_w > 70 {
+-            set_icon(&self.data.class, self.data.pid, &widgets.image);
++            let _ = set_icon(&self.data.class, self.data.pid, &widgets.image);
+         }
+ 
+         widgets
+diff -ru a/crates/windows-lib/src/switch/clients.rs b/crates/windows-lib/src/switch/clients.rs
+--- a/crates/windows-lib/src/switch/clients.rs	2026-11-25 22:58:05.329353059 +0100
++++ b/crates/windows-lib/src/switch/clients.rs	2026-11-25 22:58:17.432066610 +0100
+@@ -10,6 +10,7 @@
+ #[derive(Debug)]
+ pub struct Clients {
+     active: bool,
++    no_icon: bool,
+     data: ClientData,
+     pub id: ClientId,
+     scale: f64,
+@@ -42,9 +43,15 @@
+ 
+     view! {
+         gtk::FlowBoxChild {
++            #[name(button)]
+             gtk::Button {
+                 #[watch]
+-                set_css_classes: if self.active { &["active", "client"] } else { &["client"] },
++                set_css_classes: match (self.active, self.no_icon) {
++                    (true, true) => &["active", "client", "no-icon"],
++                    (true, false) => &["active", "client"],
++                    (false, true) => &["client", "no-icon"],
++                    (false, false) => &["client"],
++                },
+                 set_cursor_from_name: Some("pointer"),
+                 set_width_request: scale(self.monitor_data.width, self.scale),
+                 set_height_request: scale(self.monitor_data.height, self.scale),
+@@ -75,6 +82,7 @@
+         // trace!("self {}x{}", init.data.width, init.data.height);
+         Self {
+             active: false,
++            no_icon: false,
+             data: init.data,
+             monitor_data: init.monitor_data,
+             id: init.id,
+@@ -94,8 +102,10 @@
+         // Set the icon for this client
+         let client_h_w =
+             scale(self.data.height, self.scale).min(scale(self.data.width, self.scale));
+-        if client_h_w > 70 {
+-            set_icon(&self.data.class, self.data.pid, &widgets.image);
++        let has_icon = client_h_w > 70 && set_icon(&self.data.class, self.data.pid, &widgets.image);
++        if !has_icon {
++            self.no_icon = true;
++            widgets.button.add_css_class("no-icon");
+         }
+ 
+         widgets

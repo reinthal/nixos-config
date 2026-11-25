@@ -7,10 +7,16 @@
 # no overview, no launcher (fuzzel stays on SUPER + Space).
 # Options: hyprshell's crates/config-lib/src/io/config.rs, or
 # `hyprshell config edit`.
-{...}: {
+{pkgs, ...}: {
   services.hyprshell = {
     enable = true;
     systemd.enable = true;
+    # Local patch: a switcher card whose icon cannot be resolved (generic
+    # fallback, or a name the icon theme lacks) gets the `no-icon` CSS class,
+    # so the style below can show the title there instead.
+    package = pkgs.hyprshell.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [./hyprshell-no-icon-class.patch];
+    });
     settings = {
       version = 4;
       windows.switch = {
@@ -56,14 +62,25 @@
         box-shadow: 0 0 0 1px #7fbbb3;
       }
 
-      /* No window titles: icons only. hyprshell has no option for it and GTK
+      /* Icons only, no window titles. hyprshell has no option for it and GTK
          CSS has no display: none, so collapse the card's title label. */
-      .client frame > label {
+      .client:not(.no-icon) frame > label {
         font-size: 0.01px;
         color: transparent;
         min-height: 0;
         margin: 0;
         padding: 0;
+      }
+
+      /* No icon found (patched hyprshell sets .no-icon): show the title
+         instead of a broken image. */
+      .client.no-icon frame > label {
+        font-size: 1.1rem;
+        padding: 6px 8px 0 8px;
+      }
+
+      .client.no-icon image {
+        opacity: 0;
       }
     '';
   };
