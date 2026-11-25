@@ -6,5 +6,6 @@
     ./hyprlock.nix
     ./polkit.nix
     ./mako.nix
+    ./hyprshell.nix
   ];
 }

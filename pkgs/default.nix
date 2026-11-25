@@ -7,7 +7,6 @@ rec {
   trim-screencast = pkgs.callPackage ./trim-screencast.nix {};
   setup-gpg-forward = pkgs.callPackage ./setup-gpg-forward.nix {};
   hyprland-keybindings-menu = pkgs.callPackage ./hyprland-keybindings-menu.nix {};
-  hyprland-window-switcher = pkgs.callPackage ./hyprland-window-switcher.nix {};
   proton-meet = pkgs.callPackage ./proton-meet.nix {};
   timer-bar = pkgs.callPackage ./timer-bar.nix {
     workMinutes = 30;

@@ -126,7 +126,6 @@ in {
       ]
       ++ [
         pkgs.local-pkgs.hyprland-keybindings-menu
-        pkgs.local-pkgs.hyprland-window-switcher
       ]
       # mako removed: its D-Bus activation file (fr.emersion.mako.service) would
       # auto-start mako on the first notification and steal
@@ -287,15 +286,6 @@ in {
           (anim "workspaces" 6 "default")
         ];
 
-        # The window switcher's list is redrawn on every Tab; animating it
-        # would flicker.
-        layer_rule = [
-          {
-            match.namespace = "^hyprland-window-switcher$";
-            no_anim = true;
-          }
-        ];
-
         window_rule = [
           {
             match.class = "^(org\\.gnome\\.Nautilus)$";
@@ -369,10 +359,8 @@ in {
 
             (bind "SUPER + SHIFT + S" (exec "hyprshot -m region --clipboard-only"))
             (bind "ALT + Tab" (focus {last = true;}))
-            # Window switcher: hold SUPER, Tab to move, release to focus
-            # (wm.switch; the rest of its keys live in its submap in wm.lua).
-            (bind "SUPER + Tab" (call "switch" [1]))
-            (bind "SUPER + SHIFT + Tab" (call "switch" [(-1)]))
+            # SUPER + Tab / SUPER + SHIFT + Tab: window switcher, bound at
+            # runtime by hyprshell (hyprshell.nix).
             (bind "CTRL + ALT + D" (dsp' "exit"))
             (bind "SUPER + Q" (dsp' "window.close"))
             (bind "SUPER + F" (dsp "window.float" {action = "toggle";}))
