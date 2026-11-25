@@ -14,20 +14,74 @@
   dsp = name: arg: lua "hl.dsp.${name}(${toLua arg})";
   dsp' = name: lua "hl.dsp.${name}()";
   exec = dsp "exec_cmd";
-  toggleSpecial = dsp "workspace.toggle_special";
+  # Bind to a Lua helper from wm.lua (wm.*), rendered as a closure.
+  call = fn: args: lua "function() wm.${fn}(${lib.concatMapStringsSep ", " toLua args}) end";
   focus = dsp "focus";
   moveWindow = dsp "window.move";
 
   # hl.bind(keys, dispatcher[, flags])
   bind = keys: dispatcher: {_args = [keys dispatcher];};
   bindWith = flags: keys: dispatcher: {_args = [keys dispatcher flags];};
+
+  # Apps with a workspace of their own, in order: the first lives on workspace
+  # `firstAppWorkspace`, the next on the one after, and so on. `key` jumps to
+  # the workspace and starts `cfg.apps.<app>` there if it is empty.
+  # Workspaces 1-5 belong to the main monitor and 6-10 to the secondary one
+  # (see wm.lua).
+  firstAppWorkspace = 11;
+  appBinds = lib.imap0 (i: b: b // {workspace = firstAppWorkspace + i;}) [
+    {
+      key = "H";
+      app = "tasks";
+    }
+    {
+      key = "J";
+      app = "llm";
+    }
+    {
+      key = "K";
+      app = "signal-desktop";
+    }
+    {
+      key = "L";
+      app = "toggl";
+    }
+    {
+      key = "M";
+      app = "slack";
+    }
+    {
+      key = "N";
+      app = "discord";
+    }
+    {
+      key = "V";
+      app = "email";
+    }
+    {
+      key = "E";
+      app = "calendar";
+    }
+    {
+      key = "C";
+      app = "code";
+    }
+    {
+      key = "O";
+      app = "obsidian";
+    }
+    {
+      key = "P";
+      app = "vault";
+    }
+  ];
 in {
   options.local.hyprland = {
-    # Special workspace handle -> command that fills it when first opened.
-    # Hosts override single entries (see home-manager/framebook.nix).
-    scratchpads = lib.mkOption {
+    # App handle -> command that fills its workspace when opened empty (see
+    # appBinds). Hosts override single entries (see home-manager/framebook.nix).
+    apps = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
-      description = "Apps opened by special workspaces, keyed by handle.";
+      description = "Apps that own a numbered workspace, keyed by handle.";
     };
     locker = lib.mkOption {
       type = lib.types.enum ["swaylock" "hyprlock"];
@@ -43,13 +97,6 @@ in {
       type = lib.types.str;
       description = "Command bound to CTRL + SUPER + Q. Defaults from `locker`.";
     };
-    # spotify-search / spotify-queue talk to the spotify-player daemon
-    # (cli/spotify-player.nix); hosts on the native client turn them off.
-    spotifyPlayerBinds = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Bind the spotify-player fuzzel search and queue menus.";
-    };
   };
 
   config = {
@@ -59,7 +106,7 @@ in {
       else "swaylock"
     );
 
-    local.hyprland.scratchpads = lib.mapAttrs (_: lib.mkDefault) {
+    local.hyprland.apps = lib.mapAttrs (_: lib.mkDefault) {
       tasks = "chromium --app=https://linear.app/reinthal/team/REI/active";
       llm = "claude-desktop";
       toggl = "chromium --app=https://track.toggl.com/timer";
@@ -217,17 +264,6 @@ in {
           };
         };
 
-        workspace_rule = let
-          ws_monitor0 = [0 1 2 3];
-          ws_monitor1 = [4 5 6 7];
-          f = monitor: ws: {
-            workspace = toString ws;
-            inherit monitor;
-          };
-        in
-          (map (f "0") ws_monitor0) # half of the ws to monitor 0
-          ++ (map (f "1") ws_monitor1); # half of the ws to monitor 1
-
         curve = {
           _args = [
             "myBezier"
@@ -271,20 +307,10 @@ in {
                 end'')
             ];
           }
-          # Fill scratchpads on first open (replaces the deprecated
-          # on_created_empty workspace rule).
-          {
-            _args = [
-              "workspace.created"
-              (lua ''
-                function(ws)
-                  local scratchpads = ${toLua cfg.scratchpads}
-                  if not (ws and ws.special and ws.is_empty) then return end
-                  local cmd = scratchpads[(ws.name:gsub("^special:", ""))]
-                  if cmd then hl.exec_cmd(cmd) end
-                end'')
-            ];
-          }
+          # Put workspaces 1-5 on the main monitor and 6-10 on the secondary
+          # one at login and whenever a display is plugged in.
+          {_args = ["hyprland.start" (lua "function() wm.arrange_soon() end")];}
+          {_args = ["monitor.added" (lua "function() wm.arrange_soon() end")];}
         ];
 
         bind = let
@@ -296,13 +322,13 @@ in {
             repeating = true;
           };
           bindm = bindWith {mouse = true;};
-          arr = [1 2 3 4 5 6 7];
+          arr = [1 2 3 4 5];
         in
           [
             (bindl "XF86AudioMute" (exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
             (bindl "XF86AudioMicMute" (exec "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
 
-            # Media keys -> MPRIS via wayle (spotify-player daemon, or whatever is active)
+            # Media keys -> MPRIS via wayle (whatever player is active)
             (bindl "XF86AudioPlay" (exec "wayle media play-pause"))
             (bindl "XF86AudioPause" (exec "wayle media play-pause"))
             (bindl "XF86AudioNext" (exec "wayle media next"))
@@ -317,37 +343,31 @@ in {
             (bindm "SUPER + mouse:272" (dsp' "window.drag"))
 
             (bind "SUPER + Return" (exec "ghostty"))
-            (bind "SUPER + Space" (exec "fuzzel"))
+            # Tap opens the launcher (on release); held, it turns SUPER + 1-5
+            # into the secondary monitor's workspaces 6-10 (wm.go / wm.send).
+            (bind "SUPER + Space" (call "launcher_down" []))
+            (bindWith {release = true;} "SUPER + Space" (call "launcher_up" ["fuzzel"]))
             (bind "SUPER + SHIFT + C" (exec "bzmenu -l fuzzel"))
             (bind "SUPER + SHIFT + V" (exec "iwmenu -l fuzzel"))
             (bind "SUPER + SHIFT + B" (exec "pwmenu -l fuzzel"))
             (bind "SUPER + slash" (exec "hyprland-keybindings-menu"))
             (bind "SUPER + SHIFT + T" (exec "timer-bar menu"))
             (bind "SUPER + W" (exec "firefox"))
-            (bind "SUPER + E" (toggleSpecial "calendar"))
             (bind "SUPER + D" (exec "wayle notify dismiss-all"))
             (bind "SUPER + SHIFT + D" (exec "wayle notify dismiss-all"))
             (bind "SUPER + B" (exec "awww-wallpaper"))
 
             (bind "SUPER + SHIFT + S" (exec "hyprshot -m region --clipboard-only"))
             (bind "ALT + Tab" (focus {last = true;}))
+            (bind "SUPER + Tab" (call "cycle" [1]))
+            (bind "SUPER + SHIFT + Tab" (call "cycle" [(-1)]))
             (bind "CTRL + ALT + D" (dsp' "exit"))
             (bind "SUPER + Q" (dsp' "window.close"))
             (bind "SUPER + F" (dsp "window.float" {action = "toggle";}))
             (bind "SUPER + A" (dsp "layout" "togglesplit"))
             (bind "SUPER + G" (dsp' "window.fullscreen"))
-            (bind "SUPER + P" (toggleSpecial "vault"))
             (bind "CTRL + SUPER + Q" (exec cfg.lockCommand))
             (bind "CTRL + SUPER + G" (exec "gamemode"))
-            (bind "SUPER + O" (toggleSpecial "obsidian"))
-            (bind "SUPER + M" (toggleSpecial "slack"))
-            (bind "SUPER + N" (toggleSpecial "discord"))
-            (bind "SUPER + V" (toggleSpecial "email"))
-            (bind "SUPER + C" (toggleSpecial "code"))
-            (bind "SUPER + H" (toggleSpecial "tasks"))
-            (bind "SUPER + J" (toggleSpecial "llm"))
-            (bind "SUPER + K" (toggleSpecial "signal-desktop"))
-            (bind "SUPER + L" (toggleSpecial "toggl"))
             (bind "SUPER + ALT + K" (focus {direction = "up";}))
             (bind "SUPER + ALT + J" (focus {direction = "down";}))
             (bind "SUPER + ALT + L" (focus {direction = "right";}))
@@ -357,13 +377,14 @@ in {
             (bind "SUPER + SHIFT + left" (moveWindow {workspace = "e-1";}))
             (bind "SUPER + SHIFT + right" (moveWindow {workspace = "e+1";}))
           ]
-          ++ lib.optionals cfg.spotifyPlayerBinds [
-            (bind "CTRL + SHIFT + Space" (exec "spotify-search"))
-            (bind "SUPER + SHIFT + Space" (exec "spotify-queue"))
-          ]
-          ++ (map (i: bind "SUPER + ${toString i}" (focus {workspace = i;})) arr)
-          ++ (map (i: bind "SUPER + SHIFT + ${toString i}" (moveWindow {workspace = i;})) arr);
+          ++ (map (b: bind "SUPER + ${b.key}" (call "app" [b.workspace cfg.apps.${b.app}])) appBinds)
+          ++ (map (i: bind "SUPER + ${toString i}" (call "go" [i])) arr)
+          ++ (map (i: bind "SUPER + SHIFT + ${toString i}" (call "send" [i])) arr);
       };
+
+      # Helpers behind the wm.* binds above. Globals, so the closures rendered
+      # from `settings` can reach them.
+      extraConfig = builtins.readFile ./wm.lua;
     };
   };
 }

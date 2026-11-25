@@ -7,20 +7,20 @@ This document lists all keybindings configured in `hyprland.nix`.
 | Keybind | Action |
 |---------|--------|
 | `SUPER + Return` | Open terminal (ghostty) |
-| `SUPER + Space` | Application launcher (rofi) |
+| `SUPER + Space` | Application launcher (fuzzel), on release |
 | `SUPER + /` | Keybindings menu (searchable) |
-| `CTRL SHIFT + Space` | Spotify artist search (fuzzel) |
-| `SUPER SHIFT + Space` | Spotify queue browser (fuzzel) |
 | `SUPER + W` | Open Firefox |
-| `SUPER + H` | Toggle Tasks (linear.app) |
-| `SUPER + J` | Toggle LLM (claude-desktop) |
-| `SUPER + M` | Toggle Slack |
-| `SUPER + N` | Toggle Discord |
-| `SUPER + V` | Toggle Email (Proton) |
-| `SUPER + C` | Toggle Code (VSCodium) |
-| `SUPER + K` | Toggle Signal |
-| `SUPER + O` | Toggle Obsidian |
-| `SUPER + P` | Toggle Vault (vault.reinthal.me) |
+| `SUPER + H` | Tasks (linear.app): jump to its workspace, start if empty |
+| `SUPER + J` | LLM (claude-desktop): jump to its workspace, start if empty |
+| `SUPER + M` | Slack |
+| `SUPER + N` | Discord |
+| `SUPER + V` | Email (Proton): jump to its workspace, start if empty |
+| `SUPER + C` | Code (VSCodium): jump to its workspace, start if empty |
+| `SUPER + K` | Signal |
+| `SUPER + O` | Obsidian |
+| `SUPER + P` | Vault (vault.reinthal.me): jump to its workspace, start if empty |
+| `SUPER + L` | Toggl: jump to its workspace, start if empty |
+| `SUPER + E` | Calendar (Proton): jump to its workspace, start if empty |
 
 ## Window Management
 
@@ -31,6 +31,8 @@ This document lists all keybindings configured in `hyprland.nix`.
 | `SUPER + G` | Toggle fullscreen |
 | `SUPER + T` | Toggle split layout |
 | `ALT + Tab` | Focus current or last window |
+| `SUPER + Tab` | Next window, across all workspaces |
+| `SUPER SHIFT + Tab` | Previous window, across all workspaces |
 
 ## Focus Navigation
 
@@ -45,10 +47,12 @@ This document lists all keybindings configured in `hyprland.nix`.
 
 | Keybind | Action |
 |---------|--------|
-| `SUPER + 1-7` | Switch to workspace 1-7 |
+| `SUPER + 1-5` | Main monitor workspace 1-5 |
+| `SUPER + Space + 1-5` | Secondary monitor workspace 6-10 (hold Space) |
 | `SUPER + Left` | Previous workspace |
 | `SUPER + Right` | Next workspace |
-| `SUPER SHIFT + 1-7` | Move window to workspace 1-7 |
+| `SUPER SHIFT + 1-5` | Move window to workspace 1-5 |
+| `SUPER SHIFT + Space + 1-5` | Move window to workspace 6-10 |
 | `SUPER SHIFT + Left` | Move window to previous workspace |
 | `SUPER SHIFT + Right` | Move window to next workspace |
 
