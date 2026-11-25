@@ -56,12 +56,14 @@
         box-shadow: 0 0 0 1px #7fbbb3;
       }
 
-      .client label {
-        color: #d3c6aa;
-      }
-
-      .client:not(.active) label {
-        color: #859289; /* fg-muted */
+      /* No window titles: icons only. hyprshell has no option for it and GTK
+         CSS has no display: none, so collapse the card's title label. */
+      .client frame > label {
+        font-size: 0.01px;
+        color: transparent;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
       }
     '';
   };
