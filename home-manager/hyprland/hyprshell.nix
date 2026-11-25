@@ -88,4 +88,12 @@
   # graphical-session.target is also reached by the GNOME session on hosts
   # that offer both (framebook); there is no Hyprland to bind into there.
   systemd.user.services.hyprshell.Unit.ConditionEnvironment = "!XDG_CURRENT_DESKTOP=GNOME";
+
+  # By default hyprshell treats an icon name as available if any installed
+  # theme has it (Papirus, MoreWaita, Qogir...), not just the active one. So
+  # classes like chromium-browser and md.obsidian.Obsidian were asked of GTK,
+  # which (Adwaita + hicolor) has no such icon. With this, only the active
+  # theme counts and those windows fall through to their .desktop file's Icon=
+  # (chromium, obsidian), which hicolor has.
+  systemd.user.services.hyprshell.Service.Environment = ["HYPRSHELL_NO_ALL_ICONS=1"];
 }
